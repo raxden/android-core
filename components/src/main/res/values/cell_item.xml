@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="title_gravity">
+        <flag name="bottom" value="80" />
+        <flag name="center" value="17" />
+        <flag name="center_horizontal" value="1" />
+        <flag name="center_vertical" value="16" />
+        <flag name="clip_horizontal" value="8" />
+        <flag name="clip_vertical" value="128" />
+        <flag name="end" value="8388613" />
+        <flag name="fill" value="119" />
+        <flag name="fill_horizontal" value="7" />
+        <flag name="fill_vertical" value="112" />
+        <flag name="left" value="3" />
+        <flag name="right" value="5" />
+        <flag name="start" value="8388611" />
+        <flag name="top" value="48" />
+    </attr>
+
+    <attr name="subtitle_gravity">
+        <flag name="bottom" value="80" />
+        <flag name="center" value="17" />
+        <flag name="center_horizontal" value="1" />
+        <flag name="center_vertical" value="16" />
+        <flag name="clip_horizontal" value="8" />
+        <flag name="clip_vertical" value="128" />
+        <flag name="end" value="8388613" />
+        <flag name="fill" value="119" />
+        <flag name="fill_horizontal" value="7" />
+        <flag name="fill_vertical" value="112" />
+        <flag name="left" value="3" />
+        <flag name="right" value="5" />
+        <flag name="start" value="8388611" />
+        <flag name="top" value="48" />
+    </attr>
+
+    <declare-styleable name="CellItemView">
+        <attr name="title" format="string" />
+        <attr name="subtitle" format="string" />
+        <attr name="titleTextAppearance" />
+        <attr name="subtitleTextAppearance" format="reference"/>
+        <attr name="image_left_src" format="reference" />
+        <attr name="image_left_tint" format="color" />
+        <attr name="image_right_src" format="reference" />
+        <attr name="image_right_tint" format="color" />
+        <attr name="separator_color" format="color" />
+        <attr name="title_gravity" />
+        <attr name="subtitle_gravity" />
+    </declare-styleable>
+
+</resources>

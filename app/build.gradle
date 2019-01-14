@@ -1,0 +1,159 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+
+    dexOptions {
+        maxProcessCount 8  // Sets the maximum number of DEX processes that can be started concurrently.
+        javaMaxHeapSize "2g" // Sets the maximum memory allocation pool size for the dex operation.
+        preDexLibraries true // Enables Gradle to pre-dex library dependencies.
+    }
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+
+        applicationId rootProject.ext.androidApplicationId
+        versionCode rootProject.ext.androidVersionCode
+        versionName rootProject.ext.androidVersionName
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        testApplicationId rootProject.ext.testApplicationId
+
+        resValue "string", "dev_username", "mobile@berepublic.es"
+        resValue "string", "dev_password", "mobile18"
+
+        setProperty("archivesBaseName", "core")
+
+        vectorDrawables.useSupportLibrary = true
+
+        ext.betaDistributionReleaseNotesFilePath = rootProject.ext.betaDistributionReleaseNotesFilePath
+        ext.betaDistributionGroupAliasesFilePath = rootProject.ext.betaDistributionGroupAliasesFilePath
+        ext.betaDistributionNotifications = rootProject.ext.betaDistributionNotifications
+
+        multiDexEnabled true
+    }
+
+    flavorDimensions "tier"
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/splash',
+                            'src/main/res/layouts/project/list',
+                            'src/main/res/layouts/project/detail',
+                            'src/main/res/layouts',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+    signingConfigs {
+        debug {
+            ext.enableCrashlytics = false
+            storeFile file('../buildSystem/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file('../buildSystem/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    productFlavors {
+        dev {
+            dimension "tier"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            resValue "string", "app_name", "Dev core"
+            resConfigs "es", "xxhdpi"
+        }
+        prod {
+            dimension "tier"
+            resValue "string", "app_name", "core"
+        }
+    }
+
+    buildTypes {
+        debug {
+            crunchPngs false                    // Disable png compression
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+        release {
+            minifyEnabled false                  // Change to TRUE to activate proguard
+            shrinkResources false
+            signingConfig signingConfigs.release
+
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro',
+                    './proguard/proguard-android.pro',
+                    './proguard/proguard-androidx.pro',
+                    './proguard/proguard-crashlytics.pro',
+                    './proguard/proguard-firebase.pro',
+                    './proguard/proguard-glide.pro',
+                    './proguard/proguard-google.pro',
+                    './proguard/proguard-google-analytics.pro',
+                    './proguard/proguard-google-play-services.pro',
+                    './proguard/proguard-gson.pro',
+                    './proguard/proguard-material.pro',
+                    './proguard/proguard-square-okhttp3.pro',
+                    './proguard/proguard-square-okio.pro',
+                    './proguard/proguard-square-retrofit2.pro',
+                    './proguard/proguard-timber.pro'
+        }
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'LICENSE.txt'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://clojars.org/repo/" }
+}
+
+dependencies {
+    implementation fileTree(include: '*.jar', dir: 'libs')
+
+    rootProject.appDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+}
+
+apply plugin: 'com.google.gms.google-services'

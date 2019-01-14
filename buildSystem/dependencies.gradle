@@ -1,0 +1,282 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+ext {
+
+    // ========== VERSIONS =========================================================================
+
+    // Androidx dependencies
+    def appCompatVersion = '1.0.0'
+    def constraintLayoutVersion = '1.1.3'
+    def multidexVersion = '2.0.0'
+    def materialVersion = '1.0.0'
+    def kotlinVersion = '1.3.11'
+
+    // dependencies
+    def androidCommonsVersion = '3.0.35'        // https://github.com/raxden/commons
+    def androidNavigationVersion = '4.0.8'      // https://github.com/raxden/android-navigation
+    def androidPreferencesVersion = '4.0.4'     // https://github.com/raxden/android-preferences
+    def androidRecyclerVersion = '3.0.13'       // https://github.com/raxden/android-recycler
+    def androidSquareVersion = '3.0.104'        // https://github.com/raxden/square
+    def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
+    def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
+    def rxPermissionsVersion = '0.9.5'          // https://github.com/tbruyelle/RxPermissions    0.10.2
+    def androidThreeTenVersion = '1.1.1'        // https://github.com/JakeWharton/ThreeTenABP
+    def crashlyticsVersion = '2.9.7'
+    def gsonVersion  = '2.8.5'                  // https://github.com/google/gson
+    def daggerVersion = '2.16'                  // https://github.com/google/dagger
+    def glideVersion = '4.7.1'                  // https://github.com/bumptech/glide
+    def okHttpVersion = '3.12.0'                // https://github.com/square/okhttp
+    def retrofitVersion = '2.5.0'               // https://github.com/square/retrofit
+    def timberVersion = '4.7.1'                 // https://github.com/JakeWharton/timber
+    def urbanAirshipVersion = '9.1.0'           // http://docs.urbanairship.com/platform/android.html
+
+    // Testing
+    def junitVersion = '4.12'
+    def assertJVersion = '1.7.0'
+    def mockitoVersion = '1.10.19'
+    def robolectricVersion = '3.6.1'
+
+    // ========== LIBRARIES ========================================================================
+
+    def androidxLibs = [
+            multidexVersion: [group: 'androidx.multidex', name: 'multidex', version: multidexVersion],
+            appCompat: [group: 'androidx.appcompat', name: 'appcompat', version: appCompatVersion],
+            material: [group: 'com.google.android.material', name: 'material', version: materialVersion],
+            constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintLayoutVersion],
+            kotlin: [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: kotlinVersion]
+    ]
+
+    def playServicesLibs = [
+            location : [group: 'com.google.android.gms', name: 'play-services-location', version: '16.0.0'],
+            maps     : [group: 'com.google.android.gms', name: 'play-services-maps', version: '16.0.0'],
+            places   : [group: 'com.google.android.gms', name: 'play-services-places', version: '16.0.0']
+    ]
+
+    def firebaseLibs = [
+            core: [group: 'com.google.firebase', name: 'firebase-core', version: '16.0.6'],
+            analytics: [group: 'com.google.firebase', name: 'firebase-analytics', version: '16.0.5'],
+            messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4'],
+            auth     : [group: 'com.google.firebase', name: 'firebase-auth', version: '16.0.5']
+    ]
+
+    def raxdenLibs = [
+            commons: [group: 'com.github.raxden', name: 'android-commons', version: androidCommonsVersion, ext: 'aar'],
+            navigation: [group: 'com.github.raxden', name: 'android-navigation', version: androidNavigationVersion, ext: 'aar'],
+            recycler: [group: 'com.github.raxden', name: 'android-recycler', version: androidRecyclerVersion, ext: 'aar'],
+            preferences: [group: 'com.github.raxden', name: 'android-preferences', version: androidPreferencesVersion, ext: 'aar'],
+            square: [group: 'com.github.raxden.square', name: 'square', version: androidSquareVersion, ext: 'aar'],
+            squareCommons: [group: 'com.github.raxden.square', name: 'square-commons', version: androidSquareVersion, ext: 'aar']
+    ]
+
+    def libs = [
+            gson: [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+
+            dagger: [group: 'com.google.dagger', name: 'dagger-android', version: daggerVersion],
+            daggerAndroidSupport: [group: 'com.google.dagger', name: 'dagger-android-support', version: daggerVersion],
+            daggerCompiler: [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
+            daggerAndroidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: daggerVersion],
+
+            timber: [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
+
+            threetenabp: [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
+
+            rxAndroid: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
+            rxKotlin: [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: rxKotlinVersion],
+
+            glide: [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
+            glideCompiler: [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
+
+            retrofit: [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofitVersion],
+            retrofitRX: [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: retrofitVersion],
+            retrofitConverterGson: [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitVersion],
+            retrofitConverterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: retrofitVersion],
+
+            okhttp: [group: 'com.squareup.okhttp3', name: 'okhttp', version: okHttpVersion],
+            okhttpLoggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okHttpVersion],
+
+            rxPermissions: [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
+
+            urbanairship: [group: 'com.urbanairship.android', name: 'urbanairship-fcm', version: urbanAirshipVersion],
+
+            crashlytics: [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
+    ]
+
+    def testLibs = [
+            junit: [group: 'junit', name: 'junit', version: junitVersion],
+            assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion],
+            mockito: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion],
+            robolectric: [group: 'org.robolectric', name: 'robolectric', version: robolectricVersion],
+            robolectricShadowsMultidex: [group: 'org.robolectric', name: 'shadows-multidex', version: robolectricVersion]
+    ]
+
+    // ========== MODULES DEPENDENCIES =============================================================
+
+    def modules = [
+            app: ':app',
+            data: ':data',
+            domain: ':domain',
+            commons: ':commons',
+            components: ':components',
+            resources: ':resources'
+    ]
+
+    appDependencies = [
+            [configuration: "implementation", dependency: project(modules.commons)],
+            [configuration: "implementation", dependency: project(modules.components)],
+            [configuration: "implementation", dependency: project(modules.domain)],
+            [configuration: "implementation", dependency: project(modules.data)],
+
+            [configuration: "implementation", dependency: androidxLibs.multidexVersion],
+            [configuration: "implementation", dependency: androidxLibs.appCompat],
+            [configuration: "implementation", dependency: androidxLibs.material],
+            [configuration: "implementation", dependency: androidxLibs.constraintLayout],
+            [configuration: "implementation", dependency: androidxLibs.kotlin],
+
+            [configuration: "implementation", dependency: playServicesLibs.location],
+            [configuration: "implementation", dependency: playServicesLibs.maps],
+            [configuration: "implementation", dependency: playServicesLibs.places],
+
+            [configuration: "implementation", dependency: firebaseLibs.core],
+            [configuration: "implementation", dependency: firebaseLibs.analytics],
+            [configuration: "implementation", dependency: firebaseLibs.messaging],
+            [configuration: "implementation", dependency: firebaseLibs.auth],
+
+            [configuration: "implementation", dependency: raxdenLibs.commons],
+            [configuration: "implementation", dependency: raxdenLibs.navigation],
+            [configuration: "implementation", dependency: raxdenLibs.recycler],
+            [configuration: "implementation", dependency: raxdenLibs.preferences],
+            [configuration: "implementation", dependency: raxdenLibs.square],
+            [configuration: "implementation", dependency: raxdenLibs.squareCommons],
+
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "implementation", dependency: libs.daggerAndroidSupport],
+            [configuration: "kapt", dependency: libs.daggerCompiler],
+            [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+            [configuration: "testImplementation", dependency: libs.dagger],
+            [configuration: "testAnnotationProcessor", dependency: libs.daggerCompiler],
+            [configuration: "testAnnotationProcessor", dependency: libs.daggerAndroidProcessor],
+
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxKotlin],
+
+            [configuration: "implementation", dependency: libs.retrofit],
+            [configuration: "implementation", dependency: libs.retrofitRX],
+            [configuration: "implementation", dependency: libs.retrofitConverterGson],
+            [configuration: "implementation", dependency: libs.retrofitConverterScalars],
+
+            [configuration: "implementation", dependency: libs.okhttp],
+            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
+
+            [configuration: "implementation", dependency: libs.glide],
+            [configuration: "kapt", dependency: libs.glideCompiler],
+
+            [configuration: "implementation", dependency: libs.gson],
+
+            [configuration: "implementation", dependency: libs.threetenabp],
+
+            [configuration: "implementation", dependency: libs.timber],
+
+            [configuration: "implementation", dependency: libs.rxPermissions],
+
+            [configuration: "implementation", dependency: libs.urbanairship],
+
+            [configuration: "implementation", dependency: libs.crashlytics, options: { transitive = true }],
+
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.assertj],
+            [configuration: "testImplementation", dependency: testLibs.mockito],
+            [configuration: "testImplementation", dependency: testLibs.robolectric],
+            [configuration: "testImplementation", dependency: testLibs.robolectricShadowsMultidex]
+    ]
+
+    domainDependencies = [
+            [configuration: "implementation", dependency: project(modules.commons)],
+
+            [configuration: "implementation", dependency: androidxLibs.kotlin],
+
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "implementation", dependency: libs.daggerAndroidSupport],
+            [configuration: "kapt", dependency: libs.daggerCompiler],
+            [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+
+            [configuration: "implementation", dependency: libs.threetenabp],
+
+            [configuration: "implementation", dependency: libs.timber],
+
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxAndroid]
+    ]
+
+    dataDependencies = [
+            [configuration: "implementation", dependency: project(modules.commons)],
+            [configuration: "implementation", dependency: project(modules.domain)],
+
+            [configuration: "implementation", dependency: androidxLibs.kotlin],
+
+            [configuration: "implementation", dependency: raxdenLibs.commons],
+            [configuration: "implementation", dependency: raxdenLibs.preferences],
+
+            [configuration: "implementation", dependency: firebaseLibs.messaging],
+
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "implementation", dependency: libs.daggerAndroidSupport],
+            [configuration: "kapt", dependency: libs.daggerCompiler],
+            [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+
+            [configuration: "implementation", dependency: libs.gson],
+
+            [configuration: "implementation", dependency: libs.threetenabp],
+
+            [configuration: "implementation", dependency: libs.timber],
+
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxAndroid],
+
+            [configuration: "implementation", dependency: libs.retrofit],
+            [configuration: "implementation", dependency: libs.retrofitRX],
+            [configuration: "implementation", dependency: libs.retrofitConverterGson],
+            [configuration: "implementation", dependency: libs.retrofitConverterScalars],
+
+            [configuration: "implementation", dependency: libs.okhttp],
+            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
+
+            [configuration: "implementation", dependency: libs.urbanairship]
+    ]
+
+    componentsDependencies = [
+            [configuration: "implementation", dependency: project(modules.commons)],
+
+            [configuration: "implementation", dependency: androidxLibs.appCompat],
+            [configuration: "implementation", dependency: androidxLibs.material],
+            [configuration: "implementation", dependency: androidxLibs.kotlin],
+
+            [configuration: "implementation", dependency: libs.threetenabp],
+
+            [configuration: "implementation", dependency: libs.timber]
+    ]
+
+    commonsDependencies = [
+            [configuration: "implementation", dependency: project(modules.resources)],
+
+            [configuration: "implementation", dependency: androidxLibs.appCompat],
+            [configuration: "implementation", dependency: androidxLibs.kotlin],
+
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: libs.rxKotlin],
+
+            [configuration: "implementation", dependency: raxdenLibs.commons],
+
+            [configuration: "implementation", dependency: libs.gson],
+
+            [configuration: "implementation", dependency: libs.threetenabp],
+
+            [configuration: "implementation", dependency: libs.timber],
+
+            [configuration: "implementation", dependency: libs.glide],
+            [configuration: "kapt", dependency: libs.glideCompiler]
+    ]
+
+    resourcesDependencies = [
+    ]
+
+}
