@@ -11,7 +11,7 @@ import dagger.Module
  * Provides SampleMapFragment fragment dependencies.
  */
 @Module(includes = arrayOf(
-        BaseViewFragmentModule::class
+        BaseFragmentModule::class
 ))
 abstract class SplashFragmentModule {
 

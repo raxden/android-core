@@ -2,6 +2,7 @@ package com.core.app.injector.module
 
 import com.core.app.injector.scope.PerActivity
 import com.core.app.ui.project.list.ProjectListActivity
+import com.core.app.ui.project.list.ProjectListActivityModule
 import com.core.app.ui.splash.SplashActivity
 import com.core.app.ui.splash.SplashActivityModule
 import dagger.Module
@@ -28,7 +29,7 @@ abstract class InjectorModule {
      * provided by this application instance (singleton scoped objects).
      */
     @PerActivity
-    @ContributesAndroidInjector(modules = arrayOf(ProjectListActivity::class))
+    @ContributesAndroidInjector(modules = arrayOf(ProjectListActivityModule::class))
     internal abstract fun projectListActivity(): ProjectListActivity
 
 
