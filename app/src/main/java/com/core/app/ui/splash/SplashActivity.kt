@@ -3,6 +3,7 @@ package com.core.app.ui.splash
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
+import com.core.app.AppActivity
 import com.core.app.R
 import com.core.app.base.BaseFragmentActivity
 import com.core.commons.extension.getExtras
@@ -13,7 +14,7 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmen
 import kotlinx.android.synthetic.main.splash_activity.*
 import javax.inject.Inject
 
-class SplashActivity : BaseFragmentActivity(),
+class SplashActivity : AppActivity(),
     InjectFragmentInterceptorCallback<SplashFragment> {
 
     @Inject

@@ -11,7 +11,6 @@ import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptorCallback
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 abstract class BaseViewFragment<VM : ViewModel, VDB : ViewDataBinding> : BaseFragment(),
         AutoInflateViewInterceptorCallback {

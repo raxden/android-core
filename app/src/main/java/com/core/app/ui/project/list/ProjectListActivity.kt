@@ -2,6 +2,7 @@ package com.core.app.ui.project.list
 
 import android.os.Bundle
 import android.view.View
+import com.core.app.AppActivity
 import com.core.app.R
 import com.core.app.base.BaseFragmentActivity
 import com.core.app.ui.project.list.view.ProjectListFragment
@@ -12,7 +13,7 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmen
 import kotlinx.android.synthetic.main.splash_activity.*
 import javax.inject.Inject
 
-class ProjectListActivity : BaseFragmentActivity(),
+class ProjectListActivity : AppActivity(),
         InjectFragmentInterceptorCallback<ProjectListFragment> {
 
     @Inject
