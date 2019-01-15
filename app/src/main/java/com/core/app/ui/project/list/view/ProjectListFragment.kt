@@ -1,11 +1,10 @@
-package com.core.app.ui.project.list
+package com.core.app.ui.project.list.view
 
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.core.app.base.mvvm.BaseViewFragment
 import com.core.app.databinding.ProjectListFragmentBinding
+import com.core.app.ui.project.list.viewModel.ProjectListViewModel
 import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptorCallback
-import javax.inject.Inject
 
 class ProjectListFragment : BaseViewFragment<ProjectListViewModel, ProjectListFragmentBinding>(),
         AutoInflateViewInterceptorCallback {

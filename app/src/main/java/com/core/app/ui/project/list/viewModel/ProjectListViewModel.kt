@@ -1,4 +1,4 @@
-package com.core.app.ui.project.list
+package com.core.app.ui.project.list.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +10,7 @@ import io.reactivex.observers.DisposableMaybeObserver
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ProjectListViewModel : BaseViewModel() {
+class ProjectListViewModel @Inject constructor(): BaseViewModel() {
 
     @Inject
     lateinit var getProjectListUseCase: GetProjectListUseCase

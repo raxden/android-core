@@ -5,6 +5,8 @@ import com.core.app.base.BaseActivityModule
 import com.core.app.base.BaseFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
+import com.core.app.ui.project.list.view.ProjectListFragment
+import com.core.app.ui.project.list.view.ProjectListFragmentModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -13,7 +15,7 @@ import dagger.android.ContributesAndroidInjector
  * Provides splash activity dependencies
  */
 @Module(includes = arrayOf(
-    BaseFragmentActivityModule::class
+        BaseFragmentActivityModule::class
 ))
 abstract class ProjectListActivityModule {
 

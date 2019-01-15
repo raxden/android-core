@@ -5,7 +5,6 @@ import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Provider
-import javax.inject.Singleton
 
 /**
  * A provider factory that persists ViewModels [ViewModel].
@@ -14,8 +13,8 @@ import javax.inject.Singleton
  * https://medium.com/@marco_cattaneo/android-viewmodel-and-factoryprovider-good-way-to-manage-it-with-dagger-2-d9e20a07084c
  */
 class ViewModelProviderFactory @Inject constructor(
-        private val mViewModelMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) :
-        ViewModelProvider.Factory {
+        private val mViewModelMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val creator = mViewModelMap[modelClass] ?: mViewModelMap.asIterable().firstOrNull {
@@ -27,5 +26,4 @@ class ViewModelProviderFactory @Inject constructor(
             throw RuntimeException(e)
         }
     }
-
 }

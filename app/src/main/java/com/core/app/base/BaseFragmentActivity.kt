@@ -12,8 +12,7 @@ abstract class BaseFragmentActivity : BaseActivity(),
 
     @Inject
     lateinit var mAutoInflateLayoutInterceptor: AutoInflateLayoutInterceptor
-
-    private lateinit var mContentView: View
+    lateinit var mContentView: View
 
     // ========= AutoInflateLayoutInterceptorCallback ==============================================
 
@@ -24,9 +23,8 @@ abstract class BaseFragmentActivity : BaseActivity(),
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
-        super.setupInterceptors(interceptorList.apply {
-            add(mAutoInflateLayoutInterceptor)
-        })
+        super.setupInterceptors(interceptorList)
+        interceptorList.add(mAutoInflateLayoutInterceptor)
     }
 
 }

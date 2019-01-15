@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager
 import com.core.app.injector.module.InterceptorFragmentModule
 import com.core.app.injector.scope.PerFragment
 import com.core.commons.DisposableManager
+import com.core.commons.LoaderManager
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -37,6 +38,11 @@ abstract class BaseFragmentModule {
         @Named(DISPOSABLE_FRAGMENT_MANAGER)
         @PerFragment
         internal fun disposableManager(): DisposableManager = DisposableManager()
+
+        @JvmStatic
+        @Provides
+        @PerFragment
+        internal fun loaderManager(): LoaderManager = LoaderManager()
 
         @JvmStatic
         @Provides
