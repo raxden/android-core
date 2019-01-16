@@ -20,18 +20,19 @@ abstract class BaseViewFragment<VM : ViewModel, VDB : ViewDataBinding> : BaseFra
     @Inject
     lateinit var mAutoInflateViewInterceptor: AutoInflateViewInterceptor
 
-    private var mViewModel: VM? = null
+    protected val mViewModel: VM by lazy { ViewModelProvider(this, mViewModelFactory).get(mViewModelClass) }
+    protected abstract val mViewModelClass: Class<VM>
+
     private var mViewDataBinding: VDB? = null
 
-    abstract fun getViewModel(): Class<VM>
+    fun getViewDataBinding(): VDB? = mViewDataBinding
 
-    fun getViewDataBinding() : VDB? = mViewDataBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        mViewModel = ViewModelProvider(this, mViewModelFactory).get(getViewModel())
-    }
+//    abstract fun getViewModel(): Class<VM>
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        mViewModel = ViewModelProvider(this, mViewModelFactory).get(getViewModel())
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

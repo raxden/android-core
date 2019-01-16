@@ -1,21 +1,19 @@
 package com.core.app.ui.splash
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.base.BaseFragmentActivity
+import com.core.app.ui.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
-import kotlinx.android.synthetic.main.splash_activity.*
 import javax.inject.Inject
 
 class SplashActivity : AppActivity(),
-    InjectFragmentInterceptorCallback<SplashFragment> {
+        InjectFragmentInterceptorCallback<SplashFragment> {
 
     @Inject
     internal lateinit var mInjectFragmentInterceptor: InjectFragmentInterceptor

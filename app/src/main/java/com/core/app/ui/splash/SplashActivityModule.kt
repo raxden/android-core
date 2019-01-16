@@ -5,6 +5,8 @@ import com.core.app.base.BaseActivityModule
 import com.core.app.base.BaseFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
+import com.core.app.ui.splash.view.SplashFragment
+import com.core.app.ui.splash.view.SplashFragmentModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
