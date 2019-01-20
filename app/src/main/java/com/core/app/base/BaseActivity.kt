@@ -1,6 +1,7 @@
 package com.core.app.base
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.core.commons.DisposableManager
 import com.raxdenstudios.square.SquareActivity
 import com.raxdenstudios.square.interceptor.Interceptor
@@ -17,6 +18,8 @@ abstract class BaseActivity : SquareActivity(),
     @Inject
     lateinit var mDisposableManager: DisposableManager
     @Inject
+    lateinit var mFragmentManager: FragmentManager
+    @Inject
     lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     // =============== LifeCycle ===================================================================
@@ -32,5 +35,4 @@ abstract class BaseActivity : SquareActivity(),
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) { }
-
 }

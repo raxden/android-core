@@ -34,6 +34,16 @@ abstract class ProjectListActivityModule {
     @PerActivity
     internal abstract fun activity(activity: ProjectListActivity): Activity
 
+    /**
+     * The main activity listens to the events in the [ProjectListFragment].
+     *
+     * @param activity the activity
+     * @return the main fragment mCallback
+     */
+    @Binds
+    @PerActivity
+    internal abstract fun fragmentCallback(activity: ProjectListActivity): ProjectListFragment.FragmentCallback
+
     // =============================================================================================
 
     /**
@@ -43,5 +53,4 @@ abstract class ProjectListActivityModule {
     @PerFragment
     @ContributesAndroidInjector(modules = arrayOf(ProjectListFragmentModule::class))
     internal abstract fun fragmentInjector(): ProjectListFragment
-
 }

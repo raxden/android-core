@@ -48,7 +48,6 @@ abstract class BaseFragmentModule {
         @Provides
         @Named(CHILD_FRAGMENT_MANAGER)
         @PerFragment
-        internal fun fragmentManager(f: Fragment): FragmentManager = f.childFragmentManager
+        internal fun childFragmentManager(f: Fragment): FragmentManager = f.childFragmentManager
     }
-
 }

@@ -26,5 +26,4 @@ abstract class BaseFragmentActivity : BaseActivity(),
         super.setupInterceptors(interceptorList)
         interceptorList.add(mAutoInflateLayoutInterceptor)
     }
-
 }

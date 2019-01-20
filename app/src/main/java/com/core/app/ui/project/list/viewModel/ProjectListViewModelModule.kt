@@ -18,5 +18,4 @@ abstract class ProjectListViewModelModule {
     @PerFragment
     @ViewModelKey(ProjectListViewModel::class)
     abstract fun viewModel(viewModel: ProjectListViewModel): ViewModel
-
 }

@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.splash_activity.*
 import javax.inject.Inject
 
 class ProjectListActivity : AppActivity(),
+        ProjectListFragment.FragmentCallback,
         InjectFragmentInterceptorCallback<ProjectListFragment> {
 
     @Inject

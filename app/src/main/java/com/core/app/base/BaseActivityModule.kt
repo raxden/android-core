@@ -60,7 +60,5 @@ abstract class BaseActivityModule {
         @Provides
         @PerActivity
         internal fun fragmentManager(activity: AppCompatActivity): FragmentManager = activity.supportFragmentManager
-
     }
-
 }

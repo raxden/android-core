@@ -27,5 +27,4 @@ abstract class ProjectListFragmentModule {
     @Binds
     @PerFragment
     internal abstract fun fragment(fragment: ProjectListFragment): Fragment
-
 }

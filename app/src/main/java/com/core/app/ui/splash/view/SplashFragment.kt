@@ -1,13 +1,15 @@
 package com.core.app.ui.splash.view
 
 import android.os.Bundle
+import android.view.View
 import com.core.app.AppFragment
+import com.core.app.BR
 import com.core.app.databinding.SplashFragmentBinding
 import com.core.app.ui.splash.viewModel.SplashViewModel
 
-class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding>() {
+class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, SplashFragment.FragmentCallback>() {
 
-//    override fun getViewModel(): Class<SplashViewModel> = SplashViewModel::class.java
+    interface FragmentCallback : BaseViewFragmentCallback
 
     override val mViewModelClass: Class<SplashViewModel>
         get() = SplashViewModel::class.java
@@ -17,4 +19,10 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding>() {
             arguments = bundle ?: Bundle()
         }
     }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        mViewModel.prepareApplicationToLaunch()
+    }
+
 }

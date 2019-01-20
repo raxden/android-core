@@ -13,6 +13,7 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmen
 import javax.inject.Inject
 
 class SplashActivity : AppActivity(),
+        SplashFragment.FragmentCallback,
         InjectFragmentInterceptorCallback<SplashFragment> {
 
     @Inject

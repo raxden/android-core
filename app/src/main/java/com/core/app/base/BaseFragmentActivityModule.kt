@@ -8,7 +8,4 @@ import dagger.Module
  * provide a concrete implementation of [Activity].
  */
 @Module(includes = arrayOf(BaseActivityModule::class))
-abstract class BaseFragmentActivityModule {
-
-
-}
+abstract class BaseFragmentActivityModule

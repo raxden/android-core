@@ -34,6 +34,16 @@ abstract class SplashActivityModule {
     @PerActivity
     internal abstract fun activity(activity: SplashActivity): Activity
 
+    /**
+     * The main activity listens to the events in the [SplashFragment].
+     *
+     * @param activity the activity
+     * @return the main fragment mCallback
+     */
+    @Binds
+    @PerActivity
+    internal abstract fun fragmentCallback(activity: SplashActivity): SplashFragment.FragmentCallback
+
     // =============================================================================================
 
     /**
@@ -43,5 +53,4 @@ abstract class SplashActivityModule {
     @PerFragment
     @ContributesAndroidInjector(modules = arrayOf(SplashFragmentModule::class))
     internal abstract fun fragmentInjector(): SplashFragment
-
 }

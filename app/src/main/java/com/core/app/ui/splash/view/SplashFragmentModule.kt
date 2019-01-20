@@ -28,5 +28,4 @@ abstract class SplashFragmentModule {
     @Binds
     @PerFragment
     internal abstract fun fragment(fragment: SplashFragment): Fragment
-
 }

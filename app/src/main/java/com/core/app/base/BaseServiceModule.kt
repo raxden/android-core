@@ -1,6 +1,10 @@
 package com.core.app.base
 
+import com.core.app.injector.scope.PerService
+import com.core.commons.DisposableManager
 import dagger.Module
+import dagger.Provides
+import javax.inject.Named
 
 /**
  * Provides base service dependencies. This must be included in all services modules, which must
@@ -14,12 +18,10 @@ abstract class BaseServiceModule {
 
         const val DISPOSABLE_SERVICE_MANAGER = "BaseServiceModule.disposableServiceManager"
 
-//        @JvmStatic
-//        @Provides
-//        @Named(DISPOSABLE_SERVICE_MANAGER)
-//        @PerService
-//        internal fun disposableServiceManager(): DisposableManager = DisposableManager()
-
+        @JvmStatic
+        @Provides
+        @Named(DISPOSABLE_SERVICE_MANAGER)
+        @PerService
+        internal fun disposableServiceManager(): DisposableManager = DisposableManager()
     }
-
 }

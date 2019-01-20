@@ -5,9 +5,9 @@ import com.core.app.AppFragment
 import com.core.app.databinding.ProjectListFragmentBinding
 import com.core.app.ui.project.list.viewModel.ProjectListViewModel
 
-class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding>() {
+class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding, ProjectListFragment.FragmentCallback>() {
 
-//    override fun getViewModel(): Class<ProjectListViewModel> = ProjectListViewModel::class.java
+    interface FragmentCallback : BaseViewFragmentCallback
 
     override val mViewModelClass: Class<ProjectListViewModel>
         get() = ProjectListViewModel::class.java

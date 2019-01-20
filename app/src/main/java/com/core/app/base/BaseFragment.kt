@@ -42,8 +42,10 @@ import javax.inject.Named
  * **VIEW BINDING**
  * This fragment handles view bind and unbinding.
  */
-abstract class BaseFragment : SquareDialogFragment(),
+abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : SquareDialogFragment(),
         HasSupportFragmentInjector {
+
+    interface BaseFragmentCallback
 
     @Inject
     @field:Named(DISPOSABLE_FRAGMENT_MANAGER)
@@ -53,6 +55,8 @@ abstract class BaseFragment : SquareDialogFragment(),
     lateinit var mChildFragmentManager: FragmentManager
     @Inject
     lateinit var mChildFragmentInjector: DispatchingAndroidInjector<Fragment>
+    @Inject
+    lateinit var mCallback: TCallback
 
     // =============== LifeCycle ===================================================================
 
@@ -73,14 +77,4 @@ abstract class BaseFragment : SquareDialogFragment(),
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {}
-
-//    protected fun addDisposable(disposable: Disposable) = mDisposableManager.add(disposable)
-//
-//    protected fun removeDisposable(disposable: Disposable) = mDisposableManager.remove(disposable)
-
-    protected fun addChildFragment(@IdRes containerViewId: Int, fragment: Fragment) = mChildFragmentManager
-            .beginTransaction()
-            .add(containerViewId, fragment)
-            .commit()
-
 }

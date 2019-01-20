@@ -53,5 +53,4 @@ abstract class BaseApplication : MultiDexApplication(),
     private fun initDependencyInjector() {
         AppInjector.init(this)
     }
-
 }

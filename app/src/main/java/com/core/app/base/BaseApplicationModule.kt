@@ -48,7 +48,5 @@ abstract class BaseApplicationModule {
         @Provides
         @Singleton
         internal fun contentResolver(application: Application): ContentResolver =  application.contentResolver
-
     }
-
 }

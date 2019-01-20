@@ -1,7 +1,7 @@
 package com.core.app
 
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
 import com.core.app.base.mvvm.BaseViewFragment
+import com.core.app.base.mvvm.BaseViewModel
 
-abstract class AppFragment<VM : ViewModel, VDB : ViewDataBinding>: BaseViewFragment<VM, VDB>()
+abstract class AppFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback: BaseViewFragment.BaseViewFragmentCallback>: BaseViewFragment<VM, VDB, TCallback>()

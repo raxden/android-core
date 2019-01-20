@@ -21,5 +21,4 @@ abstract class BaseViewFragmentModule {
     @Binds
     @PerFragment
     abstract fun viewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory
-
 }

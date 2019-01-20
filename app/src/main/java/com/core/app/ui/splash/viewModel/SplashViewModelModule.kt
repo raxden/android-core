@@ -18,5 +18,4 @@ abstract class SplashViewModelModule {
     @PerFragment
     @ViewModelKey(SplashViewModel::class)
     abstract fun viewModel(viewModel: SplashViewModel): ViewModel
-
 }

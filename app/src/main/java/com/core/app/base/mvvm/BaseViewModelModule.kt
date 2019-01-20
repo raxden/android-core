@@ -6,6 +6,4 @@ import dagger.Module
  * Provides base viewModel dependencies. This must be included in all viewModel modules
  */
 @Module
-abstract class BaseViewModelModule {
-
-}
+abstract class BaseViewModelModule

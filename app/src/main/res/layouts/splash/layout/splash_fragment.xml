@@ -3,10 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.core.app.ui.splash.viewModel.SplashViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -36,13 +40,14 @@
             app:layout_constraintStart_toStartOf="@+id/logo_image_view"
             app:layout_constraintTop_toBottomOf="@+id/logo_image_view" />
 
-        <androidx.core.widget.ContentLoadingProgressBar
+        <com.core.components.ProgressView
             android:id="@+id/content_loading_progress_bar_view"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
+            app:visibleGone="@{viewModel.loader}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

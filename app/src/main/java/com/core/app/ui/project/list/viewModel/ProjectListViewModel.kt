@@ -46,5 +46,4 @@ class ProjectListViewModel @Inject constructor(): BaseViewModel() {
     fun getProjectList() : LiveData<List<Project>> {
         return mProjectList
     }
-
 }

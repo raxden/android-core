@@ -1,5 +1,6 @@
 package com.core.commons
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class LoaderManager {
@@ -25,6 +26,6 @@ class LoaderManager {
         loader.postValue(false)
     }
 
-    fun getLoader(): MutableLiveData<Boolean> = loader
+    fun getLoader(): LiveData<Boolean> = loader
 
 }
