@@ -13,6 +13,10 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     androidExtensions {
         experimental = true
     }

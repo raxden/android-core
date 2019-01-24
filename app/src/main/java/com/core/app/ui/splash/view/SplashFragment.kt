@@ -1,11 +1,9 @@
 package com.core.app.ui.splash.view
 
 import android.os.Bundle
-import android.view.View
 import com.core.app.AppFragment
-import com.core.app.BR
 import com.core.app.databinding.SplashFragmentBinding
-import com.core.app.ui.splash.viewModel.SplashViewModel
+import com.core.app.ui.splash.viewmodel.SplashViewModel
 
 class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, SplashFragment.FragmentCallback>() {
 

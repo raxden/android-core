@@ -1,4 +1,4 @@
-package com.core.app.ui.project.list.viewModel
+package com.core.app.ui.project.list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.core.app.base.mvvm.BaseViewModelModule

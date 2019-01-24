@@ -1,8 +1,7 @@
-package com.core.app.ui.splash.viewModel
+package com.core.app.ui.splash.viewmodel
 
 import com.core.app.base.mvvm.BaseViewModel
 import io.reactivex.Completable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.schedulers.Schedulers
@@ -21,15 +20,15 @@ class SplashViewModel @Inject constructor(): BaseViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableCompletableObserver() {
                     override fun onStart() {
-                        mLoaderManager.push()
+                        mLoaderManager.push("preparing application to launch...")
                     }
 
                     override fun onComplete() {
-                        mLoaderManager.pull()
+                        mLoaderManager.pop()
                     }
 
                     override fun onError(e: Throwable) {
-                        mLoaderManager.pull()
+                        mLoaderManager.pop()
                     }
                 }))
     }

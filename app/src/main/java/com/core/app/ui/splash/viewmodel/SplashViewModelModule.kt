@@ -1,4 +1,4 @@
-package com.core.app.ui.splash.viewModel
+package com.core.app.ui.splash.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.core.app.base.mvvm.BaseViewModelModule

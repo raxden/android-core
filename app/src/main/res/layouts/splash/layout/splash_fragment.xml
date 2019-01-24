@@ -5,9 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
-            type="com.core.app.ui.splash.viewModel.SplashViewModel" />
+            type="com.core.app.ui.splash.viewmodel.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,20 +42,6 @@
             app:layout_constraintStart_toStartOf="@+id/logo_image_view"
             app:layout_constraintTop_toBottomOf="@+id/logo_image_view" />
 
-        <com.core.components.ProgressView
-            android:id="@+id/content_loading_progress_bar_view"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:visibleGone="@{viewModel.loader}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logo_image_view"
-            app:layout_constraintVertical_bias="0.35" />
-
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/version_name_view"
             android:layout_width="wrap_content"
@@ -67,6 +55,18 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Versión 1.0.0"
             tools:visibility="visible" />
+
+        <com.core.components.ProgressView
+            android:id="@+id/content_loading_progress_bar_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{viewModel.loader.status ? View.VISIBLE : View.GONE}"
+            app:progressText="@{viewModel.loader.message}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

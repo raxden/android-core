@@ -4,8 +4,7 @@ import androidx.fragment.app.Fragment
 import com.core.app.base.BaseFragmentModule
 import com.core.app.base.mvvm.BaseViewFragmentModule
 import com.core.app.injector.scope.PerFragment
-import com.core.app.ui.project.list.viewModel.ProjectListViewModelModule
-import com.core.app.ui.splash.viewModel.SplashViewModelModule
+import com.core.app.ui.splash.viewmodel.SplashViewModelModule
 import dagger.Binds
 import dagger.Module
 

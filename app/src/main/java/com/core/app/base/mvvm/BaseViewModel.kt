@@ -1,7 +1,5 @@
 package com.core.app.base.mvvm
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.core.app.base.BaseFragmentModule
 import com.core.commons.DisposableManager
@@ -22,5 +20,5 @@ abstract class BaseViewModel : ViewModel() {
         super.onCleared()
     }
 
-    fun getLoader(): LiveData<Boolean> = mLoaderManager.getLoader()
+    fun getLoader(): LoaderManager = mLoaderManager
 }

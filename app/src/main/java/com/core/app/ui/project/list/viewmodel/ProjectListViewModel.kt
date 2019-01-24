@@ -1,4 +1,4 @@
-package com.core.app.ui.project.list.viewModel
+package com.core.app.ui.project.list.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,21 +23,21 @@ class ProjectListViewModel @Inject constructor(): BaseViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableMaybeObserver<List<Project>>() {
                     override fun onStart() {
-                        mLoaderManager.push()
+                        mLoaderManager.push("retreive project list")
                     }
 
                     override fun onSuccess(t: List<Project>) {
-                        mLoaderManager.pull()
+                        mLoaderManager.pop()
                         mProjectList.value = t
                     }
 
                     override fun onComplete() {
-                        mLoaderManager.pull()
+                        mLoaderManager.pop()
                         mProjectList.value = emptyList()
                     }
 
                     override fun onError(e: Throwable) {
-                        mLoaderManager.pull()
+                        mLoaderManager.pop()
 //                        showError()
                     }
                 }))

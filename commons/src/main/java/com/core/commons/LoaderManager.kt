@@ -5,27 +5,36 @@ import androidx.lifecycle.MutableLiveData
 
 class LoaderManager {
 
-    private val loader: MutableLiveData<Boolean> = MutableLiveData()
-    private var counter: Int = 0
+    private val mStatus: MutableLiveData<Boolean> = MutableLiveData()
+    private val mMessage: MutableLiveData<String> = MutableLiveData()
+    private var mCounter: Int = 0
 
-    @Synchronized
-    fun push() {
-        counter.inc()
-        loader.postValue(true)
+    init {
+        mStatus.postValue(false)
+        mMessage.postValue("")
     }
 
     @Synchronized
-    fun pull() {
-        if (counter > 0) counter.dec()
-        else loader.postValue(false)
+    fun push(message: String) {
+        mCounter.inc()
+        mStatus.postValue(true)
+        mMessage.postValue(message)
+    }
+
+    @Synchronized
+    fun pop() {
+        if (mCounter > 0) mCounter.dec()
+        else mStatus.postValue(false)
     }
 
     @Synchronized
     fun clear() {
-        counter = 0
-        loader.postValue(false)
+        mCounter = 0
+        mStatus.postValue(false)
     }
 
-    fun getLoader(): LiveData<Boolean> = loader
+    fun getStatus(): LiveData<Boolean> = mStatus
+
+    fun getMessage(): LiveData<String> = mMessage
 
 }

@@ -4,6 +4,7 @@
     <!-- Attributes -->
 
     <declare-styleable name="ProgressView">
+        <attr name="progressText" format="string" />
         <attr name="progressIndeterminateTint" format="color" />
         <attr name="progressBackgroundColor" format="color" />
         <attr name="progressTextColor" format="color" />

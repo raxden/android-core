@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
@@ -14,6 +15,7 @@ import com.core.app.base.BaseFragment
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptorCallback
+import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback: BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>(),
