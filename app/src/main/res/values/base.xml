@@ -1,0 +1,20 @@
+<resources>
+
+    <style name="BaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <!-- ========================================================================= -->
+
+    <style name="BaseTheme.Translucent">
+    </style>
+
+    <style name="BaseTheme.Translucent.Navigation">
+    </style>
+
+    <style name="BaseTheme.Transparent">
+    </style>
+
+    <style name="BaseTheme.Transparent.Navigation">
+    </style>
+
+</resources>

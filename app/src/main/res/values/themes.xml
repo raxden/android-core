@@ -1,0 +1,23 @@
+<resources>
+
+    <style name="AppTheme" parent="BaseTheme" >
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Translucent" parent="BaseTheme.Translucent">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Translucent.Navigation" parent="BaseTheme.Translucent.Navigation">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Transparent" parent="BaseTheme.Transparent">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.Transparent.Navigation" parent="BaseTheme.Transparent.Navigation">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+</resources>
