@@ -1,5 +1,7 @@
-package com.core.app.ui.splash.viewmodel
+package com.core.app.ui.splash.view
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.core.app.base.mvvm.BaseViewModel
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,8 +16,10 @@ class SplashViewModel @Inject constructor(): BaseViewModel() {
         const val IN_MILLISECONDS: Long = 3000
     }
 
-    fun prepareApplicationToLaunch() {
-        mDisposableManager.add(makeTime()
+    private val mApplicationReady: MutableLiveData<Boolean> = MutableLiveData()
+
+    init {
+        mCompositeDisposable.add(makeTime()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableCompletableObserver() {
@@ -24,6 +28,7 @@ class SplashViewModel @Inject constructor(): BaseViewModel() {
                     }
 
                     override fun onComplete() {
+                        mApplicationReady.value = true
                         mLoaderManager.pop()
                     }
 
@@ -32,6 +37,8 @@ class SplashViewModel @Inject constructor(): BaseViewModel() {
                     }
                 }))
     }
+
+    fun isApplicationReadyToLaunch() : LiveData<Boolean> = mApplicationReady
 
     private fun makeTime(): Completable = Completable.timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
 

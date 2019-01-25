@@ -29,6 +29,12 @@ class SplashActivity : AppActivity(),
 
     override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
 
+    // =============== SplashFragment.FragmentCallback =============================================
+
+    override fun launchProjectList() {
+        mNavigationHelper.launchProjectList()
+    }
+
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {

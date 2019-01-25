@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.core.app.injector.module.InterceptorFragmentModule
 import com.core.app.injector.scope.PerFragment
-import com.core.commons.DisposableManager
 import com.core.commons.LoaderManager
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
 
 /**
@@ -26,7 +26,7 @@ abstract class BaseFragmentModule {
     companion object {
 
         const val CHILD_FRAGMENT_MANAGER = "BaseFragmentModule.childFragmentManager"
-        const val DISPOSABLE_FRAGMENT_MANAGER = "BaseFragmentModule.disposableManager"
+        const val FRAGMENT_COMPOSITE_DISPOSABLE = "BaseFragmentModule.compositeDisposable"
 
         @JvmStatic
         @Provides
@@ -35,9 +35,9 @@ abstract class BaseFragmentModule {
 
         @JvmStatic
         @Provides
-        @Named(DISPOSABLE_FRAGMENT_MANAGER)
+        @Named(FRAGMENT_COMPOSITE_DISPOSABLE)
         @PerFragment
-        internal fun disposableManager(): DisposableManager = DisposableManager()
+        internal fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
 
         @JvmStatic
         @Provides

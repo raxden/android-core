@@ -1,9 +1,9 @@
 package com.core.app.base
 
 import com.core.app.injector.scope.PerService
-import com.core.commons.DisposableManager
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
 
 /**
@@ -22,6 +22,6 @@ abstract class BaseServiceModule {
         @Provides
         @Named(DISPOSABLE_SERVICE_MANAGER)
         @PerService
-        internal fun disposableServiceManager(): DisposableManager = DisposableManager()
+        internal fun disposableServiceManager(): CompositeDisposable = CompositeDisposable()
     }
 }

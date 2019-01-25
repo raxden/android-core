@@ -6,13 +6,14 @@ import android.content.res.Resources
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
+import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.InterceptorActivityModule
 import com.core.app.injector.scope.PerActivity
-import com.core.commons.DisposableManager
 import com.core.commons.extension.getExtras
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
 
 /**
@@ -54,11 +55,16 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun disposableManager(): DisposableManager = DisposableManager()
+        internal fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
 
         @JvmStatic
         @Provides
         @PerActivity
         internal fun fragmentManager(activity: AppCompatActivity): FragmentManager = activity.supportFragmentManager
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun navigationHelper(activity: Activity): NavigationHelper = NavigationHelper(activity)
     }
 }

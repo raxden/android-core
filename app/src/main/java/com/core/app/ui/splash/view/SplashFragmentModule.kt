@@ -1,19 +1,20 @@
 package com.core.app.ui.splash.view
 
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import com.core.app.base.BaseFragmentModule
 import com.core.app.base.mvvm.BaseViewFragmentModule
+import com.core.app.base.mvvm.ViewModelKey
 import com.core.app.injector.scope.PerFragment
-import com.core.app.ui.splash.viewmodel.SplashViewModelModule
 import dagger.Binds
 import dagger.Module
+import dagger.multibindings.IntoMap
 
 /**
  * Provides SampleMapFragment fragment dependencies.
  */
 @Module(includes = arrayOf(
-        BaseViewFragmentModule::class,
-        SplashViewModelModule::class
+        BaseViewFragmentModule::class
 ))
 abstract class SplashFragmentModule {
 
@@ -27,4 +28,11 @@ abstract class SplashFragmentModule {
     @Binds
     @PerFragment
     internal abstract fun fragment(fragment: SplashFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @PerFragment
+    @ViewModelKey(SplashViewModel::class)
+    internal abstract fun viewModel(viewModel: SplashViewModel): ViewModel
+
 }

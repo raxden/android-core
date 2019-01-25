@@ -1,9 +1,9 @@
 package com.core.app.base
 
 import com.core.app.injector.scope.PerBroadcastReceiver
-import com.core.commons.DisposableManager
 import dagger.Module
 import dagger.Provides
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
 
 /**
@@ -22,6 +22,6 @@ abstract class BaseBroadcastReceiverModule {
         @Provides
         @Named(DISPOSABLE_BROADCAST_RECEIVER_MANAGER)
         @PerBroadcastReceiver
-        internal fun disposableBroadcastReceiverManager(): DisposableManager = DisposableManager()
+        internal fun disposableBroadcastReceiverManager(): CompositeDisposable = CompositeDisposable()
     }
 }

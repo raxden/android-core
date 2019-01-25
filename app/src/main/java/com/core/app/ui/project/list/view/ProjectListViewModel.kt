@@ -1,4 +1,4 @@
-package com.core.app.ui.project.list.viewmodel
+package com.core.app.ui.project.list.view
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,7 @@ class ProjectListViewModel @Inject constructor(): BaseViewModel() {
     private val mProjectList: MutableLiveData<List<Project>> = MutableLiveData()
 
     fun retrieveProjectList(userID: String) {
-        mDisposableManager.add(getProjectListUseCase.execute(userID)
+        mCompositeDisposable.add(getProjectListUseCase.execute(userID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableMaybeObserver<List<Project>>() {

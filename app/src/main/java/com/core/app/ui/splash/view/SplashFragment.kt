@@ -1,13 +1,16 @@
 package com.core.app.ui.splash.view
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.SplashFragmentBinding
-import com.core.app.ui.splash.viewmodel.SplashViewModel
+import timber.log.Timber
 
 class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, SplashFragment.FragmentCallback>() {
 
-    interface FragmentCallback : BaseViewFragmentCallback
+    interface FragmentCallback : BaseViewFragmentCallback {
+        fun launchProjectList()
+    }
 
     override val mViewModelClass: Class<SplashViewModel>
         get() = SplashViewModel::class.java
@@ -18,9 +21,10 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
         }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        mViewModel.prepareApplicationToLaunch()
+    override fun observeViewModel(viewModel: SplashViewModel) {
+        viewModel.isApplicationReadyToLaunch().observe(this, Observer { isReady ->
+            if (isReady) mCallback.launchProjectList()
+        })
     }
 
 }

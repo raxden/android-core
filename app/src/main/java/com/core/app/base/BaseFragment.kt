@@ -2,16 +2,15 @@ package com.core.app.base
 
 import android.content.Context
 import android.os.Bundle
-import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.core.app.base.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
-import com.core.app.base.BaseFragmentModule.Companion.DISPOSABLE_FRAGMENT_MANAGER
-import com.core.commons.DisposableManager
+import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.raxdenstudios.square.SquareDialogFragment
 import com.raxdenstudios.square.interceptor.Interceptor
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -48,8 +47,8 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Squa
     interface BaseFragmentCallback
 
     @Inject
-    @field:Named(DISPOSABLE_FRAGMENT_MANAGER)
-    lateinit var mDisposableManager: DisposableManager
+    @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
+    lateinit var mCompositeDisposable: CompositeDisposable
     @Inject
     @field:Named(CHILD_FRAGMENT_MANAGER)
     lateinit var mChildFragmentManager: FragmentManager
@@ -66,7 +65,7 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Squa
     }
 
     override fun onDestroy() {
-        mDisposableManager.removeAll()
+        mCompositeDisposable.dispose()
         super.onDestroy()
     }
 

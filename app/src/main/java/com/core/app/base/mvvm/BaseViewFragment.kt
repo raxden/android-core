@@ -29,8 +29,13 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
     lateinit var mAutoInflateViewInterceptor: AutoInflateViewInterceptor
 
     protected abstract val mViewModelClass: Class<VM>
-    protected val mViewModel: VM by lazy { ViewModelProvider(this, mViewModelFactory).get(mViewModelClass) }
-    protected var mViewDataBinding: VDB? = null
+    private val mViewModel: VM by lazy { ViewModelProvider(this, mViewModelFactory).get(mViewModelClass) }
+    private var mViewDataBinding: VDB? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        observeViewModel(mViewModel)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,8 +44,15 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
             setLifecycleOwner(this@BaseViewFragment)    // Layout requirement to listen any changes on LiveData values
             setVariable(BR.viewModel, mViewModel)
             executePendingBindings()
+            onViewBinded(this, view, savedInstanceState)
         }
     }
+
+    fun onViewBinded(viewDataBinding: VDB, view: View, savedInstanceState: Bundle?) {
+
+    }
+
+    protected abstract fun observeViewModel(viewModel : VM)
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
         super.setupInterceptors(interceptorList)

@@ -2,11 +2,12 @@ package com.core.app.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.core.commons.DisposableManager
+import com.core.app.helper.NavigationHelper
 import com.raxdenstudios.square.SquareActivity
 import com.raxdenstudios.square.interceptor.Interceptor
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 /**
@@ -16,7 +17,9 @@ abstract class BaseActivity : SquareActivity(),
     HasSupportFragmentInjector {
 
     @Inject
-    lateinit var mDisposableManager: DisposableManager
+    lateinit var mNavigationHelper: NavigationHelper
+    @Inject
+    lateinit var mCompositeDisposable: CompositeDisposable
     @Inject
     lateinit var mFragmentManager: FragmentManager
     @Inject
@@ -24,7 +27,7 @@ abstract class BaseActivity : SquareActivity(),
 
     // =============== LifeCycle ===================================================================
     override fun onDestroy() {
-        mDisposableManager.removeAll()
+        mCompositeDisposable.dispose()
         super.onDestroy()
     }
 
