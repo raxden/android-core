@@ -14,11 +14,11 @@ class NavigationHelper(private val mActivity: Activity) {
                 .launchAndFinish()
     }
 
-    fun launchProjectList() {
+    fun launchProjectListAndFinishCurrentView() {
         NavigationManager.Builder(mActivity)
                 .putData(getExtras())
                 .navigateToClass(ProjectListActivity::class.java)
-                .launch()
+                .launchAndFinish()
     }
 
     private fun getExtras(): Bundle {

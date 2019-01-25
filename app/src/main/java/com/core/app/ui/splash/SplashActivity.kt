@@ -32,7 +32,7 @@ class SplashActivity : AppActivity(),
     // =============== SplashFragment.FragmentCallback =============================================
 
     override fun launchProjectList() {
-        mNavigationHelper.launchProjectList()
+        mNavigationHelper.launchProjectListAndFinishCurrentView()
     }
 
     // =============== Support methods =============================================================
