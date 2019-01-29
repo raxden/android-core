@@ -4,12 +4,11 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.SplashFragmentBinding
-import timber.log.Timber
 
 class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, SplashFragment.FragmentCallback>() {
 
     interface FragmentCallback : BaseViewFragmentCallback {
-        fun launchProjectList()
+        fun launchLogin()
     }
 
     override val mViewModelClass: Class<SplashViewModel>
@@ -23,7 +22,7 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
 
     override fun observeViewModel(viewModel: SplashViewModel) {
         viewModel.isApplicationReadyToLaunch().observe(this, Observer { isReady ->
-            if (isReady) mCallback.launchProjectList()
+            if (isReady) mCallback.launchLogin()
         })
     }
 

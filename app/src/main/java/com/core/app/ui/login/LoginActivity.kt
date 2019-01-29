@@ -1,9 +1,10 @@
-package com.core.app.ui.splash
+package com.core.app.ui.login
 
 import android.os.Bundle
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.R
+import com.core.app.ui.login.view.LoginFragment
 import com.core.app.ui.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
@@ -12,34 +13,27 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmen
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
 import javax.inject.Inject
 
-class SplashActivity : AppActivity(),
-        SplashFragment.FragmentCallback,
-        InjectFragmentInterceptorCallback<SplashFragment> {
+class LoginActivity : AppActivity(),
+        LoginFragment.FragmentCallback,
+        InjectFragmentInterceptorCallback<LoginFragment> {
 
     @Inject
     internal lateinit var mInjectFragmentInterceptor: InjectFragmentInterceptor
-    @Inject
-    internal lateinit var mFullScreenInterceptor: FullScreenInterceptor
 
     // =============== InjectFragmentInterceptorCallback ===========================================
 
-    override fun onCreateFragment(): SplashFragment? = SplashFragment.newInstance(getExtras())
+    override fun onCreateFragment(): LoginFragment? = LoginFragment.newInstance(getExtras())
 
-    override fun onFragmentLoaded(fragment: SplashFragment) {}
+    override fun onFragmentLoaded(fragment: LoginFragment) {}
 
     override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
 
-    // =============== SplashFragment.FragmentCallback =============================================
-
-    override fun launchLogin() {
-        mNavigationHelper.launchLoginAndFinishCurrentView()
-    }
+    // =============== LoginFragment.FragmentCallback =============================================
 
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
         super.setupInterceptors(interceptorList)
         interceptorList.add(mInjectFragmentInterceptor)
-        interceptorList.add(mFullScreenInterceptor)
     }
 }

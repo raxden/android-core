@@ -29,10 +29,12 @@
         </activity>
 
         <activity
-            android:name="com.core.app.ui.project.list.ProjectListActivity"
-            android:screenOrientation="portrait"
+            android:name="com.core.app.ui.login.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
 
+        <activity
+            android:name="com.core.app.ui.project.list.ProjectListActivity"
+            android:windowSoftInputMode="adjustPan" />
 
     </application>
 

@@ -1,6 +1,8 @@
 package com.core.app.injector.module
 
 import com.core.app.injector.scope.PerActivity
+import com.core.app.ui.login.LoginActivity
+import com.core.app.ui.login.LoginActivityModule
 import com.core.app.ui.project.list.ProjectListActivity
 import com.core.app.ui.project.list.ProjectListActivityModule
 import com.core.app.ui.splash.SplashActivity
@@ -23,6 +25,14 @@ abstract class InjectorModule {
     @PerActivity
     @ContributesAndroidInjector(modules = arrayOf(SplashActivityModule::class))
     internal abstract fun splashActivity(): SplashActivity
+
+    /**
+     * Provides the injector for the [LoginActivity], which has access to the dependencies
+     * provided by this application instance (singleton scoped objects).
+     */
+    @PerActivity
+    @ContributesAndroidInjector(modules = arrayOf(LoginActivityModule::class))
+    internal abstract fun loginActivity(): LoginActivity
 
     /**
      * Provides the injector for the [ProjectListActivity], which has access to the dependencies
