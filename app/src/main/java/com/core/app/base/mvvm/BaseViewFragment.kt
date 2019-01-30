@@ -48,9 +48,7 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
         }
     }
 
-    fun onViewBinded(viewDataBinding: VDB, view: View, savedInstanceState: Bundle?) {
-
-    }
+    protected abstract fun onViewBinded(viewDataBinding: VDB, view: View, savedInstanceState: Bundle?)
 
     protected abstract fun observeViewModel(viewModel : VM)
 

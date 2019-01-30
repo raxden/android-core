@@ -16,9 +16,4 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
             arguments = bundle ?: Bundle()
         }
     }
-
-    override fun observeViewModel(viewModel: LoginViewModel) {
-
-    }
-
 }

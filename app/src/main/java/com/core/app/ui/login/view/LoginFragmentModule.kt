@@ -34,5 +34,4 @@ abstract class LoginFragmentModule {
     @PerFragment
     @ViewModelKey(LoginViewModel::class)
     internal abstract fun viewModel(viewModel: LoginViewModel): ViewModel
-
 }

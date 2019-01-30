@@ -23,53 +23,28 @@
             android:layout_height="wrap_content"
             android:padding="40dp">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/username"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            <include
+                android:id="@+id/username_layout"
+                layout="@layout/username_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
-                app:error="@{viewModel.usernameError}"
-                app:errorEnabled="true"
-                app:layout_constraintBottom_toTopOf="@+id/password"
+                app:layout_constraintBottom_toTopOf="@+id/password_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed">
+                app:layout_constraintVertical_chainStyle="packed"
+                app:viewModel="@{viewModel}" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:onTextChanged="@{()-> viewModel.onUsernameChanged()}"
-                    android:text="@={viewModel.username}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            <include
+                android:id="@+id/password_layout"
+                layout="@layout/password_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:hint="Password"
-                app:error="@{viewModel.passwordError}"
-                app:errorEnabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/username"
-                app:layout_constraintStart_toStartOf="@+id/username"
-                app:layout_constraintTop_toBottomOf="@+id/username">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:onTextChanged="@{()-> viewModel.onPasswordChanged()}"
-                    android:text="@={viewModel.password}" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/username_layout"
+                app:viewModel="@{viewModel}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_btn"
@@ -78,7 +53,7 @@
                 android:layout_marginTop="16dp"
                 android:onClick="@{()-> viewModel.onLoginClicked()}"
                 android:text="Login"
-                app:layout_constraintTop_toBottomOf="@+id/password" />
+                app:layout_constraintTop_toBottomOf="@+id/password_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -16,8 +16,4 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
             arguments = bundle ?: Bundle()
         }
     }
-
-    override fun observeViewModel(viewModel: ProjectListViewModel) {
-
-    }
 }
