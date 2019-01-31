@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.core.app.injector.module.InterceptorFragmentModule
 import com.core.app.injector.scope.PerFragment
-import com.core.commons.LoaderManager
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -38,11 +37,6 @@ abstract class BaseFragmentModule {
         @Named(FRAGMENT_COMPOSITE_DISPOSABLE)
         @PerFragment
         internal fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
-
-        @JvmStatic
-        @Provides
-        @PerFragment
-        internal fun loaderManager(): LoaderManager = LoaderManager()
 
         @JvmStatic
         @Provides

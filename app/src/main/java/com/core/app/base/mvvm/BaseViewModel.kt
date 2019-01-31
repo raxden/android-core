@@ -1,17 +1,24 @@
 package com.core.app.base.mvvm
 
 import androidx.lifecycle.ViewModel
-import com.core.app.base.BaseFragmentModule
-import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
-import com.core.commons.LoaderManager
+import com.core.app.util.ErrorManager
+import com.core.app.util.LoaderManager
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
-import javax.inject.Named
 
 abstract class BaseViewModel : ViewModel() {
 
-    protected var mLoaderManager: LoaderManager = LoaderManager()
-    protected var mCompositeDisposable: CompositeDisposable = CompositeDisposable()
+    @Inject
+    lateinit var mLoaderManager: LoaderManager
+    @Inject
+    lateinit var mErrorManager: ErrorManager
+    @Inject
+    lateinit var mCompositeDisposable: CompositeDisposable
+
+    /**
+     * This method will be called when this ViewModel is created.
+     */
+    open fun onCreated() {}
 
     override fun onCleared() {
         mCompositeDisposable.dispose()
@@ -19,4 +26,6 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     fun getLoader(): LoaderManager = mLoaderManager
+
+    fun getError(): ErrorManager = mErrorManager
 }

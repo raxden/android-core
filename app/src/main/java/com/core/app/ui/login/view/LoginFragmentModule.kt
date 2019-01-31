@@ -28,10 +28,4 @@ abstract class LoginFragmentModule {
     @Binds
     @PerFragment
     internal abstract fun fragment(fragment: LoginFragment): Fragment
-
-    @Binds
-    @IntoMap
-    @PerFragment
-    @ViewModelKey(LoginViewModel::class)
-    internal abstract fun viewModel(viewModel: LoginViewModel): ViewModel
 }

@@ -28,10 +28,4 @@ abstract class ProjectListFragmentModule {
     @Binds
     @PerFragment
     internal abstract fun fragment(fragment: ProjectListFragment): Fragment
-
-    @Binds
-    @IntoMap
-    @PerFragment
-    @ViewModelKey(ProjectListViewModel::class)
-    internal abstract fun viewModel(viewModel: ProjectListViewModel): ViewModel
 }

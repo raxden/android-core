@@ -6,8 +6,8 @@ import org.threeten.bp.LocalDateTime
 
 @Parcelize
 data class User(
-    var id: Long,
-    var name: String,
-    var createdAt: LocalDateTime,
-    var updatedAt: LocalDateTime
+    var id: Long = 0,
+    var username: String,
+    var createdAt: LocalDateTime? = null,
+    var updatedAt: LocalDateTime? = null
 ) : Parcelable

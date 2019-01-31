@@ -16,9 +16,4 @@ import dagger.Module
                 BaseFragmentModule::class
         )
 )
-abstract class BaseViewFragmentModule {
-
-    @Binds
-    @PerFragment
-    abstract fun viewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory
-}
+abstract class BaseViewFragmentModule

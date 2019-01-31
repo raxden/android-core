@@ -51,8 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:enabled="@{!viewModel.loader.status}"
                 android:onClick="@{()-> viewModel.onLoginClicked()}"
-                android:text="Login"
+                android:text='@{viewModel.loader.status ? "loading" : "Login"}'
                 app:layout_constraintTop_toBottomOf="@+id/password_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

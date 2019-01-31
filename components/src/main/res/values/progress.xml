@@ -7,7 +7,8 @@
         <attr name="progressText" format="string" />
         <attr name="progressIndeterminateTint" format="color" />
         <attr name="progressBackgroundColor" format="color" />
-        <attr name="progressTextColor" format="color" />
+        <attr name="progressTextColor" format="reference|color" />
+        <attr name="adf" format="color" />
     </declare-styleable>
 
     <!-- Styles -->
@@ -25,6 +26,7 @@
     <style name="ProgressBar" parent="BaseProgressBar">
 
     </style>
+
 
     <style name="ProgressHorizontalBar" parent="BaseProgressHorizontalBar">
 

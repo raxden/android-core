@@ -30,6 +30,10 @@ class LoginActivity : AppActivity(),
 
     // =============== LoginFragment.FragmentCallback =============================================
 
+    override fun onUserLogged() {
+        mNavigationHelper.launchProjectListAndFinishCurrentView()
+    }
+
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {

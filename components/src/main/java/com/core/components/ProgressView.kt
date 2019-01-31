@@ -1,9 +1,11 @@
 package com.core.components
 
 import android.content.Context
+import android.content.res.TypedArray
 
 import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.ProgressBar
 import com.core.commons.extension.*
@@ -29,12 +31,16 @@ class ProgressView : BaseComponentView {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
     override fun loadAttributes(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
-        val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.ProgressView, 0, 0)
-        mBackgroundColor = typedArray.getColor(R.styleable.ProgressView_progressBackgroundColor, -1)
-        mTextColor = typedArray.getColor(R.styleable.ProgressView_progressTextColor, -1)
-        mProgressText = typedArray.getString(R.styleable.ProgressView_progressText)
-        mIndeterminateTint = typedArray.getColor(R.styleable.ProgressView_progressIndeterminateTint, -1)
-        typedArray.recycle()
+        context.theme.obtainStyledAttributes(attrs, R.styleable.ProgressView, 0, 0).apply {
+            try {
+                mBackgroundColor = getColor(R.styleable.ProgressView_progressBackgroundColor, -1)
+                mTextColor = getColor(R.styleable.ProgressView_progressTextColor, -1)
+                mProgressText = getString(R.styleable.ProgressView_progressText)
+                mIndeterminateTint = getColor(R.styleable.ProgressView_progressIndeterminateTint, -1)
+            } finally {
+                recycle()
+            }
+        }
     }
 
     override fun bindViews() {
@@ -55,7 +61,7 @@ class ProgressView : BaseComponentView {
     }
 
     override fun setVisibility(visibility: Int) {
-        when(visibility) {
+        when (visibility) {
             View.VISIBLE -> startFadeInAnimation()
             View.INVISIBLE -> startFadeOutAnimation()
             View.GONE -> startFadeOutAnimation()

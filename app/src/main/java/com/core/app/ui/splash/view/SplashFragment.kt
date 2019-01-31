@@ -25,5 +25,4 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
             if (isReady) mCallback.launchLogin()
         })
     }
-
 }

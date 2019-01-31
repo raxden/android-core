@@ -3,6 +3,7 @@ package com.core.app.ui.splash
 import android.app.Activity
 import com.core.app.base.BaseActivityModule
 import com.core.app.base.BaseFragmentActivityModule
+import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
 import com.core.app.ui.splash.view.SplashFragment
@@ -15,7 +16,7 @@ import dagger.android.ContributesAndroidInjector
  * Provides splash activity dependencies
  */
 @Module(includes = arrayOf(
-    BaseFragmentActivityModule::class
+        BaseFragmentActivityModule::class
 ))
 abstract class SplashActivityModule {
 

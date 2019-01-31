@@ -18,7 +18,7 @@ import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateV
 import timber.log.Timber
 import javax.inject.Inject
 
-abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback: BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>(),
+abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>(),
         AutoInflateViewInterceptorCallback {
 
     interface BaseViewFragmentCallback : BaseFragmentCallback
@@ -29,11 +29,12 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
     lateinit var mAutoInflateViewInterceptor: AutoInflateViewInterceptor
 
     protected abstract val mViewModelClass: Class<VM>
-    private val mViewModel: VM by lazy { ViewModelProvider(this, mViewModelFactory).get(mViewModelClass) }
+    private lateinit var mViewModel: VM
     private var mViewDataBinding: VDB? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mViewModel = ViewModelProvider(this, mViewModelFactory).get(mViewModelClass).also { it.onCreated() }
         observeViewModel(mViewModel)
     }
 
@@ -50,7 +51,7 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
 
     protected abstract fun onViewBinded(viewDataBinding: VDB, view: View, savedInstanceState: Bundle?)
 
-    protected abstract fun observeViewModel(viewModel : VM)
+    protected abstract fun observeViewModel(viewModel: VM)
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
         super.setupInterceptors(interceptorList)

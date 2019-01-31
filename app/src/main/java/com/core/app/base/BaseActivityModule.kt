@@ -8,7 +8,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.InterceptorActivityModule
+import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
+import com.core.app.util.ErrorManager
+import com.core.app.util.LoaderManager
 import com.core.commons.extension.getExtras
 import dagger.Binds
 import dagger.Module
@@ -21,9 +24,10 @@ import javax.inject.Named
  * provide a concrete implementation of [Activity].
  */
 @Module(
-    includes = arrayOf(
-        InterceptorActivityModule::class
-    )
+        includes = arrayOf(
+                InterceptorActivityModule::class,
+                ViewModelModule::class
+        )
 )
 abstract class BaseActivityModule {
 
@@ -61,6 +65,16 @@ abstract class BaseActivityModule {
         @Provides
         @PerActivity
         internal fun fragmentManager(activity: AppCompatActivity): FragmentManager = activity.supportFragmentManager
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun loaderManager(@Named(ACTIVITY_CONTEXT) context: Context): LoaderManager = LoaderManager(context)
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun errorManager(@Named(ACTIVITY_CONTEXT) context: Context): ErrorManager = ErrorManager(context)
 
         @JvmStatic
         @Provides
