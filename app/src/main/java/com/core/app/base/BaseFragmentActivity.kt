@@ -4,29 +4,29 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.core.app.BR
 import com.raxdenstudios.square.interceptor.Interceptor
-import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.AutoInflateLayoutInterceptor
-import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.AutoInflateLayoutInterceptorCallback
+import com.raxdenstudios.square.interceptor.commons.inflatelayout.InflateLayoutInterceptor
+import com.raxdenstudios.square.interceptor.commons.inflatelayout.InflateLayoutInterceptorCallback
 import javax.inject.Inject
 
-abstract class BaseFragmentActivity : BaseActivity(),
-    AutoInflateLayoutInterceptorCallback {
+abstract class BaseFragmentActivity<VDB : ViewDataBinding> : BaseActivity(),
+        InflateLayoutInterceptorCallback {
 
     @Inject
-    lateinit var mAutoInflateLayoutInterceptor: AutoInflateLayoutInterceptor
-    lateinit var mContentView: View
+    lateinit var mInflateLayoutInterceptor: InflateLayoutInterceptor
+
+    protected var mBinding: VDB? = null
 
     // ========= AutoInflateLayoutInterceptorCallback ==============================================
 
-    override fun onContentViewCreated(view: View, savedInstanceState: Bundle?) {
-        mContentView = view
+    override fun onLayoutIdLoaded(layoutId: Int, savedInstanceState: Bundle?) {
+        mBinding = DataBindingUtil.setContentView(this, layoutId)
     }
 
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
         super.setupInterceptors(interceptorList)
-        interceptorList.add(mAutoInflateLayoutInterceptor)
+        interceptorList.add(mInflateLayoutInterceptor)
     }
 }

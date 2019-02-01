@@ -3,7 +3,7 @@ package com.core.app.ui.splash
 import android.os.Bundle
 import android.view.View
 import com.core.app.AppActivity
-import com.core.app.R
+import com.core.app.databinding.SplashActivityBinding
 import com.core.app.ui.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
@@ -12,7 +12,7 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmen
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
 import javax.inject.Inject
 
-class SplashActivity : AppActivity(),
+class SplashActivity : AppActivity<SplashActivityBinding>(),
         SplashFragment.FragmentCallback,
         InjectFragmentInterceptorCallback<SplashFragment> {
 
@@ -27,7 +27,7 @@ class SplashActivity : AppActivity(),
 
     override fun onFragmentLoaded(fragment: SplashFragment) {}
 
-    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
+    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mBinding?.contentView as View
 
     // =============== SplashFragment.FragmentCallback =============================================
 

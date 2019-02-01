@@ -4,16 +4,15 @@ import android.os.Bundle
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.base.BaseFragmentActivity
+import com.core.app.databinding.ProjectListActivityBinding
 import com.core.app.ui.project.list.view.ProjectListFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
-import kotlinx.android.synthetic.main.splash_activity.*
 import javax.inject.Inject
 
-class ProjectListActivity : AppActivity(),
+class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
         ProjectListFragment.FragmentCallback,
         InjectFragmentInterceptorCallback<ProjectListFragment> {
 
@@ -26,14 +25,12 @@ class ProjectListActivity : AppActivity(),
 
     override fun onFragmentLoaded(fragment: ProjectListFragment) {}
 
-    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
+    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mBinding?.contentView as View
 
     // =============== Support methods =============================================================
 
     override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
         super.setupInterceptors(interceptorList)
-        interceptorList.apply {
-            add(mInjectFragmentInterceptor)
-        }
+        interceptorList.add(mInjectFragmentInterceptor)
     }
 }

@@ -7,6 +7,9 @@ import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.AutoInflat
 import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.AutoInflateLayoutInterceptorCallback
 import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenActivityInterceptor
 import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenInterceptor
+import com.raxdenstudios.square.interceptor.commons.inflatelayout.InflateLayoutActivityInterceptor
+import com.raxdenstudios.square.interceptor.commons.inflatelayout.InflateLayoutInterceptor
+import com.raxdenstudios.square.interceptor.commons.inflatelayout.InflateLayoutInterceptorCallback
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentActivityInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
@@ -18,6 +21,13 @@ import dagger.Provides
  */
 @Module
 object InterceptorActivityModule {
+
+    @JvmStatic
+    @Provides
+    @PerActivity
+    internal fun inflateLayoutInterceptor(activity: AppCompatActivity): InflateLayoutInterceptor {
+        return InflateLayoutActivityInterceptor(activity, activity as InflateLayoutInterceptorCallback)
+    }
 
     @JvmStatic
     @Provides

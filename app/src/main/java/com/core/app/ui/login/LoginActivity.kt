@@ -3,17 +3,15 @@ package com.core.app.ui.login
 import android.os.Bundle
 import android.view.View
 import com.core.app.AppActivity
-import com.core.app.R
+import com.core.app.databinding.LoginActivityBinding
 import com.core.app.ui.login.view.LoginFragment
-import com.core.app.ui.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
-import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
 import javax.inject.Inject
 
-class LoginActivity : AppActivity(),
+class LoginActivity : AppActivity<LoginActivityBinding>(),
         LoginFragment.FragmentCallback,
         InjectFragmentInterceptorCallback<LoginFragment> {
 
@@ -26,7 +24,7 @@ class LoginActivity : AppActivity(),
 
     override fun onFragmentLoaded(fragment: LoginFragment) {}
 
-    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
+    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mBinding?.contentView as View
 
     // =============== LoginFragment.FragmentCallback =============================================
 
