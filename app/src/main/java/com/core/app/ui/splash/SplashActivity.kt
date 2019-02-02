@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.databinding.SplashActivityBinding
 import com.core.app.ui.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
-import kotlinx.android.synthetic.main.login_activity.view.*
 import javax.inject.Inject
 
 class SplashActivity : AppActivity(),

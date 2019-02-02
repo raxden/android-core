@@ -2,10 +2,8 @@ package com.core.app.ui.project.list
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.app.NotificationCompat.getExtras
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.databinding.ProjectListActivityBinding
 import com.core.app.ui.project.list.view.ProjectListFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
