@@ -1,30 +1,27 @@
 package com.core.app.base.mvvm
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
 import com.core.app.base.BaseFragment
-import com.raxdenstudios.square.interceptor.Interceptor
-import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptor
-import com.raxdenstudios.square.interceptor.commons.autoinflateview.AutoInflateViewInterceptorCallback
+import com.core.commons.extension.getLayoutId
 import javax.inject.Inject
 
-abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>(),
-        AutoInflateViewInterceptorCallback {
+abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>() {
 
     interface BaseViewFragmentCallback : BaseFragmentCallback
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
-    @Inject
-    lateinit var mAutoInflateViewInterceptor: AutoInflateViewInterceptor
 
     protected abstract val mViewModelClass: Class<VM>
-    private lateinit var mViewModel: VM
-    protected var mBinding: VDB? = null
+    protected lateinit var mViewModel: VM
+    protected lateinit var mBinding: VDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,20 +29,14 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
         observeViewModel(mViewModel)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mBinding = DataBindingUtil.bind(view)
-        mBinding?.apply {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mBinding = DataBindingUtil.inflate<VDB>(inflater, getLayoutId(), container, false).apply {
             setLifecycleOwner(this@BaseViewFragment)    // Layout requirement to listen any changes on LiveData values
             setVariable(BR.viewModel, mViewModel)
             executePendingBindings()
         }
+        return mBinding.root
     }
 
     protected abstract fun observeViewModel(viewModel: VM)
-
-    override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
-        super.setupInterceptors(interceptorList)
-        interceptorList.add(mAutoInflateViewInterceptor)
-    }
 }

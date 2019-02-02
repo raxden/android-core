@@ -2,6 +2,7 @@ package com.core.app.ui.project.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.NotificationCompat.getExtras
 import com.core.app.AppActivity
 import com.core.app.R
 import com.core.app.databinding.ProjectListActivityBinding
@@ -12,7 +13,7 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmen
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
 import javax.inject.Inject
 
-class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
+class ProjectListActivity : AppActivity(),
         ProjectListFragment.FragmentCallback,
         InjectFragmentInterceptorCallback<ProjectListFragment> {
 
@@ -25,7 +26,7 @@ class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
 
     override fun onFragmentLoaded(fragment: ProjectListFragment) {}
 
-    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mBinding?.contentView as View
+    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
 
     // =============== Support methods =============================================================
 
