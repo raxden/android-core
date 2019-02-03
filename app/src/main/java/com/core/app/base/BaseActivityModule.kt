@@ -69,12 +69,12 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun loaderManager(@Named(ACTIVITY_CONTEXT) context: Context): LoaderManager = LoaderManager(context)
+        internal fun loaderManager(resources: Resources): LoaderManager = LoaderManager(resources)
 
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun errorManager(@Named(ACTIVITY_CONTEXT) context: Context): ErrorManager = ErrorManager(context)
+        internal fun errorManager(resources: Resources): ErrorManager = ErrorManager(resources)
 
         @JvmStatic
         @Provides

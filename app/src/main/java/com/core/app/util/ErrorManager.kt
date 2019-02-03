@@ -1,10 +1,11 @@
 package com.core.app.util
 
 import android.content.Context
+import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class ErrorManager(val mContext: Context) {
+class ErrorManager(val mResources: Resources) {
 
     private val mCode: MutableLiveData<Long> = MutableLiveData()
     private val mTitle: MutableLiveData<String> = MutableLiveData()
