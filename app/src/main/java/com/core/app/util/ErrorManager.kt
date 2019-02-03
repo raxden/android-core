@@ -1,6 +1,5 @@
 package com.core.app.util
 
-import android.content.Context
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

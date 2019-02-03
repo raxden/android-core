@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
 import com.core.app.base.BaseFragment
+import com.core.app.observer.TrackerViewObserver
 import com.core.commons.extension.getLayoutId
 import javax.inject.Inject
 
@@ -18,6 +20,8 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
 
     protected abstract val mViewModelClass: Class<VM>
     protected lateinit var mViewModel: VM
