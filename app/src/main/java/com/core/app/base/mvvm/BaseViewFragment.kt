@@ -39,4 +39,6 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
     }
 
     protected abstract fun observeViewModel(viewModel: VM)
+
+    fun getViewModel(): VM = mViewModel
 }

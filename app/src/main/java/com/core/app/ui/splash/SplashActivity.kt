@@ -2,14 +2,17 @@ package com.core.app.ui.splash
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import com.core.app.AppActivity
 import com.core.app.R
 import com.core.app.ui.splash.view.SplashFragment
+import com.core.app.ui.splash.view.SplashViewModel
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
 import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
+import timber.log.Timber
 import javax.inject.Inject
 
 class SplashActivity : AppActivity(),
