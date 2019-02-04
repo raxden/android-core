@@ -8,8 +8,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.InterceptorActivityModule
+import com.core.app.injector.module.LifecycleActivityModule
 import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
+import com.core.app.util.BroadcastOperationManager
 import com.core.app.util.ErrorManager
 import com.core.app.util.LoaderManager
 import com.core.commons.extension.getExtras
@@ -26,6 +28,7 @@ import javax.inject.Named
 @Module(
         includes = arrayOf(
                 InterceptorActivityModule::class,
+                LifecycleActivityModule::class,
                 ViewModelModule::class
         )
 )
@@ -75,6 +78,11 @@ abstract class BaseActivityModule {
         @Provides
         @PerActivity
         internal fun errorManager(activity: Activity): ErrorManager = ErrorManager(activity)
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun broadcastOperationManager(activity: AppCompatActivity): BroadcastOperationManager = BroadcastOperationManager(activity)
 
         @JvmStatic
         @Provides

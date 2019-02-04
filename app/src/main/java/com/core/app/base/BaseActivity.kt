@@ -2,7 +2,9 @@ package com.core.app.base
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleObserver
 import com.core.app.helper.NavigationHelper
+import com.core.app.util.BroadcastOperationManager
 import com.raxdenstudios.square.SquareActivity
 import com.raxdenstudios.square.interceptor.Interceptor
 import dagger.android.DispatchingAndroidInjector
@@ -20,6 +22,10 @@ abstract class BaseActivity : SquareActivity(),
     lateinit var mNavigationHelper: NavigationHelper
     @Inject
     lateinit var mCompositeDisposable: CompositeDisposable
+    @Inject
+    lateinit var mBroadcastOperationManager: BroadcastOperationManager
+    @Inject
+    lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
     @Inject
     lateinit var mFragmentManager: FragmentManager
     @Inject

@@ -1,4 +1,4 @@
-package com.core.data.network.gateway.retrofit.callAdapter
+package com.core.data.network.gateway.retrofit.adapter
 
 import com.core.data.network.gateway.retrofit.exception.RetrofitException
 import io.reactivex.*

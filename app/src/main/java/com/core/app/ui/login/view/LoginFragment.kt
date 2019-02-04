@@ -21,7 +21,7 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
     }
 
     override fun observeViewModel(viewModel: LoginViewModel) {
-        viewModel.isUserLogged().observe(this, Observer { isLogged ->
+        viewModel.userLogged.observe(this, Observer { isLogged ->
             if (isLogged) mCallback.onUserLogged()
         })
     }

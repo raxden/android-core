@@ -37,8 +37,6 @@ class LoginViewModel @Inject constructor(
         passwordError.postValue("")
     }
 
-    fun isUserLogged(): LiveData<Boolean> = userLogged
-
     private fun performLogin(username: String, password: String) {
         mLoginUseCase.execute(username, password)
                 .flatMapCompletable { Completable.complete() }

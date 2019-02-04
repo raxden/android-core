@@ -19,7 +19,7 @@ class TrackerViewObserver(
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun onResume() {
+    private fun onResume() {
         mTrackerManager.trackScreen(mFragment)
     }
 }

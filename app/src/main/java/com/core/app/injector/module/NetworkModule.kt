@@ -6,7 +6,7 @@ import com.core.app.BuildConfig
 import com.core.app.R
 import com.core.data.network.gateway.AppGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway
-import com.core.data.network.gateway.retrofit.callAdapter.RxErrorHandlingCallAdapterFactory
+import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
 import com.core.data.network.gateway.retrofit.service.AppRetrofitService
 import com.core.data.network.interceptor.HttpCacheInterceptor
 import dagger.Module
