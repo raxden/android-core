@@ -1,10 +1,11 @@
 package com.core.app.util
 
+import android.app.Activity
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class LoaderManager(val mResources: Resources) {
+class LoaderManager(private val mActivity: Activity) {
 
     private val mStatus: MutableLiveData<Boolean> = MutableLiveData()
     private val mMessage: MutableLiveData<String> = MutableLiveData()
@@ -19,7 +20,7 @@ class LoaderManager(val mResources: Resources) {
     fun push(message: Int) {
         mCounter.inc()
         mStatus.postValue(true)
-        mMessage.postValue(mResources.getString(message))
+        mMessage.postValue(mActivity.getString(message))
     }
 
     @Synchronized
