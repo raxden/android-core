@@ -6,9 +6,6 @@ import androidx.fragment.app.FragmentManager
 import com.core.app.injector.module.InterceptorFragmentModule
 import com.core.app.injector.module.LifecycleFragmentModule
 import com.core.app.injector.scope.PerFragment
-import com.core.app.observer.TrackerViewObserver
-import com.core.app.util.TrackerManager
-import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable

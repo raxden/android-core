@@ -2,7 +2,6 @@ package com.core.app.base
 
 import android.os.Bundle
 import android.view.View
-import com.core.app.observer.TrackerViewObserver
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.AutoInflateLayoutInterceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.AutoInflateLayoutInterceptorCallback

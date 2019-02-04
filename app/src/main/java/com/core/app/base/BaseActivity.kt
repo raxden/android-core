@@ -1,5 +1,6 @@
 package com.core.app.base
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
@@ -30,12 +31,6 @@ abstract class BaseActivity : SquareActivity(),
     lateinit var mFragmentManager: FragmentManager
     @Inject
     lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
-
-    // =============== LifeCycle ===================================================================
-    override fun onDestroy() {
-        mCompositeDisposable.dispose()
-        super.onDestroy()
-    }
 
     // =============== HasFragmentInjector =========================================================
 

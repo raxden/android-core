@@ -10,9 +10,9 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
 import com.core.app.base.BaseFragment
-import com.core.app.observer.TrackerViewObserver
 import com.core.commons.extension.getLayoutId
 import javax.inject.Inject
+import javax.inject.Named
 
 abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>() {
 
@@ -20,8 +20,6 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
 
     @Inject
     lateinit var mViewModelFactory: ViewModelProvider.Factory
-    @Inject
-    lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
 
     protected abstract val mViewModelClass: Class<VM>
     protected lateinit var mViewModel: VM

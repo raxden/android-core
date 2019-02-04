@@ -4,8 +4,10 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
 import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
+import com.core.app.injector.module.LifecycleFragmentModule.LIFECYCLE_FRAGMENT_OBSERVER
 import com.raxdenstudios.square.SquareDialogFragment
 import com.raxdenstudios.square.interceptor.Interceptor
 import dagger.android.DispatchingAndroidInjector
@@ -50,6 +52,9 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Squa
     @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
     lateinit var mCompositeDisposable: CompositeDisposable
     @Inject
+    @field:Named(LIFECYCLE_FRAGMENT_OBSERVER)
+    lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
+    @Inject
     @field:Named(CHILD_FRAGMENT_MANAGER)
     lateinit var mChildFragmentManager: FragmentManager
     @Inject
@@ -62,11 +67,6 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Squa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
-
-    override fun onDestroy() {
-        mCompositeDisposable.dispose()
-        super.onDestroy()
     }
 
     // =============== HasFragmentInjector =========================================================

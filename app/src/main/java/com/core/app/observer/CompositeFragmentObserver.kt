@@ -4,13 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import com.core.app.util.TrackerManager
-import com.google.firebase.analytics.FirebaseAnalytics
-import timber.log.Timber
+import io.reactivex.disposables.CompositeDisposable
 
-class TrackerViewObserver(
+class CompositeFragmentObserver(
         private val mFragment: Fragment,
-        private val mTrackerManager: TrackerManager
+        private val mCompositeDisposable: CompositeDisposable
 ) : LifecycleObserver {
 
     init {
@@ -18,8 +16,10 @@ class TrackerViewObserver(
         mFragment.lifecycle.addObserver(this)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    private fun onResume() {
-        mTrackerManager.trackScreen(mFragment)
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    private fun onDestroy() {
+        mCompositeDisposable.dispose()
     }
+
+
 }

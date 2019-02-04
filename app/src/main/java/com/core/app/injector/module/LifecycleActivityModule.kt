@@ -1,17 +1,15 @@
 package com.core.app.injector.module
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.injector.scope.PerActivity
-import com.core.app.injector.scope.PerFragment
 import com.core.app.observer.BroadcastActivityObserver
-import com.core.app.observer.TrackerViewObserver
+import com.core.app.observer.CompositeActivityObserver
 import com.core.app.util.BroadcastOperationManager
-import com.core.app.util.TrackerManager
 import dagger.Module
 import dagger.Provides
 import dagger.multibindings.IntoSet
+import io.reactivex.disposables.CompositeDisposable
 
 @Module
 object LifecycleActivityModule {
@@ -20,6 +18,12 @@ object LifecycleActivityModule {
     @Provides
     @IntoSet
     @PerActivity
-    internal fun broadcastActivityObserver(activity: AppCompatActivity, broadcastOperationManager: BroadcastOperationManager): LifecycleObserver = BroadcastActivityObserver(activity, broadcastOperationManager)
+    internal fun compositeActivityObserver(activity: AppCompatActivity, disposable: CompositeDisposable): LifecycleObserver = CompositeActivityObserver(activity, disposable)
+
+    @JvmStatic
+    @Provides
+    @IntoSet
+    @PerActivity
+    internal fun broadcastActivityObserver(activity: AppCompatActivity, broadcast: BroadcastOperationManager): LifecycleObserver = BroadcastActivityObserver(activity, broadcast)
 
 }
