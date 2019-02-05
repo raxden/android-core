@@ -25,6 +25,4 @@ class BroadcastActivityObserver(
     private fun onDestroy() {
         mBroadcastOperationManager.unregisterReceiver()
     }
-
-
 }
