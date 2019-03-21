@@ -1,48 +1,27 @@
 package com.core.app.ui.splash
 
-import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import com.core.app.AppActivity
 import com.core.app.R
 import com.core.app.ui.splash.view.SplashFragment
-import com.core.app.ui.splash.view.SplashViewModel
 import com.core.commons.extension.getExtras
-import com.raxdenstudios.square.interceptor.Interceptor
-import com.raxdenstudios.square.interceptor.commons.fullscreen.FullScreenInterceptor
-import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptor
-import com.raxdenstudios.square.interceptor.commons.injectfragment.InjectFragmentInterceptorCallback
-import timber.log.Timber
-import javax.inject.Inject
+import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
 
 class SplashActivity : AppActivity(),
         SplashFragment.FragmentCallback,
-        InjectFragmentInterceptorCallback<SplashFragment> {
+        HasInjectFragmentInterceptor<SplashFragment> {
 
-    @Inject
-    internal lateinit var mInjectFragmentInterceptor: InjectFragmentInterceptor
-    @Inject
-    internal lateinit var mFullScreenInterceptor: FullScreenInterceptor
+    // =============== HasInjectFragmentInterceptor ================================================
 
-    // =============== InjectFragmentInterceptorCallback ===========================================
+    override fun onLoadFragmentContainer(): View = mContentView.findViewById(R.id.content_view)
 
-    override fun onCreateFragment(): SplashFragment? = SplashFragment.newInstance(getExtras())
+    override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
 
     override fun onFragmentLoaded(fragment: SplashFragment) {}
-
-    override fun onLoadFragmentContainer(savedInstanceState: Bundle?): View = mContentView.findViewById(R.id.content_view)
 
     // =============== SplashFragment.FragmentCallback =============================================
 
     override fun launchLogin() {
         mNavigationHelper.launchLoginAndFinishCurrentView()
-    }
-
-    // =============== Support methods =============================================================
-
-    override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {
-        super.setupInterceptors(interceptorList)
-        interceptorList.add(mInjectFragmentInterceptor)
-        interceptorList.add(mFullScreenInterceptor)
     }
 }

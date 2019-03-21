@@ -1,4 +1,4 @@
-package com.core.app.observer
+package com.core.app.lifecycle
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.util.BroadcastOperationManager
 
-class BroadcastActivityObserver(
+class BroadcastActivityLifecycle(
         private val mActivity: AppCompatActivity,
         private val mBroadcastOperationManager: BroadcastOperationManager
 ) : LifecycleObserver {

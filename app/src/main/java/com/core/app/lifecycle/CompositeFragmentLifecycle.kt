@@ -1,4 +1,4 @@
-package com.core.app.observer
+package com.core.app.lifecycle
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import io.reactivex.disposables.CompositeDisposable
 
-class CompositeFragmentObserver(
+class CompositeFragmentLifecycle(
         private val mFragment: Fragment,
         private val mCompositeDisposable: CompositeDisposable
 ) : LifecycleObserver {
@@ -20,6 +20,4 @@ class CompositeFragmentObserver(
     private fun onDestroy() {
         mCompositeDisposable.dispose()
     }
-
-
 }

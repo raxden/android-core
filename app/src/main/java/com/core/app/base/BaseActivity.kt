@@ -1,13 +1,11 @@
 package com.core.app.base
 
-import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.helper.NavigationHelper
 import com.core.app.util.BroadcastOperationManager
-import com.raxdenstudios.square.SquareActivity
-import com.raxdenstudios.square.interceptor.Interceptor
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.disposables.CompositeDisposable
@@ -16,7 +14,7 @@ import javax.inject.Inject
 /**
  * Abstract Activity for all Activities to extend.
  */
-abstract class BaseActivity : SquareActivity(),
+abstract class BaseActivity : AppCompatActivity(),
     HasSupportFragmentInjector {
 
     @Inject
@@ -35,8 +33,4 @@ abstract class BaseActivity : SquareActivity(),
     // =============== HasFragmentInjector =========================================================
 
     override fun supportFragmentInjector() = mFragmentInjector
-
-    // =============== Support methods =============================================================
-
-    override fun setupInterceptors(interceptorList: MutableList<Interceptor>) { }
 }

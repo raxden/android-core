@@ -3,7 +3,6 @@ package com.core.app.base
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.core.app.injector.module.InterceptorFragmentModule
 import com.core.app.injector.module.LifecycleFragmentModule
 import com.core.app.injector.scope.PerFragment
 import dagger.Module
@@ -17,7 +16,6 @@ import javax.inject.Named
  */
 @Module(
         includes = arrayOf(
-                InterceptorFragmentModule::class,
                 LifecycleFragmentModule::class
         )
 )

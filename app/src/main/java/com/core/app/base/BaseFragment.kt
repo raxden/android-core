@@ -8,7 +8,6 @@ import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
 import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.core.app.injector.module.LifecycleFragmentModule.LIFECYCLE_FRAGMENT_OBSERVER
-import com.raxdenstudios.square.SquareDialogFragment
 import com.raxdenstudios.square.interceptor.Interceptor
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -43,7 +42,7 @@ import javax.inject.Named
  * **VIEW BINDING**
  * This fragment handles view bind and unbinding.
  */
-abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : SquareDialogFragment(),
+abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Fragment(),
         HasSupportFragmentInjector {
 
     interface BaseFragmentCallback
@@ -72,8 +71,4 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Squa
     // =============== HasFragmentInjector =========================================================
 
     override fun supportFragmentInjector() = mChildFragmentInjector
-
-    // =============== Support methods =============================================================
-
-    override fun setupInterceptors(interceptorList: MutableList<Interceptor>) {}
 }

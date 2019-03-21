@@ -1,16 +1,25 @@
 package com.core.app.ui.splash
 
 import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.BaseActivityModule
 import com.core.app.base.BaseFragmentActivityModule
 import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
+import com.core.app.lifecycle.BroadcastActivityLifecycle
+import com.core.app.lifecycle.FullScreenActivityLifecycle
 import com.core.app.ui.splash.view.SplashFragment
 import com.core.app.ui.splash.view.SplashFragmentModule
+import com.core.app.util.BroadcastOperationManager
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.android.ContributesAndroidInjector
+import dagger.multibindings.IntoSet
 
 /**
  * Provides splash activity dependencies
@@ -44,6 +53,16 @@ abstract class SplashActivityModule {
     @Binds
     @PerActivity
     internal abstract fun fragmentCallback(activity: SplashActivity): SplashFragment.FragmentCallback
+
+    @Module
+    companion object {
+
+        @JvmStatic
+        @Provides
+        @IntoSet
+        @PerActivity
+        internal fun fullScreenActivityLifecycle(activity: AppCompatActivity): LifecycleObserver = FullScreenActivityLifecycle(activity)
+    }
 
     // =============================================================================================
 

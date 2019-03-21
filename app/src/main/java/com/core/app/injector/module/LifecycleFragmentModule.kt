@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.core.app.injector.scope.PerFragment
-import com.core.app.observer.CompositeFragmentObserver
-import com.core.app.observer.TrackerFragmentObserver
+import com.core.app.lifecycle.CompositeFragmentLifecycle
+import com.core.app.lifecycle.TrackerFragmentLifecycle
 import com.core.app.util.TrackerManager
 import dagger.Module
 import dagger.Provides
@@ -23,13 +23,12 @@ object LifecycleFragmentModule {
     @IntoSet
     @PerFragment
     @Named(LIFECYCLE_FRAGMENT_OBSERVER)
-    internal fun compositeFragmentObserver(f: Fragment, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) disposable: CompositeDisposable): LifecycleObserver = CompositeFragmentObserver(f, disposable)
+    internal fun compositeFragmentObserver(f: Fragment, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) disposable: CompositeDisposable): LifecycleObserver = CompositeFragmentLifecycle(f, disposable)
 
     @JvmStatic
     @Provides
     @IntoSet
     @PerFragment
     @Named(LIFECYCLE_FRAGMENT_OBSERVER)
-    internal fun trackerViewObserver(f: Fragment, manager: TrackerManager): LifecycleObserver = TrackerFragmentObserver(f, manager)
-
+    internal fun trackerViewObserver(f: Fragment, manager: TrackerManager): LifecycleObserver = TrackerFragmentLifecycle(f, manager)
 }
