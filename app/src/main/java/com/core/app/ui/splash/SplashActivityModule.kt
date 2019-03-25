@@ -54,15 +54,15 @@ abstract class SplashActivityModule {
     @PerActivity
     internal abstract fun fragmentCallback(activity: SplashActivity): SplashFragment.FragmentCallback
 
-    @Module
-    companion object {
-
-        @JvmStatic
-        @Provides
-        @IntoSet
-        @PerActivity
-        internal fun fullScreenActivityLifecycle(activity: AppCompatActivity): LifecycleObserver = FullScreenActivityLifecycle(activity)
-    }
+//    @Module
+//    companion object {
+//
+//        @JvmStatic
+//        @Provides
+//        @IntoSet
+//        @PerActivity
+//        internal fun fullScreenActivityLifecycle(activity: AppCompatActivity): LifecycleObserver = FullScreenActivityLifecycle(activity)
+//    }
 
     // =============================================================================================
 

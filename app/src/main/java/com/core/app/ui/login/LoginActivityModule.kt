@@ -15,7 +15,7 @@ import dagger.android.ContributesAndroidInjector
  * Provides Login activity dependencies
  */
 @Module(includes = arrayOf(
-    BaseFragmentActivityModule::class
+        BaseFragmentActivityModule::class
 ))
 abstract class LoginActivityModule {
 

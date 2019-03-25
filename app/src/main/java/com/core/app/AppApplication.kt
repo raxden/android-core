@@ -6,6 +6,8 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.core.app.base.BaseApplication
 import com.core.app.util.AppUrbanAirshipNotificationFactory
 import com.core.app.util.CrashReportingTree
+import com.raxdenstudios.square.InterceptorManager
+import com.raxdenstudios.square.interceptor.commons.InterceptorCommonsFactory
 import com.urbanairship.UAirship
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
@@ -19,6 +21,7 @@ class AppApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
+        initSquare()
 //        initFabric()
         initTimber()
         initTreeTen()
@@ -33,6 +36,13 @@ class AppApplication : BaseApplication() {
 //        super.onConfigurationChanged(newConfig)
 //        LanguageManager(this).setDefaultLocale()
 //    }
+
+    private fun initSquare() {
+        InterceptorManager.Builder()
+                .addInterceptorFactory(InterceptorCommonsFactory())
+                .build()
+                .init(this)
+    }
 
     private fun initFabric() {
         // Initializes Fabric for builds that don't use the debug build type.
