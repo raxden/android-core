@@ -17,7 +17,8 @@ object AnalyticsModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun firebaseAnalytics(application: Application): FirebaseAnalytics = FirebaseAnalytics.getInstance(application)
+    internal fun firebaseAnalytics(application: Application): FirebaseAnalytics =
+            FirebaseAnalytics.getInstance(application)
 
     @JvmStatic
     @Provides
@@ -31,5 +32,8 @@ object AnalyticsModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun trackerManager(firebaseAnalytics: FirebaseAnalytics, @Named("screensToTrack") screens: MutableMap<String, String>): TrackerManager = TrackerManager(firebaseAnalytics, screens)
+    internal fun trackerManager(
+            firebaseAnalytics: FirebaseAnalytics,
+            @Named("screensToTrack") screens: MutableMap<String, String>
+    ): TrackerManager = TrackerManager(firebaseAnalytics, screens)
 }

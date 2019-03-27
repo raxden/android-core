@@ -6,15 +6,19 @@
     <!-- ========================================================================= -->
 
     <style name="BaseTheme.Translucent">
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="BaseTheme.Translucent.Navigation">
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <style name="BaseTheme.Transparent">
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="BaseTheme.Transparent.Navigation">
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
 </resources>

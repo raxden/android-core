@@ -22,7 +22,7 @@ class AppApplication : BaseApplication() {
         super.onCreate()
 
         initSquare()
-//        initFabric()
+        initFabric()
         initTimber()
         initTreeTen()
 //        initUrbanAirship()

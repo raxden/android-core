@@ -1,6 +1,5 @@
 package com.core.app.injector.module
 
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
@@ -19,16 +18,11 @@ object SchedulerModule {
     @Provides
     @Singleton
     @Named("io")
-    internal fun io(): Scheduler {
-        return Schedulers.io()
-    }
+    internal fun io(): Scheduler = Schedulers.io()
 
     @JvmStatic
     @Provides
     @Singleton
     @Named("mainThread")
-    internal fun mainThread(builder: GsonBuilder): Scheduler {
-        return AndroidSchedulers.mainThread()
-    }
-
+    internal fun mainThread(): Scheduler =  AndroidSchedulers.mainThread()
 }

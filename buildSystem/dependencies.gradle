@@ -13,7 +13,6 @@ ext {
 
     // dependencies
     def androidCommonsVersion = '3.0.35'        // https://github.com/raxden/commons
-    def androidNavigationVersion = '4.0.8'      // https://github.com/raxden/android-navigation
     def androidPreferencesVersion = '4.0.4'     // https://github.com/raxden/android-preferences
     def androidRecyclerVersion = '3.0.13'       // https://github.com/raxden/android-recycler
     def androidSquareVersion = '4.0.4'          // https://github.com/raxden/square
@@ -61,7 +60,6 @@ ext {
 
     def raxdenLibs = [
             commons: [group: 'com.github.raxden', name: 'android-commons', version: androidCommonsVersion, ext: 'aar'],
-            navigation: [group: 'com.github.raxden', name: 'android-navigation', version: androidNavigationVersion, ext: 'aar'],
             recycler: [group: 'com.github.raxden', name: 'android-recycler', version: androidRecyclerVersion, ext: 'aar'],
             preferences: [group: 'com.github.raxden', name: 'android-preferences', version: androidPreferencesVersion, ext: 'aar'],
             square: [group: 'com.github.raxden.square', name: 'square', version: androidSquareVersion, ext: 'aar'],
@@ -142,7 +140,6 @@ ext {
             [configuration: "implementation", dependency: firebaseLibs.auth],
 
             [configuration: "implementation", dependency: raxdenLibs.commons],
-            [configuration: "implementation", dependency: raxdenLibs.navigation],
             [configuration: "implementation", dependency: raxdenLibs.recycler],
             [configuration: "implementation", dependency: raxdenLibs.preferences],
             [configuration: "implementation", dependency: raxdenLibs.square],
@@ -249,6 +246,7 @@ ext {
             [configuration: "implementation", dependency: androidxLibs.appCompat],
             [configuration: "implementation", dependency: androidxLibs.material],
             [configuration: "implementation", dependency: androidxLibs.kotlin],
+            [configuration: "implementation", dependency: androidxLibs.constraintLayout],
 
             [configuration: "implementation", dependency: libs.threetenabp],
 

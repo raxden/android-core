@@ -22,6 +22,6 @@ class SplashActivity : AppActivity(),
     // =============== SplashFragment.FragmentCallback =============================================
 
     override fun launchLogin() {
-        mNavigationHelper.launchLoginAndFinishCurrentView()
+        mNavigationHelper.launchLogin(finishCurrentView = true)
     }
 }

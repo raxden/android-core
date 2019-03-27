@@ -1,26 +1,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.core.app">
+    package="com.core.app">
 
-    <application android:name="com.core.app.AppApplication"
-                 android:allowBackup="true"
-                 android:label="@string/app_name"
-                 android:icon="@mipmap/ic_launcher"
-                 android:roundIcon="@mipmap/ic_launcher_round"
-                 android:supportsRtl="true"
-                 android:theme="@style/AppTheme">
+    <application
+        android:name=".AppApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
 
         <provider
-                android:name="androidx.core.content.FileProvider"
-                android:authorities="${applicationId}.fileprovider"
-                android:exported="false"
-                android:grantUriPermissions="true">
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
-                    android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/provider_paths" />
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <activity
-                android:name="com.core.app.ui.splash.SplashActivity">
+            android:name=".ui.splash.SplashActivity"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -29,11 +31,13 @@
         </activity>
 
         <activity
-            android:name="com.core.app.ui.login.LoginActivity"
+            android:name=".ui.login.LoginActivity"
+            android:theme="@style/AppTheme.Translucent.Navigation"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name="com.core.app.ui.project.list.ProjectListActivity"
+            android:name=".ui.project.list.ProjectListActivity"
+            android:theme="@style/AppTheme.Translucent.Navigation"
             android:windowSoftInputMode="adjustPan" />
 
     </application>

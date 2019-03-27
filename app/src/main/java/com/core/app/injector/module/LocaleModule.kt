@@ -14,24 +14,18 @@ object LocaleModule {
     @Provides
     @IntoSet
     @Singleton
-    internal fun localeES(): Locale {
-        return Locale("es", "ES")
-    }
+    internal fun localeES(): Locale = Locale("es", "ES")
 
     @JvmStatic
     @Provides
     @IntoSet
     @Singleton
-    internal fun localeCA(): Locale {
-        return Locale("ca", "ES")
-    }
+    internal fun localeCA(): Locale = Locale("ca", "ES")
 
     @JvmStatic
     @Provides
     @Singleton
     @Named("default")
-    internal fun localeDefault(): Locale {
-        return Locale("es", "ES")
-    }
+    internal fun localeDefault(): Locale = Locale("es", "ES")
 
 }

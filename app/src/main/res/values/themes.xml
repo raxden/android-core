@@ -20,4 +20,10 @@
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 
+    <!-- ============== -->
+
+    <style name="AppTheme.Splash" parent="AppTheme.Transparent.Navigation">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
 </resources>

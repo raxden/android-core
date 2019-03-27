@@ -20,7 +20,7 @@ object AppInjector {
 
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
             override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {
-                activity?.let { handleActivity(it) }
+                activity?.also { handleActivity(it) }
             }
 
             override fun onActivityPaused(activity: Activity?) {}
@@ -38,16 +38,11 @@ object AppInjector {
     }
 
     private fun handleActivity(activity: Activity) {
-        if (activity is HasSupportFragmentInjector) {
-            AndroidInjection.inject(activity)
-        }
+        if (activity is HasSupportFragmentInjector) AndroidInjection.inject(activity)
         (activity as? FragmentActivity)?.run {
-            supportFragmentManager.registerFragmentLifecycleCallbacks(object :
-                FragmentManager.FragmentLifecycleCallbacks() {
+            supportFragmentManager.registerFragmentLifecycleCallbacks(object : FragmentManager.FragmentLifecycleCallbacks() {
                 override fun onFragmentPreAttached(fm: FragmentManager, f: Fragment, context: Context) {
-                    if (f is HasSupportFragmentInjector) {
-                        AndroidSupportInjection.inject(f)
-                    }
+                    if (f is HasSupportFragmentInjector) AndroidSupportInjection.inject(f)
                 }
             }, true)
         }

@@ -22,6 +22,6 @@ class LoginActivity : AppActivity(),
     // =============== LoginFragment.FragmentCallback =============================================
 
     override fun onUserLogged() {
-        mNavigationHelper.launchProjectListAndFinishCurrentView()
+        mNavigationHelper.launchProjectList(finishCurrentView = true)
     }
 }
