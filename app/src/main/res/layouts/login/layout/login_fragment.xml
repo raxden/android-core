@@ -25,7 +25,7 @@
 
             <include
                 android:id="@+id/username_layout"
-                layout="@layout/username_input_layout"
+                layout="@layout/login_fragment_username_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/password_layout"
@@ -37,7 +37,7 @@
 
             <include
                 android:id="@+id/password_layout"
-                layout="@layout/password_input_layout"
+                layout="@layout/login_fragment_password_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
