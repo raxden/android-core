@@ -7,8 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
 import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
-import com.core.app.injector.module.LifecycleFragmentModule.LIFECYCLE_FRAGMENT_OBSERVER
-import com.raxdenstudios.square.interceptor.Interceptor
+import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.disposables.CompositeDisposable

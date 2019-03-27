@@ -4,11 +4,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import com.core.app.base.BaseFragmentModule
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
+import javax.inject.Named
 
-class CompositeFragmentLifecycle(
+class CompositeFragmentLifecycle @Inject internal constructor(
         private val mFragment: Fragment,
-        private val mCompositeDisposable: CompositeDisposable
+        @field:Named(BaseFragmentModule.FRAGMENT_COMPOSITE_DISPOSABLE) private val mCompositeDisposable: CompositeDisposable
 ) : LifecycleObserver {
 
     init {

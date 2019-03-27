@@ -1,34 +1,31 @@
 package com.core.app.injector.module
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
-import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.core.app.injector.scope.PerFragment
 import com.core.app.lifecycle.CompositeFragmentLifecycle
 import com.core.app.lifecycle.TrackerFragmentLifecycle
-import com.core.app.util.TrackerManager
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoSet
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
 
 @Module
-object LifecycleFragmentModule {
+abstract class LifecycleFragmentModule {
 
-    const val LIFECYCLE_FRAGMENT_OBSERVER = "LifecycleFragmentModule.fragment"
+    @Module
+    companion object {
+        const val LIFECYCLE_FRAGMENT_OBSERVER = "LifecycleFragmentModule.fragment"
+    }
 
-    @JvmStatic
-    @Provides
+    @Binds
     @IntoSet
     @PerFragment
     @Named(LIFECYCLE_FRAGMENT_OBSERVER)
-    internal fun compositeFragmentObserver(f: Fragment, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) disposable: CompositeDisposable): LifecycleObserver = CompositeFragmentLifecycle(f, disposable)
+    internal abstract fun compositeLifecycleObserver(lifecycleObserver: CompositeFragmentLifecycle): LifecycleObserver
 
-    @JvmStatic
-    @Provides
+    @Binds
     @IntoSet
     @PerFragment
     @Named(LIFECYCLE_FRAGMENT_OBSERVER)
-    internal fun trackerViewObserver(f: Fragment, manager: TrackerManager): LifecycleObserver = TrackerFragmentLifecycle(f, manager)
+    internal abstract fun trackerLifecycleObserver(lifecycleObserver: TrackerFragmentLifecycle): LifecycleObserver
 }

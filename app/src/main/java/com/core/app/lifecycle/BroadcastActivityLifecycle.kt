@@ -5,8 +5,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.util.BroadcastOperationManager
+import javax.inject.Inject
 
-class BroadcastActivityLifecycle(
+class BroadcastActivityLifecycle @Inject internal constructor(
         private val mActivity: AppCompatActivity,
         private val mBroadcastOperationManager: BroadcastOperationManager
 ) : LifecycleObserver {

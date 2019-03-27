@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import javax.inject.Inject
 
-class FullScreenActivityLifecycle(
+class FullScreenActivityLifecycle @Inject internal constructor(
         private val mActivity: AppCompatActivity
 ) : LifecycleObserver {
 

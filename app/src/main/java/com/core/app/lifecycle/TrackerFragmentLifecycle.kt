@@ -5,8 +5,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.util.TrackerManager
+import javax.inject.Inject
 
-class TrackerFragmentLifecycle(
+class TrackerFragmentLifecycle @Inject internal constructor(
         private val mFragment: Fragment,
         private val mTrackerManager: TrackerManager
 ) : LifecycleObserver {

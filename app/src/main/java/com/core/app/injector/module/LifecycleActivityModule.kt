@@ -1,29 +1,23 @@
 package com.core.app.injector.module
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.injector.scope.PerActivity
 import com.core.app.lifecycle.BroadcastActivityLifecycle
 import com.core.app.lifecycle.CompositeActivityLifecycle
-import com.core.app.util.BroadcastOperationManager
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoSet
-import io.reactivex.disposables.CompositeDisposable
 
 @Module
-object LifecycleActivityModule {
+abstract class LifecycleActivityModule {
 
-    @JvmStatic
-    @Provides
+    @Binds
     @IntoSet
     @PerActivity
-    internal fun compositeActivityObserver(activity: AppCompatActivity, disposable: CompositeDisposable): LifecycleObserver = CompositeActivityLifecycle(activity, disposable)
+    internal abstract fun compositeLifecycleObserver(lifecycleObserver: CompositeActivityLifecycle): LifecycleObserver
 
-    @JvmStatic
-    @Provides
+    @Binds
     @IntoSet
     @PerActivity
-    internal fun broadcastActivityObserver(activity: AppCompatActivity, broadcast: BroadcastOperationManager): LifecycleObserver = BroadcastActivityLifecycle(activity, broadcast)
-
+    internal abstract fun broadcastLifecycleObserver(lifecycleObserver: BroadcastActivityLifecycle): LifecycleObserver
 }
