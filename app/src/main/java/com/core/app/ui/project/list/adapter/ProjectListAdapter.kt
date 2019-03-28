@@ -34,7 +34,6 @@ class ProjectListAdapter : RecyclerView.Adapter<ProjectListAdapter.ProjectListVi
             mData = data
             notifyItemRangeInserted(0, data.size)
         }
-        notifyDataSetChanged()
     }
 
     class ProjectListViewHolder constructor(val binding: ProjectListItemBinding) : RecyclerView.ViewHolder(binding.root)
