@@ -27,7 +27,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAdapter = ProjectListAdapter()
+        mAdapter = ProjectListAdapter(mViewModel)
         mBinding.recyclerView.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -36,7 +36,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
 
     override fun observeViewModel(viewModel: ProjectListViewModel) {
         viewModel.projectList.observe(this, Observer { data ->
-            mAdapter.setData(data)
+            mAdapter.setItems(data)
         })
     }
 }

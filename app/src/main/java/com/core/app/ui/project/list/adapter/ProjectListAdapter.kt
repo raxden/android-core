@@ -5,10 +5,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.databinding.DataBindingUtil
 import android.view.LayoutInflater
 import com.core.app.R
+import com.core.app.base.mvvm.BaseViewFragment
 import com.core.app.databinding.ProjectListItemBinding
 import com.core.domain.Project
 
 class ProjectListAdapter : RecyclerView.Adapter<ProjectListAdapter.ProjectListViewHolder>() {
+
+    interface AdapterCallback {
+        fun onItemPressed(item: Project)
+    }
 
     private var mData: List<Project>? = null
 
@@ -29,7 +34,7 @@ class ProjectListAdapter : RecyclerView.Adapter<ProjectListAdapter.ProjectListVi
         }
     }
 
-    fun setData(data: List<Project>) {
+    fun setItems(data: List<Project>) {
         if (mData == null) {
             mData = data
             notifyItemRangeInserted(0, data.size)
