@@ -2,6 +2,7 @@ package com.core.app.ui.project.list.view
 
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.mvvm.BaseViewModel
+import com.core.app.ui.project.list.adapter.ProjectListAdapter
 import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
@@ -10,12 +11,16 @@ import javax.inject.Inject
 
 class ProjectListViewModel @Inject constructor(
         private val mGetProjectListUseCase: GetProjectListUseCase
-) : BaseViewModel() {
+) : BaseViewModel(), ProjectListAdapter.AdapterCallback {
 
     val projectList: MutableLiveData<List<Project>> = MutableLiveData()
 
     override fun onCreated() {
         retrieveProjectList()
+    }
+
+    override fun itemSelected(position: Int) {
+
     }
 
     private fun retrieveProjectList() {

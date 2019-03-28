@@ -9,10 +9,12 @@ import com.core.app.base.mvvm.BaseViewFragment
 import com.core.app.databinding.ProjectListItemBinding
 import com.core.domain.Project
 
-class ProjectListAdapter : RecyclerView.Adapter<ProjectListAdapter.ProjectListViewHolder>() {
+class ProjectListAdapter constructor(
+        private val mCallback: AdapterCallback
+) : RecyclerView.Adapter<ProjectListAdapter.ProjectListViewHolder>() {
 
     interface AdapterCallback {
-        fun onItemPressed(item: Project)
+        fun itemSelected(position: Int)
     }
 
     private var mData: List<Project>? = null
@@ -29,6 +31,7 @@ class ProjectListAdapter : RecyclerView.Adapter<ProjectListAdapter.ProjectListVi
 
     override fun onBindViewHolder(holder: ProjectListViewHolder, position: Int) {
         holder.binding.apply {
+            root.setOnClickListener { mCallback.itemSelected(position) }
             project = mData?.get(position)
             executePendingBindings()
         }
