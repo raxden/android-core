@@ -9,18 +9,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProjectEntityDataMapper @Inject internal constructor(
-    context: Context
-) : DataMapper<ProjectEntity, Project>(context) {
+class ProjectEntityDataMapper @Inject internal constructor(context: Context) : DataMapper<ProjectEntity, Project>(context) {
 
-    override fun transform(source: ProjectEntity): Project {
-        val project = source.mapTo<Project>()
-        return project
-    }
+    override fun transform(source: ProjectEntity): Project = source.mapTo()
 
-    override fun inverse(source: Project): ProjectEntity {
-        val entity = source.mapTo<ProjectEntity>()
-        return entity
-    }
-
+    override fun inverse(source: Project): ProjectEntity = source.mapTo()
 }

@@ -1,45 +1,42 @@
 package com.core.app.ui.project.list.view
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.mvvm.BaseViewModel
 import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.observers.DisposableMaybeObserver
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class ProjectListViewModel @Inject constructor() : BaseViewModel() {
+class ProjectListViewModel @Inject constructor(
+        private val mGetProjectListUseCase: GetProjectListUseCase
+) : BaseViewModel() {
 
-    @Inject
-    lateinit var getProjectListUseCase: GetProjectListUseCase
+    val projectList: MutableLiveData<List<Project>> = MutableLiveData()
 
-    private val mProjectList: MutableLiveData<List<Project>> = MutableLiveData()
+    override fun onCreated() {
+        retrieveProjectList()
+    }
 
-    fun retrieveProjectList(userID: String) {
-        getProjectListUseCase.execute(userID)
+    private fun retrieveProjectList() {
+        mGetProjectListUseCase.execute()
                 .subscribeWith(
-                        onStart = { mLoaderManager.push("retreive project list") },
+                        onStart = {
+                            mLoaderManager.push("retrieve project list")
+                        },
                         onError = {
                             mLoaderManager.pop()
                             mErrorManager.set(it)
                         },
                         onSuccess = {
                             mLoaderManager.pop()
-                            mProjectList.value = it
+                            projectList.value = it
                         },
                         onComplete = {
                             mLoaderManager.pop()
-                            mProjectList.value = emptyList()
+                            projectList.value = emptyList()
                         }
                 )
                 .addTo(mCompositeDisposable)
-    }
-
-    fun getProjectList(): LiveData<List<Project>> {
-        return mProjectList
     }
 }

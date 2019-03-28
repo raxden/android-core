@@ -1,10 +1,6 @@
 package com.core.app.base
 
 import android.app.Activity
-import androidx.lifecycle.ViewModelProvider
-import com.core.app.base.mvvm.ViewModelProviderFactory
-import com.core.app.injector.scope.PerActivity
-import dagger.Binds
 import dagger.Module
 
 /**

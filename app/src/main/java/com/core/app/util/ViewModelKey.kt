@@ -1,4 +1,4 @@
-package com.core.app.base.mvvm
+package com.core.app.util
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

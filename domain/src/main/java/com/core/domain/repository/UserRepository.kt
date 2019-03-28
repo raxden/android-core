@@ -7,4 +7,5 @@ interface UserRepository : Repository {
 
     fun login(username: String, password: String): Single<User>
 
+    fun retrieve(): Single<User>
 }

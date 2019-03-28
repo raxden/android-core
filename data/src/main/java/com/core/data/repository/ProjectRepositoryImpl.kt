@@ -13,10 +13,11 @@ class ProjectRepositoryImpl @Inject internal constructor(
     private val entityDataMapper: ProjectEntityDataMapper
 ) : ProjectRepository {
 
-    override fun list(userId: String): Maybe<List<Project>> =
-        gateway.projectList(userId).map { entityDataMapper.transform(it) }
+    override fun list(userId: String): Maybe<List<Project>> = gateway
+            .projectList(userId)
+            .map { entityDataMapper.transform(it) }
 
-    override fun detail(userId: String, projectName: String): Single<Project> =
-        gateway.projectDetail(userId, projectName).map { entityDataMapper.transform(it) }
-
+    override fun detail(userId: String, projectName: String): Single<Project> = gateway
+            .projectDetail(userId, projectName)
+            .map { entityDataMapper.transform(it) }
 }

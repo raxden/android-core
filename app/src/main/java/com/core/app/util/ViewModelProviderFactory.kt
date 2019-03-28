@@ -1,4 +1,4 @@
-package com.core.app.base.mvvm
+package com.core.app.util
 
 import javax.inject.Inject
 
@@ -19,7 +19,7 @@ class ViewModelProviderFactory @Inject constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val creator = mViewModelMap[modelClass] ?: mViewModelMap.asIterable().firstOrNull {
             modelClass.isAssignableFrom(it.key)
-        }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
+        }?.value ?: throw Exception("unknown model class $modelClass")
         return try {
             creator.get() as T
         } catch (e: Exception) {

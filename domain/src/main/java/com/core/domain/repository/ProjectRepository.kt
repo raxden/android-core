@@ -9,5 +9,4 @@ interface ProjectRepository : Repository {
     fun list(userId: String): Maybe<List<Project>>
 
     fun detail(userId: String, projectName: String): Single<Project>
-
 }

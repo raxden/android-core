@@ -33,7 +33,7 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate<VDB>(inflater, getLayoutId(), container, false).apply {
-            setLifecycleOwner(this@BaseViewFragment)    // Layout requirement to listen any changes on LiveData values
+            lifecycleOwner = this@BaseViewFragment    // Layout requirement to listen any changes on LiveData values
             setVariable(BR.viewModel, mViewModel)
             executePendingBindings()
         }

@@ -1,14 +1,11 @@
 package com.core.app.ui.login.view
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import com.core.app.base.BaseFragmentModule
 import com.core.app.base.mvvm.BaseViewFragmentModule
-import com.core.app.base.mvvm.ViewModelKey
 import com.core.app.injector.scope.PerFragment
 import dagger.Binds
 import dagger.Module
-import dagger.multibindings.IntoMap
 
 /**
  * Provides SampleMapFragment fragment dependencies.

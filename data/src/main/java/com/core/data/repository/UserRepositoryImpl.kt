@@ -8,7 +8,10 @@ import javax.inject.Inject
 
 class UserRepositoryImpl @Inject internal constructor() : UserRepository {
 
-    override fun login(username: String, password: String): Single<User> {
-        return Single.timer(3000, TimeUnit.MILLISECONDS).map { User(username = username) }
-    }
+    override fun login(username: String, password: String): Single<User> = Single
+            .timer(3000, TimeUnit.MILLISECONDS)
+            .map { User(username = username) }
+
+    override fun retrieve(): Single<User> = Single
+            .just(User(username = "raxden"))
 }

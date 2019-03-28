@@ -22,5 +22,4 @@ object ValidationHelper {
     fun isURL(url: String): Boolean {
         return if (url.isEmpty()) false else Patterns.WEB_URL.matcher(url).matches()
     }
-
 }
