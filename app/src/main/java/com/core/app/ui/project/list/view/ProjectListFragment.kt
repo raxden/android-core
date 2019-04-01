@@ -8,10 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.core.app.AppFragment
 import com.core.app.databinding.ProjectListFragmentBinding
 import com.core.app.ui.project.list.adapter.ProjectListAdapter
+import com.core.domain.Project
 
 class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding, ProjectListFragment.FragmentCallback>() {
 
-    interface FragmentCallback : BaseViewFragmentCallback
+    interface FragmentCallback : BaseViewFragmentCallback {
+        fun onProjectSelected(project: Project)
+    }
 
     private lateinit var mAdapter: ProjectListAdapter
 
@@ -34,9 +37,8 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
         }
     }
 
-    override fun observeViewModel(viewModel: ProjectListViewModel) {
-        viewModel.projectList.observe(this, Observer { data ->
-            mAdapter.setItems(data)
-        })
+    override fun onViewModelAttached(viewModel: ProjectListViewModel) {
+        viewModel.projectList.observe(this, Observer { data -> mAdapter.setItems(data) })
+        viewModel.projectSelected.observe(this, Observer { data -> mCallback.onProjectSelected(data) })
     }
 }

@@ -20,7 +20,7 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
         }
     }
 
-    override fun observeViewModel(viewModel: SplashViewModel) {
+    override fun onViewModelAttached(viewModel: SplashViewModel) {
         viewModel.isApplicationReadyToLaunch().observe(this, Observer { isReady ->
             if (isReady) mCallback.launchLogin()
         })

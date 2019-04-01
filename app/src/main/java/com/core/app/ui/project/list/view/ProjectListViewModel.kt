@@ -7,7 +7,6 @@ import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
 import io.reactivex.rxkotlin.addTo
-import timber.log.Timber
 import javax.inject.Inject
 
 class ProjectListViewModel @Inject constructor(
@@ -15,13 +14,16 @@ class ProjectListViewModel @Inject constructor(
 ) : BaseViewModel(), ProjectListAdapter.AdapterCallback {
 
     val projectList: MutableLiveData<List<Project>> = MutableLiveData()
+    val projectSelected: MutableLiveData<Project> = MutableLiveData()
 
     override fun onCreated() {
         retrieveProjectList()
     }
 
     override fun itemSelected(position: Int) {
-        Timber.d(" "+position)
+        projectList.value?.get(position).also {
+            projectSelected.postValue(it)
+        }
     }
 
     private fun retrieveProjectList() {

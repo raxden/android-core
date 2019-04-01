@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
 import com.core.app.base.BaseFragment
 import com.core.commons.extension.getLayoutId
 import javax.inject.Inject
-import javax.inject.Named
 
-abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback> : BaseFragment<TCallback>() {
+abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback>
+    : BaseFragment<TCallback>() {
 
     interface BaseViewFragmentCallback : BaseFragmentCallback
 
@@ -28,7 +27,7 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProvider(this, mViewModelFactory).get(mViewModelClass).also { it.onCreated() }
-        observeViewModel(mViewModel)
+        onViewModelAttached(mViewModel)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -40,7 +39,7 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
         return mBinding.root
     }
 
-    protected abstract fun observeViewModel(viewModel: VM)
+    abstract fun onViewModelAttached(viewModel: VM)
 
     fun getViewModel(): VM = mViewModel
 }
