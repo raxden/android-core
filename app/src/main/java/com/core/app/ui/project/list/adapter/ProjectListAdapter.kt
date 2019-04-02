@@ -2,7 +2,7 @@ package com.core.app.ui.project.list.adapter
 
 //class ProjectListDataBindingAdapter constructor(
 //        private val mCallback: AdapterCallback
-//) : BaseViewDataBindingAdapter<Project, ProjectListItemBinding>() {
+//) : BaseListAdapter<Project, ProjectListItemBinding>() {
 
 //    interface AdapterCallback {
 //        fun itemSelected(position: Int)

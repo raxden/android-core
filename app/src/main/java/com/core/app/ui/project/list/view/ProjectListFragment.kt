@@ -4,11 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.core.app.AppFragment
 import com.core.app.R
-import com.core.app.base.adapter.BaseViewDataBindingAdapter
+import com.core.app.base.adapter.BaseListAdapter
 import com.core.app.databinding.ProjectListFragmentBinding
 import com.core.app.databinding.ProjectListItemBinding
 import com.core.domain.Project
@@ -33,7 +34,10 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAdapter = ProjectListAdapter(mViewModel)
+        mAdapter = ProjectListAdapter(mViewModel, object : DiffUtil.ItemCallback<Project>() {
+            override fun areItemsTheSame(oldItem: Project, newItem: Project): Boolean = oldItem.id == newItem.id
+            override fun areContentsTheSame(oldItem: Project, newItem: Project): Boolean = oldItem == newItem
+        })
         mBinding.recyclerView.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -41,11 +45,14 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     }
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
-        viewModel.projectList.observe(owner, Observer { data -> mAdapter.setItems(data) })
+        viewModel.projectList.observe(owner, Observer { data -> mAdapter.submitList(data) })
         viewModel.projectSelected.observe(owner, Observer { data -> mCallback.onProjectSelected(data) })
     }
 
-    internal class ProjectListAdapter(val mViewModel: ProjectListViewModel) : BaseViewDataBindingAdapter<Project, ProjectListItemBinding>() {
+    internal class ProjectListAdapter(
+            val mViewModel: ProjectListViewModel,
+            mDiffCallback: DiffUtil.ItemCallback<Project>
+    ) : BaseListAdapter<Project, ProjectListItemBinding>(mDiffCallback) {
 
         override fun getItemViewType(position: Int): Int = R.layout.project_list_item
 
