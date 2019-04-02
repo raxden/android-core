@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
 import com.core.app.base.BaseFragment
@@ -27,19 +28,23 @@ abstract class BaseViewFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCall
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProvider(this, mViewModelFactory).get(mViewModelClass).also { it.onCreated() }
-        onViewModelAttached(mViewModel)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mBinding = DataBindingUtil.inflate<VDB>(inflater, getLayoutId(), container, false).apply {
-            lifecycleOwner = this@BaseViewFragment    // Layout requirement to listen any changes on LiveData values
+            lifecycleOwner = viewLifecycleOwner    // Layout requirement to listen any changes on LiveData values
             setVariable(BR.viewModel, mViewModel)
             executePendingBindings()
         }
         return mBinding.root
     }
 
-    abstract fun onViewModelAttached(viewModel: VM)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onViewModelAttached(viewLifecycleOwner, mViewModel)
+    }
+
+    abstract fun onViewModelAttached(owner: LifecycleOwner, viewModel: VM)
 
     fun getViewModel(): VM = mViewModel
 }

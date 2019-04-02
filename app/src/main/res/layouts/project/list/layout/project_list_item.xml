@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="project"
+            name="item"
             type="com.core.domain.Project" />
     </data>
 
@@ -21,7 +21,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="@{project.name}"
+            android:text="@{item.name}"
             android:textColor="#000000"
             tools:text="item_1"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,7 @@
 package com.core.app.ui.splash.view
 
 import android.os.Bundle
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.SplashFragmentBinding
@@ -20,8 +21,8 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
         }
     }
 
-    override fun onViewModelAttached(viewModel: SplashViewModel) {
-        viewModel.isApplicationReadyToLaunch().observe(this, Observer { isReady ->
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: SplashViewModel) {
+        viewModel.isApplicationReadyToLaunch().observe(owner, Observer { isReady ->
             if (isReady) mCallback.launchLogin()
         })
     }
