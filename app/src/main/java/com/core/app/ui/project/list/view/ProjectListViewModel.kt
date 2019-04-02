@@ -19,7 +19,7 @@ class ProjectListViewModel @Inject constructor(
         retrieveProjectList()
     }
 
-    fun itemSelected(position: Int) {
+    fun onItemSelected(position: Int) {
         projectList.value?.get(position).also {
             projectSelected.postValue(it)
         }

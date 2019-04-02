@@ -50,15 +50,10 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     }
 
     internal class ProjectListAdapter(
-            val mViewModel: ProjectListViewModel,
-            mDiffCallback: DiffUtil.ItemCallback<Project>
-    ) : BaseListAdapter<Project, ProjectListItemBinding>(mDiffCallback) {
+            viewModel: ProjectListViewModel,
+            diffCallback: DiffUtil.ItemCallback<Project>
+    ) : BaseListAdapter<Project, ProjectListViewModel, ProjectListItemBinding>(viewModel, diffCallback) {
 
         override fun getItemViewType(position: Int): Int = R.layout.project_list_item
-
-        override fun onBindViewHolder(holder: ViewDataBindingHolder<Project, ProjectListItemBinding>, position: Int) {
-            super.onBindViewHolder(holder, position)
-            holder.binding.root.setOnClickListener { mViewModel.itemSelected(position) }
-        }
     }
 }

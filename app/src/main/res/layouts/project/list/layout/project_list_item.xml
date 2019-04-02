@@ -6,13 +6,22 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.core.app.ui.project.list.view.ProjectListViewModel" />
+
+        <variable
+            name="position"
+            type="Integer" />
+
+        <variable
             name="item"
             type="com.core.domain.Project" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()-> viewModel.onItemSelected(position)}">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
@@ -23,12 +32,12 @@
             android:layout_marginBottom="8dp"
             android:text="@{item.name}"
             android:textColor="#000000"
-            tools:text="item_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:text="item_1"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
