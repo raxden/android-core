@@ -10,6 +10,7 @@ import org.threeten.bp.LocalDateTime
 data class Project(
     var id: Long,
     var name: String,
+    var description: String,
     var user: User,
     var uri: Uri,
     var createdAt: LocalDateTime,
