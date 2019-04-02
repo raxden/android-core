@@ -22,7 +22,7 @@
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="6dp"
         app:cardBackgroundColor="@android:color/white"
         android:onClick="@{()-> viewModel.onItemSelected(position)}"
         app:cardUseCompatPadding="true">
