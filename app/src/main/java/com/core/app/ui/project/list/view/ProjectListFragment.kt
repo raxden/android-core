@@ -13,6 +13,7 @@ import com.core.app.base.adapter.BaseListAdapter
 import com.core.app.databinding.ProjectListFragmentBinding
 import com.core.app.databinding.ProjectListItemBinding
 import com.core.domain.Project
+import timber.log.Timber
 
 class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding, ProjectListFragment.FragmentCallback>() {
 
@@ -55,5 +56,10 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     ) : BaseListAdapter<Project, ProjectListViewModel, ProjectListItemBinding>(viewModel, diffCallback) {
 
         override fun getItemViewType(position: Int): Int = R.layout.project_list_item
+
+        override fun onBindViewHolder(holder: ViewDataBindingHolder<Project, ProjectListViewModel, ProjectListItemBinding>, position: Int) {
+            super.onBindViewHolder(holder, position)
+            holder.itemView.setOnClickListener { Timber.d("") }
+        }
     }
 }

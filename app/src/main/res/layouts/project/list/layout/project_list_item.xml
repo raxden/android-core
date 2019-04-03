@@ -19,11 +19,12 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.MaterialComponents.CardView"
+        style="@style/CardView"
+        android:id="@+id/card_item_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
-        app:cardBackgroundColor="@android:color/white"
+        android:foreground="?android:attr/selectableItemBackground"
         android:onClick="@{()-> viewModel.onItemSelected(position)}"
         app:cardUseCompatPadding="true">
 
