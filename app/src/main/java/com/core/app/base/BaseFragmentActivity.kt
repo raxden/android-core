@@ -7,12 +7,12 @@ import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.HasAutoInf
 abstract class BaseFragmentActivity : BaseActivity(),
         HasAutoInflateLayoutInterceptor {
 
-    lateinit var mContentView: View
+    lateinit var mRootView: View
 
     // ========= HasInflateLayoutInterceptor =======================================================
 
     override fun onContentViewCreated(view: View) {
-        mContentView = view
+        mRootView = view
     }
 
     // =============== Support methods =============================================================

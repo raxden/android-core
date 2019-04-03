@@ -1,7 +1,6 @@
 package com.core.app.ui.login.view
 
 import android.text.TextUtils
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.mvvm.BaseViewModel
 import com.core.commons.ValidationHelper
@@ -12,7 +11,7 @@ import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
-        private val mLoginUseCase: LoginUseCase
+        private val loginUseCase: LoginUseCase
 ) : BaseViewModel() {
 
     val username: MutableLiveData<String> = MutableLiveData()
@@ -38,7 +37,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun performLogin(username: String, password: String) {
-        mLoginUseCase.execute(username, password)
+        loginUseCase.execute(username, password)
                 .flatMapCompletable { Completable.complete() }
                 .subscribeWith(
                         onStart = { mLoaderManager.push("validando credenciales...") },

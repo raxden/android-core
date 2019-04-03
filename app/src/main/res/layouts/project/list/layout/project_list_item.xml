@@ -15,11 +15,11 @@
 
         <variable
             name="item"
-            type="com.core.domain.Project" />
+            type="com.core.app.model.ProjectModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        style="@style/CardView"
+        style="@style/Widget.MaterialComponents.CardView"
         android:id="@+id/card_item_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

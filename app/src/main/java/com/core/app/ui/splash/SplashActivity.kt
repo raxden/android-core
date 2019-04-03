@@ -13,7 +13,7 @@ class SplashActivity : AppActivity(),
 
     // =============== HasInjectFragmentInterceptor ================================================
 
-    override fun onLoadFragmentContainer(): View = mContentView.findViewById(R.id.content_view)
+    override fun onLoadFragmentContainer(): View = findViewById(R.id.content_view)
 
     override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
 

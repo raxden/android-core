@@ -2,6 +2,8 @@ package com.core.app.ui.project.list.view
 
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.mvvm.BaseViewModel
+import com.core.app.model.ProjectModel
+import com.core.app.model.mapper.ProjectModelDataMapper
 import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
@@ -9,10 +11,13 @@ import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
 class ProjectListViewModel @Inject constructor(
-        private val mGetProjectListUseCase: GetProjectListUseCase
+        private val getProjectListUseCase: GetProjectListUseCase,
+        private val projectModelDataMapper: ProjectModelDataMapper
 ) : BaseViewModel(){
 
-    val projectList: MutableLiveData<List<Project>> = MutableLiveData()
+    private var projectList: List<Project> = emptyList()
+
+    val projectModelList: MutableLiveData<List<ProjectModel>> = MutableLiveData()
     val projectSelected: MutableLiveData<Project> = MutableLiveData()
 
     override fun onCreated() {
@@ -20,13 +25,15 @@ class ProjectListViewModel @Inject constructor(
     }
 
     fun onItemSelected(position: Int) {
-        projectList.value?.get(position).also {
-            projectSelected.postValue(it)
-        }
+        projectList[position].also { projectSelected.postValue(it) }
     }
 
     private fun retrieveProjectList() {
-        mGetProjectListUseCase.execute()
+        getProjectListUseCase.execute()
+                .map {
+                    projectList = it
+                    projectModelDataMapper.transform(it)
+                }
                 .subscribeWith(
                         onStart = {
                             mLoaderManager.push("retrieve project list")
@@ -37,11 +44,11 @@ class ProjectListViewModel @Inject constructor(
                         },
                         onSuccess = {
                             mLoaderManager.pop()
-                            projectList.value = it
+                            projectModelList.value = it
                         },
                         onComplete = {
                             mLoaderManager.pop()
-                            projectList.value = emptyList()
+                            projectModelList.value = emptyList()
                         }
                 )
                 .addTo(mCompositeDisposable)
