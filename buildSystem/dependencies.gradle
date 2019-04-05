@@ -255,6 +255,7 @@ ext {
 
             [configuration: "implementation", dependency: androidxLibs.appCompat],
             [configuration: "implementation", dependency: androidxLibs.material],
+            [configuration: "implementation", dependency: androidxLibs.constraintLayout],
             [configuration: "implementation", dependency: androidxLibs.kotlin],
 
             [configuration: "implementation", dependency: libs.rxAndroid],

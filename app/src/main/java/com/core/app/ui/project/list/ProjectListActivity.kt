@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar
 import com.core.app.AppActivity
 import com.core.app.R
 import com.core.app.ui.project.list.view.ProjectListFragment
+import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras
 import com.core.domain.Project
 import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
@@ -20,7 +21,9 @@ class ProjectListActivity : AppActivity(),
 
     override fun onCreateToolbarView(): Toolbar = findViewById(R.id.toolbar_view)
 
-    override fun onToolbarViewCreated(toolbar: Toolbar) {}
+    override fun onToolbarViewCreated(toolbar: Toolbar) {
+        toolbar.alignToStatusBarBottom()
+    }
 
     // =============== HasInjectFragmentInterceptor ================================================
 
