@@ -5,7 +5,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.LoginFragmentBinding
-import com.core.app.util.LocaleUtils
 
 class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>() {
 
@@ -25,13 +24,11 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
     override fun onViewDataBindingCreated(binding: LoginFragmentBinding) {
         super.onViewDataBindingCreated(binding)
         activity?.also { activity ->
-            binding.languageEsBtn.setOnClickListener {
-                LocaleUtils.setLocale(activity, "es", "ES")
-                activity.recreate()
+            binding.accessFineLocationBtn.setOnClickListener {
+
             }
-            binding.languageEnBtn.setOnClickListener {
-                LocaleUtils.setLocale(activity, "en", "UK")
-                activity.recreate()
+            binding.cameraBtn.setOnClickListener {
+
             }
         }
     }

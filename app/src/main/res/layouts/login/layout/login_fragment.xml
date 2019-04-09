@@ -58,22 +58,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/password_layout" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/language_es_btn"
+                android:id="@+id/access_fine_location_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="@string/spanish"
-                app:layout_constraintBottom_toBottomOf="@+id/language_en_btn"
-                app:layout_constraintEnd_toStartOf="@+id/language_en_btn"
-                app:layout_constraintTop_toTopOf="@+id/language_en_btn" />
+                android:text="access fine location"
+                app:layout_constraintBottom_toBottomOf="@+id/camera_btn"
+                app:layout_constraintEnd_toStartOf="@+id/camera_btn"
+                app:layout_constraintTop_toTopOf="@+id/camera_btn" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/language_en_btn"
+                android:id="@+id/camera_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/english"
+                android:text="camera"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

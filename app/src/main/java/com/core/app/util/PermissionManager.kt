@@ -2,9 +2,8 @@ package com.core.app.util
 
 import android.Manifest
 import android.app.Activity
-import android.content.DialogInterface
-import android.view.View
 import androidx.appcompat.app.AlertDialog
+import com.core.app.R
 import com.core.commons.extension.subscribeWith
 import com.tbruyelle.rxpermissions2.Permission
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -49,13 +48,13 @@ class PermissionManager(
     private fun handleRequestPermissionRationale(permission: Permission, callback: Callback) {
         when (permission.name) {
             Manifest.permission.ACCESS_FINE_LOCATION ->
-                showRequestPermissionRationale("", "", "", "", permission, callback)
+                showRequestPermissionRationale(R.string.permission_rationale_access_fine_location_title, R.string.permission_rationale_access_fine_location_message, R.string.permission_rationale_access_fine_location_positive, R.string.permission_rationale_access_fine_location_negative, permission, callback)
             Manifest.permission.CAMERA ->
-                showRequestPermissionRationale("", "", "", "", permission, callback)
+                showRequestPermissionRationale(R.string.permission_rationale_camera_title, R.string.permission_rationale_camera_message, R.string.permission_rationale_camera_positive, R.string.permission_rationale_camera_negative, permission, callback)
         }
     }
 
-    private fun showRequestPermissionRationale(title: String, message: String, positive: String, negative: String, permission: Permission, callback: Callback) {
+    private fun showRequestPermissionRationale(title: Int, message: Int, positive: Int, negative: Int, permission: Permission, callback: Callback) {
         AlertDialog.Builder(mActivity)
                 .setTitle(title)
                 .setMessage(message)
