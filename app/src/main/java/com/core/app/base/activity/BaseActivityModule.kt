@@ -12,15 +12,12 @@ import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.util.BroadcastOperationManager
 import com.core.app.util.ErrorManager
-import com.core.app.util.LocaleManager
 import com.core.app.util.LoaderManager
 import com.core.commons.extension.getExtras
-import com.raxdenstudios.preferences.AdvancedPreferences
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
-import java.util.*
 import javax.inject.Named
 
 /**
@@ -69,15 +66,6 @@ abstract class BaseActivityModule {
         @Provides
         @PerActivity
         internal fun fragmentManager(activity: AppCompatActivity): FragmentManager = activity.supportFragmentManager
-
-        @JvmStatic
-        @Provides
-        @PerActivity
-        internal fun localeManager(
-                preferences: AdvancedPreferences,
-                @Named("default") locale: Locale,
-                availableLocaleList: Set<Locale>
-        ): LocaleManager = LocaleManager(preferences, locale, availableLocaleList)
 
         @JvmStatic
         @Provides

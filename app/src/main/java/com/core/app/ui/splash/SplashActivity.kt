@@ -22,7 +22,7 @@ class SplashActivity : AppActivity(),
     // =============== SplashFragment.FragmentCallback =============================================
 
     override fun launchLogin() {
-//        mNavigationHelper.launchLogin(finishCurrentView = true)
-        mNavigationHelper.launchProjectList(finishCurrentView = true)
+        mNavigationHelper.launchLogin(finishCurrentView = true)
+//        mNavigationHelper.launchProjectList(finishCurrentView = true)
     }
 }

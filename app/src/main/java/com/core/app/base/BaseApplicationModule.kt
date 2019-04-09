@@ -14,7 +14,6 @@ import javax.inject.Singleton
  */
 @Module(includes = arrayOf(
         SchedulerModule::class,
-        LocaleModule::class,
         GsonModule::class,
         AnalyticsModule::class,
         PreferencesModule::class,

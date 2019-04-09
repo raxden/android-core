@@ -3,11 +3,15 @@ package com.core.app.base
 import android.app.Activity
 import android.app.Service
 import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.res.Configuration
 import androidx.multidex.MultiDexApplication
 import androidx.appcompat.app.AppCompatDelegate
 import com.core.app.injector.AppInjector
+import com.core.app.util.LocaleUtils
 import com.raxdenstudios.commons.util.SDKUtils
 import dagger.android.*
+import java.util.*
 import javax.inject.Inject
 
 /**
@@ -26,6 +30,15 @@ abstract class BaseApplication : MultiDexApplication(),
     lateinit var mBroadcastReceiverDispatchingAndroidInjector: DispatchingAndroidInjector<BroadcastReceiver>
 
     // =============== LifeCycle ===================================================================
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleUtils.attachBaseContext(base, Locale("es", "ES")))
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+        LocaleUtils.onConfigurationChanged(this)
+    }
 
     override fun onCreate() {
         super.onCreate()
