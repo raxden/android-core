@@ -1,7 +1,7 @@
 package com.core.app.util
 
 import android.Manifest
-import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import com.core.app.R
 import com.core.commons.extension.subscribeWith
@@ -12,7 +12,7 @@ import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
 
 class PermissionManager(
-        private val mActivity: Activity,
+        private val mContext: Context,
         private val mRxPermissions: RxPermissions,
         private val mCompositeDisposable: CompositeDisposable) {
 
@@ -55,7 +55,8 @@ class PermissionManager(
     }
 
     private fun showRequestPermissionRationale(title: Int, message: Int, positive: Int, negative: Int, permission: Permission, callback: Callback) {
-        AlertDialog.Builder(mActivity)
+        MaterialAlertDialogBuilder
+        AlertDialog.Builder(mContext)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(positive) { _, _ -> requestPermission(callback, permission.name) }

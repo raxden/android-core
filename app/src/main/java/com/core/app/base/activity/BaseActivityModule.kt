@@ -81,8 +81,8 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun permissionManager(rxPermissions: RxPermissions, compositeDisposable: CompositeDisposable): PermissionManager
-                = PermissionManager(rxPermissions, compositeDisposable)
+        internal fun permissionManager(context: Context, rxPermissions: RxPermissions, compositeDisposable: CompositeDisposable): PermissionManager
+                = PermissionManager(context, rxPermissions, compositeDisposable)
 
         @JvmStatic
         @Provides

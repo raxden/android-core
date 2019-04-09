@@ -1,12 +1,16 @@
 package com.core.app.ui.login.view
 
+import android.Manifest
 import android.os.Bundle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.LoginFragmentBinding
+import com.core.app.util.PermissionManager
+import com.tbruyelle.rxpermissions2.Permission
 
-class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>() {
+class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>(),
+        PermissionManager.Callback {
 
     interface FragmentCallback : AppFragmentCallback {
         fun onUserLogged()
@@ -23,13 +27,11 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
 
     override fun onViewDataBindingCreated(binding: LoginFragmentBinding) {
         super.onViewDataBindingCreated(binding)
-        activity?.also { activity ->
-            binding.accessFineLocationBtn.setOnClickListener {
-
-            }
-            binding.cameraBtn.setOnClickListener {
-
-            }
+        binding.accessFineLocationBtn.setOnClickListener {
+            mPermissionManager.requestPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        }
+        binding.cameraBtn.setOnClickListener {
+            mPermissionManager.requestPermission(this, Manifest.permission.CAMERA)
         }
     }
 
@@ -37,5 +39,13 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
         viewModel.userLogged.observe(owner, Observer { isLogged ->
             if (isLogged) mCallback.onUserLogged()
         })
+    }
+
+    override fun onPermissionGranted(permission: Permission) {
+
+    }
+
+    override fun onPermissionDenied(permission: Permission) {
+
     }
 }

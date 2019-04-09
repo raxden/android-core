@@ -1,5 +1,6 @@
 package com.core.app.base.fragment
 
+import android.content.Context
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -45,8 +46,8 @@ abstract class BaseFragmentModule {
         @Provides
         @Named(FRAGMENT_PERMISSION_MANAGER)
         @PerFragment
-        internal fun permissionManager(rxPermissions: RxPermissions, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable): PermissionManager
-                = PermissionManager(rxPermissions, compositeDisposable)
+        internal fun permissionManager(context: Context, rxPermissions: RxPermissions, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable): PermissionManager
+                = PermissionManager(context, rxPermissions, compositeDisposable)
 
         @JvmStatic
         @Provides

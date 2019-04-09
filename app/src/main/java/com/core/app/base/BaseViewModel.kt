@@ -14,8 +14,6 @@ abstract class BaseViewModel : ViewModel() {
     @Inject
     lateinit var mErrorManager: ErrorManager
     @Inject
-    lateinit var mPermissionManager: PermissionManager
-    @Inject
     lateinit var mCompositeDisposable: CompositeDisposable
 
     /**
