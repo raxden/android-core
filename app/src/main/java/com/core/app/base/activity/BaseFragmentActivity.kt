@@ -1,6 +1,7 @@
-package com.core.app.base
+package com.core.app.base.activity
 
 import android.view.View
+import com.core.app.base.activity.BaseActivity
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.HasAutoInflateLayoutInterceptor
 

@@ -1,6 +1,7 @@
-package com.core.app.base
+package com.core.app.base.activity
 
 import android.app.Activity
+import com.core.app.base.activity.BaseActivityModule
 import dagger.Module
 
 /**
