@@ -1,8 +1,9 @@
 package com.core.app.ui.project.list.view
 
 import androidx.fragment.app.Fragment
-import com.core.app.base.BaseFragmentModule
-import com.core.app.base.mvvm.BaseViewFragmentModule
+import com.core.app.base.fragment.BaseFragmentModule
+import com.core.app.base.fragment.BaseViewFragmentModule
+import com.core.app.base.fragment.BaseViewModelFragmentModule
 import com.core.app.injector.scope.PerFragment
 import dagger.Binds
 import dagger.Module
@@ -11,7 +12,7 @@ import dagger.Module
  * Provides SampleMapFragment fragment dependencies.
  */
 @Module(includes = arrayOf(
-        BaseViewFragmentModule::class
+        BaseViewModelFragmentModule::class
 ))
 abstract class ProjectListFragmentModule {
 

@@ -1,10 +1,7 @@
-package com.core.app.base.mvvm
+package com.core.app.base.fragment
 
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.core.app.base.BaseFragmentModule
-import com.core.app.injector.scope.PerFragment
-import dagger.Binds
+import com.core.app.base.fragment.BaseFragmentModule
 import dagger.Module
 
 /**

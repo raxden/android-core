@@ -1,4 +1,4 @@
-package com.core.app.base
+package com.core.app.base.fragment
 
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment

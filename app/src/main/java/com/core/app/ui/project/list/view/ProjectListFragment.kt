@@ -17,7 +17,7 @@ import com.core.domain.Project
 
 class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding, ProjectListFragment.FragmentCallback>() {
 
-    interface FragmentCallback : BaseViewFragmentCallback {
+    interface FragmentCallback : AppFragmentCallback {
         fun onProjectSelected(project: Project)
     }
 
@@ -39,7 +39,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
             override fun areItemsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem.name == newItem.name
             override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem == newItem
         })
-        mBinding.recyclerView.apply {
+        mViewDataBinding.recyclerView.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }

@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import androidx.multidex.MultiDexApplication
 import androidx.appcompat.app.AppCompatDelegate
 import com.core.app.injector.AppInjector
-import com.core.app.injector.component.DaggerApplicationComponent
 import com.raxdenstudios.commons.util.SDKUtils
 import dagger.android.*
 import javax.inject.Inject

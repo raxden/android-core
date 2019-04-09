@@ -1,4 +1,4 @@
-package com.core.app.base.mvvm
+package com.core.app.base
 
 import androidx.lifecycle.ViewModel
 import com.core.app.util.ErrorManager

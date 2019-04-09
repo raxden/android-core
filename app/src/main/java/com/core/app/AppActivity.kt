@@ -1,10 +1,8 @@
 package com.core.app
 
-import com.core.app.base.BaseFragmentActivity
+import com.core.app.base.activity.BaseFragmentActivity
 import com.raxdenstudios.square.interceptor.HasInterceptor
 import com.raxdenstudios.square.interceptor.Interceptor
 
-abstract class AppActivity : BaseFragmentActivity(), HasInterceptor {
+abstract class AppActivity : BaseFragmentActivity()
 
-    override fun onInterceptorCreated(interceptor: Interceptor) {}
-}

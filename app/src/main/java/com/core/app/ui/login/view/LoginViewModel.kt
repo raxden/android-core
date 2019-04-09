@@ -2,7 +2,7 @@ package com.core.app.ui.login.view
 
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
-import com.core.app.base.mvvm.BaseViewModel
+import com.core.app.base.BaseViewModel
 import com.core.commons.ValidationHelper
 import com.core.commons.extension.subscribeWith
 import com.core.domain.interactor.LoginUseCase

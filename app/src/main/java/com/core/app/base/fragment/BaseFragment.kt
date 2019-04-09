@@ -1,12 +1,12 @@
-package com.core.app.base
+package com.core.app.base.fragment
 
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
-import com.core.app.base.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
-import com.core.app.base.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
+import com.core.app.base.fragment.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
+import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector

@@ -1,7 +1,7 @@
 package com.core.app.ui.project.list.view
 
 import androidx.lifecycle.MutableLiveData
-import com.core.app.base.mvvm.BaseViewModel
+import com.core.app.base.BaseViewModel
 import com.core.app.model.ProjectModel
 import com.core.app.model.mapper.ProjectModelDataMapper
 import com.core.commons.extension.subscribeWith

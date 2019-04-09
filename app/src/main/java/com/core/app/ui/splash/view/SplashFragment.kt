@@ -8,7 +8,7 @@ import com.core.app.databinding.SplashFragmentBinding
 
 class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, SplashFragment.FragmentCallback>() {
 
-    interface FragmentCallback : BaseViewFragmentCallback {
+    interface FragmentCallback : AppFragmentCallback {
         fun launchLogin()
     }
 

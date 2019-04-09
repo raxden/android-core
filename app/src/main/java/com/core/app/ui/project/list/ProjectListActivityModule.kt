@@ -1,8 +1,8 @@
 package com.core.app.ui.project.list
 
 import android.app.Activity
-import com.core.app.base.BaseActivityModule
-import com.core.app.base.BaseFragmentActivityModule
+import com.core.app.base.activity.BaseActivityModule
+import com.core.app.base.activity.BaseFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
 import com.core.app.ui.project.list.view.ProjectListFragment

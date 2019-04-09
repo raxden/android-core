@@ -12,9 +12,9 @@ ext {
     def kotlinVersion = '1.3.11'
 
     // dependencies
-    def androidCommonsVersion = '3.0.35'        // https://github.com/raxden/commons
+    def androidCommonsVersion = '3.0.35'        // https://github.com/raxden/android-commons
     def androidPreferencesVersion = '4.0.4'     // https://github.com/raxden/android-preferences
-    def androidSquareVersion = '4.0.4'          // https://github.com/raxden/square
+    def androidSquareVersion = '4.0.4'          // https://github.com/raxden/android-square
     def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
     def rxPermissionsVersion = '0.9.5'          // https://github.com/tbruyelle/RxPermissions    0.10.2
@@ -26,7 +26,6 @@ ext {
     def okHttpVersion = '3.12.0'                // https://github.com/square/okhttp
     def retrofitVersion = '2.5.0'               // https://github.com/square/retrofit
     def timberVersion = '4.7.1'                 // https://github.com/JakeWharton/timber
-    def urbanAirshipVersion = '9.1.0'           // http://docs.urbanairship.com/platform/android.html
 
     // Testing
     def junitVersion = '4.12'
@@ -91,8 +90,6 @@ ext {
             okhttpLoggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okHttpVersion],
 
             rxPermissions: [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
-
-            urbanairship: [group: 'com.urbanairship.android', name: 'urbanairship-fcm', version: urbanAirshipVersion],
 
             crashlytics: [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
     ]
@@ -172,8 +169,6 @@ ext {
 
             [configuration: "implementation", dependency: libs.rxPermissions],
 
-            [configuration: "implementation", dependency: libs.urbanairship],
-
             [configuration: "implementation", dependency: libs.crashlytics, options: { transitive = true }],
 
             [configuration: "testImplementation", dependency: testLibs.junit],
@@ -232,9 +227,7 @@ ext {
             [configuration: "implementation", dependency: libs.retrofitConverterScalars],
 
             [configuration: "implementation", dependency: libs.okhttp],
-            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
-
-            [configuration: "implementation", dependency: libs.urbanairship]
+            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor]
     ]
 
     componentsDependencies = [

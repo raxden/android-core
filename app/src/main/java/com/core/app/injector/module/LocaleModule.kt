@@ -27,5 +27,4 @@ object LocaleModule {
     @Singleton
     @Named("default")
     internal fun localeDefault(): Locale = Locale("es", "ES")
-
 }

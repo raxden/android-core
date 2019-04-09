@@ -8,7 +8,7 @@ import com.core.app.databinding.LoginFragmentBinding
 
 class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>() {
 
-    interface FragmentCallback : BaseViewFragmentCallback {
+    interface FragmentCallback : AppFragmentCallback {
         fun onUserLogged()
     }
 

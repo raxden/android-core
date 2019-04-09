@@ -41,6 +41,4 @@ abstract class InjectorModule {
     @PerActivity
     @ContributesAndroidInjector(modules = arrayOf(ProjectListActivityModule::class))
     internal abstract fun projectListActivity(): ProjectListActivity
-
-
 }
