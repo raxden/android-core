@@ -18,9 +18,9 @@ import javax.inject.Inject
  * The Android [MultiDexApplication].
  */
 abstract class BaseApplication : MultiDexApplication(),
-    HasActivityInjector,
-    HasServiceInjector,
-    HasBroadcastReceiverInjector {
+        HasActivityInjector,
+        HasServiceInjector,
+        HasBroadcastReceiverInjector {
 
     @Inject
     lateinit var mActivityInjector: DispatchingAndroidInjector<Activity>
@@ -54,7 +54,7 @@ abstract class BaseApplication : MultiDexApplication(),
     override fun serviceInjector(): AndroidInjector<Service>? = mServiceInjector
 
     override fun broadcastReceiverInjector(): AndroidInjector<BroadcastReceiver>? =
-        mBroadcastReceiverDispatchingAndroidInjector
+            mBroadcastReceiverDispatchingAndroidInjector
 
     // =============== Support methods =============================================================
 

@@ -6,6 +6,8 @@ import android.content.res.Resources
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import com.core.app.BuildConfig
 import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.LifecycleActivityModule
 import com.core.app.injector.module.ViewModelModule
@@ -13,7 +15,9 @@ import com.core.app.injector.scope.PerActivity
 import com.core.app.util.BroadcastOperationManager
 import com.core.app.util.ErrorManager
 import com.core.app.util.LoaderManager
+import com.core.app.util.PermissionManager
 import com.core.commons.extension.getExtras
+import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -66,6 +70,19 @@ abstract class BaseActivityModule {
         @Provides
         @PerActivity
         internal fun fragmentManager(activity: AppCompatActivity): FragmentManager = activity.supportFragmentManager
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun rxPermissions(activity: AppCompatActivity): RxPermissions = RxPermissions(activity).apply {
+            setLogging(BuildConfig.DEBUG)
+        }
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun permissionManager(rxPermissions: RxPermissions, compositeDisposable: CompositeDisposable): PermissionManager
+                = PermissionManager(rxPermissions, compositeDisposable)
 
         @JvmStatic
         @Provides

@@ -8,6 +8,7 @@ import androidx.lifecycle.LifecycleObserver
 import com.core.app.helper.NavigationHelper
 import com.core.app.util.BroadcastOperationManager
 import com.core.app.util.LocaleUtils
+import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.disposables.CompositeDisposable
@@ -25,6 +26,8 @@ abstract class BaseActivity : AppCompatActivity(),
     lateinit var mCompositeDisposable: CompositeDisposable
     @Inject
     lateinit var mBroadcastOperationManager: BroadcastOperationManager
+    @Inject
+    lateinit var mPermissionManager: PermissionManager
     @Inject
     lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
     @Inject

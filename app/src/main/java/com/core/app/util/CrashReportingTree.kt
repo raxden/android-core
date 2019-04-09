@@ -20,5 +20,4 @@ class CrashReportingTree : Timber.Tree() {
                 || message.contains("java.net.ConnectException")
                 || message.contains("java.net.SocketTimeoutException"))
     }
-
 }

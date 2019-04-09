@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.core.app.injector.module.LifecycleFragmentModule
 import com.core.app.injector.scope.PerFragment
+import com.core.app.util.PermissionManager
+import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -26,6 +28,7 @@ abstract class BaseFragmentModule {
 
         const val CHILD_FRAGMENT_MANAGER = "BaseFragmentModule.childFragmentManager"
         const val FRAGMENT_COMPOSITE_DISPOSABLE = "BaseFragmentModule.compositeDisposable"
+        const val FRAGMENT_PERMISSION_MANAGER = "BaseFragmentModule.permissionManager"
 
         @JvmStatic
         @Provides
@@ -37,6 +40,13 @@ abstract class BaseFragmentModule {
         @Named(FRAGMENT_COMPOSITE_DISPOSABLE)
         @PerFragment
         internal fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
+
+        @JvmStatic
+        @Provides
+        @Named(FRAGMENT_PERMISSION_MANAGER)
+        @PerFragment
+        internal fun permissionManager(rxPermissions: RxPermissions, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable): PermissionManager
+                = PermissionManager(rxPermissions, compositeDisposable)
 
         @JvmStatic
         @Provides

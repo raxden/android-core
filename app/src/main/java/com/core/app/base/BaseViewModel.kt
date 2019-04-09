@@ -3,6 +3,7 @@ package com.core.app.base
 import androidx.lifecycle.ViewModel
 import com.core.app.util.ErrorManager
 import com.core.app.util.LoaderManager
+import com.core.app.util.PermissionManager
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -12,6 +13,8 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var mLoaderManager: LoaderManager
     @Inject
     lateinit var mErrorManager: ErrorManager
+    @Inject
+    lateinit var mPermissionManager: PermissionManager
     @Inject
     lateinit var mCompositeDisposable: CompositeDisposable
 

@@ -7,7 +7,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.fragment.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
 import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
+import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_PERMISSION_MANAGER
 import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
+import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.disposables.CompositeDisposable
@@ -49,6 +51,9 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Frag
     @Inject
     @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
     lateinit var mCompositeDisposable: CompositeDisposable
+    @Inject
+    @field:Named(FRAGMENT_PERMISSION_MANAGER)
+    lateinit var mPermissionManager: PermissionManager
     @Inject
     @field:Named(LIFECYCLE_FRAGMENT_OBSERVER)
     lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
