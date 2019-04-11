@@ -44,11 +44,11 @@ android {
         main {
             res.srcDirs =
                     [
-                            'src/main/res/layouts/commons/fields',
-                            'src/main/res/layouts/login',
-                            'src/main/res/layouts/splash',
-                            'src/main/res/layouts/project/list',
-                            'src/main/res/layouts/project/detail',
+                            'src/main/res/layouts/components',
+                            'src/main/res/layouts/screens/login',
+                            'src/main/res/layouts/screens/splash',
+                            'src/main/res/layouts/screens/project/list',
+                            'src/main/res/layouts/screens/project/detail',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]

@@ -1,10 +1,10 @@
-package com.core.app.ui.project.list
+package com.core.app.ui.screens.project.list
 
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.ui.project.list.view.ProjectListFragment
+import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras
 import com.core.domain.Project

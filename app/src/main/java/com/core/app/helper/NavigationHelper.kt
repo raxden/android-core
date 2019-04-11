@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.core.app.ui.login.LoginActivity
-import com.core.app.ui.project.list.ProjectListActivity
-import com.core.app.ui.splash.SplashActivity
+import com.core.app.ui.screens.login.LoginActivity
+import com.core.app.ui.screens.project.list.ProjectListActivity
+import com.core.app.ui.screens.splash.SplashActivity
 
 class NavigationHelper(private val mActivity: Activity) {
 

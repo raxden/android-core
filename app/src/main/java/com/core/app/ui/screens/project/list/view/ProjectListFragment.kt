@@ -1,4 +1,4 @@
-package com.core.app.ui.project.list.view
+package com.core.app.ui.screens.project.list.view
 
 import android.os.Bundle
 import android.view.View

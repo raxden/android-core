@@ -1,4 +1,4 @@
-package com.core.app.ui.login.view
+package com.core.app.ui.screens.splash.view
 
 import androidx.fragment.app.Fragment
 import com.core.app.base.fragment.BaseFragmentModule
@@ -13,7 +13,7 @@ import dagger.Module
 @Module(includes = arrayOf(
         BaseViewModelFragmentModule::class
 ))
-abstract class LoginFragmentModule {
+abstract class SplashFragmentModule {
 
     /**
      * As per the contract specified in [BaseFragmentModule]; "This must be included in all
@@ -24,5 +24,5 @@ abstract class LoginFragmentModule {
      */
     @Binds
     @PerFragment
-    internal abstract fun fragment(fragment: LoginFragment): Fragment
+    internal abstract fun fragment(fragment: SplashFragment): Fragment
 }

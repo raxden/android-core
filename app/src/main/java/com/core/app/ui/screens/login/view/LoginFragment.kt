@@ -1,4 +1,4 @@
-package com.core.app.ui.login.view
+package com.core.app.ui.screens.login.view
 
 import android.Manifest
 import android.os.Bundle

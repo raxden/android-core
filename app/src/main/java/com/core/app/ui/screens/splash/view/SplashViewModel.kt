@@ -1,4 +1,4 @@
-package com.core.app.ui.splash.view
+package com.core.app.ui.screens.splash.view
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

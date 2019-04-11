@@ -1,9 +1,9 @@
-package com.core.app.ui.login
+package com.core.app.ui.screens.login
 
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.ui.login.view.LoginFragment
+import com.core.app.ui.screens.login.view.LoginFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
 

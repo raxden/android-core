@@ -1,4 +1,4 @@
-package com.core.app.ui.project.list.view
+package com.core.app.ui.screens.project.list.view
 
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel

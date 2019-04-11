@@ -1,12 +1,12 @@
 package com.core.app.injector.module
 
 import com.core.app.injector.scope.PerActivity
-import com.core.app.ui.login.LoginActivity
-import com.core.app.ui.login.LoginActivityModule
-import com.core.app.ui.project.list.ProjectListActivity
-import com.core.app.ui.project.list.ProjectListActivityModule
-import com.core.app.ui.splash.SplashActivity
-import com.core.app.ui.splash.SplashActivityModule
+import com.core.app.ui.screens.login.LoginActivity
+import com.core.app.ui.screens.login.LoginActivityModule
+import com.core.app.ui.screens.project.list.ProjectListActivity
+import com.core.app.ui.screens.project.list.ProjectListActivityModule
+import com.core.app.ui.screens.splash.SplashActivity
+import com.core.app.ui.screens.splash.SplashActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

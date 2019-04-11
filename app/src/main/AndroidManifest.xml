@@ -24,7 +24,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity android:name="com.core.app.ui.screens.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,11 +33,11 @@
         </activity>
 
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.core.app.ui.screens.login.LoginActivity"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name=".ui.project.list.ProjectListActivity"
+            android:name="com.core.app.ui.screens.project.list.ProjectListActivity"
             android:windowSoftInputMode="adjustPan" />
 
     </application>

@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.core.app.util.ViewModelKey
 import com.core.app.util.ViewModelProviderFactory
 import com.core.app.injector.scope.PerActivity
-import com.core.app.ui.login.view.LoginViewModel
-import com.core.app.ui.project.list.view.ProjectListViewModel
-import com.core.app.ui.splash.view.SplashViewModel
+import com.core.app.ui.screens.login.view.LoginViewModel
+import com.core.app.ui.screens.project.list.view.ProjectListViewModel
+import com.core.app.ui.screens.splash.view.SplashViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

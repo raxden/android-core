@@ -1,9 +1,9 @@
-package com.core.app.ui.splash
+package com.core.app.ui.screens.splash
 
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.R
-import com.core.app.ui.splash.view.SplashFragment
+import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
 

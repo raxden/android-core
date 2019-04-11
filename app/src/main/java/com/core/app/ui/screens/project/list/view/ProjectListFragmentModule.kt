@@ -1,8 +1,7 @@
-package com.core.app.ui.project.list.view
+package com.core.app.ui.screens.project.list.view
 
 import androidx.fragment.app.Fragment
 import com.core.app.base.fragment.BaseFragmentModule
-import com.core.app.base.fragment.BaseViewFragmentModule
 import com.core.app.base.fragment.BaseViewModelFragmentModule
 import com.core.app.injector.scope.PerFragment
 import dagger.Binds
