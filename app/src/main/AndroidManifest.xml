@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.core.app">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".AppApplication"
@@ -24,9 +24,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:theme="@style/AppTheme.Splash">
+        <activity android:name=".ui.splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,12 +34,10 @@
 
         <activity
             android:name=".ui.login.LoginActivity"
-            android:theme="@style/AppTheme.Translucent.Navigation"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".ui.project.list.ProjectListActivity"
-            android:theme="@style/AppTheme.Translucent.Navigation"
             android:windowSoftInputMode="adjustPan" />
 
     </application>

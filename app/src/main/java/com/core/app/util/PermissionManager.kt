@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import com.core.app.R
 import com.core.commons.extension.subscribeWith
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tbruyelle.rxpermissions2.Permission
 import com.tbruyelle.rxpermissions2.RxPermissions
 import io.reactivex.disposables.CompositeDisposable
@@ -55,8 +56,7 @@ class PermissionManager(
     }
 
     private fun showRequestPermissionRationale(title: Int, message: Int, positive: Int, negative: Int, permission: Permission, callback: Callback) {
-        MaterialAlertDialogBuilder
-        AlertDialog.Builder(mContext)
+        MaterialAlertDialogBuilder(mContext)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(positive) { _, _ -> requestPermission(callback, permission.name) }

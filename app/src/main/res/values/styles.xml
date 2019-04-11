@@ -1,4 +1,24 @@
 <resources>
 
+    <style name="AppButton" parent="Widget.MaterialComponents.Button" />
+
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />
+
+    <style name="AppCard" parent="Widget.MaterialComponents.CardView" />
+
+    <style name="AppBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
+
+    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar" >
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppFloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton" />
+
+    <style name="AppTabStyle" parent="Widget.MaterialComponents.TabLayout.Colored" />
+
+    <!--<style name="AppAlertDialog" parent="MaterialAlertDialog.MaterialComponents">-->
+        <!--<item name="colorSurface">@color/colorSurface</item>-->
+        <!--<item name="android:theme">@style/Theme.MaterialComponents.Light.NoActionBar</item>-->
+    <!--</style>-->
 
 </resources>

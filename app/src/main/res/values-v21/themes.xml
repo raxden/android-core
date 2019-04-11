@@ -2,7 +2,15 @@
 <resources>
 
     <style name="AppTheme.Translucent.Navigation" parent="BaseTheme.Translucent.Navigation">
-        <item name="android:windowBackground">@color/colorWindowBackground</item>
+        <item name="materialButtonStyle">@style/AppButton</item>
+        <item name="materialCardViewStyle">@style/AppCard</item>
+        <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
+        <!--<item name="alertDialogStyle">@style/AppAlertDialog</item>-->
+        <item name="textInputStyle">@style/AppTextField</item>
+        <item name="toolbarStyle">@style/AppToolbar</item>
+        <item name="floatingActionButtonStyle">@style/AppFloatingActionButton</item>
+        <item name="tabStyle">@style/AppTabStyle</item>
+
         <item name="android:windowTranslucentStatus">false</item>
     </style>
 
