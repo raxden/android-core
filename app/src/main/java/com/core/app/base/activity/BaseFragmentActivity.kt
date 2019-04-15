@@ -1,22 +1,23 @@
 package com.core.app.base.activity
 
+import android.os.Bundle
 import android.view.View
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import com.core.app.base.activity.BaseActivity
 import com.raxdenstudios.square.interceptor.Interceptor
 import com.raxdenstudios.square.interceptor.commons.autoinflatelayout.HasAutoInflateLayoutInterceptor
 
-abstract class BaseFragmentActivity : BaseActivity(),
-        HasAutoInflateLayoutInterceptor {
+abstract class BaseFragmentActivity<VDB : ViewDataBinding> : BaseActivity() {
 
-    lateinit var mRootView: View
+    protected abstract val mLayoutId: Int
+    protected lateinit var mBinding: VDB
 
-    // ========= HasInflateLayoutInterceptor =======================================================
-
-    override fun onContentViewCreated(view: View) {
-        mRootView = view
+    override fun onCreate(savedInstanceState: Bundle?) {
+        mBinding = DataBindingUtil.setContentView(this, mLayoutId)
+        onBindingCreated(mBinding)
+        super.onCreate(savedInstanceState)
     }
 
-    // =============== Support methods =============================================================
-
-    override fun onInterceptorCreated(interceptor: Interceptor) {}
+    abstract fun onBindingCreated(binding: VDB)
 }

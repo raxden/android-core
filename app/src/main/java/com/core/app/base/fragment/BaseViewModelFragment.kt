@@ -25,7 +25,7 @@ abstract class BaseViewModelFragment<VM : BaseViewModel, VDB : ViewDataBinding, 
         mViewModel = ViewModelProvider(this, mViewModelFactory).get(mViewModelClass).also { it.onCreated() }
     }
 
-    override fun onViewDataBindingCreated(binding: VDB) {
+    override fun onBindingCreated(binding: VDB) {
         binding.apply {
             setVariable(BR.viewModel, mViewModel)
             executePendingBindings()

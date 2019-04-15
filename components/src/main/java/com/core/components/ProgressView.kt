@@ -1,16 +1,14 @@
 package com.core.components
 
 import android.content.Context
-import android.content.res.TypedArray
 
 import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.View
 import android.widget.ProgressBar
 import com.core.commons.extension.*
 
-class ProgressView : BaseComponentView {
+class ProgressView : BaseComponent2View {
 
     private var mContainer: View? = null
     private var mProgressBar: ProgressBar? = null

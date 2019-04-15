@@ -39,7 +39,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
             override fun areItemsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem.name == newItem.name
             override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem == newItem
         })
-        mViewDataBinding.recyclerView.apply {
+        mBinding.recyclerView.apply {
             adapter = mAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }

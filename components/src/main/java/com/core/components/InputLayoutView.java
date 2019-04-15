@@ -31,7 +31,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 import timber.log.Timber;
 
-public class InputLayoutView extends BaseComponentView {
+public class InputLayoutView extends BaseComponent2View {
 
     public enum HintType {NONE, FIXED, FIXED_TO_LEFT}
 

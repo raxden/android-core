@@ -6,27 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import com.core.app.BR
-import com.core.commons.extension.getLayoutId
-import javax.inject.Inject
 
 abstract class BaseViewFragment<VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback>
     : BaseFragment<TCallback>() {
 
     interface BaseViewFragmentCallback : BaseFragmentCallback
 
-    protected lateinit var mViewDataBinding: VDB
+    protected abstract val mLayoutId: Int
+    protected lateinit var mBinding: VDB
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return DataBindingUtil.inflate<VDB>(inflater, getLayoutId(), container, false).let { binding ->
-            mViewDataBinding = binding
+        return DataBindingUtil.inflate<VDB>(inflater, mLayoutId, container, false).let { binding ->
+            mBinding = binding
             binding.lifecycleOwner = viewLifecycleOwner    // Layout requirement to listen any changes on LiveData values
-            onViewDataBindingCreated(binding)
+            onBindingCreated(binding)
             binding.root
         }
     }
 
-    abstract fun onViewDataBindingCreated(binding: VDB)
+    abstract fun onBindingCreated(binding: VDB)
 }

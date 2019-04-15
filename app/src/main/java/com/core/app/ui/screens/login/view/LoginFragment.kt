@@ -25,8 +25,8 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
         }
     }
 
-    override fun onViewDataBindingCreated(binding: LoginFragmentBinding) {
-        super.onViewDataBindingCreated(binding)
+    override fun onBindingCreated(binding: LoginFragmentBinding) {
+        super.onBindingCreated(binding)
         binding.accessFineLocationBtn.setOnClickListener {
             mPermissionManager.requestPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
         }

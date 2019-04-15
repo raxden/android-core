@@ -1,24 +1,34 @@
 package com.core.app.ui.components
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
-import android.view.View
 import com.core.app.R
+import com.core.app.databinding.ProjectListItemViewBinding
+import com.core.app.model.ProjectModel
+import com.core.components.BaseComponentView
 
-class ProjectListItemView(context: Context, attrs: AttributeSet) : View(context, attrs) {
+class ProjectListItemView @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0,
+        defStyleRes: Int = 0
+) : BaseComponentView<ProjectListItemViewBinding>(context, attrs, defStyleAttr, defStyleRes) {
 
-    init {
-        context.theme.obtainStyledAttributes(
-                attrs,
-                R.styleable.PieChart,
-                0, 0).apply {
+    override val mStyleable: IntArray
+        get() = R.styleable.ProjectListItemView
 
-            try {
-                mShowText = getBoolean(R.styleable.PieChart_showText, false)
-                textPos = getInteger(R.styleable.PieChart_labelPosition, 0)
-            } finally {
-                recycle()
-            }
-        }
+    override val mLayoutId: Int
+        get() = R.layout.project_list_item_view
+
+    override fun onLoadStyledAttributes(attrs: TypedArray) {}
+
+    override fun onBindingCreated(binding: ProjectListItemViewBinding) {}
+
+    override fun onLoadData() {}
+
+    fun setModel(model: ProjectModel) {
+        mBinding.model = model
+        mBinding.executePendingBindings()
     }
 }

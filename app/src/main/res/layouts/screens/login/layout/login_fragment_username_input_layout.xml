@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.core.app.ui.login.view.LoginViewModel" />
+            type="com.core.app.ui.screens.login.view.LoginViewModel" />
     </data>
 
     <com.google.android.material.textfield.TextInputLayout

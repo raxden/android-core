@@ -4,6 +4,7 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.core.app.AppActivity
 import com.core.app.R
+import com.core.app.databinding.ProjectListActivityBinding
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras
@@ -12,14 +13,14 @@ import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFrag
 import com.raxdenstudios.square.interceptor.commons.toolbar.HasToolbarInterceptor
 import timber.log.Timber
 
-class ProjectListActivity : AppActivity(),
+class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
         ProjectListFragment.FragmentCallback,
         HasToolbarInterceptor,
         HasInjectFragmentInterceptor<ProjectListFragment> {
 
     // =============== HasToolbarInterceptor =======================================================
 
-    override fun onCreateToolbarView(): Toolbar = findViewById(R.id.toolbar_view)
+    override fun onCreateToolbarView(): Toolbar = mBinding.toolbarView
 
     override fun onToolbarViewCreated(toolbar: Toolbar) {
         toolbar.alignToStatusBarBottom()
@@ -27,7 +28,7 @@ class ProjectListActivity : AppActivity(),
 
     // =============== HasInjectFragmentInterceptor ================================================
 
-    override fun onLoadFragmentContainer(): View = findViewById(R.id.content_view)
+    override fun onLoadFragmentContainer(): View = mBinding.contentView
 
     override fun onCreateFragment(): ProjectListFragment = ProjectListFragment.newInstance(getExtras())
 

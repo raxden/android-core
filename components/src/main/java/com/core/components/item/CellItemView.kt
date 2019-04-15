@@ -7,11 +7,11 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
 import com.core.commons.extension.setCompatTextAppearance
-import com.core.components.BaseComponentView
+import com.core.components.BaseComponent2View
 import com.core.components.R
 import kotlinx.android.synthetic.main.cell_item_view.view.*
 
-class CellItemView : BaseComponentView {
+class CellItemView : BaseComponent2View {
 
     private var titleTextAppearance: Int = 0
     private var subtitleTextAppearance: Int = 0

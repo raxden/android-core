@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import kotlinx.android.synthetic.main.notice_dialog_view.view.*
 
-class NoticeDialogView : BaseComponentView {
+class NoticeDialogView : BaseComponent2View {
 
     private var titleTextAppearance: Int = 0
     private var descriptionTextAppearance: Int = 0

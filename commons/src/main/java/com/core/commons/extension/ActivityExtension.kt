@@ -15,12 +15,3 @@ fun Activity.finishOK(data: Intent) {
     setResult(Activity.RESULT_OK, data)
     finish()
 }
-
-fun Activity.getLayoutId(): Int = javaClass.simpleName
-        .decapitalize()
-        .split("(?=\\p{Upper})".toRegex())
-        .joinToString(separator = "_")
-        .toLowerCase()
-        .takeIf { it.isNotEmpty() }?.let {
-            resources.getIdentifier(it.replace("R.layout.", ""), "layout", packageName)
-        } ?: 0

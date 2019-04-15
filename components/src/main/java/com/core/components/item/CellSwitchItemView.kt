@@ -6,11 +6,11 @@ import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.CompoundButton
-import com.core.components.BaseComponentView
+import com.core.components.BaseComponent2View
 import com.core.components.R
 import kotlinx.android.synthetic.main.cell_switch_item_view.view.*
 
-class CellSwitchItemView : BaseComponentView {
+class CellSwitchItemView : BaseComponent2View {
 
     private var titleTextAppearance: Int = 0
     private var subtitleTextAppearance: Int = 0
