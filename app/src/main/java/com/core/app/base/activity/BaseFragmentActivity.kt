@@ -15,7 +15,9 @@ abstract class BaseFragmentActivity<VDB : ViewDataBinding> : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         mBinding = DataBindingUtil.setContentView(this, mLayoutId)
+        mBinding.lifecycleOwner = this
         onBindingCreated(mBinding)
+
         super.onCreate(savedInstanceState)
     }
 
