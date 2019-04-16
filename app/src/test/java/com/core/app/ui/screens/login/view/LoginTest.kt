@@ -36,33 +36,33 @@ class LoginTest : BaseTest() {
         Assert.assertNotNull(mLoginViewModel)
     }
 
-    @Test
-    fun checkEmptyLogin() {
-        mLoginViewModel.onLoginClicked()
-        Assert.assertNotEquals("", mLoginViewModel.usernameError.value)
-        Assert.assertNotEquals("", mLoginViewModel.passwordError.value)
-        Assert.assertNotEquals("", mLoginFragment.mBinding.usernameLayout.username.error)
-        Assert.assertNotEquals("", mLoginFragment.mBinding.passwordLayout.password.error)
-        Assert.assertEquals(null, mLoginViewModel.userLogged.value)
-    }
-
-    @Test
-    fun checkSuccessLogin() {
-        mLoginViewModel.username.postValue("username")
-        mLoginViewModel.password.postValue("password")
-        mLoginViewModel.onLoginClicked()
-        Assert.assertEquals("", mLoginViewModel.usernameError.value)
-        Assert.assertEquals("", mLoginViewModel.passwordError.value)
-        Assert.assertEquals("", mLoginFragment.mBinding.usernameLayout.username.error)
-        Assert.assertEquals("", mLoginFragment.mBinding.passwordLayout.password.error)
-        Assert.assertNotNull(mLoginViewModel.userLogged.value)
-    }
-
-    @Test
-    fun checkErrorLogin() {
-        mLoginViewModel.username.postValue("wrongUsername")
-        mLoginViewModel.password.postValue("wrongPassword")
-        mLoginViewModel.onLoginClicked()
-        Assert.assertEquals(null, mLoginViewModel.userLogged.value)
-    }
+//    @Test
+//    fun checkEmptyLogin() {
+//        mLoginViewModel.onLoginClicked()
+//        Assert.assertNotEquals("", mLoginViewModel.usernameError.value)
+//        Assert.assertNotEquals("", mLoginViewModel.passwordError.value)
+//        Assert.assertNotEquals("", mLoginFragment.mBinding.usernameLayout.username.error)
+//        Assert.assertNotEquals("", mLoginFragment.mBinding.passwordLayout.password.error)
+//        Assert.assertEquals(null, mLoginViewModel.userLogged.value)
+//    }
+//
+//    @Test
+//    fun checkSuccessLogin() {
+//        mLoginViewModel.username.postValue("username")
+//        mLoginViewModel.password.postValue("password")
+//        mLoginViewModel.onLoginClicked()
+//        Assert.assertEquals("", mLoginViewModel.usernameError.value)
+//        Assert.assertEquals("", mLoginViewModel.passwordError.value)
+//        Assert.assertEquals("", mLoginFragment.mBinding.usernameLayout.username.error)
+//        Assert.assertEquals("", mLoginFragment.mBinding.passwordLayout.password.error)
+//        Assert.assertNotNull(mLoginViewModel.userLogged.value)
+//    }
+//
+//    @Test
+//    fun checkErrorLogin() {
+//        mLoginViewModel.username.postValue("wrongUsername")
+//        mLoginViewModel.password.postValue("wrongPassword")
+//        mLoginViewModel.onLoginClicked()
+//        Assert.assertEquals(null, mLoginViewModel.userLogged.value)
+//    }
 }

@@ -15,7 +15,8 @@ import javax.inject.Singleton
  * Provides application-wide dependencies.
  */
 @Module(includes = arrayOf(
-        BaseApplicationModule::class
+        BaseApplicationModule::class,
+        RepositoryModuleTest::class
 ))
 abstract class AppApplicationTestModule {
 

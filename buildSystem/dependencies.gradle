@@ -30,7 +30,7 @@ ext {
     // Testing
     def junitVersion = '4.12'
     def assertJVersion = '1.7.0'
-    def mockitoVersion = '1.10.19'
+    def mockitoVersion = '2.27.0'
     def robolectricVersion = '4.2.1'
 
     // ========== LIBRARIES ========================================================================
