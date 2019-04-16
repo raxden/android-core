@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import com.core.app.AppApplication;
+import com.core.app.AppApplicationTest;
 
 import org.junit.Rule;
 import org.junit.rules.TestRule;
@@ -23,7 +24,7 @@ import io.reactivex.plugins.RxJavaPlugins;
 import io.reactivex.schedulers.Schedulers;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = 21, application = AppApplication.class, packageName = "com.core.app")
+@Config(sdk = 21, application = AppApplicationTest.class, packageName = "com.core.app")
 public abstract class BaseTest {
 
     @Rule

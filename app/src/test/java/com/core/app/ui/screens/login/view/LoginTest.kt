@@ -47,12 +47,22 @@ class LoginTest : BaseTest() {
     }
 
     @Test
-    fun checkLogin() {
+    fun checkSuccessLogin() {
         mLoginViewModel.username.postValue("username")
         mLoginViewModel.password.postValue("password")
         mLoginViewModel.onLoginClicked()
         Assert.assertEquals("", mLoginViewModel.usernameError.value)
         Assert.assertEquals("", mLoginViewModel.passwordError.value)
+        Assert.assertEquals("", mLoginFragment.mBinding.usernameLayout.username.error)
+        Assert.assertEquals("", mLoginFragment.mBinding.passwordLayout.password.error)
         Assert.assertNotNull(mLoginViewModel.userLogged.value)
+    }
+
+    @Test
+    fun checkErrorLogin() {
+        mLoginViewModel.username.postValue("wrongUsername")
+        mLoginViewModel.password.postValue("wrongPassword")
+        mLoginViewModel.onLoginClicked()
+        Assert.assertEquals(null, mLoginViewModel.userLogged.value)
     }
 }

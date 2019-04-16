@@ -173,8 +173,8 @@ ext {
             [configuration: "testImplementation", dependency: testLibs.mockito],
             [configuration: "testImplementation", dependency: testLibs.robolectric],
             [configuration: "testImplementation", dependency: testLibs.robolectricShadowsMultidex],
-            [configuration: "testImplementation", dependency: libs.daggerAndroidSupport],
-            [configuration: "testAnnotationProcessor", dependency: libs.daggerAndroidProcessor]
+
+            [configuration: "kaptTest", dependency: libs.daggerCompiler]
     ]
 
     domainDependencies = [
