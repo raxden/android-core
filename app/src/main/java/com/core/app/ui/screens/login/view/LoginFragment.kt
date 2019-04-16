@@ -7,13 +7,14 @@ import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.LoginFragmentBinding
 import com.core.app.util.PermissionManager
+import com.core.domain.User
 import com.tbruyelle.rxpermissions2.Permission
 
 class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>(),
         PermissionManager.Callback {
 
     interface FragmentCallback : AppFragmentCallback {
-        fun onUserLogged()
+        fun onUserLogged(user: User)
     }
 
     override val mViewModelClass: Class<LoginViewModel>
@@ -36,8 +37,8 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
     }
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: LoginViewModel) {
-        viewModel.userLogged.observe(owner, Observer { isLogged ->
-            if (isLogged) mCallback.onUserLogged()
+        viewModel.userLogged.observe(owner, Observer { user ->
+            mCallback.onUserLogged(user)
         })
     }
 

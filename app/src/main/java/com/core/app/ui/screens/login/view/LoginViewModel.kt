@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel
 import com.core.commons.ValidationHelper
 import com.core.commons.extension.subscribeWith
+import com.core.domain.User
 import com.core.domain.interactor.LoginUseCase
 import io.reactivex.Completable
 import io.reactivex.rxkotlin.addTo
@@ -18,7 +19,7 @@ class LoginViewModel @Inject constructor(
     val password: MutableLiveData<String> = MutableLiveData()
     val usernameError: MutableLiveData<String> = MutableLiveData()
     val passwordError: MutableLiveData<String> = MutableLiveData()
-    val userLogged: MutableLiveData<Boolean> = MutableLiveData()
+    val userLogged: MutableLiveData<User> = MutableLiveData()
 
     private var mValidForm = false
 
@@ -38,15 +39,14 @@ class LoginViewModel @Inject constructor(
 
     private fun performLogin(username: String, password: String) {
         loginUseCase.execute(username, password)
-                .flatMapCompletable { Completable.complete() }
                 .subscribeWith(
                         onStart = { mLoaderManager.push("validando credenciales...") },
                         onError = {
                             mLoaderManager.pop()
                             mErrorManager.set(it)
                         },
-                        onComplete = {
-                            userLogged.postValue(true)
+                        onSuccess = {
+                            userLogged.postValue(it)
                         }
                 )
                 .addTo(mCompositeDisposable)

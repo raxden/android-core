@@ -13,7 +13,7 @@ abstract class BaseViewFragment<VDB : ViewDataBinding, TCallback : BaseViewFragm
     interface BaseViewFragmentCallback : BaseFragmentCallback
 
     protected abstract val mLayoutId: Int
-    protected lateinit var mBinding: VDB
+    lateinit var mBinding: VDB
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return DataBindingUtil.inflate<VDB>(inflater, mLayoutId, container, false).let { binding ->

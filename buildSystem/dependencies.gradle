@@ -31,7 +31,7 @@ ext {
     def junitVersion = '4.12'
     def assertJVersion = '1.7.0'
     def mockitoVersion = '1.10.19'
-    def robolectricVersion = '3.6.1'
+    def robolectricVersion = '4.2.1'
 
     // ========== LIBRARIES ========================================================================
 
@@ -95,6 +95,7 @@ ext {
     ]
 
     def testLibs = [
+            daggerCompiler: [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
             junit: [group: 'junit', name: 'junit', version: junitVersion],
             assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion],
             mockito: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion],
@@ -139,13 +140,9 @@ ext {
             [configuration: "implementation", dependency: raxdenLibs.square],
             [configuration: "implementation", dependency: raxdenLibs.squareCommons],
 
-            [configuration: "implementation", dependency: libs.dagger],
             [configuration: "implementation", dependency: libs.daggerAndroidSupport],
             [configuration: "kapt", dependency: libs.daggerCompiler],
             [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
-            [configuration: "testImplementation", dependency: libs.dagger],
-            [configuration: "testAnnotationProcessor", dependency: libs.daggerCompiler],
-            [configuration: "testAnnotationProcessor", dependency: libs.daggerAndroidProcessor],
 
             [configuration: "implementation", dependency: libs.rxAndroid],
             [configuration: "implementation", dependency: libs.rxKotlin],
@@ -175,7 +172,9 @@ ext {
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: testLibs.mockito],
             [configuration: "testImplementation", dependency: testLibs.robolectric],
-            [configuration: "testImplementation", dependency: testLibs.robolectricShadowsMultidex]
+            [configuration: "testImplementation", dependency: testLibs.robolectricShadowsMultidex],
+            [configuration: "testImplementation", dependency: libs.daggerAndroidSupport],
+            [configuration: "testAnnotationProcessor", dependency: libs.daggerAndroidProcessor]
     ]
 
     domainDependencies = [

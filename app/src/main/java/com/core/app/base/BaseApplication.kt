@@ -62,7 +62,7 @@ abstract class BaseApplication : MultiDexApplication(),
         if (!SDKUtils.hasLollipop()) AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
 
-    private fun initDependencyInjector() {
+    protected fun initDependencyInjector() {
         AppInjector.init(this)
     }
 }

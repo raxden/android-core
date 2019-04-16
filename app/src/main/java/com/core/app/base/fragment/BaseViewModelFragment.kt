@@ -18,7 +18,7 @@ abstract class BaseViewModelFragment<VM : BaseViewModel, VDB : ViewDataBinding, 
     lateinit var mViewModelFactory: ViewModelProvider.Factory
 
     protected abstract val mViewModelClass: Class<VM>
-    protected lateinit var mViewModel: VM
+    lateinit var mViewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
