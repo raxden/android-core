@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface LoginUseCase {
 
-    fun execute(username: String, password: String): Single<User>
+    fun execute(username: String): Single<User>
 }

@@ -16,29 +16,22 @@ class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     val username: MutableLiveData<String> = MutableLiveData()
-    val password: MutableLiveData<String> = MutableLiveData()
     val usernameError: MutableLiveData<String> = MutableLiveData()
-    val passwordError: MutableLiveData<String> = MutableLiveData()
     val userLogged: MutableLiveData<User> = MutableLiveData()
 
     private var mValidForm = false
 
     fun onLoginClicked() {
         mValidForm = validateUsername()
-        mValidForm = validatePassword()
-        if (mValidForm) performLogin(username.value ?: "", password.value ?: "")
+        if (mValidForm) performLogin(username.value ?: "")
     }
 
     fun onUsernameChanged() {
         usernameError.postValue("")
     }
 
-    fun onPasswordChanged() {
-        passwordError.postValue("")
-    }
-
-    private fun performLogin(username: String, password: String) {
-        loginUseCase.execute(username, password)
+    private fun performLogin(username: String) {
+        loginUseCase.execute(username)
                 .subscribeWith(
                         onStart = { mLoaderManager.push("validando credenciales...") },
                         onError = {
@@ -59,17 +52,4 @@ class LoginViewModel @Inject constructor(
         } else usernameError.postValue("")
         return true
     }
-
-    private fun validatePassword(): Boolean {
-        if (TextUtils.isEmpty(password.value ?: "")) {
-            passwordError.postValue("El campo password no puede estar vacio")
-            return false
-        } else passwordError.postValue("")
-        if (!ValidationHelper.isPassword(password.value ?: "")) {
-            passwordError.postValue("Contraseña con formato incorrecto")
-            return false
-        } else passwordError.postValue("")
-        return true
-    }
-
 }
