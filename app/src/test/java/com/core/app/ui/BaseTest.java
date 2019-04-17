@@ -1,9 +1,5 @@
 package com.core.app.ui;
 
-import android.content.Context;
-import android.content.res.Resources;
-
-import com.core.app.AppApplication;
 import com.core.app.AppApplicationTest;
 
 import org.junit.Rule;
@@ -13,10 +9,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.model.Statement;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
-import java.io.File;
 
 import io.reactivex.Scheduler;
 import io.reactivex.functions.Function;
@@ -38,18 +32,6 @@ public abstract class BaseTest {
 
     @Rule
     public TestRule immediateSchedulersRule = new ImmediateSchedulersRule();
-
-    public static Context context() {
-        return RuntimeEnvironment.application;
-    }
-
-    public static File cacheDir() {
-        return RuntimeEnvironment.application.getCacheDir();
-    }
-
-    public static Resources getResources() {
-        return RuntimeEnvironment.application.getResources();
-    }
 
     private class ImmediateSchedulersRule implements TestRule {
         @Override
