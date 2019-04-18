@@ -21,7 +21,7 @@ object RepositoryModuleTest {
     @Provides
     @Singleton
     internal fun userRepositoryImpl(): UserRepositoryImpl = Mockito.mock(UserRepositoryImpl::class.java).also {
-        Mockito.`when`(it.login("username", "password")).thenReturn(Single.just(User(1234, "username")))
+        Mockito.`when`(it.login("username")).thenReturn(Single.just(User(1234, "username")))
         Mockito.`when`(it.retrieve()).thenReturn(Single.just(User(1234, "username")))
     }
 }
