@@ -1,9 +1,9 @@
-package com.core.data.entity.mapper
+package com.core.data.network.entity.mapper
 
 import android.content.Context
 import com.core.commons.DataMapper
 import com.core.commons.extension.mapTo
-import com.core.data.entity.ProjectEntity
+import com.core.data.network.entity.ProjectEntity
 import com.core.domain.Project
 import javax.inject.Inject
 import javax.inject.Singleton
