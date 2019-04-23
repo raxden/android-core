@@ -1,6 +1,6 @@
 package com.core.data.network.gateway.retrofit.service
 
-import com.core.data.entity.ProjectEntity
+import com.core.data.network.entity.ProjectEntity
 import io.reactivex.Maybe
 import io.reactivex.Single
 import retrofit2.http.*

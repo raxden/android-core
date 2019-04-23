@@ -18,6 +18,7 @@ ext {
     def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
     def rxPermissionsVersion = '0.9.5'          // https://github.com/tbruyelle/RxPermissions    0.10.2
+    def roomVersion = '2.1.0-alpha06'
     def androidThreeTenVersion = '1.1.1'        // https://github.com/JakeWharton/ThreeTenABP
     def crashlyticsVersion = '2.9.7'
     def gsonVersion  = '2.8.5'                  // https://github.com/google/gson
@@ -54,6 +55,11 @@ ext {
             analytics: [group: 'com.google.firebase', name: 'firebase-analytics', version: '16.0.5'],
             messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4'],
             auth     : [group: 'com.google.firebase', name: 'firebase-auth', version: '16.0.5']
+    ]
+
+    def roomLibs = [
+            runtime: [group: 'androidx.room', name: 'room-runtime', version: roomVersion],
+            compiler: [group: 'androidx.room', name: 'room-compiler', version: roomVersion]
     ]
 
     def raxdenLibs = [
@@ -155,6 +161,9 @@ ext {
             [configuration: "implementation", dependency: libs.okhttp],
             [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
 
+            [configuration: "implementation", dependency: roomLibs.runtime],
+            [configuration: "kapt", dependency: roomLibs.compiler],
+
             [configuration: "implementation", dependency: libs.glide],
             [configuration: "kapt", dependency: libs.glideCompiler],
 
@@ -192,7 +201,10 @@ ext {
             [configuration: "implementation", dependency: libs.timber],
 
             [configuration: "implementation", dependency: libs.rxAndroid],
-            [configuration: "implementation", dependency: libs.rxAndroid]
+            [configuration: "implementation", dependency: libs.rxAndroid],
+            
+            [configuration: "implementation", dependency: roomLibs.runtime],
+            [configuration: "kapt", dependency: roomLibs.compiler]
     ]
 
     dataDependencies = [
@@ -226,7 +238,10 @@ ext {
             [configuration: "implementation", dependency: libs.retrofitConverterScalars],
 
             [configuration: "implementation", dependency: libs.okhttp],
-            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor]
+            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
+
+            [configuration: "implementation", dependency: roomLibs.runtime],
+            [configuration: "kapt", dependency: roomLibs.compiler]
     ]
 
     componentsDependencies = [

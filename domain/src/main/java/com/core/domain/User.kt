@@ -1,13 +1,14 @@
 package com.core.domain
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
-import org.threeten.bp.LocalDateTime
 
 @Parcelize
+@Entity(tableName = "user")
 data class User(
-    var id: Long = 0,
-    var username: String,
-    var createdAt: LocalDateTime? = null,
-    var updatedAt: LocalDateTime? = null
+        @PrimaryKey(autoGenerate = true)
+        var id: Long = 0,
+        var username: String
 ) : Parcelable

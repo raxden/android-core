@@ -1,6 +1,6 @@
 package com.core.data.repository
 
-import com.core.data.entity.mapper.ProjectEntityDataMapper
+import com.core.data.network.entity.mapper.ProjectEntityDataMapper
 import com.core.data.network.gateway.AppGateway
 import com.core.domain.Project
 import com.core.domain.repository.ProjectRepository
@@ -13,11 +13,11 @@ class ProjectRepositoryImpl @Inject internal constructor(
     private val entityDataMapper: ProjectEntityDataMapper
 ) : ProjectRepository {
 
-    override fun list(userId: String): Maybe<List<Project>> = gateway
-            .projectList(userId)
+    override fun list(username: String): Maybe<List<Project>> = gateway
+            .projectList(username)
             .map { entityDataMapper.transform(it) }
 
-    override fun detail(userId: String, projectName: String): Single<Project> = gateway
-            .projectDetail(userId, projectName)
+    override fun detail(username: String, projectName: String): Single<Project> = gateway
+            .projectDetail(username, projectName)
             .map { entityDataMapper.transform(it) }
 }

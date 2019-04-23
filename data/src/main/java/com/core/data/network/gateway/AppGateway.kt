@@ -1,6 +1,6 @@
 package com.core.data.network.gateway
 
-import com.core.data.entity.ProjectEntity
+import com.core.data.network.entity.ProjectEntity
 import io.reactivex.Maybe
 import io.reactivex.Single
 

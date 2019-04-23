@@ -3,7 +3,6 @@ package com.core.app.base
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
-import com.core.app.AppApplication
 import com.core.app.injector.module.*
 import dagger.Binds
 import dagger.Module
@@ -21,7 +20,8 @@ import javax.inject.Singleton
         CacheModule::class,
         RepositoryModule::class,
         UseCaseModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        DatabaseModule::class
 ))
 abstract class BaseApplicationModule {
 

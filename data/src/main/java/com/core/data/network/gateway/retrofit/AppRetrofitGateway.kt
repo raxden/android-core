@@ -1,7 +1,7 @@
 package com.core.data.network.gateway.retrofit
 
 import com.core.data.network.gateway.AppGateway
-import com.core.data.entity.ProjectEntity
+import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.gateway.retrofit.service.AppRetrofitService
 import io.reactivex.Maybe
 import io.reactivex.Single
