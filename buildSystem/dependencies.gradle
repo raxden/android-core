@@ -9,7 +9,7 @@ ext {
     def constraintLayoutVersion = '1.1.3'
     def multidexVersion = '2.0.0'
     def materialVersion = '1.1.0-alpha03'
-    def kotlinVersion = '1.3.11'
+    def kotlinVersion = '1.3.30'
 
     // dependencies
     def androidCommonsVersion = '3.0.35'        // https://github.com/raxden/android-commons
@@ -59,7 +59,8 @@ ext {
 
     def roomLibs = [
             runtime: [group: 'androidx.room', name: 'room-runtime', version: roomVersion],
-            compiler: [group: 'androidx.room', name: 'room-compiler', version: roomVersion]
+            compiler: [group: 'androidx.room', name: 'room-compiler', version: roomVersion],
+            rxjava2: [group: 'androidx.room', name: 'room-rxjava2', version: roomVersion]
     ]
 
     def raxdenLibs = [
@@ -163,6 +164,7 @@ ext {
 
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
+            [configuration: "implementation", dependency: roomLibs.rxjava2],
 
             [configuration: "implementation", dependency: libs.glide],
             [configuration: "kapt", dependency: libs.glideCompiler],
@@ -204,7 +206,8 @@ ext {
             [configuration: "implementation", dependency: libs.rxAndroid],
             
             [configuration: "implementation", dependency: roomLibs.runtime],
-            [configuration: "kapt", dependency: roomLibs.compiler]
+            [configuration: "kapt", dependency: roomLibs.compiler],
+            [configuration: "implementation", dependency: roomLibs.rxjava2]
     ]
 
     dataDependencies = [
@@ -241,7 +244,8 @@ ext {
             [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
 
             [configuration: "implementation", dependency: roomLibs.runtime],
-            [configuration: "kapt", dependency: roomLibs.compiler]
+            [configuration: "kapt", dependency: roomLibs.compiler],
+            [configuration: "implementation", dependency: roomLibs.rxjava2]
     ]
 
     componentsDependencies = [

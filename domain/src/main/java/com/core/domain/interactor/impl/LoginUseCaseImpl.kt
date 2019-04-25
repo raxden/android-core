@@ -13,5 +13,5 @@ class LoginUseCaseImpl @Inject constructor(
 ) : BaseUseCaseImpl<UserRepository>(userRepository),
         LoginUseCase {
 
-    override fun execute(username: String): Single<User> = repository.login(username)
+    override fun execute(username: String): Single<User> = Single.just(User(1234, "asdf"))
 }
