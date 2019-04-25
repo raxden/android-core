@@ -6,7 +6,8 @@ import com.core.domain.Account
 
 @Database(
         entities = [Account::class],
-        version = 1
+        version = 1,
+        exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
