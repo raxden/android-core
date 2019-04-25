@@ -17,7 +17,7 @@ class ProjectRepositoryImpl @Inject internal constructor(
             .projectList(username)
             .map { entityDataMapper.transform(it) }
 
-    override fun detail(username: String, projectName: String): Single<Project> = gateway
+    override fun detail(username: String, projectName: String): Maybe<Project> = gateway
             .projectDetail(username, projectName)
             .map { entityDataMapper.transform(it) }
 }

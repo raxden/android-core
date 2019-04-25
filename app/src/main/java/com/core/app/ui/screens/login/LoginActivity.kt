@@ -5,6 +5,7 @@ import com.core.app.AppActivity
 import com.core.app.databinding.LoginActivityBinding
 import com.core.app.ui.screens.login.view.LoginFragment
 import com.core.commons.extension.getExtras
+import com.core.domain.Account
 import com.core.domain.User
 import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
 
@@ -26,7 +27,7 @@ class LoginActivity : AppActivity<LoginActivityBinding>(),
 
     // =============== LoginFragment.FragmentCallback =============================================
 
-    override fun onUserLogged(user: User) {
+    override fun onLoginSuccess(account: Account) {
         mNavigationHelper.launchProjectList(finishCurrentView = true)
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel
 import com.core.commons.ValidationHelper
 import com.core.commons.extension.subscribeWith
+import com.core.domain.Account
 import com.core.domain.User
 import com.core.domain.interactor.LoginUseCase
 import io.reactivex.Completable
@@ -17,7 +18,7 @@ class LoginViewModel @Inject constructor(
 
     val username: MutableLiveData<String> = MutableLiveData()
     val usernameError: MutableLiveData<String> = MutableLiveData()
-    val userLogged: MutableLiveData<User> = MutableLiveData()
+    val userLogged: MutableLiveData<Account> = MutableLiveData()
 
     private var mValidForm = false
 

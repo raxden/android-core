@@ -1,17 +1,23 @@
 package com.core.domain.interactor.impl
 
+import com.core.domain.Account
 import com.core.domain.User
 import com.core.domain.interactor.LoginUseCase
+import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.ProjectRepository
 import com.core.domain.repository.UserRepository
+import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject
 
 class LoginUseCaseImpl @Inject constructor(
-        projectRepository: ProjectRepository,
-        userRepository: UserRepository
-) : BaseUseCaseImpl<UserRepository>(userRepository),
-        LoginUseCase {
+        private val userRepository: UserRepository,
+        private val accountRepository: AccountRepository
+) : LoginUseCase {
 
-    override fun execute(username: String): Single<User> = Single.just(User(1234, "asdf"))
+    override fun execute(username: String): Maybe<Account> = userRepository
+            .retrieve(username)
+            .flatMap {
+                accountRepository.save(Account(username = it.username)).toMaybe()
+            }
 }

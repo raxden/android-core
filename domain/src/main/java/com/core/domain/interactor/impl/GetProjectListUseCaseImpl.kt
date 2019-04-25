@@ -2,19 +2,19 @@ package com.core.domain.interactor.impl
 
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
+import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.ProjectRepository
 import com.core.domain.repository.UserRepository
 import io.reactivex.Maybe
 import javax.inject.Inject
 
 class GetProjectListUseCaseImpl @Inject constructor(
-        projectRepository: ProjectRepository,
-        private val userRepository: UserRepository
-) : BaseUseCaseImpl<ProjectRepository>(projectRepository),
-        GetProjectListUseCase {
+        private val projectRepository: ProjectRepository,
+        private val accountRepository: AccountRepository
+) : GetProjectListUseCase {
 
-    override fun execute(): Maybe<List<Project>> = userRepository.retrieve(1234)
-            .flatMapMaybe { repository.list(it.username) }
+    override fun execute(): Maybe<List<Project>> = accountRepository.retrieve()
+            .flatMap { projectRepository.list(it.username) }
 
-    override fun execute(userId: String): Maybe<List<Project>> = repository.list(userId)
+    override fun execute(username: String): Maybe<List<Project>> = projectRepository.list(username)
 }

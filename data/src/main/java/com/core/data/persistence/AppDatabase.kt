@@ -2,13 +2,13 @@ package com.core.data.persistence
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.core.domain.User
+import com.core.domain.Account
 
 @Database(
-        entities = arrayOf(User::class),
+        entities = arrayOf(Account::class),
         version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun userDao(): UserDao
+    abstract fun accountDao(): AccountDao
 }

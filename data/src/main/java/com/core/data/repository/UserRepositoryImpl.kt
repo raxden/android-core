@@ -1,19 +1,18 @@
 package com.core.data.repository
 
-import com.core.data.persistence.AppDatabase
+import com.core.data.network.entity.mapper.UserEntityDataMapper
+import com.core.data.network.gateway.AppGateway
 import com.core.domain.User
 import com.core.domain.repository.UserRepository
-import io.reactivex.Single
+import io.reactivex.Maybe
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject internal constructor(
-        private val appDatabase: AppDatabase
+        private val gateway: AppGateway,
+        private val entityDataMapper: UserEntityDataMapper
 ) : UserRepository {
 
-    override fun retrieve(id: Long): Single<User> = appDatabase.userDao().find(id.toString())
-
-    override fun save(user: User): Single<User> {
-        return if (user.id == 0L) appDatabase.userDao().insert(user)
-        else appDatabase.userDao().update(user).andThen(Single.just(user))
-    }
+    override fun retrieve(username: String): Maybe<User> = gateway
+            .user(username)
+            .map { entityDataMapper.transform(it) }
 }
