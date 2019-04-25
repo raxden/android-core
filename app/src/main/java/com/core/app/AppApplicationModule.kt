@@ -14,9 +14,7 @@ import javax.inject.Singleton
 /**
  * Provides application-wide dependencies.
  */
-@Module(includes = arrayOf(
-        BaseApplicationModule::class
-))
+@Module(includes = [BaseApplicationModule::class])
 abstract class AppApplicationModule {
 
     @Binds

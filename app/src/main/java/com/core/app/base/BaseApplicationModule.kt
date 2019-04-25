@@ -12,17 +12,17 @@ import javax.inject.Singleton
 /**
  * Provides application-wide dependencies.
  */
-@Module(includes = arrayOf(
-        SchedulerModule::class,
-        GsonModule::class,
-        AnalyticsModule::class,
-        PreferencesModule::class,
-        CacheModule::class,
-        RepositoryModule::class,
-        UseCaseModule::class,
-        NetworkModule::class,
-        DatabaseModule::class
-))
+@Module(includes = [
+    SchedulerModule::class,
+    GsonModule::class,
+    AnalyticsModule::class,
+    PreferencesModule::class,
+    CacheModule::class,
+    RepositoryModule::class,
+    UseCaseModule::class,
+    NetworkModule::class,
+    DatabaseModule::class
+])
 abstract class BaseApplicationModule {
 
     @Binds
@@ -35,6 +35,6 @@ abstract class BaseApplicationModule {
         @JvmStatic
         @Provides
         @Singleton
-        internal fun contentResolver(application: Application): ContentResolver =  application.contentResolver
+        internal fun contentResolver(application: Application): ContentResolver = application.contentResolver
     }
 }

@@ -14,10 +14,10 @@ import javax.inject.Singleton
 /**
  * Provides application-wide dependencies.
  */
-@Module(includes = arrayOf(
-        BaseApplicationModule::class,
-        RepositoryModuleTest::class
-))
+@Module(includes = [
+    BaseApplicationModule::class,
+    RepositoryModuleTest::class
+])
 abstract class AppApplicationTestModule {
 
     @Binds

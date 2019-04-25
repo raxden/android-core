@@ -28,12 +28,10 @@ import javax.inject.Named
  * Provides base activity dependencies. This must be included in all activity modules, which must
  * provide a concrete implementation of [Activity].
  */
-@Module(
-        includes = arrayOf(
-                LifecycleActivityModule::class,
-                ViewModelModule::class
-        )
-)
+@Module(includes = [
+    LifecycleActivityModule::class,
+    ViewModelModule::class
+])
 abstract class BaseActivityModule {
 
     @Binds
@@ -81,8 +79,7 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun permissionManager(context: Context, rxPermissions: RxPermissions, compositeDisposable: CompositeDisposable): PermissionManager
-                = PermissionManager(context, rxPermissions, compositeDisposable)
+        internal fun permissionManager(context: Context, rxPermissions: RxPermissions, compositeDisposable: CompositeDisposable): PermissionManager = PermissionManager(context, rxPermissions, compositeDisposable)
 
         @JvmStatic
         @Provides

@@ -10,9 +10,7 @@ import dagger.Module
 /**
  * Provides SampleMapFragment fragment dependencies.
  */
-@Module(includes = arrayOf(
-        BaseViewModelFragmentModule::class
-))
+@Module(includes = [BaseViewModelFragmentModule::class])
 abstract class ProjectListFragmentModule {
 
     /**

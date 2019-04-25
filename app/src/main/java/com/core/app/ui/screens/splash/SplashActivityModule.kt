@@ -17,9 +17,7 @@ import dagger.multibindings.IntoSet
 /**
  * Provides splash activity dependencies
  */
-@Module(includes = arrayOf(
-        BaseFragmentActivityModule::class
-))
+@Module(includes = [BaseFragmentActivityModule::class])
 abstract class SplashActivityModule {
 
     /**

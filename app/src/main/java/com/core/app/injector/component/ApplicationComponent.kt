@@ -55,11 +55,11 @@ import javax.inject.Singleton
  *
  */
 @Singleton
-@Component(modules = arrayOf(
+@Component(modules = [
         AndroidInjectionModule::class,
         AppApplicationModule::class,
         InjectorModule::class
-))
+])
 interface ApplicationComponent : AndroidInjector<AppApplication> {
 
     @Component.Builder

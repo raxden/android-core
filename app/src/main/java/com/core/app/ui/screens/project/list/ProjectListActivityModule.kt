@@ -14,9 +14,7 @@ import dagger.android.ContributesAndroidInjector
 /**
  * Provides splash activity dependencies
  */
-@Module(includes = arrayOf(
-        BaseFragmentActivityModule::class
-))
+@Module(includes = [BaseFragmentActivityModule::class])
 abstract class ProjectListActivityModule {
 
     /**

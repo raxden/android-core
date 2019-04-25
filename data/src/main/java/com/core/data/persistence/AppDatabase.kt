@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.core.domain.Account
 
 @Database(
-        entities = arrayOf(Account::class),
+        entities = [Account::class],
         version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
