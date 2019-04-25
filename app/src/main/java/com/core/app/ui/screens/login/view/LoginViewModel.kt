@@ -34,13 +34,19 @@ class LoginViewModel @Inject constructor(
     private fun performLogin(username: String) {
         loginUseCase.execute(username)
                 .subscribeWith(
-                        onStart = { mLoaderManager.push("validando credenciales...") },
+                        onStart = {
+                            mLoaderManager.push("validando credenciales...")
+                        },
                         onError = {
                             mLoaderManager.pop()
                             mErrorManager.set(it)
                         },
                         onSuccess = {
                             userLogged.postValue(it)
+                        },
+                        onComplete = {
+                            mLoaderManager.pop()
+                            mErrorManager.set(0, "¡Ops!", "user not found")
                         }
                 )
                 .addTo(mCompositeDisposable)

@@ -8,15 +8,15 @@ import io.reactivex.Single
 interface AppGateway {
 
     fun user(
-            user: String
+            username: String
     ): Maybe<UserEntity>
 
     fun projectList(
-            user: String
+            username: String
     ): Maybe<List<ProjectEntity>>
 
     fun projectDetail(
-        user: String,
-        projectName: String
+            username: String,
+            projectName: String
     ): Maybe<ProjectEntity>
 }

@@ -6,5 +6,7 @@ import io.reactivex.Single
 
 interface GetProjectDetailUseCase {
 
-    fun execute(userId: String, projectName: String): Maybe<Project>
+    fun execute(projectName: String): Maybe<Project>
+
+    fun execute(username: String, projectName: String): Maybe<Project>
 }

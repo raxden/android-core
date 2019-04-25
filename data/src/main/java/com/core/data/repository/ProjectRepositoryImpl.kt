@@ -9,8 +9,8 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class ProjectRepositoryImpl @Inject internal constructor(
-    private val gateway: AppGateway,
-    private val entityDataMapper: ProjectEntityDataMapper
+        private val gateway: AppGateway,
+        private val entityDataMapper: ProjectEntityDataMapper
 ) : ProjectRepository {
 
     override fun list(username: String): Maybe<List<Project>> = gateway
