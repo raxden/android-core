@@ -15,8 +15,7 @@ class LoginUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : LoginUseCase {
 
-    override fun execute(username: String): Maybe<Account> = userRepository
-            .retrieve(username)
+    override fun execute(username: String): Maybe<Account> = userRepository.retrieve(username)
             .flatMap {
                 accountRepository.save(Account(username = it.username)).toMaybe()
             }

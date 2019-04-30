@@ -13,12 +13,13 @@ class AccountRepositoryImpl @Inject internal constructor(
 
     override fun retrieve(): Maybe<Account> = appDatabase.accountDao().findAll().map { it.first() }
 
-    override fun retrieve(id: Long): Maybe<Account> = appDatabase.accountDao().find(id.toString())
+    override fun retrieve(id: Long): Maybe<Account> = appDatabase.accountDao().find(id)
 
     override fun save(account: Account): Single<Account> {
-        if (account.id == 0L) appDatabase.accountDao().insert(account)
-        else appDatabase.accountDao().update(account)
-//        todo
-        return Single.just(account)
+        return if (account.id == 0L) {
+            appDatabase.accountDao().insert(account).flatMap {
+                appDatabase.accountDao().find(it).toSingle()
+            }
+        } else appDatabase.accountDao().update(account).andThen(Single.just(account))
     }
 }
