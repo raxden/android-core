@@ -18,9 +18,18 @@ interface AccountDao {
     @Query("SELECT * FROM Account")
     fun findAll(): Maybe<List<Account>>
 
+    @Query("DELETE FROM Account WHERE id= :id")
+    fun delete(id: Long): Completable
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(account: Account): Single<Long>
 
     @Update
     fun update(account: Account): Completable
+
+    @Delete
+    fun delete(account: Account): Completable
+
+    @Query("DELETE FROM Account")
+    fun deleteAll(): Completable
 }

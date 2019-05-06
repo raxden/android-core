@@ -17,11 +17,11 @@ ext {
     def androidSquareVersion = '4.0.4'          // https://github.com/raxden/android-square
     def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
-    def rxPermissionsVersion = '0.9.5'          // https://github.com/tbruyelle/RxPermissions    0.10.2
+    def rxPermissionsVersion = '0.9.5'// https://github.com/tbruyelle/RxPermissions    0.10.2
     def roomVersion = '2.1.0-alpha06'
     def androidThreeTenVersion = '1.1.1'        // https://github.com/JakeWharton/ThreeTenABP
     def crashlyticsVersion = '2.9.7'
-    def gsonVersion  = '2.8.5'                  // https://github.com/google/gson
+    def gsonVersion = '2.8.5'                  // https://github.com/google/gson
     def daggerVersion = '2.16'                  // https://github.com/google/dagger
     def glideVersion = '4.7.1'                  // https://github.com/bumptech/glide
     def okHttpVersion = '3.12.0'                // https://github.com/square/okhttp
@@ -36,89 +36,104 @@ ext {
 
     // ========== LIBRARIES ========================================================================
 
-    def androidxLibs = [
-            multidexVersion: [group: 'androidx.multidex', name: 'multidex', version: multidexVersion],
-            appCompat: [group: 'androidx.appcompat', name: 'appcompat', version: appCompatVersion],
-            material: [group: 'com.google.android.material', name: 'material', version: materialVersion],
-            constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintLayoutVersion],
-            kotlin: [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: kotlinVersion]
+    def support = [
+            multidexVersion : [group: 'androidx.multidex', name: 'multidex', version: multidexVersion],
+            appCompat       : [group: 'androidx.appcompat', name: 'appcompat', version: appCompatVersion],
+            material        : [group: 'com.google.android.material', name: 'material', version: materialVersion],
+            constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintLayoutVersion]
+    ]
+
+    def kotlinLibs = [
+            core: [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: kotlinVersion],
+            test: [group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: kotlinVersion]
     ]
 
     def playServicesLibs = [
-            location : [group: 'com.google.android.gms', name: 'play-services-location', version: '16.0.0'],
-            maps     : [group: 'com.google.android.gms', name: 'play-services-maps', version: '16.0.0'],
-            places   : [group: 'com.google.android.gms', name: 'play-services-places', version: '16.0.0']
+            location: [group: 'com.google.android.gms', name: 'play-services-location', version: '16.0.0'],
+            maps    : [group: 'com.google.android.gms', name: 'play-services-maps', version: '16.0.0'],
+            places  : [group: 'com.google.android.gms', name: 'play-services-places', version: '16.0.0']
     ]
 
     def firebaseLibs = [
-            core: [group: 'com.google.firebase', name: 'firebase-core', version: '16.0.6'],
+            core     : [group: 'com.google.firebase', name: 'firebase-core', version: '16.0.6'],
             analytics: [group: 'com.google.firebase', name: 'firebase-analytics', version: '16.0.5'],
             messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4'],
             auth     : [group: 'com.google.firebase', name: 'firebase-auth', version: '16.0.5']
     ]
 
+    def daggerLibs = [
+            androidSupport  : [group: 'com.google.dagger', name: 'dagger-android-support', version: daggerVersion],
+            compiler        : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
+            androidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: daggerVersion]
+    ]
+
     def roomLibs = [
-            runtime: [group: 'androidx.room', name: 'room-runtime', version: roomVersion],
+            runtime : [group: 'androidx.room', name: 'room-runtime', version: roomVersion],
             compiler: [group: 'androidx.room', name: 'room-compiler', version: roomVersion],
-            rxjava2: [group: 'androidx.room', name: 'room-rxjava2', version: roomVersion]
+            rxjava2 : [group: 'androidx.room', name: 'room-rxjava2', version: roomVersion],
+            test    : [group: 'androidx.room', name: 'room-testing', version: roomVersion]
+    ]
+
+    def rxLibs = [
+            android: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
+            kotlin : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: rxKotlinVersion]
+    ]
+
+    def retrofit = [
+            core            : [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofitVersion],
+            rx              : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: retrofitVersion],
+            converterGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitVersion],
+            converterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: retrofitVersion]
+    ]
+
+    def glideLibs = [
+            core    : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
+            compiler: [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion]
     ]
 
     def raxdenLibs = [
-            commons: [group: 'com.github.raxden', name: 'android-commons', version: androidCommonsVersion, ext: 'aar'],
-            preferences: [group: 'com.github.raxden', name: 'android-preferences', version: androidPreferencesVersion, ext: 'aar'],
-            square: [group: 'com.github.raxden.square', name: 'square', version: androidSquareVersion, ext: 'aar'],
+            commons      : [group: 'com.github.raxden', name: 'android-commons', version: androidCommonsVersion, ext: 'aar'],
+            preferences  : [group: 'com.github.raxden', name: 'android-preferences', version: androidPreferencesVersion, ext: 'aar'],
+            square       : [group: 'com.github.raxden.square', name: 'square', version: androidSquareVersion, ext: 'aar'],
             squareCommons: [group: 'com.github.raxden.square', name: 'square-commons', version: androidSquareVersion, ext: 'aar']
     ]
 
     def libs = [
-            gson: [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+            gson                    : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+            timber                  : [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
+            threetenabp             : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
 
-            dagger: [group: 'com.google.dagger', name: 'dagger-android', version: daggerVersion],
-            daggerAndroidSupport: [group: 'com.google.dagger', name: 'dagger-android-support', version: daggerVersion],
-            daggerCompiler: [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
-            daggerAndroidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: daggerVersion],
-
-            timber: [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
-
-            threetenabp: [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
-
-            rxAndroid: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
-            rxKotlin: [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: rxKotlinVersion],
-
-            glide: [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
-            glideCompiler: [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion],
-
-            retrofit: [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofitVersion],
-            retrofitRX: [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: retrofitVersion],
-            retrofitConverterGson: [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitVersion],
-            retrofitConverterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: retrofitVersion],
-
-            okhttp: [group: 'com.squareup.okhttp3', name: 'okhttp', version: okHttpVersion],
+            okhttp                  : [group: 'com.squareup.okhttp3', name: 'okhttp', version: okHttpVersion],
             okhttpLoggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okHttpVersion],
 
-            rxPermissions: [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
+            rxPermissions           : [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
 
-            crashlytics: [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
+            crashlytics             : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
+    ]
+
+    def robolectricLibs = [
+            core    : [group: 'org.robolectric', name: 'robolectric', version: robolectricVersion],
+            multidex: [group: 'org.robolectric', name: 'shadows-multidex', version: robolectricVersion]
+    ]
+
+    def mockitoLibs = [
+            mockito: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]
     ]
 
     def testLibs = [
-            daggerCompiler: [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
-            junit: [group: 'junit', name: 'junit', version: junitVersion],
-            assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion],
-            mockito: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion],
-            robolectric: [group: 'org.robolectric', name: 'robolectric', version: robolectricVersion],
-            robolectricShadowsMultidex: [group: 'org.robolectric', name: 'shadows-multidex', version: robolectricVersion]
+            junit  : [group: 'junit', name: 'junit', version: junitVersion],
+            assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion]
     ]
 
     // ========== MODULES DEPENDENCIES =============================================================
 
     def modules = [
-            app: ':app',
-            data: ':data',
-            domain: ':domain',
-            commons: ':commons',
+            app       : ':app',
+            data      : ':data',
+            domain    : ':domain',
+            commons   : ':commons',
             components: ':components',
-            resources: ':resources'
+            resources : ':resources'
     ]
 
     appDependencies = [
@@ -127,11 +142,12 @@ ext {
             [configuration: "implementation", dependency: project(modules.domain)],
             [configuration: "implementation", dependency: project(modules.data)],
 
-            [configuration: "implementation", dependency: androidxLibs.multidexVersion],
-            [configuration: "implementation", dependency: androidxLibs.appCompat],
-            [configuration: "implementation", dependency: androidxLibs.material],
-            [configuration: "implementation", dependency: androidxLibs.constraintLayout],
-            [configuration: "implementation", dependency: androidxLibs.kotlin],
+            [configuration: "implementation", dependency: support.multidexVersion],
+            [configuration: "implementation", dependency: support.appCompat],
+            [configuration: "implementation", dependency: support.material],
+            [configuration: "implementation", dependency: support.constraintLayout],
+
+            [configuration: "implementation", dependency: kotlinLibs.core],
 
             [configuration: "implementation", dependency: playServicesLibs.location],
             [configuration: "implementation", dependency: playServicesLibs.maps],
@@ -147,17 +163,17 @@ ext {
             [configuration: "implementation", dependency: raxdenLibs.square],
             [configuration: "implementation", dependency: raxdenLibs.squareCommons],
 
-            [configuration: "implementation", dependency: libs.daggerAndroidSupport],
-            [configuration: "kapt", dependency: libs.daggerCompiler],
-            [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+            [configuration: "implementation", dependency: daggerLibs.androidSupport],
+            [configuration: "kapt", dependency: daggerLibs.compiler],
+            [configuration: "kapt", dependency: daggerLibs.androidProcessor],
 
-            [configuration: "implementation", dependency: libs.rxAndroid],
-            [configuration: "implementation", dependency: libs.rxKotlin],
+            [configuration: "implementation", dependency: rxLibs.android],
+            [configuration: "implementation", dependency: rxLibs.kotlin],
 
-            [configuration: "implementation", dependency: libs.retrofit],
-            [configuration: "implementation", dependency: libs.retrofitRX],
-            [configuration: "implementation", dependency: libs.retrofitConverterGson],
-            [configuration: "implementation", dependency: libs.retrofitConverterScalars],
+            [configuration: "implementation", dependency: retrofit.core],
+            [configuration: "implementation", dependency: retrofit.rx],
+            [configuration: "implementation", dependency: retrofit.converterGson],
+            [configuration: "implementation", dependency: retrofit.converterScalars],
 
             [configuration: "implementation", dependency: libs.okhttp],
             [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
@@ -166,8 +182,8 @@ ext {
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
 
-            [configuration: "implementation", dependency: libs.glide],
-            [configuration: "kapt", dependency: libs.glideCompiler],
+            [configuration: "implementation", dependency: glideLibs.core],
+            [configuration: "kapt", dependency: glideLibs.compiler],
 
             [configuration: "implementation", dependency: libs.gson],
 
@@ -177,34 +193,35 @@ ext {
 
             [configuration: "implementation", dependency: libs.rxPermissions],
 
-            [configuration: "implementation", dependency: libs.crashlytics, options: { transitive = true }],
+            [configuration: "implementation", dependency: libs.crashlytics, options: {
+                transitive = true
+            }],
 
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
-            [configuration: "testImplementation", dependency: testLibs.mockito],
-            [configuration: "testImplementation", dependency: testLibs.robolectric],
-            [configuration: "testImplementation", dependency: testLibs.robolectricShadowsMultidex],
-
-            [configuration: "kaptTest", dependency: libs.daggerCompiler]
+            [configuration: "testImplementation", dependency: kotlinLibs.test],
+            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: robolectricLibs.core],
+            [configuration: "testImplementation", dependency: robolectricLibs.multidex],
+            [configuration: "kaptTest", dependency: daggerLibs.compiler]
     ]
 
     domainDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
 
-            [configuration: "implementation", dependency: androidxLibs.kotlin],
+            [configuration: "implementation", dependency: kotlinLibs.core],
 
-            [configuration: "implementation", dependency: libs.dagger],
-            [configuration: "implementation", dependency: libs.daggerAndroidSupport],
-            [configuration: "kapt", dependency: libs.daggerCompiler],
-            [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+            [configuration: "implementation", dependency: daggerLibs.androidSupport],
+            [configuration: "kapt", dependency: daggerLibs.compiler],
+            [configuration: "kapt", dependency: daggerLibs.androidProcessor],
 
             [configuration: "implementation", dependency: libs.threetenabp],
 
             [configuration: "implementation", dependency: libs.timber],
 
-            [configuration: "implementation", dependency: libs.rxAndroid],
-            [configuration: "implementation", dependency: libs.rxAndroid],
-            
+            [configuration: "implementation", dependency: rxLibs.android],
+            [configuration: "implementation", dependency: rxLibs.kotlin],
+
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2]
@@ -214,17 +231,16 @@ ext {
             [configuration: "implementation", dependency: project(modules.commons)],
             [configuration: "implementation", dependency: project(modules.domain)],
 
-            [configuration: "implementation", dependency: androidxLibs.kotlin],
+            [configuration: "implementation", dependency: kotlinLibs.core],
 
             [configuration: "implementation", dependency: raxdenLibs.commons],
             [configuration: "implementation", dependency: raxdenLibs.preferences],
 
             [configuration: "implementation", dependency: firebaseLibs.messaging],
 
-            [configuration: "implementation", dependency: libs.dagger],
-            [configuration: "implementation", dependency: libs.daggerAndroidSupport],
-            [configuration: "kapt", dependency: libs.daggerCompiler],
-            [configuration: "kapt", dependency: libs.daggerAndroidProcessor],
+            [configuration: "implementation", dependency: daggerLibs.androidSupport],
+            [configuration: "kapt", dependency: daggerLibs.compiler],
+            [configuration: "kapt", dependency: daggerLibs.androidProcessor],
 
             [configuration: "implementation", dependency: libs.gson],
 
@@ -232,29 +248,37 @@ ext {
 
             [configuration: "implementation", dependency: libs.timber],
 
-            [configuration: "implementation", dependency: libs.rxAndroid],
-            [configuration: "implementation", dependency: libs.rxAndroid],
+            [configuration: "implementation", dependency: rxLibs.android],
+            [configuration: "implementation", dependency: rxLibs.kotlin],
 
-            [configuration: "implementation", dependency: libs.retrofit],
-            [configuration: "implementation", dependency: libs.retrofitRX],
-            [configuration: "implementation", dependency: libs.retrofitConverterGson],
-            [configuration: "implementation", dependency: libs.retrofitConverterScalars],
+            [configuration: "implementation", dependency: retrofit.core],
+            [configuration: "implementation", dependency: retrofit.rx],
+            [configuration: "implementation", dependency: retrofit.converterGson],
+            [configuration: "implementation", dependency: retrofit.converterScalars],
 
             [configuration: "implementation", dependency: libs.okhttp],
             [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
 
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
-            [configuration: "implementation", dependency: roomLibs.rxjava2]
+            [configuration: "implementation", dependency: roomLibs.rxjava2],
+
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.assertj],
+            [configuration: "testImplementation", dependency: kotlinLibs.test],
+            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: robolectricLibs.core],
+            [configuration: "testImplementation", dependency: robolectricLibs.multidex]
     ]
 
     componentsDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
 
-            [configuration: "implementation", dependency: androidxLibs.appCompat],
-            [configuration: "implementation", dependency: androidxLibs.material],
-            [configuration: "implementation", dependency: androidxLibs.kotlin],
-            [configuration: "implementation", dependency: androidxLibs.constraintLayout],
+            [configuration: "implementation", dependency: support.appCompat],
+            [configuration: "implementation", dependency: support.material],
+            [configuration: "implementation", dependency: support.constraintLayout],
+
+            [configuration: "implementation", dependency: kotlinLibs.core],
 
             [configuration: "implementation", dependency: libs.threetenabp],
 
@@ -264,13 +288,14 @@ ext {
     commonsDependencies = [
             [configuration: "implementation", dependency: project(modules.resources)],
 
-            [configuration: "implementation", dependency: androidxLibs.appCompat],
-            [configuration: "implementation", dependency: androidxLibs.material],
-            [configuration: "implementation", dependency: androidxLibs.constraintLayout],
-            [configuration: "implementation", dependency: androidxLibs.kotlin],
+            [configuration: "implementation", dependency: support.appCompat],
+            [configuration: "implementation", dependency: support.material],
+            [configuration: "implementation", dependency: support.constraintLayout],
 
-            [configuration: "implementation", dependency: libs.rxAndroid],
-            [configuration: "implementation", dependency: libs.rxKotlin],
+            [configuration: "implementation", dependency: kotlinLibs.core],
+
+            [configuration: "implementation", dependency: rxLibs.android],
+            [configuration: "implementation", dependency: rxLibs.kotlin],
 
             [configuration: "implementation", dependency: raxdenLibs.commons],
 
@@ -280,8 +305,8 @@ ext {
 
             [configuration: "implementation", dependency: libs.timber],
 
-            [configuration: "implementation", dependency: libs.glide],
-            [configuration: "kapt", dependency: libs.glideCompiler]
+            [configuration: "implementation", dependency: glideLibs.core],
+            [configuration: "kapt", dependency: glideLibs.compiler]
     ]
 
     resourcesDependencies = [

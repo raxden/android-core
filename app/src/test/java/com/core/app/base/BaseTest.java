@@ -1,4 +1,4 @@
-package com.core.app.ui;
+package com.core.app.base;
 
 import com.core.app.AppApplicationTest;
 
