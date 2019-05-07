@@ -15,7 +15,7 @@ interface AppGateway {
             username: String
     ): Maybe<List<ProjectEntity>>
 
-    fun projectDetail(
+    fun project(
             username: String,
             projectName: String
     ): Maybe<ProjectEntity>

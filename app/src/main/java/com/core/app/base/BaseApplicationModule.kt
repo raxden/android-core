@@ -17,7 +17,6 @@ import javax.inject.Singleton
     GsonModule::class,
     AnalyticsModule::class,
     PreferencesModule::class,
-    CacheModule::class,
     RepositoryModule::class,
     UseCaseModule::class,
     NetworkModule::class,

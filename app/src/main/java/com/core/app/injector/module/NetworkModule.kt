@@ -18,6 +18,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -25,6 +26,8 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
 
+    private const val CACHE_DIRECTORY = "responses"
+    private const val CACHE_SIZE = 10 * 1024 * 1024         // 10 MiB;
     private const val CACHE_MAX_AGE = 60 * 10               // read from cache for 10 minutes
     private const val CACHE_MAX_STALE = 60 * 60 * 24 * 28   // tolerate 4-weeks stale
     private const val TIMEOUT = 35                          // 30 sec
@@ -62,6 +65,13 @@ object NetworkModule {
     }
 
     // OKHttpClient ====================================================================================================
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    internal fun cache(context: Context): Cache {
+        return Cache(File(context.cacheDir, CACHE_DIRECTORY), CACHE_SIZE.toLong())
+    }
 
     @JvmStatic
     @Provides

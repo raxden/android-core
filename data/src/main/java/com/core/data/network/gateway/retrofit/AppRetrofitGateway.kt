@@ -17,6 +17,6 @@ class AppRetrofitGateway(
     override fun projectList(username: String): Maybe<List<ProjectEntity>> = service
             .retrieveProjectList(username)
 
-    override fun projectDetail(username: String, projectName: String): Maybe<ProjectEntity> = service
+    override fun project(username: String, projectName: String): Maybe<ProjectEntity> = service
             .retrieveProjectDetail(username, projectName)
 }

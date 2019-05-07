@@ -18,6 +18,6 @@ class ProjectRepositoryImpl @Inject internal constructor(
             .map { entityDataMapper.transform(it) }
 
     override fun detail(username: String, projectName: String): Maybe<Project> = gateway
-            .projectDetail(username, projectName)
+            .project(username, projectName)
             .map { entityDataMapper.transform(it) }
 }
