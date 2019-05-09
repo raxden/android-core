@@ -12,7 +12,7 @@ import org.junit.Test
 import org.robolectric.Robolectric
 import org.robolectric.android.controller.ActivityController
 
-class LoginTest : BaseTest() {
+class LoginViewModelTest : BaseTest() {
 
     private lateinit var mActivityController: ActivityController<LoginActivity>
     private lateinit var mLoginActivity: LoginActivity
@@ -48,7 +48,7 @@ class LoginTest : BaseTest() {
 
     @Test
     fun checkSuccessLogin() {
-        mLoginViewModel.username.postValue("username")
+        mLoginViewModel.username.postValue("raxden")
         mLoginViewModel.onLoginClicked()
         Assert.assertTrue(TextUtils.isEmpty(mLoginViewModel.usernameError.value))
         Assert.assertNotNull(mLoginViewModel.userLogged.value)

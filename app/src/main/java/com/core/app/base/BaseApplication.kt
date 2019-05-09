@@ -1,12 +1,12 @@
 package com.core.app.base
 
 import android.app.Activity
+import android.app.Application
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import androidx.multidex.MultiDexApplication
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -19,10 +19,7 @@ import dagger.android.support.HasSupportFragmentInjector
 import java.util.*
 import javax.inject.Inject
 
-/**
- * The Android [MultiDexApplication].
- */
-abstract class BaseApplication : MultiDexApplication(),
+abstract class BaseApplication : Application(),
         HasActivityInjector,
         HasServiceInjector,
         HasBroadcastReceiverInjector {

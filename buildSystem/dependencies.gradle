@@ -5,9 +5,7 @@ ext {
     // ========== VERSIONS =========================================================================
 
     // Androidx dependencies
-    def appCompatVersion = '1.0.0'
     def constraintLayoutVersion = '1.1.3'
-    def multidexVersion = '2.0.0'
     def materialVersion = '1.1.0-alpha03'
     def kotlinVersion = '1.3.31'
 
@@ -37,8 +35,6 @@ ext {
     // ========== LIBRARIES ========================================================================
 
     def support = [
-            multidexVersion : [group: 'androidx.multidex', name: 'multidex', version: multidexVersion],
-            appCompat       : [group: 'androidx.appcompat', name: 'appcompat', version: appCompatVersion],
             material        : [group: 'com.google.android.material', name: 'material', version: materialVersion],
             constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintLayoutVersion]
     ]
@@ -142,8 +138,6 @@ ext {
             [configuration: "implementation", dependency: project(modules.domain)],
             [configuration: "implementation", dependency: project(modules.data)],
 
-            [configuration: "implementation", dependency: support.multidexVersion],
-            [configuration: "implementation", dependency: support.appCompat],
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
 
@@ -274,7 +268,6 @@ ext {
     componentsDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
 
-            [configuration: "implementation", dependency: support.appCompat],
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
 
@@ -288,7 +281,6 @@ ext {
     commonsDependencies = [
             [configuration: "implementation", dependency: project(modules.resources)],
 
-            [configuration: "implementation", dependency: support.appCompat],
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
 
