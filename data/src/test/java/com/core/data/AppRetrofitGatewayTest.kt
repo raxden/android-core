@@ -1,7 +1,7 @@
-package com.core.data.network.gateway
+package com.core.data
 
-import com.core.data.BaseTest
 import com.core.data.network.entity.ProjectEntity
+import com.core.data.network.gateway.AppGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway
 import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
 import com.core.data.network.gateway.retrofit.exception.RetrofitException
@@ -18,7 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
-class AppGatewayTest : BaseTest() {
+class AppRetrofitGatewayTest : BaseTest() {
 
     private lateinit var server: MockWebServer
     private lateinit var gateway: AppGateway

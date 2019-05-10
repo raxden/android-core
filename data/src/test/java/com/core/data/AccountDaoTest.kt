@@ -1,13 +1,11 @@
-package com.core.data.persistence
+package com.core.data
 
 import androidx.room.Room
-import com.core.data.BaseTest
+import com.core.data.persistence.AppDatabase
 import com.core.domain.Account
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
 class AccountDaoTest : BaseTest() {
 

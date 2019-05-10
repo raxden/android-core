@@ -1,4 +1,4 @@
-package com.core.data.network.gateway.retrofit
+package com.core.data.network.gateway.stream
 
 import android.content.Context
 import com.core.commons.extension.fromJson

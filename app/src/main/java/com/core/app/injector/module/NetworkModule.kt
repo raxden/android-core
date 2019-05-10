@@ -5,7 +5,7 @@ import com.google.gson.Gson
 import com.core.app.BuildConfig
 import com.core.app.R
 import com.core.data.network.gateway.AppGateway
-import com.core.data.network.gateway.retrofit.AppFileStreamGateway
+import com.core.data.network.gateway.stream.AppFileStreamGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway
 import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
 import com.core.data.network.gateway.retrofit.service.AppRetrofitService
@@ -18,7 +18,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
