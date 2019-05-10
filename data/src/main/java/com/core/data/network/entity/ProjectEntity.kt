@@ -1,6 +1,7 @@
 package com.core.data.network.entity
 
 import android.net.Uri
+import android.text.TextUtils
 import com.google.gson.annotations.Expose
 
 data class ProjectEntity(
@@ -11,4 +12,8 @@ data class ProjectEntity(
         @Expose val uri: Uri? = null,
         @Expose val createdAt: String? = null,
         @Expose val updatedAt: String? = null
-)
+) {
+
+    fun validate(): Boolean = id != null
+            && !TextUtils.isEmpty(name)
+}

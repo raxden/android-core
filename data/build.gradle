@@ -19,6 +19,9 @@ android {
         dev {
             dimension "tier"
         }
+        mock {
+            dimension "tier"
+        }
         prod {
             dimension "tier"
         }

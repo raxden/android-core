@@ -75,11 +75,18 @@ ext {
             kotlin : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: rxKotlinVersion]
     ]
 
-    def retrofit = [
+    def retrofitLibs = [
             core            : [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofitVersion],
             rx              : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: retrofitVersion],
             converterGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitVersion],
-            converterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: retrofitVersion]
+            converterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: retrofitVersion],
+            mock            : [group: 'com.squareup.retrofit2', name: 'retrofit-mock', version: retrofitVersion]
+    ]
+
+    def okHttpLibs = [
+            core              : [group: 'com.squareup.okhttp3', name: 'okhttp', version: okHttpVersion],
+            loggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okHttpVersion],
+            mockWebServer     : [group: 'com.squareup.okhttp3', name: 'mockwebserver', version: okHttpVersion],
     ]
 
     def glideLibs = [
@@ -95,16 +102,13 @@ ext {
     ]
 
     def libs = [
-            gson                    : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
-            timber                  : [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
-            threetenabp             : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
+            gson         : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
+            timber       : [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
+            threetenabp  : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
 
-            okhttp                  : [group: 'com.squareup.okhttp3', name: 'okhttp', version: okHttpVersion],
-            okhttpLoggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okHttpVersion],
+            rxPermissions: [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
 
-            rxPermissions           : [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
-
-            crashlytics             : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
+            crashlytics  : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
     ]
 
     def robolectricLibs = [
@@ -164,13 +168,13 @@ ext {
             [configuration: "implementation", dependency: rxLibs.android],
             [configuration: "implementation", dependency: rxLibs.kotlin],
 
-            [configuration: "implementation", dependency: retrofit.core],
-            [configuration: "implementation", dependency: retrofit.rx],
-            [configuration: "implementation", dependency: retrofit.converterGson],
-            [configuration: "implementation", dependency: retrofit.converterScalars],
+            [configuration: "implementation", dependency: retrofitLibs.core],
+            [configuration: "implementation", dependency: retrofitLibs.rx],
+            [configuration: "implementation", dependency: retrofitLibs.converterGson],
+            [configuration: "implementation", dependency: retrofitLibs.converterScalars],
 
-            [configuration: "implementation", dependency: libs.okhttp],
-            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
+            [configuration: "implementation", dependency: okHttpLibs.core],
+            [configuration: "implementation", dependency: okHttpLibs.loggingInterceptor],
 
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
@@ -245,13 +249,13 @@ ext {
             [configuration: "implementation", dependency: rxLibs.android],
             [configuration: "implementation", dependency: rxLibs.kotlin],
 
-            [configuration: "implementation", dependency: retrofit.core],
-            [configuration: "implementation", dependency: retrofit.rx],
-            [configuration: "implementation", dependency: retrofit.converterGson],
-            [configuration: "implementation", dependency: retrofit.converterScalars],
+            [configuration: "implementation", dependency: retrofitLibs.core],
+            [configuration: "implementation", dependency: retrofitLibs.rx],
+            [configuration: "implementation", dependency: retrofitLibs.converterGson],
+            [configuration: "implementation", dependency: retrofitLibs.converterScalars],
 
-            [configuration: "implementation", dependency: libs.okhttp],
-            [configuration: "implementation", dependency: libs.okhttpLoggingInterceptor],
+            [configuration: "implementation", dependency: okHttpLibs.core],
+            [configuration: "implementation", dependency: okHttpLibs.loggingInterceptor],
 
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
@@ -260,6 +264,8 @@ ext {
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
+            [configuration: "testImplementation", dependency: retrofitLibs.mock],
+            [configuration: "testImplementation", dependency: okHttpLibs.mockWebServer],
             [configuration: "testImplementation", dependency: mockitoLibs.mockito],
             [configuration: "testImplementation", dependency: robolectricLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.multidex]

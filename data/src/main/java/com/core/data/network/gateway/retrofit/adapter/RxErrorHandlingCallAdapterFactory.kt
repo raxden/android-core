@@ -22,8 +22,7 @@ class RxErrorHandlingCallAdapterFactory private constructor() : CallAdapter.Fact
     private class RxCallAdapterWrapper<R>(private val retrofit: Retrofit, private val wrapped: CallAdapter<R, *>?) : CallAdapter<R, Any> {
 
         override fun adapt(call: Call<R>): Any? {
-            val result = wrapped?.adapt(call)
-            return when (result) {
+            return when (val result = wrapped?.adapt(call)) {
                 is Single<*> -> result.onErrorResumeNext(Function { throwable -> Single.error(asRetrofitException(throwable)) })
                 is Maybe<*> -> result.onErrorResumeNext(Function { throwable -> Maybe.error(asRetrofitException(throwable)) })
                 is Completable -> result.onErrorResumeNext { throwable -> Completable.error(asRetrofitException(throwable)) }
@@ -36,12 +35,17 @@ class RxErrorHandlingCallAdapterFactory private constructor() : CallAdapter.Fact
         private fun asRetrofitException(throwable: Throwable): RetrofitException {
             // We had non-200 http error
             if (throwable is HttpException) {
+                val url  = throwable.response().raw().request().url().toString()
                 val response = throwable.response()
-                return RetrofitException.httpError(response.raw().request().url().toString(), response, retrofit)
+                return when {
+                    response.code() == 401 -> RetrofitException.unauthenticatedError(url, response, retrofit)
+                    response.code() in 400..499 -> RetrofitException.clientError(url, response, retrofit)
+                    response.code() in 500..599 -> RetrofitException.serverError(url, response, retrofit)
+                    else -> RetrofitException.unexpectedError(throwable)
+                }
             }
             // A network error happened
-            return if (throwable is IOException)
-                RetrofitException.networkError(throwable)
+            return if (throwable is IOException) RetrofitException.networkError(throwable)
             else RetrofitException.unexpectedError(throwable)
             // We don't know what happened. We need to simply convert to an unknown error
         }

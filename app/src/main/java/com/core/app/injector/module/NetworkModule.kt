@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.core.app.BuildConfig
 import com.core.app.R
 import com.core.data.network.gateway.AppGateway
+import com.core.data.network.gateway.retrofit.AppFileStreamGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway
 import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
 import com.core.data.network.gateway.retrofit.service.AppRetrofitService
@@ -36,7 +37,7 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun httpLogginInterceptorLevel(): HttpLoggingInterceptor.Level {
+    internal fun httpLoggingInterceptorLevel(): HttpLoggingInterceptor.Level {
         return if (BuildConfig.DEBUG)
             HttpLoggingInterceptor.Level.BODY
         else
@@ -99,7 +100,6 @@ object NetworkModule {
                 .client(httpClient)
                 .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
     }
@@ -118,8 +118,10 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun appGateway(service: AppRetrofitService): AppGateway {
-        return AppRetrofitGateway(service)
+    internal fun appGateway(context: Context, @Named("excludeFieldsWithoutExposeAnnotation") gson: Gson, service: AppRetrofitService): AppGateway {
+        return when {
+            BuildConfig.FLAVOR == "mock" -> AppFileStreamGateway(context, gson)
+            else -> AppRetrofitGateway(service)
+        }
     }
-
 }

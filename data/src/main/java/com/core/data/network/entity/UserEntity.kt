@@ -1,5 +1,6 @@
 package com.core.data.network.entity
 
+import android.text.TextUtils
 import com.google.gson.annotations.Expose
 
 data class UserEntity(
@@ -19,4 +20,8 @@ data class UserEntity(
         @Expose val following: String? = null,
         @Expose val created_at: String? = null,
         @Expose val updated_at: String? = null
-)
+) {
+
+    fun validate(): Boolean = id != null
+            && !TextUtils.isEmpty(name)
+}
