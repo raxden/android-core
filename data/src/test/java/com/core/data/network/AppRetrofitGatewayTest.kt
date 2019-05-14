@@ -1,6 +1,8 @@
-package com.core.data
+package com.core.data.network
 
 import android.text.TextUtils
+import com.core.data.BaseTest
+import com.core.data.network.entity.ErrorEntity
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.entity.UserEntity
 import com.core.data.network.gateway.AppGateway
@@ -79,38 +81,60 @@ class AppRetrofitGatewayTest : BaseTest() {
     }
 
     @Test
-    fun retrieveUserEntity() {
+    fun userEntity() {
         server.enqueue(
                 MockResponse().apply {
                     setResponseCode(200)
                     setBody(AssetsUtils.getString(getContext(), "user.json"))
                 }
         )
-        gateway.user("").test().assertValue { validateUserEntity(it) }
+        gateway.user("").test()
+                .assertValue { validateUserEntity(it) }
+                .assertNoErrors()
     }
 
     @Test
-    fun retrieveProjectEntityList() {
+    fun userEntityNotFound() {
+        server.enqueue(
+                MockResponse().apply {
+                    setResponseCode(404)
+                    setBody(AssetsUtils.getString(getContext(), "user_not_found.json"))
+                }
+        )
+        gateway.user("").test().assertError {
+            (it as RetrofitException).let { exception ->
+                exception.kind == RetrofitException.Kind.CLIENT_ERROR
+                        && exception.parseBodyErrorAs(ErrorEntity::class.java)?.let { entity -> entity.message == "Not Found" } ?: false
+            }
+        }
+    }
+
+    @Test
+    fun projectEntityList() {
         server.enqueue(
                 MockResponse().apply {
                     setResponseCode(200)
                     setBody(AssetsUtils.getString(getContext(), "repos.json"))
                 }
         )
-        gateway.projectList("").test().assertValue { list: List<ProjectEntity> ->
-            list.find { !validateProjectEntity(it) }?.let { false } ?: true
-        }
+        gateway.projectList("").test()
+                .assertValue { list: List<ProjectEntity> ->
+                    list.find { !validateProjectEntity(it) }?.let { false } ?: true
+                }
+                .assertNoErrors()
     }
 
     @Test
-    fun retrieveProjectEntity() {
+    fun projectEntity() {
         server.enqueue(
                 MockResponse().apply {
                     setResponseCode(200)
                     setBody(AssetsUtils.getString(getContext(), "repo.json"))
                 }
         )
-        gateway.project("", "").test().assertValue { validateProjectEntity(it) }
+        gateway.project("", "").test()
+                .assertValue { validateProjectEntity(it) }
+                .assertNoErrors()
     }
 
     private fun validateUserEntity(entity: UserEntity): Boolean = entity.id != null

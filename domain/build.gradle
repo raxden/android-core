@@ -9,11 +9,15 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
     }
 
     androidExtensions {
         experimental = true
     }
+
+    testOptions.unitTests.includeAndroidResources = true
 }
 
 dependencies {

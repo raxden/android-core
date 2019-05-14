@@ -11,6 +11,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
 
         vectorDrawables.useSupportLibrary = true
+
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
     }
 
     dataBinding {
@@ -20,6 +22,8 @@ android {
     androidExtensions {
         experimental = true
     }
+
+    testOptions.unitTests.includeAndroidResources = true
 }
 
 dependencies {

@@ -195,6 +195,7 @@ ext {
                 transitive = true
             }],
 
+            [configuration: "testImplementation", dependency: project(modules.commons)],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
@@ -222,7 +223,15 @@ ext {
 
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
-            [configuration: "implementation", dependency: roomLibs.rxjava2]
+            [configuration: "implementation", dependency: roomLibs.rxjava2],
+
+            [configuration: "testImplementation", dependency: project(modules.commons)],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.assertj],
+            [configuration: "testImplementation", dependency: kotlinLibs.test],
+            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: robolectricLibs.core],
+            [configuration: "testImplementation", dependency: robolectricLibs.multidex]
     ]
 
     dataDependencies = [
@@ -261,6 +270,7 @@ ext {
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
 
+            [configuration: "testImplementation", dependency: project(modules.commons)],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
@@ -304,7 +314,17 @@ ext {
             [configuration: "implementation", dependency: libs.timber],
 
             [configuration: "implementation", dependency: glideLibs.core],
-            [configuration: "kapt", dependency: glideLibs.compiler]
+            [configuration: "kapt", dependency: glideLibs.compiler],
+
+            [configuration: "implementation", dependency: mockitoLibs.mockito],
+
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.assertj],
+            [configuration: "testImplementation", dependency: kotlinLibs.test],
+            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: robolectricLibs.core],
+            [configuration: "testImplementation", dependency: robolectricLibs.multidex],
+            [configuration: "kaptTest", dependency: daggerLibs.compiler]
     ]
 
     resourcesDependencies = [

@@ -13,8 +13,12 @@ class GetProjectListUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : GetProjectListUseCase {
 
-    override fun execute(): Maybe<List<Project>> = accountRepository.retrieve()
-            .flatMap { projectRepository.list(it.username) }
+    override fun execute(): Maybe<List<Project>> = accountRepository
+            .retrieve()
+            .flatMapMaybe {
+                projectRepository.list(it.username)
+            }
 
-    override fun execute(username: String): Maybe<List<Project>> = projectRepository.list(username)
+    override fun execute(username: String): Maybe<List<Project>> = projectRepository
+            .list(username)
 }

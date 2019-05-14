@@ -7,5 +7,5 @@ import io.reactivex.Single
 
 interface UserRepository : Repository {
 
-    fun retrieve(username: String): Maybe<User>
+    fun retrieve(username: String): Single<User>
 }

@@ -17,7 +17,7 @@ class AppFileStreamGateway(
         private val gson: Gson
 ) : AppGateway {
 
-    override fun user(username: String): Maybe<UserEntity> = Maybe.just(
+    override fun user(username: String): Single<UserEntity> = Single.just(
             gson.fromJson(AssetsUtils.getString(context, "user.json"))
     )
 
@@ -25,7 +25,7 @@ class AppFileStreamGateway(
             gson.fromJson(AssetsUtils.getString(context, "repos.json"))
     )
 
-    override fun project(username: String, projectName: String): Maybe<ProjectEntity> = Maybe.just(
+    override fun project(username: String, projectName: String): Single<ProjectEntity> = Single.just(
             gson.fromJson(AssetsUtils.getString(context, "repo.json"))
     )
 }

@@ -13,8 +13,12 @@ class GetProjectDetailUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : GetProjectDetailUseCase {
 
-    override fun execute(projectName: String): Maybe<Project> = accountRepository.retrieve()
-            .flatMap { projectRepository.detail(it.username, projectName) }
+    override fun execute(projectName: String): Single<Project> = accountRepository
+            .retrieve()
+            .flatMap {
+                projectRepository.detail(it.username, projectName)
+            }
 
-    override fun execute(username: String, projectName: String): Maybe<Project> = projectRepository.detail(username, projectName)
+    override fun execute(username: String, projectName: String): Single<Project> = projectRepository
+            .detail(username, projectName)
 }

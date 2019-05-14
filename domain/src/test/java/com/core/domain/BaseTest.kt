@@ -1,4 +1,4 @@
-package com.core.data
+package com.core.domain
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry

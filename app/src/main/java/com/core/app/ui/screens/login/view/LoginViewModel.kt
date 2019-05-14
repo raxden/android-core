@@ -44,10 +44,6 @@ class LoginViewModel @Inject constructor(
                         onSuccess = {
                             mLoaderManager.pop()
                             userLogged.postValue(it)
-                        },
-                        onComplete = {
-                            mLoaderManager.pop()
-                            mErrorManager.set(0, "¡Ops!", "user not found")
                         }
                 )
                 .addTo(mCompositeDisposable)

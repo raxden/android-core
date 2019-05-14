@@ -1,4 +1,4 @@
-package com.core.data.persistence
+package com.core.data.persistence.dao
 
 import androidx.room.*
 import com.core.domain.Account
@@ -13,7 +13,7 @@ import io.reactivex.Single
 interface AccountDao {
 
     @Query("SELECT * FROM Account WHERE id= :id")
-    fun find(id: Long): Maybe<Account>
+    fun find(id: Long): Single<Account>
 
     @Query("SELECT * FROM Account")
     fun findAll(): Maybe<List<Account>>

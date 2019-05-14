@@ -7,5 +7,5 @@ import io.reactivex.Single
 
 interface LoginUseCase {
 
-    fun execute(username: String): Maybe<Account>
+    fun execute(username: String): Single<Account>
 }

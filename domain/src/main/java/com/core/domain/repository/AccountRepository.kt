@@ -6,9 +6,9 @@ import io.reactivex.Single
 
 interface AccountRepository : Repository {
 
-    fun retrieve(): Maybe<Account>
+    fun retrieve(): Single<Account>
 
-    fun retrieve(id: Long): Maybe<Account>
+    fun retrieve(id: Long): Single<Account>
 
     fun save(account: Account) : Single<Account>
 }

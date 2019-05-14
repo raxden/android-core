@@ -1,6 +1,7 @@
-package com.core.data
+package com.core.data.network
 
 import com.core.commons.extension.fromJson
+import com.core.data.BaseTest
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.entity.UserEntity
 import com.google.gson.Gson

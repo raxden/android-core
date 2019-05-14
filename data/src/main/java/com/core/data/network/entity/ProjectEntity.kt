@@ -11,7 +11,7 @@ data class ProjectEntity(
         @Expose val name: String? = null,
         @Expose val description: String? = null,
         @Expose val user: UserEntity? = null,
-        @Expose val uri: String? = null,
+        @Expose val url: String? = null,
         @Expose val createdAt: String? = null,
         @Expose val updatedAt: String? = null
 ) {
@@ -21,7 +21,7 @@ data class ProjectEntity(
             name = name ?: "",
             description = description ?: "",
             user = user?.toUser(),
-            uri = Uri.parse(uri),
+            uri = Uri.parse(url),
             createdAt = null,
             updatedAt = null
     )

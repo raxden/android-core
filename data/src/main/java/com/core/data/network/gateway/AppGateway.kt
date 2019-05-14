@@ -9,7 +9,7 @@ interface AppGateway {
 
     fun user(
             username: String
-    ): Maybe<UserEntity>
+    ): Single<UserEntity>
 
     fun projectList(
             username: String
@@ -18,5 +18,5 @@ interface AppGateway {
     fun project(
             username: String,
             projectName: String
-    ): Maybe<ProjectEntity>
+    ): Single<ProjectEntity>
 }

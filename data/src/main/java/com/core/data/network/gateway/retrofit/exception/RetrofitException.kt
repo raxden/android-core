@@ -41,7 +41,7 @@ class RetrofitException internal constructor(
      * @throws IOException if unable to convert the body to the specified `type`.
      */
     @Throws(IOException::class)
-    fun <T> getErrorBodyAs(type: Class<T>): T? {
+    fun <T> parseBodyErrorAs(type: Class<T>): T? {
         if (response?.errorBody() == null) {
             return null
         }

@@ -16,8 +16,9 @@ class ProjectRepositoryImpl @Inject internal constructor(
     override fun list(username: String): Maybe<List<Project>> = gateway
             .projectList(username)
             .map { entityDataMapper.transform(it) }
+            .filter { it.isNotEmpty() }
 
-    override fun detail(username: String, projectName: String): Maybe<Project> = gateway
+    override fun detail(username: String, projectName: String): Single<Project> = gateway
             .project(username, projectName)
             .map { entityDataMapper.transform(it) }
 }

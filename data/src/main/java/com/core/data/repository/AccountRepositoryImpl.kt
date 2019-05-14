@@ -11,14 +11,14 @@ class AccountRepositoryImpl @Inject internal constructor(
         private val appDatabase: AppDatabase
 ) : AccountRepository {
 
-    override fun retrieve(): Maybe<Account> = appDatabase.accountDao().findAll().map { it.first() }
+    override fun retrieve(): Single<Account> = appDatabase.accountDao().findAll().map { it.first() }.toSingle()
 
-    override fun retrieve(id: Long): Maybe<Account> = appDatabase.accountDao().find(id)
+    override fun retrieve(id: Long): Single<Account> = appDatabase.accountDao().find(id)
 
     override fun save(account: Account): Single<Account> {
         return if (account.id == 0L) {
             appDatabase.accountDao().insert(account).flatMap {
-                appDatabase.accountDao().find(it).toSingle()
+                appDatabase.accountDao().find(it)
             }
         } else appDatabase.accountDao().update(account).andThen(Single.just(account))
     }
