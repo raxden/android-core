@@ -8,11 +8,11 @@ import org.threeten.bp.LocalDateTime
 
 @Parcelize
 data class Project(
-        var id: Long,
-        var name: String,
-        var description: String,
-        var user: User,
-        var uri: Uri,
-        var createdAt: LocalDateTime,
-        var updatedAt: LocalDateTime
+        var id: Long? = null,
+        var name: String? = null,
+        var description: String? = null,
+        var user: User? = null,
+        var uri: Uri? = null,
+        var createdAt: LocalDateTime? = null,
+        var updatedAt: LocalDateTime? = null
 ) : Parcelable

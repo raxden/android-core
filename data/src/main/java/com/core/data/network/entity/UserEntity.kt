@@ -1,6 +1,6 @@
 package com.core.data.network.entity
 
-import android.text.TextUtils
+import com.core.domain.User
 import com.google.gson.annotations.Expose
 
 data class UserEntity(
@@ -22,6 +22,18 @@ data class UserEntity(
         @Expose val updated_at: String? = null
 ) {
 
-    fun validate(): Boolean = id != null
-            && !TextUtils.isEmpty(name)
+    fun toUser(): User = User(
+            id = id ?: 0L,
+            username = login ?: "",
+            type = type ?: "",
+            name = name ?: "",
+            company = company ?: "",
+            blog = blog ?: "",
+            location = location ?: "",
+            email = email ?: "",
+            followers = followers ?: "",
+            following = following ?: "",
+            createdAt = null,
+            updatedAt = null
+    )
 }

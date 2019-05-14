@@ -1,6 +1,8 @@
 package com.core.data
 
+import android.text.TextUtils
 import com.core.data.network.entity.ProjectEntity
+import com.core.data.network.entity.UserEntity
 import com.core.data.network.gateway.AppGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway
 import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
@@ -84,7 +86,7 @@ class AppRetrofitGatewayTest : BaseTest() {
                     setBody(AssetsUtils.getString(getContext(), "user.json"))
                 }
         )
-        gateway.user("").test().assertValue { it.validate() }
+        gateway.user("").test().assertValue { validateUserEntity(it) }
     }
 
     @Test
@@ -96,7 +98,7 @@ class AppRetrofitGatewayTest : BaseTest() {
                 }
         )
         gateway.projectList("").test().assertValue { list: List<ProjectEntity> ->
-            list.find { !it.validate() }?.let { false } ?: true
+            list.find { !validateProjectEntity(it) }?.let { false } ?: true
         }
     }
 
@@ -108,7 +110,12 @@ class AppRetrofitGatewayTest : BaseTest() {
                     setBody(AssetsUtils.getString(getContext(), "repo.json"))
                 }
         )
-        gateway.project("", "").test().assertValue { it.validate() }
+        gateway.project("", "").test().assertValue { validateProjectEntity(it) }
     }
 
+    private fun validateUserEntity(entity: UserEntity): Boolean = entity.id != null
+            && !TextUtils.isEmpty(entity.name)
+
+    private fun validateProjectEntity(entity: ProjectEntity): Boolean = entity.id != null
+            && !TextUtils.isEmpty(entity.name)
 }
