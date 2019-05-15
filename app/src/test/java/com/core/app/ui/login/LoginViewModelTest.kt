@@ -41,6 +41,7 @@ class LoginViewModelTest : BaseTest() {
 
     @Test
     fun checkEmptyLogin() {
+        mLoginViewModel.username.postValue("")
         mLoginViewModel.onLoginClicked()
         Assert.assertFalse(TextUtils.isEmpty(mLoginViewModel.usernameError.value))
         Assert.assertNull(mLoginViewModel.userLogged.value)
@@ -48,7 +49,7 @@ class LoginViewModelTest : BaseTest() {
 
     @Test
     fun checkSuccessLogin() {
-        mLoginViewModel.username.postValue("raxden")
+        mLoginViewModel.username.postValue("username")
         mLoginViewModel.onLoginClicked()
         Assert.assertTrue(TextUtils.isEmpty(mLoginViewModel.usernameError.value))
         Assert.assertNotNull(mLoginViewModel.userLogged.value)
