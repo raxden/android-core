@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AlertDialog
 import com.core.app.R
 import com.core.data.network.gateway.retrofit.exception.RetrofitException
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.exceptions.CompositeException
 import java.net.ConnectException
 import java.net.SocketTimeoutException
@@ -52,15 +53,16 @@ class ErrorManager(private val mActivity: Activity) {
 
     @Synchronized
     private fun showError(error: BundleError) {
-        AlertDialog.Builder(mActivity).apply {
-            setTitle(error.title)
-            setMessage(error.message)
-            setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
-            setOnDismissListener { dialog ->
-                mErrorList.remove(mErrorList.first())
-                if (mErrorList.isNotEmpty()) showError(mErrorList.first())
-            }
-        }.show()
+        MaterialAlertDialogBuilder(mActivity)
+                .setTitle(error.title)
+                .setMessage(error.message)
+                .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+                .setOnDismissListener {
+                    mErrorList.remove(mErrorList.first())
+                    if (mErrorList.isNotEmpty()) showError(mErrorList.first())
+                }
+                .create()
+                .show()
     }
 
     private class BundleError(val code: Int, val title: String, val message: String)

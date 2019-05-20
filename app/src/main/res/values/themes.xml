@@ -1,10 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <style name="AppTheme" parent="BaseTheme.Translucent.Navigation">
         <item name="materialButtonStyle">@style/AppButton</item>
         <item name="materialCardViewStyle">@style/AppCard</item>
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
-        <!--<item name="alertDialogStyle">@style/AppAlertDialog</item>-->
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="toolbarStyle">@style/AppToolbar</item>
         <item name="floatingActionButtonStyle">@style/AppFloatingActionButton</item>
@@ -22,6 +23,11 @@
         <item name="textAppearanceCaption">@style/CodeFont.Caption</item>
         <item name="textAppearanceButton">@style/CodeFont.Button</item>
         <item name="textAppearanceOverline">@style/CodeFont.Overline</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
     </style>
+
+    <!-- https://material.io/develop/android/components/dialog/ -->
+    <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert" />
 
 </resources>
