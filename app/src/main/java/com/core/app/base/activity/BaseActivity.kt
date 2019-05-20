@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.helper.NavigationHelper
 import com.core.app.util.BroadcastOperationManager
-import com.core.app.util.LocaleUtils
+import com.core.app.util.LocaleManager
 import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -36,7 +36,7 @@ abstract class BaseActivity : AppCompatActivity(),
     lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun attachBaseContext(newBase: Context) {
-        super.attachBaseContext(LocaleUtils.attachBaseContext(newBase))
+        super.attachBaseContext(LocaleManager.attachBaseContext(newBase))
     }
 
     // =============== HasFragmentInjector =========================================================

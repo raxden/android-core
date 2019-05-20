@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import com.core.app.util.LocaleUtils
+import com.core.app.util.LocaleManager
 import com.raxdenstudios.commons.util.SDKUtils
 import dagger.android.*
 import dagger.android.support.AndroidSupportInjection
@@ -34,12 +34,12 @@ abstract class BaseApplication : Application(),
     // =============== LifeCycle ===================================================================
 
     override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(LocaleUtils.attachBaseContext(base, Locale("es", "ES")))
+        super.attachBaseContext(LocaleManager.attachBaseContext(base, Locale("en", "US")))
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
-        LocaleUtils.onConfigurationChanged(this)
+        LocaleManager.onConfigurationChanged(this)
     }
 
     override fun onCreate() {
