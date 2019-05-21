@@ -21,7 +21,7 @@ class ProjectListViewModel @Inject constructor(
     val projectSelected: MutableLiveData<Project> = MutableLiveData()
 
     override fun onCreated() {
-//        retrieveProjectList()
+        retrieveProjectList()
     }
 
     fun onItemSelected(position: Int) {

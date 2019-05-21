@@ -21,8 +21,6 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
         fun onProjectSelected(project: Project)
     }
 
-    private lateinit var adapter: ProjectModelListAdapter
-
     override val viewModelClass: Class<ProjectListViewModel>
         get() = ProjectListViewModel::class.java
 
@@ -32,23 +30,17 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        adapter = ProjectModelListAdapter(viewModel, object : DiffUtil.ItemCallback<ProjectModel>() {
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
+        val listAdapter = ProjectModelListAdapter(viewModel, object : DiffUtil.ItemCallback<ProjectModel>() {
             override fun areItemsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem.name == newItem.name
             override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem == newItem
         })
         binding.recyclerView.apply {
-            adapter = adapter
+            adapter = listAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
-    }
-
-    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
-        viewModel.projectModelList.observe(owner, Observer { data -> adapter.submitList(data) })
+        viewModel.projectModelList.observe(owner, Observer { data -> listAdapter.submitList(data) })
         viewModel.projectSelected.observe(owner, Observer { data -> callback.onProjectSelected(data) })
-        viewModel.retrieveProjectList()
     }
 
     internal class ProjectModelListAdapter(
