@@ -1,9 +1,10 @@
 package com.core.app.ui.screens.project.list
 
+import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.core.app.AppActivity
-import com.core.app.R
 import com.core.app.databinding.ProjectListActivityBinding
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
@@ -18,9 +19,13 @@ class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
         HasToolbarInterceptor,
         HasInjectFragmentInterceptor<ProjectListFragment> {
 
+    companion object {
+        fun intent(context: Context): Intent = Intent(context, ProjectListActivity::class.java)
+    }
+
     // =============== HasToolbarInterceptor =======================================================
 
-    override fun onCreateToolbarView(): Toolbar = mBinding.toolbarView
+    override fun onCreateToolbarView(): Toolbar = binding.toolbarView
 
     override fun onToolbarViewCreated(toolbar: Toolbar) {
         toolbar.alignToStatusBarBottom()
@@ -28,7 +33,7 @@ class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
 
     // =============== HasInjectFragmentInterceptor ================================================
 
-    override fun onLoadFragmentContainer(): View = mBinding.contentView
+    override fun onLoadFragmentContainer(): View = binding.contentView
 
     override fun onCreateFragment(): ProjectListFragment = ProjectListFragment.newInstance(getExtras())
 

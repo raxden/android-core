@@ -24,9 +24,9 @@ class LoginViewModelTest : BaseTest() {
         mActivityController = Robolectric.buildActivity(LoginActivity::class.java).apply {
             create().start().resume()
             mLoginActivity = get()
-            mLoginActivity.mLoginFragment?.also {
+            mLoginActivity.loginFragment?.also {
                 mLoginFragment = it
-                mLoginViewModel = mLoginFragment.mViewModel
+                mLoginViewModel = mLoginFragment.viewModel
             }
         }
     }

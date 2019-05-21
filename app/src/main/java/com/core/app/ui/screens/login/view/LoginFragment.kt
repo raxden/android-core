@@ -10,10 +10,10 @@ import com.core.domain.Account
 class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>() {
 
     interface FragmentCallback : AppFragmentCallback {
-        fun onLoginSuccess(account: Account)
+        fun onLoginSuccess()
     }
 
-    override val mViewModelClass: Class<LoginViewModel>
+    override val viewModelClass: Class<LoginViewModel>
         get() = LoginViewModel::class.java
 
     companion object {
@@ -23,8 +23,6 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
     }
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: LoginViewModel) {
-        viewModel.userLogged.observe(owner, Observer { account ->
-            mCallback.onLoginSuccess(account)
-        })
+        viewModel.userLogged.observe(owner, Observer { callback.onLoginSuccess() })
     }
 }

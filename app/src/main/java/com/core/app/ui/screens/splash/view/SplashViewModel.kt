@@ -15,24 +15,24 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
         const val IN_MILLISECONDS: Long = 3000
     }
 
-    private val mApplicationReady: MutableLiveData<Boolean> = MutableLiveData()
+    private val applicationReady: MutableLiveData<Boolean> = MutableLiveData()
 
     override fun onCreated() {
         makeTime()
                 .subscribeWith(
-                        onStart = { mLoaderManager.push("preparing application to launch...") },
+                        onStart = { loaderManager.push("preparing application to launch...") },
                         onError = {
-                            mLoaderManager.pop()
-                            mErrorManager.set(it)
+                            loaderManager.pop()
+                            errorManager.set(it)
                         },
                         onComplete = {
-                            mApplicationReady.value = true
+                            applicationReady.value = true
                         }
                 )
-                .addTo(mCompositeDisposable)
+                .addTo(compositeDisposable)
     }
 
-    fun isApplicationReadyToLaunch(): LiveData<Boolean> = mApplicationReady
+    fun isApplicationReadyToLaunch(): LiveData<Boolean> = applicationReady
 
     private fun makeTime(): Completable = Completable.timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
 

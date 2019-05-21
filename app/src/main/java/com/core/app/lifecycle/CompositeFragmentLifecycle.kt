@@ -10,17 +10,17 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class CompositeFragmentLifecycle @Inject internal constructor(
-        private val mFragment: Fragment,
-        @field:Named(BaseFragmentModule.FRAGMENT_COMPOSITE_DISPOSABLE) private val mCompositeDisposable: CompositeDisposable
+        private val fragment: Fragment,
+        @field:Named(BaseFragmentModule.FRAGMENT_COMPOSITE_DISPOSABLE) private val compositeDisposable: CompositeDisposable
 ) : LifecycleObserver {
 
     init {
         // lifecycle-aware components, no need to unsubscribe/remove observers.
-        mFragment.lifecycle.addObserver(this)
+        fragment.lifecycle.addObserver(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {
-        mCompositeDisposable.dispose()
+        compositeDisposable.dispose()
     }
 }

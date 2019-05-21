@@ -15,26 +15,26 @@ abstract class BaseViewModelFragment<VM : BaseViewModel, VDB : ViewDataBinding, 
     interface BaseViewModelFragmentCallback : BaseViewFragmentCallback
 
     @Inject
-    lateinit var mViewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    protected abstract val mViewModelClass: Class<VM>
-    lateinit var mViewModel: VM
+    protected abstract val viewModelClass: Class<VM>
+    lateinit var viewModel: VM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewModel = ViewModelProvider(this, mViewModelFactory).get(mViewModelClass).also { it.onCreated() }
+        viewModel = ViewModelProvider(this, viewModelFactory).get(viewModelClass).also { it.onCreated() }
     }
 
     override fun onBindingCreated(binding: VDB) {
         binding.apply {
-            setVariable(BR.viewModel, mViewModel)
+            setVariable(BR.viewModel, viewModel)
             executePendingBindings()
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onViewModelAttached(viewLifecycleOwner, mViewModel)
+        onViewModelAttached(viewLifecycleOwner, viewModel)
     }
 
     abstract fun onViewModelAttached(owner: LifecycleOwner, viewModel: VM)

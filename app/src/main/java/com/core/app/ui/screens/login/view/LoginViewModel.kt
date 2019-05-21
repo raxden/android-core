@@ -3,12 +3,9 @@ package com.core.app.ui.screens.login.view
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel
-import com.core.commons.ValidationHelper
 import com.core.commons.extension.subscribeWith
 import com.core.domain.Account
-import com.core.domain.User
 import com.core.domain.interactor.LoginUseCase
-import io.reactivex.Completable
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
@@ -35,18 +32,18 @@ class LoginViewModel @Inject constructor(
         loginUseCase.execute(username)
                 .subscribeWith(
                         onStart = {
-                            mLoaderManager.push("validando credenciales...")
+                            loaderManager.push("validando credenciales...")
                         },
                         onError = {
-                            mLoaderManager.pop()
-                            mErrorManager.set(it)
+                            loaderManager.pop()
+                            errorManager.set(it)
                         },
                         onSuccess = {
-                            mLoaderManager.pop()
+                            loaderManager.pop()
                             userLogged.postValue(it)
                         }
                 )
-                .addTo(mCompositeDisposable)
+                .addTo(compositeDisposable)
     }
 
     private fun validateUsername(): Boolean {

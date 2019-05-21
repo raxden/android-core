@@ -1,35 +1,31 @@
 package com.core.app.helper
 
 import android.app.Activity
-import android.content.Intent
-import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.core.app.ui.screens.login.LoginActivity
 import com.core.app.ui.screens.project.list.ProjectListActivity
 import com.core.app.ui.screens.splash.SplashActivity
 
-class NavigationHelper(private val mActivity: Activity) {
+class NavigationHelper(private val activity: Activity) {
 
     fun launchSplash() {
-        Intent(mActivity, SplashActivity::class.java).also { intent ->
-            ContextCompat.startActivity(mActivity, intent, null)
-            mActivity.finish()
+        SplashActivity.intent(activity).run {
+            ContextCompat.startActivity(activity, this, null)
+            activity.finish()
         }
     }
 
-    fun launchLogin(extras: Bundle? = null, finishCurrentView: Boolean = false) {
-        Intent(mActivity, LoginActivity::class.java).also { intent ->
-            extras?.let { intent.putExtras(it) }
-            ContextCompat.startActivity(mActivity, intent, null)
+    fun launchLogin(finishCurrentActivity: Boolean = false) {
+        LoginActivity.intent(activity).run {
+            ContextCompat.startActivity(activity, this, null)
         }
-        if (finishCurrentView) mActivity.finish()
+        if (finishCurrentActivity) activity.finish()
     }
 
-    fun launchProjectList(extras: Bundle? = null, finishCurrentView: Boolean = false) {
-        Intent(mActivity, ProjectListActivity::class.java).also { intent ->
-            extras?.let { intent.putExtras(it) }
-            ContextCompat.startActivity(mActivity, intent, null)
+    fun launchProjectList(finishCurrentActivity: Boolean = false) {
+        ProjectListActivity.intent(activity).run {
+            ContextCompat.startActivity(activity, this, null)
         }
-        if (finishCurrentView) mActivity.finish()
+        if (finishCurrentActivity) activity.finish()
     }
 }

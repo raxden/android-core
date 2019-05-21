@@ -36,7 +36,7 @@ abstract class ProjectListActivityModule {
      * The main activity listens to the events in the [ProjectListFragment].
      *
      * @param activity the activity
-     * @return the main fragment mCallback
+     * @return the main fragment callback
      */
     @Binds
     @PerActivity

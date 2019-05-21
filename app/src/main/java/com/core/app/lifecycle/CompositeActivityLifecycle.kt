@@ -8,17 +8,17 @@ import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
 class CompositeActivityLifecycle @Inject internal constructor(
-        private val mActivity: AppCompatActivity,
-        private val mCompositeDisposable: CompositeDisposable
+        private val activity: AppCompatActivity,
+        private val compositeDisposable: CompositeDisposable
 ) : LifecycleObserver {
 
     init {
         // lifecycle-aware components, no need to unsubscribe/remove observers.
-        mActivity.lifecycle.addObserver(this)
+        activity.lifecycle.addObserver(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {
-        mCompositeDisposable.dispose()
+        compositeDisposable.dispose()
     }
 }

@@ -21,9 +21,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
         fun onProjectSelected(project: Project)
     }
 
-    private lateinit var mAdapter: ProjectModelListAdapter
-
-    override val mViewModelClass: Class<ProjectListViewModel>
+    override val viewModelClass: Class<ProjectListViewModel>
         get() = ProjectListViewModel::class.java
 
     companion object {
@@ -32,22 +30,17 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        mAdapter = ProjectModelListAdapter(mViewModel, object : DiffUtil.ItemCallback<ProjectModel>() {
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
+        val listAdapter = ProjectModelListAdapter(viewModel, object : DiffUtil.ItemCallback<ProjectModel>() {
             override fun areItemsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem.name == newItem.name
             override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem == newItem
         })
-        mBinding.recyclerView.apply {
-            adapter = mAdapter
+        binding.recyclerView.apply {
+            adapter = listAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         }
-    }
-
-    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
-        viewModel.projectModelList.observe(owner, Observer { data -> mAdapter.submitList(data) })
-        viewModel.projectSelected.observe(owner, Observer { data -> mCallback.onProjectSelected(data) })
+        viewModel.projectModelList.observe(owner, Observer { data -> listAdapter.submitList(data) })
+        viewModel.projectSelected.observe(owner, Observer { data -> callback.onProjectSelected(data) })
     }
 
     internal class ProjectModelListAdapter(
