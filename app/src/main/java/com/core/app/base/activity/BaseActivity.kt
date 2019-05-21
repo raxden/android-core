@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
+import com.core.app.helper.AnimationHelper
 import com.core.app.helper.NavigationHelper
 import com.core.app.util.BroadcastOperationManager
 import com.core.app.util.LocaleManager
@@ -22,6 +23,8 @@ abstract class BaseActivity : AppCompatActivity(),
 
     @Inject
     lateinit var navigationHelper: NavigationHelper
+    @Inject
+    lateinit var animationHelper: AnimationHelper
     @Inject
     lateinit var compositeDisposable: CompositeDisposable
     @Inject

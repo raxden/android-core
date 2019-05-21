@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_PERMISSION_MANAGER
+import com.core.app.helper.AnimationHelper
 import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
 import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
@@ -46,6 +47,8 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Frag
 
     interface BaseFragmentCallback
 
+    @Inject
+    lateinit var animationHelper: AnimationHelper
     @Inject
     @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
     lateinit var compositeDisposable: CompositeDisposable

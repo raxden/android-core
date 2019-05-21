@@ -24,11 +24,15 @@ class ProjectListViewModel @Inject constructor(
         retrieveProjectList()
     }
 
+    fun refreshProjectList() {
+        retrieveProjectList()
+    }
+
     fun onItemSelected(position: Int) {
         projectList[position].also { projectSelected.postValue(it) }
     }
 
-    fun retrieveProjectList() {
+    private fun retrieveProjectList() {
         getProjectListUseCase.execute()
                 .map {
                     projectList = it

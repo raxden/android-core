@@ -19,6 +19,4 @@ abstract class AppFragment<VM : BaseViewModel, VDB : ViewDataBinding, TCallback 
                 .takeIf { it.isNotEmpty() }?.let {
                     resources.getIdentifier(it.replace("R.layout.", ""), "layout", context?.packageName)
                 } ?: 0
-
-    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: VM) {}
 }

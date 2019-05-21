@@ -1,6 +1,4 @@
-package com.core.app.base;
-
-import com.core.app.AppApplicationTest;
+package com.core.app;
 
 import org.junit.Rule;
 import org.junit.rules.TestRule;

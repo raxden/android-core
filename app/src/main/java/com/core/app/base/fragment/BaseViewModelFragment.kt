@@ -32,8 +32,8 @@ abstract class BaseViewModelFragment<VM : BaseViewModel, VDB : ViewDataBinding, 
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         onViewModelAttached(viewLifecycleOwner, viewModel)
     }
 

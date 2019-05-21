@@ -11,21 +11,26 @@ import com.google.gson.reflect.TypeToken
 import com.raxdenstudios.commons.util.AssetsUtils
 import io.reactivex.Maybe
 import io.reactivex.Single
+import java.util.concurrent.TimeUnit
 
 class AppFileStreamGateway(
         private val context: Context,
         private val gson: Gson
 ) : AppGateway {
 
-    override fun user(username: String): Single<UserEntity> = Single.just(
-            gson.fromJson(AssetsUtils.getString(context, "user.json"))
-    )
+    companion object {
+        const val IN_MILLISECONDS: Long = 2000
+    }
 
-    override fun projectList(username: String): Maybe<List<ProjectEntity>> = Maybe.just(
-            gson.fromJson(AssetsUtils.getString(context, "repos.json"))
-    )
+    override fun user(username: String): Single<UserEntity> = Single
+            .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
+            .map { gson.fromJson<UserEntity>(AssetsUtils.getString(context, "user.json")) }
 
-    override fun project(username: String, projectName: String): Single<ProjectEntity> = Single.just(
-            gson.fromJson(AssetsUtils.getString(context, "repo.json"))
-    )
+    override fun projectList(username: String): Maybe<List<ProjectEntity>> = Maybe
+            .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
+            .map { gson.fromJson<List<ProjectEntity>>(AssetsUtils.getString(context, "repos.json")) }
+
+    override fun project(username: String, projectName: String): Single<ProjectEntity> = Single
+            .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
+            .map { gson.fromJson<ProjectEntity>(AssetsUtils.getString(context, "repo.json")) }
 }
