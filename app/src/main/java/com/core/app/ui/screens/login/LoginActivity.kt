@@ -17,32 +17,6 @@ class LoginActivity : AppActivity<LoginActivityBinding>(),
 
     var mLoginFragment: LoginFragment? = null
 
-    override fun onResume() {
-        super.onResume()
-
-        MaterialAlertDialogBuilder(this)
-                .setTitle("titule")
-                .setMessage("message")
-                .create()
-                .show()
-
-//        AlertDialog.Builder(this)
-//                .setTitle("titule")
-//                .setMessage("message")
-//                .create()
-//                .show()
-
-//        AlertDialog.Builder(mActivity).apply {
-//            setTitle(error.title)
-//            setMessage(error.message)
-//            setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
-//            setOnDismissListener { dialog ->
-//                mErrorList.remove(mErrorList.first())
-//                if (mErrorList.isNotEmpty()) showError(mErrorList.first())
-//            }
-//        }.show()
-    }
-
     // =============== HasInjectFragmentInterceptor ================================================
 
     override fun onLoadFragmentContainer(): View = mBinding.contentView
