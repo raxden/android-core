@@ -3,9 +3,7 @@ package com.core.app.base.fragment
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
-import com.core.app.base.fragment.BaseFragmentModule.Companion.CHILD_FRAGMENT_MANAGER
 import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
 import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_PERMISSION_MANAGER
 import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
@@ -50,20 +48,17 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Frag
 
     @Inject
     @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
-    lateinit var mCompositeDisposable: CompositeDisposable
+    lateinit var compositeDisposable: CompositeDisposable
     @Inject
     @field:Named(FRAGMENT_PERMISSION_MANAGER)
-    lateinit var mPermissionManager: PermissionManager
+    lateinit var permissionManager: PermissionManager
     @Inject
     @field:Named(LIFECYCLE_FRAGMENT_OBSERVER)
-    lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
+    lateinit var lifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
     @Inject
-    @field:Named(CHILD_FRAGMENT_MANAGER)
-    lateinit var mChildFragmentManager: FragmentManager
+    lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
     @Inject
-    lateinit var mChildFragmentInjector: DispatchingAndroidInjector<Fragment>
-    @Inject
-    lateinit var mCallback: TCallback
+    lateinit var callback: TCallback
 
     // =============== LifeCycle ===================================================================
 
@@ -74,5 +69,5 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Frag
 
     // =============== HasFragmentInjector =========================================================
 
-    override fun supportFragmentInjector() = mChildFragmentInjector
+    override fun supportFragmentInjector() = childFragmentInjector
 }

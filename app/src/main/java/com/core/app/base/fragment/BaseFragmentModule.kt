@@ -3,7 +3,6 @@ package com.core.app.base.fragment
 import android.content.Context
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.core.app.injector.module.LifecycleFragmentModule
 import com.core.app.injector.scope.PerFragment
 import com.core.app.util.PermissionManager
@@ -23,7 +22,6 @@ abstract class BaseFragmentModule {
     @Module
     companion object {
 
-        const val CHILD_FRAGMENT_MANAGER = "BaseFragmentModule.childFragmentManager"
         const val FRAGMENT_COMPOSITE_DISPOSABLE = "BaseFragmentModule.compositeDisposable"
         const val FRAGMENT_PERMISSION_MANAGER = "BaseFragmentModule.permissionManager"
 
@@ -42,13 +40,10 @@ abstract class BaseFragmentModule {
         @Provides
         @Named(FRAGMENT_PERMISSION_MANAGER)
         @PerFragment
-        internal fun permissionManager(context: Context, rxPermissions: RxPermissions, @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable): PermissionManager
-                = PermissionManager(context, rxPermissions, compositeDisposable)
-
-        @JvmStatic
-        @Provides
-        @Named(CHILD_FRAGMENT_MANAGER)
-        @PerFragment
-        internal fun childFragmentManager(f: Fragment): FragmentManager = f.childFragmentManager
+        internal fun permissionManager(
+                context: Context,
+                rxPermissions: RxPermissions,
+                @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable
+        ): PermissionManager = PermissionManager(context, rxPermissions, compositeDisposable)
     }
 }

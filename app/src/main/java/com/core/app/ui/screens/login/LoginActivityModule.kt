@@ -36,7 +36,7 @@ abstract class LoginActivityModule {
      * The main activity listens to the events in the [LoginFragment].
      *
      * @param activity the activity
-     * @return the main fragment mCallback
+     * @return the main fragment callback
      */
     @Binds
     @PerActivity

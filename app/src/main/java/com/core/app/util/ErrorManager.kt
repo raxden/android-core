@@ -1,7 +1,7 @@
 package com.core.app.util
 
 import android.app.Activity
-import androidx.appcompat.app.AlertDialog
+import android.content.Context
 import com.core.app.R
 import com.core.data.network.gateway.retrofit.exception.RetrofitException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -10,22 +10,22 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class ErrorManager(private val mActivity: Activity) {
+class ErrorManager(private val context: Context) {
 
     private val mErrorList = mutableSetOf<BundleError>()
 
     fun set(throwable: Throwable) {
         var code = 0
-        var title: String = mActivity.getString(R.string.unespected_error_title)
-        var message: String = mActivity.getString(R.string.unespected_error_message)
+        var title: String = context.getString(R.string.unespected_error_title)
+        var message: String = context.getString(R.string.unespected_error_message)
         when (throwable) {
             is CompositeException -> for (childThrowable in throwable.exceptions) set(childThrowable)
             is RetrofitException -> {
                 code = throwable.response?.code() ?: 0
                 when (throwable.cause) {
-                    is ConnectException -> message = mActivity.getString(R.string.unespected_timeout_message)
-                    is SocketTimeoutException -> message = mActivity.getString(R.string.unespected_timeout_message)
-                    is UnknownHostException -> message = mActivity.getString(R.string.unespected_timeout_message)
+                    is ConnectException -> message = context.getString(R.string.unespected_timeout_message)
+                    is SocketTimeoutException -> message = context.getString(R.string.unespected_timeout_message)
+                    is UnknownHostException -> message = context.getString(R.string.unespected_timeout_message)
                     else -> {
 
                     }
@@ -36,7 +36,7 @@ class ErrorManager(private val mActivity: Activity) {
     }
 
     fun set(code: Int, title: Int, message: Int) {
-        handleError(BundleError(code, mActivity.getString(title), mActivity.getString(message)))
+        handleError(BundleError(code, context.getString(title), context.getString(message)))
     }
 
     fun set(code: Int, title: String, message: String) {
@@ -53,7 +53,7 @@ class ErrorManager(private val mActivity: Activity) {
 
     @Synchronized
     private fun showError(error: BundleError) {
-        MaterialAlertDialogBuilder(mActivity)
+        MaterialAlertDialogBuilder(context)
                 .setTitle(error.title)
                 .setMessage(error.message)
                 .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }

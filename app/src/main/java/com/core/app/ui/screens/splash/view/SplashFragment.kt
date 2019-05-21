@@ -12,7 +12,7 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
         fun launchLogin()
     }
 
-    override val mViewModelClass: Class<SplashViewModel>
+    override val viewModelClass: Class<SplashViewModel>
         get() = SplashViewModel::class.java
 
     companion object {
@@ -23,7 +23,7 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: SplashViewModel) {
         viewModel.isApplicationReadyToLaunch().observe(owner, Observer { isReady ->
-            if (isReady) mCallback.launchLogin()
+            if (isReady) callback.launchLogin()
         })
     }
 }

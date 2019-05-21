@@ -25,11 +25,11 @@ abstract class BaseApplication : Application(),
         HasBroadcastReceiverInjector {
 
     @Inject
-    lateinit var mActivityInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityInjector: DispatchingAndroidInjector<Activity>
     @Inject
-    lateinit var mServiceInjector: DispatchingAndroidInjector<Service>
+    lateinit var serviceInjector: DispatchingAndroidInjector<Service>
     @Inject
-    lateinit var mBroadcastReceiverDispatchingAndroidInjector: DispatchingAndroidInjector<BroadcastReceiver>
+    lateinit var broadcastReceiverDispatchingAndroidInjector: DispatchingAndroidInjector<BroadcastReceiver>
 
     // =============== LifeCycle ===================================================================
 
@@ -53,12 +53,12 @@ abstract class BaseApplication : Application(),
 
     // =============== Injectors ===================================================================
 
-    override fun activityInjector(): AndroidInjector<Activity>? = mActivityInjector
+    override fun activityInjector(): AndroidInjector<Activity>? = activityInjector
 
-    override fun serviceInjector(): AndroidInjector<Service>? = mServiceInjector
+    override fun serviceInjector(): AndroidInjector<Service>? = serviceInjector
 
     override fun broadcastReceiverInjector(): AndroidInjector<BroadcastReceiver>? =
-            mBroadcastReceiverDispatchingAndroidInjector
+            broadcastReceiverDispatchingAndroidInjector
 
     // =============== Support methods =============================================================
 

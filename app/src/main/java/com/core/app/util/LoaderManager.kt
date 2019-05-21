@@ -1,49 +1,48 @@
 package com.core.app.util
 
-import android.app.Activity
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-class LoaderManager(private val mActivity: Activity) {
+class LoaderManager(private val resources: Resources) {
 
-    private val mStatus: MutableLiveData<Boolean> = MutableLiveData()
-    private val mMessage: MutableLiveData<String> = MutableLiveData()
-    private var mCounter: Int = 0
+    private val status: MutableLiveData<Boolean> = MutableLiveData()
+    private val message: MutableLiveData<String> = MutableLiveData()
+    private var counter: Int = 0
 
     init {
-        mStatus.postValue(false)
-        mMessage.postValue("")
+        status.postValue(false)
+        message.postValue("")
     }
 
     @Synchronized
     fun push(message: Int) {
-        mCounter.inc()
-        mStatus.postValue(true)
-        mMessage.postValue(mActivity.getString(message))
+        counter.inc()
+        status.postValue(true)
+        this.message.postValue(resources.getString(message))
     }
 
     @Synchronized
     fun push(message: String) {
-        mCounter.inc()
-        mStatus.postValue(true)
-        mMessage.postValue(message)
+        counter.inc()
+        status.postValue(true)
+        this.message.postValue(message)
     }
 
     @Synchronized
     fun pop() {
-        if (mCounter > 0) mCounter.dec()
-        else mStatus.postValue(false)
+        if (counter > 0) counter.dec()
+        else status.postValue(false)
     }
 
     @Synchronized
     fun clear() {
-        mCounter = 0
-        mStatus.postValue(false)
+        counter = 0
+        status.postValue(false)
     }
 
-    fun getStatus(): LiveData<Boolean> = mStatus
+    fun getStatus(): LiveData<Boolean> = status
 
-    fun getMessage(): LiveData<String> = mMessage
+    fun getMessage(): LiveData<String> = message
 
 }

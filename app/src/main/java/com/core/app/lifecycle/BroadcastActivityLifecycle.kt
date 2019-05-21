@@ -8,22 +8,22 @@ import com.core.app.util.BroadcastOperationManager
 import javax.inject.Inject
 
 class BroadcastActivityLifecycle @Inject internal constructor(
-        private val mActivity: AppCompatActivity,
-        private val mBroadcastOperationManager: BroadcastOperationManager
+        private val activity: AppCompatActivity,
+        private val broadcastOperationManager: BroadcastOperationManager
 ) : LifecycleObserver {
 
     init {
         // lifecycle-aware components, no need to unsubscribe/remove observers.
-        mActivity.lifecycle.addObserver(this)
+        activity.lifecycle.addObserver(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {
-        mBroadcastOperationManager.registerReceiver()
+        broadcastOperationManager.registerReceiver()
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {
-        mBroadcastOperationManager.unregisterReceiver()
+        broadcastOperationManager.unregisterReceiver()
     }
 }

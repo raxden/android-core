@@ -21,19 +21,19 @@ abstract class BaseActivity : AppCompatActivity(),
         HasSupportFragmentInjector {
 
     @Inject
-    lateinit var mNavigationHelper: NavigationHelper
+    lateinit var navigationHelper: NavigationHelper
     @Inject
-    lateinit var mCompositeDisposable: CompositeDisposable
+    lateinit var compositeDisposable: CompositeDisposable
     @Inject
-    lateinit var mBroadcastOperationManager: BroadcastOperationManager
+    lateinit var broadcastOperationManager: BroadcastOperationManager
     @Inject
-    lateinit var mPermissionManager: PermissionManager
+    lateinit var permissionManager: PermissionManager
     @Inject
-    lateinit var mLifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
+    lateinit var lifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
     @Inject
-    lateinit var mFragmentManager: FragmentManager
+    lateinit var fragmentManager: FragmentManager
     @Inject
-    lateinit var mFragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     override fun attachBaseContext(newBase: Context) {
         super.attachBaseContext(LocaleManager.attachBaseContext(newBase))
@@ -41,5 +41,5 @@ abstract class BaseActivity : AppCompatActivity(),
 
     // =============== HasFragmentInjector =========================================================
 
-    override fun supportFragmentInjector() = mFragmentInjector
+    override fun supportFragmentInjector() = fragmentInjector
 }

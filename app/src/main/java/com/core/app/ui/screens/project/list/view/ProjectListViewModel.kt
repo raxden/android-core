@@ -21,14 +21,14 @@ class ProjectListViewModel @Inject constructor(
     val projectSelected: MutableLiveData<Project> = MutableLiveData()
 
     override fun onCreated() {
-        retrieveProjectList()
+//        retrieveProjectList()
     }
 
     fun onItemSelected(position: Int) {
         projectList[position].also { projectSelected.postValue(it) }
     }
 
-    private fun retrieveProjectList() {
+    fun retrieveProjectList() {
         getProjectListUseCase.execute()
                 .map {
                     projectList = it
@@ -36,21 +36,21 @@ class ProjectListViewModel @Inject constructor(
                 }
                 .subscribeWith(
                         onStart = {
-                            mLoaderManager.push("retrieve project list")
+                            loaderManager.push("retrieve project list")
                         },
                         onError = {
-                            mLoaderManager.pop()
-                            mErrorManager.set(it)
+                            loaderManager.pop()
+                            errorManager.set(it)
                         },
                         onSuccess = {
-                            mLoaderManager.pop()
+                            loaderManager.pop()
                             projectModelList.value = it
                         },
                         onComplete = {
-                            mLoaderManager.pop()
+                            loaderManager.pop()
                             projectModelList.value = emptyList()
                         }
                 )
-                .addTo(mCompositeDisposable)
+                .addTo(compositeDisposable)
     }
 }

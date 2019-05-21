@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.raxdenstudios.commons.util.Utils
 import java.util.*
 
-class BroadcastOperationManager(val mActivity: AppCompatActivity) {
+class BroadcastOperationManager(val activity: AppCompatActivity) {
 
     companion object {
         const val OPERATION_ACTION = ".ACTIVITY_OPERATION"
@@ -21,22 +21,22 @@ class BroadcastOperationManager(val mActivity: AppCompatActivity) {
     }
 
     fun sendOperation(operation: Operation) {
-        val intent = Intent(Utils.getPackageName(mActivity) + OPERATION_ACTION)
+        val intent = Intent(Utils.getPackageName(activity) + OPERATION_ACTION)
         when (operation) {
             Operation.FINISH_ALL -> intent.putExtra(OPERATION, Operation.FINISH_ALL.ordinal)
             Operation.FINISH -> {
 //                TODO
             }
         }
-        mActivity.sendBroadcast(intent)
+        activity.sendBroadcast(intent)
     }
 
     fun registerReceiver() {
-        mActivity.registerReceiver(mOperationReceiver, IntentFilter(Utils.getPackageName(mActivity) + OPERATION_ACTION))
+        activity.registerReceiver(mOperationReceiver, IntentFilter(Utils.getPackageName(activity) + OPERATION_ACTION))
     }
 
     fun unregisterReceiver() {
-        mActivity.unregisterReceiver(mOperationReceiver)
+        activity.unregisterReceiver(mOperationReceiver)
     }
 
     private val mOperationReceiver = object : BroadcastReceiver() {
@@ -52,10 +52,10 @@ class BroadcastOperationManager(val mActivity: AppCompatActivity) {
                         activitiesToFinish.add(activityName)
                     }
                     for (activityToFinish in activitiesToFinish) {
-                        if (activityToFinish == this.javaClass.name) mActivity.finish()
+                        if (activityToFinish == this.javaClass.name) activity.finish()
                     }
                 }
-                Operation.FINISH_ALL -> mActivity.finish()
+                Operation.FINISH_ALL -> activity.finish()
             }
         }
     }

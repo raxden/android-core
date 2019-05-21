@@ -12,12 +12,12 @@ abstract class BaseViewFragment<VDB : ViewDataBinding, TCallback : BaseViewFragm
 
     interface BaseViewFragmentCallback : BaseFragmentCallback
 
-    protected abstract val mLayoutId: Int
-    lateinit var mBinding: VDB
+    protected abstract val layoutId: Int
+    lateinit var binding: VDB
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return DataBindingUtil.inflate<VDB>(inflater, mLayoutId, container, false).let { binding ->
-            mBinding = binding
+        return DataBindingUtil.inflate<VDB>(inflater, layoutId, container, false).let { binding ->
+            this.binding = binding
             binding.lifecycleOwner = viewLifecycleOwner    // Layout requirement to listen any changes on LiveData values
             onBindingCreated(binding)
             binding.root

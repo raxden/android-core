@@ -39,7 +39,7 @@ abstract class SplashActivityModule {
      * The main activity listens to the events in the [SplashFragment].
      *
      * @param activity the activity
-     * @return the main fragment mCallback
+     * @return the main fragment callback
      */
     @Binds
     @PerActivity

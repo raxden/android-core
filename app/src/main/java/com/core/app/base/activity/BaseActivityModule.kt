@@ -6,7 +6,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.core.app.BuildConfig
 import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.LifecycleActivityModule
@@ -84,12 +83,12 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun loaderManager(activity: Activity): LoaderManager = LoaderManager(activity)
+        internal fun loaderManager(resources: Resources): LoaderManager = LoaderManager(resources)
 
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun errorManager(activity: Activity): ErrorManager = ErrorManager(activity)
+        internal fun errorManager(context: Context): ErrorManager = ErrorManager(context)
 
         @JvmStatic
         @Provides
