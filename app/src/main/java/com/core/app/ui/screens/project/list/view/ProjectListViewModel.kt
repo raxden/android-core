@@ -45,6 +45,7 @@ class ProjectListViewModel @Inject constructor(
                         onError = {
                             loaderManager.pop()
                             errorManager.set(it)
+                            projectModelList.value = emptyList()
                         },
                         onSuccess = {
                             loaderManager.pop()

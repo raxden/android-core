@@ -16,13 +16,13 @@
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
-            app:refreshing="@{viewModel.loader.status}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent"
+            app:refreshing="@{viewModel.loader.status}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -36,7 +36,16 @@
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-        
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:tint="@color/colorPrimary"
+            app:visibleGone="@{viewModel.projectModelList.isEmpty()}"
+            app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"
+            app:layout_constraintEnd_toEndOf="@+id/swipe_refresh_layout"
+            app:layout_constraintStart_toStartOf="@+id/swipe_refresh_layout"
+            app:layout_constraintTop_toTopOf="@+id/swipe_refresh_layout"
+            app:srcCompat="@drawable/logo_github" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

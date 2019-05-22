@@ -1,7 +1,6 @@
 package com.core.commons.glide
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -28,44 +27,43 @@ object ImageUtil {
     }
 
     @SuppressLint("CheckResult")
-    fun loadImage(context: Context,
-                  image: Any,
+    fun loadImage(image: Any,
                   imageView: ImageView,
                   progressView: View? = null,
                   errorView: View? = null,
                   scaleType: ScaleType = ScaleType.CENTER_CROP,
                   cornerType: RoundedCornersTransformation.CornerType = RoundedCornersTransformation.CornerType.ALL,
                   cornerRadius: Int = 0) {
-        val requestBuilder = Glide.with(context)
-                .load(
-                        when (image) {
-                            is String -> image
-                            is Uri -> image
-                            is Drawable -> image
-                            is Bitmap -> image
-                            else -> throw Exception("imageUser param only supports String, Uri, Drawable or Bitmap")
-                        }
-                )
-                .transition(DrawableTransitionOptions.withCrossFade())
-        loadTransformations(requestBuilder, 0, 0, 0, scaleType, cornerRadius, cornerType, 0)
-        requestBuilder.listener(object : RequestListener<Drawable> {
-            override fun onLoadFailed(e: GlideException?, model: Any, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
-                errorView?.visibility = View.VISIBLE
-                progressView?.visibility = View.GONE
-                return false
-            }
+        Glide.with(imageView).load(
+                when (image) {
+                    is String -> image
+                    is Uri -> image
+                    is Drawable -> image
+                    is Bitmap -> image
+                    else -> throw Exception("imageUser param only supports String, Uri, Drawable or Bitmap")
+                }
+        ).run {
+            transition(DrawableTransitionOptions.withCrossFade())
+            applyTransformations(this, scaleType = scaleType, cornerRadius = cornerRadius, cornerType = cornerType)
+            listener(object : RequestListener<Drawable> {
+                override fun onLoadFailed(e: GlideException?, model: Any, target: Target<Drawable>, isFirstResource: Boolean): Boolean {
+                    errorView?.visibility = View.VISIBLE
+                    progressView?.visibility = View.GONE
+                    return false
+                }
 
-            override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>, dataSource: DataSource, isFirstResource: Boolean): Boolean {
-                imageView.visibility = View.VISIBLE
-                errorView?.visibility = View.GONE
-                progressView?.visibility = View.GONE
-                return false
-            }
-        })
-        requestBuilder.into(imageView)
+                override fun onResourceReady(resource: Drawable, model: Any, target: Target<Drawable>, dataSource: DataSource, isFirstResource: Boolean): Boolean {
+                    imageView.visibility = View.VISIBLE
+                    errorView?.visibility = View.GONE
+                    progressView?.visibility = View.GONE
+                    return false
+                }
+            })
+            into(imageView)
+        }
     }
 
-    private fun loadTransformations(requestBuilder: RequestBuilder<Drawable>, width: Int, height: Int, holderId: Int, scaleType: ScaleType, cornerRadius: Int, cornerType: RoundedCornersTransformation.CornerType?, blurRadius: Int) {
+    private fun applyTransformations(requestBuilder: RequestBuilder<Drawable>, width: Int = 0, height: Int = 0, holderId: Int = 0, scaleType: ScaleType, cornerRadius: Int, cornerType: RoundedCornersTransformation.CornerType?, blurRadius: Int = 0) {
         val multiTransformation: MutableList<Transformation<Bitmap>> = mutableListOf()
         when (scaleType) {
             ScaleType.CENTER_CROP -> multiTransformation.add(CenterCrop())

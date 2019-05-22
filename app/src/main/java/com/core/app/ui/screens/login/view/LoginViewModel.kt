@@ -39,7 +39,6 @@ class LoginViewModel @Inject constructor(
                             errorManager.set(it)
                         },
                         onSuccess = {
-                            loaderManager.pop()
                             userLogged.postValue(it)
                         }
                 )
