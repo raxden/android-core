@@ -1,61 +1,56 @@
 package com.core.components
 
-import android.annotation.TargetApi
 import android.content.Context
-import android.content.res.TypedArray
-import android.os.Build
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 
-abstract class BaseComponentView<VDB : ViewDataBinding> : FrameLayout {
+abstract class BaseComponentView : FrameLayout {
 
-    protected abstract val mStyleable: IntArray
-    protected abstract val mLayoutId: Int
-    protected lateinit var mBinding: VDB
-
-    @JvmOverloads
-    constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-            : super(context, attrs, defStyleAttr) {
-        init(context, attrs, defStyleAttr)
+    constructor(context: Context) : super(context) {
+        init(context, null, 0, 0)
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    constructor (context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0)
-            : super(context, attrs, defStyleAttr, defStyleRes) {
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+        init(context, attrs, 0, 0)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+        init(context, attrs, 0, 0)
+    }
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr) {
         init(context, attrs, defStyleAttr, defStyleRes)
     }
 
-    fun init(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) {
+    private fun init(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) {
         if (!isInEditMode) {
-            attrs?.also {
-                context.theme.obtainStyledAttributes(it, mStyleable, defStyleAttr, defStyleRes).apply {
-                    try {
-                        onLoadStyledAttributes(this)
-                    } finally {
-                        recycle()
-                    }
-                }
-            }
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            mBinding = DataBindingUtil.inflate(inflater, mLayoutId, this, true)
-            onBindingCreated(mBinding)
+            loadView(context)
+            loadAttributes(context, attrs, defStyleAttr, defStyleRes)
+            bindViews()
+            loadData()
         }
     }
 
-    abstract fun onLoadStyledAttributes(attrs: TypedArray)
-
-    abstract fun onBindingCreated(binding: VDB)
-
-    abstract fun onLoadData()
+    private fun loadView(context: Context) {
+        val layoutId = getLayoutId()
+        if (layoutId != 0)
+            View.inflate(context, layoutId, this)
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        if (isInEditMode)
-            View.inflate(context, mLayoutId, this)
+        if (isInEditMode) {
+            loadView(context)
+        }
     }
-}
 
+    protected abstract fun getLayoutId(): Int
+
+    protected abstract fun loadAttributes(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int)
+
+    protected abstract fun bindViews()
+
+    protected abstract fun loadData()
+
+}

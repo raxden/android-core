@@ -6,14 +6,14 @@ import android.util.AttributeSet
 import com.core.app.R
 import com.core.app.databinding.ProjectListItemViewBinding
 import com.core.app.model.ProjectModel
-import com.core.components.BaseComponentView
+import com.core.components.BaseComponentBindingView
 
 class ProjectListItemView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0,
         defStyleRes: Int = 0
-) : BaseComponentView<ProjectListItemViewBinding>(context, attrs, defStyleAttr, defStyleRes) {
+) : BaseComponentBindingView<ProjectListItemViewBinding>(context, attrs, defStyleAttr, defStyleRes) {
 
     override val mStyleable: IntArray
         get() = R.styleable.ProjectListItemView

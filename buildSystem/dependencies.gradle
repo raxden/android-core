@@ -142,53 +142,38 @@ ext {
 
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
-
             [configuration: "implementation", dependency: kotlinLibs.core],
-
             [configuration: "implementation", dependency: playServicesLibs.location],
             [configuration: "implementation", dependency: playServicesLibs.maps],
             [configuration: "implementation", dependency: playServicesLibs.places],
-
             [configuration: "implementation", dependency: firebaseLibs.core],
             [configuration: "implementation", dependency: firebaseLibs.analytics],
             [configuration: "implementation", dependency: firebaseLibs.messaging],
             [configuration: "implementation", dependency: firebaseLibs.auth],
-
             [configuration: "implementation", dependency: raxdenLibs.commons],
             [configuration: "implementation", dependency: raxdenLibs.preferences],
             [configuration: "implementation", dependency: raxdenLibs.square],
             [configuration: "implementation", dependency: raxdenLibs.squareCommons],
-
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
-
             [configuration: "implementation", dependency: rxLibs.android],
             [configuration: "implementation", dependency: rxLibs.kotlin],
-
             [configuration: "implementation", dependency: retrofitLibs.core],
             [configuration: "implementation", dependency: retrofitLibs.rx],
             [configuration: "implementation", dependency: retrofitLibs.converterGson],
             [configuration: "implementation", dependency: retrofitLibs.converterScalars],
-
             [configuration: "implementation", dependency: okHttpLibs.core],
             [configuration: "implementation", dependency: okHttpLibs.loggingInterceptor],
-
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
-
             [configuration: "implementation", dependency: glideLibs.core],
             [configuration: "kapt", dependency: glideLibs.compiler],
-
             [configuration: "implementation", dependency: libs.gson],
-
             [configuration: "implementation", dependency: libs.threetenabp],
-
             [configuration: "implementation", dependency: libs.timber],
-
             [configuration: "implementation", dependency: libs.rxPermissions],
-
             [configuration: "implementation", dependency: libs.crashlytics, options: {
                 transitive = true
             }],
@@ -207,18 +192,13 @@ ext {
             [configuration: "implementation", dependency: project(modules.commons)],
 
             [configuration: "implementation", dependency: kotlinLibs.core],
-
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
-
             [configuration: "implementation", dependency: libs.threetenabp],
-
             [configuration: "implementation", dependency: libs.timber],
-
             [configuration: "implementation", dependency: rxLibs.android],
             [configuration: "implementation", dependency: rxLibs.kotlin],
-
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
@@ -237,33 +217,23 @@ ext {
             [configuration: "implementation", dependency: project(modules.domain)],
 
             [configuration: "implementation", dependency: kotlinLibs.core],
-
             [configuration: "implementation", dependency: raxdenLibs.commons],
             [configuration: "implementation", dependency: raxdenLibs.preferences],
-
             [configuration: "implementation", dependency: firebaseLibs.messaging],
-
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
-
             [configuration: "implementation", dependency: libs.gson],
-
             [configuration: "implementation", dependency: libs.threetenabp],
-
             [configuration: "implementation", dependency: libs.timber],
-
             [configuration: "implementation", dependency: rxLibs.android],
             [configuration: "implementation", dependency: rxLibs.kotlin],
-
             [configuration: "implementation", dependency: retrofitLibs.core],
             [configuration: "implementation", dependency: retrofitLibs.rx],
             [configuration: "implementation", dependency: retrofitLibs.converterGson],
             [configuration: "implementation", dependency: retrofitLibs.converterScalars],
-
             [configuration: "implementation", dependency: okHttpLibs.core],
             [configuration: "implementation", dependency: okHttpLibs.loggingInterceptor],
-
             [configuration: "implementation", dependency: roomLibs.runtime],
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
@@ -284,11 +254,8 @@ ext {
 
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
-
             [configuration: "implementation", dependency: kotlinLibs.core],
-
             [configuration: "implementation", dependency: libs.threetenabp],
-
             [configuration: "implementation", dependency: libs.timber]
     ]
 
@@ -296,33 +263,16 @@ ext {
             [configuration: "implementation", dependency: project(modules.resources)],
 
             [configuration: "implementation", dependency: support.material],
-            [configuration: "implementation", dependency: support.constraintLayout],
-
             [configuration: "implementation", dependency: kotlinLibs.core],
-
             [configuration: "implementation", dependency: rxLibs.android],
             [configuration: "implementation", dependency: rxLibs.kotlin],
-
             [configuration: "implementation", dependency: raxdenLibs.commons],
-
             [configuration: "implementation", dependency: libs.gson],
-
             [configuration: "implementation", dependency: libs.threetenabp],
-
             [configuration: "implementation", dependency: libs.timber],
-
             [configuration: "implementation", dependency: glideLibs.core],
             [configuration: "kapt", dependency: glideLibs.compiler],
-
-            [configuration: "implementation", dependency: mockitoLibs.mockito],
-
-            [configuration: "testImplementation", dependency: testLibs.junit],
-            [configuration: "testImplementation", dependency: testLibs.assertj],
-            [configuration: "testImplementation", dependency: kotlinLibs.test],
-            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
-            [configuration: "testImplementation", dependency: robolectricLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.multidex],
-            [configuration: "kaptTest", dependency: daggerLibs.compiler]
+            [configuration: "implementation", dependency: mockitoLibs.mockito]
     ]
 
     resourcesDependencies = [

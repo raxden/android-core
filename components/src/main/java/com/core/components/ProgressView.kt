@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.ProgressBar
 import com.core.commons.extension.*
 
-class ProgressView : BaseComponent2View {
+class ProgressView : BaseComponentView {
 
     private var mContainer: View? = null
     private var mProgressBar: ProgressBar? = null
