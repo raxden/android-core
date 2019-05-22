@@ -15,7 +15,7 @@ ext {
     def androidSquareVersion = '4.0.4'          // https://github.com/raxden/android-square
     def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
-    def rxPermissionsVersion = '0.10.2'          // https://github.com/tbruyelle/RxPermissions    0.10.2
+    def rxPermissionsVersion = '0.10.2'         // https://github.com/tbruyelle/RxPermissions
     def roomVersion = '2.1.0-beta01'
     def androidThreeTenVersion = '1.1.1'        // https://github.com/JakeWharton/ThreeTenABP
     def crashlyticsVersion = '2.9.7'
@@ -219,7 +219,6 @@ ext {
             [configuration: "implementation", dependency: kotlinLibs.core],
             [configuration: "implementation", dependency: raxdenLibs.commons],
             [configuration: "implementation", dependency: raxdenLibs.preferences],
-            [configuration: "implementation", dependency: firebaseLibs.messaging],
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
@@ -271,11 +270,9 @@ ext {
             [configuration: "implementation", dependency: libs.threetenabp],
             [configuration: "implementation", dependency: libs.timber],
             [configuration: "implementation", dependency: glideLibs.core],
-            [configuration: "kapt", dependency: glideLibs.compiler],
             [configuration: "implementation", dependency: mockitoLibs.mockito]
     ]
 
-    resourcesDependencies = [
-    ]
+    resourcesDependencies = []
 
 }
