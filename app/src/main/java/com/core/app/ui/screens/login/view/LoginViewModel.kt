@@ -40,16 +40,20 @@ class LoginViewModel @Inject constructor(
                         },
                         onSuccess = {
                             userLogged.postValue(it)
+                            loaderManager.pop()
                         }
                 )
                 .addTo(compositeDisposable)
     }
 
-    private fun validateUsername(): Boolean {
-        if (TextUtils.isEmpty(username.value)) {
+    private fun validateUsername(): Boolean = when {
+        TextUtils.isEmpty(username.value) -> {
             usernameError.postValue("El campo username no puede estar vacio")
-            return false
-        } else usernameError.postValue("")
-        return true
+            false
+        }
+        else -> {
+            usernameError.postValue("")
+            true
+        }
     }
 }

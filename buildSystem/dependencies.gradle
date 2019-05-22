@@ -15,7 +15,7 @@ ext {
     def androidSquareVersion = '4.0.4'          // https://github.com/raxden/android-square
     def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
-    def rxPermissionsVersion = '0.9.5'          // https://github.com/tbruyelle/RxPermissions    0.10.2
+    def rxPermissionsVersion = '0.10.2'          // https://github.com/tbruyelle/RxPermissions    0.10.2
     def roomVersion = '2.1.0-beta01'
     def androidThreeTenVersion = '1.1.1'        // https://github.com/JakeWharton/ThreeTenABP
     def crashlyticsVersion = '2.9.7'
@@ -105,9 +105,7 @@ ext {
             gson         : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
             timber       : [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
             threetenabp  : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
-
-            rxPermissions: [group: 'com.tbruyelle.rxpermissions2', name: 'rxpermissions', version: rxPermissionsVersion, ext: 'aar'],
-
+            rxPermissions: [group: 'com.github.tbruyelle', name: 'rxpermissions', version: rxPermissionsVersion],
             crashlytics  : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
     ]
 
