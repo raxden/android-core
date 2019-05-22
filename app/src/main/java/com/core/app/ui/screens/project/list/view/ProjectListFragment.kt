@@ -45,7 +45,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     override fun onBindingCreated(binding: ProjectListFragmentBinding) {
         super.onBindingCreated(binding)
 
-        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.refreshProjectList() }
+        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.retrieveProjectList() }
         binding.recyclerView.apply {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -55,6 +55,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
         viewModel.projectModelList.observe(owner, Observer { data -> listAdapter.submitList(data) })
         viewModel.projectSelected.observe(owner, Observer { data -> callback.onProjectSelected(data) })
+        viewModel.retrieveProjectList()
     }
 
     internal class ProjectModelListAdapter(
@@ -63,7 +64,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
             diffCallback: DiffUtil.ItemCallback<ProjectModel>
     ) : BaseListAdapter<ProjectModel, ProjectListViewModel, ProjectListItemBinding>(viewModel, diffCallback) {
 
-        var lastAnimatedPosition: Int = -1
+        private var lastAnimatedPosition: Int = -1
 
         override fun onBindViewHolder(holder: ViewDataBindingHolder<ProjectModel, ProjectListViewModel, ProjectListItemBinding>, position: Int) {
             super.onBindViewHolder(holder, position)
