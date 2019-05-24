@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import com.core.app.R
 import com.core.app.databinding.ProjectListItemViewBinding
 import com.core.app.model.ProjectModel
-import com.core.components.BaseComponentBindingView
 
 class ProjectListItemView @JvmOverloads constructor(
         context: Context,

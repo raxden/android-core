@@ -1,4 +1,4 @@
-package com.core.components
+package com.core.app.ui.components
 
 import android.annotation.TargetApi
 import android.content.Context
