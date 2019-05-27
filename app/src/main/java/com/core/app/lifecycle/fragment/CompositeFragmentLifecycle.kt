@@ -1,4 +1,4 @@
-package com.core.app.lifecycle
+package com.core.app.lifecycle.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle

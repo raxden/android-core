@@ -2,8 +2,8 @@ package com.core.app.injector.module
 
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.injector.scope.PerActivity
-import com.core.app.lifecycle.BroadcastActivityLifecycle
-import com.core.app.lifecycle.CompositeActivityLifecycle
+import com.core.app.lifecycle.activity.BroadcastActivityLifecycle
+import com.core.app.lifecycle.activity.CompositeActivityLifecycle
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet

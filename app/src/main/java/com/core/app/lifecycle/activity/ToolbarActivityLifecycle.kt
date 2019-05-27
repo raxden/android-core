@@ -1,10 +1,11 @@
-package com.core.app.lifecycle
+package com.core.app.lifecycle.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
+import com.core.app.lifecycle.BaseActivityLifecycleObserver
 import javax.inject.Inject
 
 @PerActivity

@@ -6,8 +6,8 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.core.app.AppActivity
 import com.core.app.databinding.ProjectListActivityBinding
-import com.core.app.lifecycle.InjectFragmentActivityLifecycle
-import com.core.app.lifecycle.ToolbarActivityLifecycle
+import com.core.app.lifecycle.fragment.InjectFragmentActivityLifecycle
+import com.core.app.lifecycle.activity.ToolbarActivityLifecycle
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras

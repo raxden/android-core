@@ -11,8 +11,8 @@ import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.view.View
 import android.widget.TextView
+import com.core.commons.SDKUtils
 import com.core.commons.ValidationHelper
-import com.raxdenstudios.commons.util.SDKUtils
 
 @Suppress("DEPRECATION")
 @TargetApi(23)

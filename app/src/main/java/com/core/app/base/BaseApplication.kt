@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.core.app.util.LocaleManager
-import com.raxdenstudios.commons.util.SDKUtils
+import com.core.commons.SDKUtils
 import dagger.android.*
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector

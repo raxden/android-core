@@ -6,8 +6,8 @@ import com.core.app.base.activity.BaseActivityModule
 import com.core.app.base.activity.BaseFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
-import com.core.app.lifecycle.FullScreenActivityLifecycle
-import com.core.app.lifecycle.InjectFragmentActivityLifecycle
+import com.core.app.lifecycle.activity.FullScreenActivityLifecycle
+import com.core.app.lifecycle.fragment.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.app.ui.screens.splash.view.SplashFragmentModule
 import dagger.Binds

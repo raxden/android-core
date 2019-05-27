@@ -1,4 +1,4 @@
-package com.core.app.lifecycle
+package com.core.app.lifecycle.fragment
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
+import com.core.app.lifecycle.BaseActivityLifecycleObserver
 import javax.inject.Inject
 
 @PerActivity

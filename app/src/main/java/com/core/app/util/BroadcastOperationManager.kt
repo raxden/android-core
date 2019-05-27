@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
-import com.raxdenstudios.commons.util.Utils
 import java.util.*
 
 class BroadcastOperationManager(val activity: AppCompatActivity) {
@@ -21,7 +20,7 @@ class BroadcastOperationManager(val activity: AppCompatActivity) {
     }
 
     fun sendOperation(operation: Operation) {
-        val intent = Intent(Utils.getPackageName(activity) + OPERATION_ACTION)
+        val intent = Intent(activity.packageName + OPERATION_ACTION)
         when (operation) {
             Operation.FINISH_ALL -> intent.putExtra(OPERATION, Operation.FINISH_ALL.ordinal)
             Operation.FINISH -> {
@@ -32,7 +31,7 @@ class BroadcastOperationManager(val activity: AppCompatActivity) {
     }
 
     fun registerReceiver() {
-        activity.registerReceiver(mOperationReceiver, IntentFilter(Utils.getPackageName(activity) + OPERATION_ACTION))
+        activity.registerReceiver(mOperationReceiver, IntentFilter(activity.packageName + OPERATION_ACTION))
     }
 
     fun unregisterReceiver() {

@@ -2,8 +2,8 @@ package com.core.app.injector.module
 
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.injector.scope.PerFragment
-import com.core.app.lifecycle.CompositeFragmentLifecycle
-import com.core.app.lifecycle.TrackerFragmentLifecycle
+import com.core.app.lifecycle.fragment.CompositeFragmentLifecycle
+import com.core.app.lifecycle.fragment.TrackerFragmentLifecycle
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
