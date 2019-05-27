@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
-import com.core.app.lifecycle.BaseActivityLifecycleObserver
+import com.core.app.lifecycle.BaseActivityLifecycle
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CompositeActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity,
         private val compositeDisposable: CompositeDisposable
-) : BaseActivityLifecycleObserver(activity) {
+) : BaseActivityLifecycle(activity) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {

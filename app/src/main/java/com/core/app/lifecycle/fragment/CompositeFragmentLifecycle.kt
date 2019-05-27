@@ -5,6 +5,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.base.fragment.BaseFragmentModule
 import com.core.app.injector.scope.PerFragment
+import com.core.app.lifecycle.BaseFragmentLifecycle
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 import javax.inject.Named
@@ -13,7 +14,7 @@ import javax.inject.Named
 class CompositeFragmentLifecycle @Inject internal constructor(
         fragment: Fragment,
         @field:Named(BaseFragmentModule.FRAGMENT_COMPOSITE_DISPOSABLE) private val compositeDisposable: CompositeDisposable
-) : BaseFragmentLifecycleObserver(fragment) {
+) : BaseFragmentLifecycle(fragment) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {

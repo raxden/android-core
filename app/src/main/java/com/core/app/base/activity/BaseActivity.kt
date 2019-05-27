@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.helper.AnimationHelper
 import com.core.app.helper.NavigationHelper
-import com.core.app.lifecycle.BaseActivityLifecycleObserver
+import com.core.app.lifecycle.BaseActivityLifecycle
 import com.core.app.util.BroadcastOperationManager
 import com.core.app.util.LocaleManager
 import com.core.app.util.PermissionManager
@@ -47,7 +47,7 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleObserverList.forEach { (it as? BaseActivityLifecycleObserver)?.onCreate(savedInstanceState) }
+        lifecycleObserverList.forEach { (it as? BaseActivityLifecycle)?.onCreate(savedInstanceState) }
     }
 
     // =============== HasFragmentInjector =========================================================

@@ -5,13 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
-import com.core.app.lifecycle.BaseActivityLifecycleObserver
+import com.core.app.lifecycle.BaseActivityLifecycle
 import javax.inject.Inject
 
 @PerActivity
 class FullScreenActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity
-) : BaseActivityLifecycleObserver(activity) {
+) : BaseActivityLifecycle(activity) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {

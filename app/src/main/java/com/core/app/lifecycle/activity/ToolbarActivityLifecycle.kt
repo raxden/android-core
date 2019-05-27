@@ -5,13 +5,13 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
-import com.core.app.lifecycle.BaseActivityLifecycleObserver
+import com.core.app.lifecycle.BaseActivityLifecycle
 import javax.inject.Inject
 
 @PerActivity
 class ToolbarActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity
-) : BaseActivityLifecycleObserver(activity) {
+) : BaseActivityLifecycle(activity) {
 
     interface Callback {
         fun onCreateToolbarView(): Toolbar

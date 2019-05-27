@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
-import com.core.app.lifecycle.BaseActivityLifecycleObserver
+import com.core.app.lifecycle.BaseActivityLifecycle
 import com.core.app.util.BroadcastOperationManager
 import javax.inject.Inject
 
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class BroadcastActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity,
         private val broadcastOperationManager: BroadcastOperationManager
-) : BaseActivityLifecycleObserver(activity) {
+) : BaseActivityLifecycle(activity) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {
