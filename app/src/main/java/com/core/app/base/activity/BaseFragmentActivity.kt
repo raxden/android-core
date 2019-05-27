@@ -10,11 +10,11 @@ abstract class BaseFragmentActivity<VDB : ViewDataBinding> : BaseActivity() {
     protected lateinit var binding: VDB
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
         onBindingCreated(binding)
-
-        super.onCreate(savedInstanceState)
     }
 
     abstract fun onBindingCreated(binding: VDB)
