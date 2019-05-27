@@ -8,6 +8,7 @@ import com.core.app.databinding.LoginActivityBinding
 import com.core.app.lifecycle.fragment.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.login.view.LoginFragment
 import com.core.commons.extension.getExtras
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class LoginActivity : AppActivity<LoginActivityBinding>(),
         InjectFragmentActivityLifecycle.Callback<LoginFragment>,

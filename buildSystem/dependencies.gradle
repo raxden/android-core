@@ -42,9 +42,7 @@ ext {
     ]
 
     def playServicesLibs = [
-            location: [group: 'com.google.android.gms', name: 'play-services-location', version: '16.0.0'],
-            maps    : [group: 'com.google.android.gms', name: 'play-services-maps', version: '16.0.0'],
-            places  : [group: 'com.google.android.gms', name: 'play-services-places', version: '16.0.0']
+            location: [group: 'com.google.android.gms', name: 'play-services-location', version: '16.0.0']
     ]
 
     def firebaseLibs = [
@@ -134,8 +132,6 @@ ext {
             [configuration: "implementation", dependency: support.constraintLayout],
             [configuration: "implementation", dependency: kotlinLibs.core],
             [configuration: "implementation", dependency: playServicesLibs.location],
-            [configuration: "implementation", dependency: playServicesLibs.maps],
-            [configuration: "implementation", dependency: playServicesLibs.places],
             [configuration: "implementation", dependency: firebaseLibs.core],
             [configuration: "implementation", dependency: firebaseLibs.analytics],
             [configuration: "implementation", dependency: firebaseLibs.messaging],

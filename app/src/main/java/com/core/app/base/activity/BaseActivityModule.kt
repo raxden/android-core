@@ -89,7 +89,7 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun errorManager(context: Context): ErrorManager = ErrorManager(context)
+        internal fun errorManager(activity: AppCompatActivity): ErrorManager = ErrorManager(activity)
 
         @JvmStatic
         @Provides
