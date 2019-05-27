@@ -2,20 +2,16 @@ package com.core.app.lifecycle
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
+import com.core.app.injector.scope.PerActivity
 import com.core.app.util.BroadcastOperationManager
 import javax.inject.Inject
 
+@PerActivity
 class BroadcastActivityLifecycle @Inject internal constructor(
-        private val activity: AppCompatActivity,
+        activity: AppCompatActivity,
         private val broadcastOperationManager: BroadcastOperationManager
-) : LifecycleObserver {
-
-    init {
-        // lifecycle-aware components, no need to unsubscribe/remove observers.
-        activity.lifecycle.addObserver(this)
-    }
+) : BaseActivityLifecycleObserver(activity) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {

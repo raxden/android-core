@@ -6,18 +6,18 @@ import android.view.View
 import androidx.appcompat.widget.Toolbar
 import com.core.app.AppActivity
 import com.core.app.databinding.ProjectListActivityBinding
+import com.core.app.lifecycle.InjectFragmentActivityLifecycle
+import com.core.app.lifecycle.ToolbarActivityLifecycle
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras
 import com.core.domain.Project
-import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
-import com.raxdenstudios.square.interceptor.commons.toolbar.HasToolbarInterceptor
 import timber.log.Timber
 
 class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
-        ProjectListFragment.FragmentCallback,
-        HasToolbarInterceptor,
-        HasInjectFragmentInterceptor<ProjectListFragment> {
+        ToolbarActivityLifecycle.Callback,
+        InjectFragmentActivityLifecycle.Callback<ProjectListFragment>,
+        ProjectListFragment.FragmentCallback {
 
     companion object {
         fun intent(context: Context): Intent = Intent(context, ProjectListActivity::class.java)

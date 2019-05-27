@@ -11,8 +11,6 @@ ext {
 
     // dependencies
     def androidCommonsVersion = '3.0.35'        // https://github.com/raxden/android-commons
-    def androidPreferencesVersion = '4.0.4'     // https://github.com/raxden/android-preferences
-    def androidSquareVersion = '4.0.4'          // https://github.com/raxden/android-square
     def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
     def rxPermissionsVersion = '0.10.2'         // https://github.com/tbruyelle/RxPermissions
@@ -95,10 +93,7 @@ ext {
     ]
 
     def raxdenLibs = [
-            commons      : [group: 'com.github.raxden', name: 'android-commons', version: androidCommonsVersion, ext: 'aar'],
-            preferences  : [group: 'com.github.raxden', name: 'android-preferences', version: androidPreferencesVersion, ext: 'aar'],
-            square       : [group: 'com.github.raxden.square', name: 'square', version: androidSquareVersion, ext: 'aar'],
-            squareCommons: [group: 'com.github.raxden.square', name: 'square-commons', version: androidSquareVersion, ext: 'aar']
+            commons      : [group: 'com.github.raxden', name: 'android-commons', version: androidCommonsVersion, ext: 'aar']
     ]
 
     def libs = [
@@ -151,9 +146,6 @@ ext {
             [configuration: "implementation", dependency: firebaseLibs.messaging],
             [configuration: "implementation", dependency: firebaseLibs.auth],
             [configuration: "implementation", dependency: raxdenLibs.commons],
-            [configuration: "implementation", dependency: raxdenLibs.preferences],
-            [configuration: "implementation", dependency: raxdenLibs.square],
-            [configuration: "implementation", dependency: raxdenLibs.squareCommons],
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
@@ -218,7 +210,6 @@ ext {
 
             [configuration: "implementation", dependency: kotlinLibs.core],
             [configuration: "implementation", dependency: raxdenLibs.commons],
-            [configuration: "implementation", dependency: raxdenLibs.preferences],
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],

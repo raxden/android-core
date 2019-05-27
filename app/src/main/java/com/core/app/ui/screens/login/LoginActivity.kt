@@ -5,14 +5,13 @@ import android.content.Intent
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.databinding.LoginActivityBinding
+import com.core.app.lifecycle.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.login.view.LoginFragment
 import com.core.commons.extension.getExtras
-import com.core.domain.Account
-import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
 
 class LoginActivity : AppActivity<LoginActivityBinding>(),
-        LoginFragment.FragmentCallback,
-        HasInjectFragmentInterceptor<LoginFragment> {
+        InjectFragmentActivityLifecycle.Callback<LoginFragment>,
+        LoginFragment.FragmentCallback {
 
     companion object {
         fun intent(context: Context): Intent = Intent(context, LoginActivity::class.java)

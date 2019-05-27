@@ -1,15 +1,18 @@
 package com.core.app.ui.screens.login
 
 import android.app.Activity
+import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.activity.BaseActivityModule
 import com.core.app.base.activity.BaseFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
+import com.core.app.lifecycle.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.login.view.LoginFragment
 import com.core.app.ui.screens.login.view.LoginFragmentModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import dagger.multibindings.IntoSet
 
 /**
  * Provides Login activity dependencies
@@ -41,6 +44,11 @@ abstract class LoginActivityModule {
     @Binds
     @PerActivity
     internal abstract fun fragmentCallback(activity: LoginActivity): LoginFragment.FragmentCallback
+
+    @Binds
+    @IntoSet
+    @PerActivity
+    internal abstract fun injectFragmentLifecycleObserver(lifecycleObserver: InjectFragmentActivityLifecycle<LoginFragment>): LifecycleObserver
 
     // =============================================================================================
 

@@ -5,13 +5,14 @@ import android.content.Intent
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.databinding.SplashActivityBinding
+import com.core.app.lifecycle.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
-import com.raxdenstudios.square.interceptor.commons.injectfragment.HasInjectFragmentInterceptor
+import javax.inject.Inject
 
 class SplashActivity : AppActivity<SplashActivityBinding>(),
-        SplashFragment.FragmentCallback,
-        HasInjectFragmentInterceptor<SplashFragment> {
+        InjectFragmentActivityLifecycle.Callback<SplashFragment>,
+        SplashFragment.FragmentCallback {
 
     companion object {
         fun intent(context: Context): Intent = Intent(context, SplashActivity::class.java)

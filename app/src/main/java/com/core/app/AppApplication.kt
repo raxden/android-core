@@ -6,8 +6,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.core.app.base.BaseApplication
 import com.core.app.injector.component.DaggerApplicationComponent
 import com.core.app.util.CrashReportingTree
-import com.raxdenstudios.square.InterceptorManager
-import com.raxdenstudios.square.interceptor.commons.InterceptorCommonsFactory
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
@@ -20,7 +18,6 @@ class AppApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        initSquare()
         initFabric()
         initTimber()
         initTreeTen()
@@ -28,13 +25,6 @@ class AppApplication : BaseApplication() {
 
     override fun initDaggerApplicationComponent() {
         DaggerApplicationComponent.builder().create(this).inject(this)
-    }
-
-    private fun initSquare() {
-        InterceptorManager.Builder()
-                .addInterceptorFactory(InterceptorCommonsFactory())
-                .build()
-                .init(this)
     }
 
     private fun initFabric() {

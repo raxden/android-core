@@ -2,10 +2,8 @@ package com.core.app
 
 import androidx.databinding.ViewDataBinding
 import com.core.app.base.activity.BaseFragmentActivity
-import com.raxdenstudios.square.interceptor.HasInterceptor
-import com.raxdenstudios.square.interceptor.Interceptor
 
-abstract class AppActivity<VDB : ViewDataBinding> : BaseFragmentActivity<VDB>(), HasInterceptor {
+abstract class AppActivity<VDB : ViewDataBinding> : BaseFragmentActivity<VDB>() {
 
     override val layoutId: Int
         get() = javaClass.simpleName
@@ -18,7 +16,5 @@ abstract class AppActivity<VDB : ViewDataBinding> : BaseFragmentActivity<VDB>(),
                 } ?: 0
 
     override fun onBindingCreated(binding: VDB) {}
-
-    override fun onInterceptorCreated(interceptor: Interceptor) {}
 }
 

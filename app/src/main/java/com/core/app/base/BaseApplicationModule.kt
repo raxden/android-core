@@ -16,7 +16,6 @@ import javax.inject.Singleton
     SchedulerModule::class,
     GsonModule::class,
     AnalyticsModule::class,
-    PreferencesModule::class,
     RepositoryModule::class,
     UseCaseModule::class,
     NetworkModule::class,
