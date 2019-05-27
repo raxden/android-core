@@ -33,7 +33,6 @@ class ErrorManager(private val activity: AppCompatActivity) {
                 }
             }
         }
-
         set(code, title, message)
     }
 
