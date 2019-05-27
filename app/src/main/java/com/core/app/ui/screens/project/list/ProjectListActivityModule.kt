@@ -6,7 +6,7 @@ import com.core.app.base.activity.BaseActivityModule
 import com.core.app.base.activity.BaseFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
-import com.core.app.lifecycle.fragment.InjectFragmentActivityLifecycle
+import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.lifecycle.activity.ToolbarActivityLifecycle
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.app.ui.screens.project.list.view.ProjectListFragmentModule

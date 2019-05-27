@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.core.app.AppActivity
 import com.core.app.databinding.SplashActivityBinding
-import com.core.app.lifecycle.fragment.InjectFragmentActivityLifecycle
+import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 

@@ -1,4 +1,4 @@
-package com.core.app.lifecycle.fragment
+package com.core.app.lifecycle.activity
 
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
