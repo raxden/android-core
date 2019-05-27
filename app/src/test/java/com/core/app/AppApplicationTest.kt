@@ -6,8 +6,6 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.core.app.base.BaseApplication
 import com.core.app.injector.component.DaggerApplicationComponentTest
 import com.core.app.util.CrashReportingTree
-import com.raxdenstudios.square.InterceptorManager
-import com.raxdenstudios.square.interceptor.commons.InterceptorCommonsFactory
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
 
