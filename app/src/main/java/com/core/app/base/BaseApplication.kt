@@ -34,7 +34,7 @@ abstract class BaseApplication : Application(),
     // =============== LifeCycle ===================================================================
 
     override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(LocaleManager.attachBaseContext(base, Locale("en", "US")))
+        super.attachBaseContext(LocaleManager.attachBaseContext(base))
     }
 
     override fun onConfigurationChanged(newConfig: Configuration?) {
