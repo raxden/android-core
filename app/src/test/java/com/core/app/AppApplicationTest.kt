@@ -20,7 +20,6 @@ class AppApplicationTest : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
-        initSquare()
         initFabric()
         initTimber()
         initTreeTen()
@@ -28,13 +27,6 @@ class AppApplicationTest : BaseApplication() {
 
     override fun initDaggerApplicationComponent() {
         DaggerApplicationComponentTest.builder().create(this).inject(this)
-    }
-
-    private fun initSquare() {
-        InterceptorManager.Builder()
-                .addInterceptorFactory(InterceptorCommonsFactory())
-                .build()
-                .init(this)
     }
 
     private fun initFabric() {
