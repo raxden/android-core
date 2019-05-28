@@ -19,7 +19,7 @@ class BroadcastOperationManager(val activity: AppCompatActivity) {
         FINISH, FINISH_ALL
     }
 
-    fun sendOperation(operation: Operation) {
+    fun send(operation: Operation) {
         val intent = Intent(activity.packageName + OPERATION_ACTION)
         when (operation) {
             Operation.FINISH_ALL -> intent.putExtra(OPERATION, Operation.FINISH_ALL.ordinal)

@@ -10,15 +10,15 @@ ext {
     def kotlinVersion = '1.3.31'
 
     // dependencies
-    def rxAndroidVersion = '2.1.0'              // https://github.com/ReactiveX/RxAndroid
+    def rxAndroidVersion = '2.1.1'              // https://github.com/ReactiveX/RxAndroid
     def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
     def rxPermissionsVersion = '0.10.2'         // https://github.com/tbruyelle/RxPermissions
-    def roomVersion = '2.1.0-beta01'
-    def androidThreeTenVersion = '1.1.1'        // https://github.com/JakeWharton/ThreeTenABP
-    def crashlyticsVersion = '2.9.7'
-    def gsonVersion = '2.8.5'                  // https://github.com/google/gson
-    def daggerVersion = '2.16'                  // https://github.com/google/dagger
-    def glideVersion = '4.7.1'                  // https://github.com/bumptech/glide
+    def roomVersion = '2.1.0-beta01'            // https://developer.android.com/jetpack/androidx/releases/room
+    def androidThreeTenVersion = '1.2.0'        // https://github.com/JakeWharton/ThreeTenABP
+    def crashlyticsVersion = '2.10.1'           // https://fabric.io/kits/android/crashlytics/install
+    def gsonVersion = '2.8.5'                   // https://github.com/google/gson
+    def daggerVersion = '2.22.1'                // https://github.com/google/dagger
+    def glideVersion = '4.9.0'                  // https://github.com/bumptech/glide
     def okHttpVersion = '3.12.0'                // https://github.com/square/okhttp
     def retrofitVersion = '2.5.0'               // https://github.com/square/retrofit
     def timberVersion = '4.7.1'                 // https://github.com/JakeWharton/timber
