@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import com.core.commons.SDKUtils
 import kotlinx.android.synthetic.main.notice_dialog_view.view.*
 
 class NoticeDialogView : BaseComponentView {
@@ -131,7 +132,7 @@ class NoticeDialogView : BaseComponentView {
     }
 
     private fun setTextAppearance(textView: AppCompatTextView, textAppearance: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) textView.setTextAppearance(textAppearance)
+        if (SDKUtils.hasMarshmallow()) textView.setTextAppearance(textAppearance)
         else textView.setTextAppearance(context, textAppearance)
     }
 

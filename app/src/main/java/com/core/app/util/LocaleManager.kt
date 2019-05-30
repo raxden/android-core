@@ -11,6 +11,7 @@ import timber.log.Timber
 import java.util.*
 import androidx.core.os.ConfigurationCompat
 import androidx.core.os.LocaleListCompat
+import com.core.commons.SDKUtils
 
 object LocaleManager {
 
@@ -62,7 +63,7 @@ object LocaleManager {
     }
 
     private fun updateResources(context: Context, locale: Locale): Context = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> updateResourcesLocale(context, locale)
+        SDKUtils.hasNougat() -> updateResourcesLocale(context, locale)
         else -> updateResourcesLocaleLegacy(context, locale)
     }
 

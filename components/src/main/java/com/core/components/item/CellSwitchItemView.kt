@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.View
 import android.widget.CompoundButton
+import com.core.commons.SDKUtils
 import com.core.components.BaseComponentView
 import com.core.components.R
 import kotlinx.android.synthetic.main.cell_switch_item_view.view.*
@@ -85,7 +86,7 @@ class CellSwitchItemView : BaseComponentView {
     }
 
     private fun setTextAppearance(textView: AppCompatTextView, textAppearance: Int) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) textView.setTextAppearance(textAppearance)
+        if (SDKUtils.hasMarshmallow()) textView.setTextAppearance(textAppearance)
         else textView.setTextAppearance(context, textAppearance)
     }
 
