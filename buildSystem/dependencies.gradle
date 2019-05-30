@@ -48,8 +48,7 @@ ext {
     def firebaseLibs = [
             core     : [group: 'com.google.firebase', name: 'firebase-core', version: '16.0.6'],
             analytics: [group: 'com.google.firebase', name: 'firebase-analytics', version: '16.0.5'],
-            messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4'],
-            auth     : [group: 'com.google.firebase', name: 'firebase-auth', version: '16.0.5']
+            messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4']
     ]
 
     def daggerLibs = [
@@ -135,7 +134,6 @@ ext {
             [configuration: "implementation", dependency: firebaseLibs.core],
             [configuration: "implementation", dependency: firebaseLibs.analytics],
             [configuration: "implementation", dependency: firebaseLibs.messaging],
-            [configuration: "implementation", dependency: firebaseLibs.auth],
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
