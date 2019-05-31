@@ -10,7 +10,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import com.core.app.injector.scope.PerActivity
 import com.core.app.lifecycle.BaseActivityLifecycle
-import com.core.app.util.BroadcastOperationManager
 import com.core.commons.NetworkUtils
 import javax.inject.Inject
 
@@ -19,35 +18,63 @@ class NetworkActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity
 ) : BaseActivityLifecycle(activity) {
 
-    interface Callback {
-        fun onWifiAvailable(available: Boolean)
-
-        fun onNetworkAvailable(available: Boolean)
+    interface OnNetworkChangeListener {
+        fun onChange(available: Boolean)
     }
 
-    private val mNetworkBroadcastReceiver = object : BroadcastReceiver() {
+    interface OnWifiNetworkChangeListener {
+        fun onChange(available: Boolean)
+    }
+
+    private val networkBroadcastReceiver = object : BroadcastReceiver() {
 
         override fun onReceive(context: Context, intent: Intent) {
-            callback.onNetworkAvailable(NetworkUtils.isNetworkAvailable(context))
-            callback.onWifiAvailable(NetworkUtils.isWifiAvailable(context))
+            if (currentNetworkStatus != NetworkUtils.isNetworkAvailable(context)) {
+                currentNetworkStatus = !currentNetworkStatus
+                networkChangeListenerList.forEach { it.onChange(currentNetworkStatus) }
+            }
+            if (currentWifiStatus != NetworkUtils.isWifiAvailable(context)) {
+                currentWifiStatus = !currentWifiStatus
+                wifiNetworkChangeListenerList.forEach { it.onChange(currentWifiStatus) }
+            }
         }
     }
 
-    private val callback: Callback
+    private var currentNetworkStatus = false
+    private var currentWifiStatus = false
+    private val networkChangeListenerList: MutableList<OnNetworkChangeListener> = mutableListOf()
+    private val wifiNetworkChangeListenerList: MutableList<OnWifiNetworkChangeListener> = mutableListOf()
 
     init {
-        // lifecycle-aware components, no need to unsubscribe/remove observers.
-        @Suppress("UNCHECKED_CAST")
-        callback = activity as Callback
+        currentNetworkStatus = NetworkUtils.isNetworkAvailable(activity)
+        currentWifiStatus = NetworkUtils.isWifiAvailable(activity)
+    }
+
+    fun addOnNetworkChangeListener(listener: OnNetworkChangeListener) {
+        networkChangeListenerList.add(listener)
+    }
+
+    fun addOnWifiNetworkChangeListener(listener: OnWifiNetworkChangeListener) {
+        wifiNetworkChangeListenerList.add(listener)
+    }
+
+    fun removeOnNetworkChangeListener(listener: OnNetworkChangeListener) {
+        networkChangeListenerList.remove(listener)
+    }
+
+    fun removeOnWifiNetworkChangeListener(listener: OnWifiNetworkChangeListener) {
+        wifiNetworkChangeListenerList.remove(listener)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {
-        activity.registerReceiver(mNetworkBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
+        activity.registerReceiver(networkBroadcastReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {
-        activity.unregisterReceiver(mNetworkBroadcastReceiver)
+        networkChangeListenerList.clear()
+        wifiNetworkChangeListenerList.clear()
+        activity.unregisterReceiver(networkBroadcastReceiver)
     }
 }
