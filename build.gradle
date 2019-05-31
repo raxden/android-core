@@ -9,7 +9,6 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
         maven { url 'https://github.com/leonardocardoso/mvn-repo/raw/master/maven-deploy' }
         maven { url "https://plugins.gradle.org/m2/" }
-        maven { url 'https://dl.bintray.com/android/android-tools' }    // https://stackoverflow.com/questions/53704155/could-not-find-com-google-gmsgoogle-services4-0-1
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
@@ -27,11 +26,11 @@ allprojects {
         maven { url "https://maven.google.com" }
         maven { url "https://jitpack.io" }
         flatDir {
-            dirs  'libs'
+            dirs 'libs'
         }
     }
     ext {
-        minSdkVersion = 21
+        minSdkVersion = 21      // https://developer.android.com/about/dashboards
         targetSdkVersion = 28
         compileSdkVersion = 28
 
