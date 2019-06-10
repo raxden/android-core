@@ -57,6 +57,11 @@ abstract class BaseActivity : AppCompatActivity(),
         lifecycleObserverList.forEach { (it as? BaseActivityLifecycle)?.onCreate(savedInstanceState) }
     }
 
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
+    }
+    
     // =============== HasFragmentInjector =========================================================
 
     override fun supportFragmentInjector() = fragmentInjector
