@@ -61,7 +61,7 @@ abstract class BaseActivity : AppCompatActivity(),
         compositeDisposable.dispose()
         super.onDestroy()
     }
-    
+
     // =============== HasFragmentInjector =========================================================
 
     override fun supportFragmentInjector() = fragmentInjector
