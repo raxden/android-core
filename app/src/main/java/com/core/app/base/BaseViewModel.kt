@@ -12,8 +12,8 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var loaderManager: LoaderManager
     @Inject
     lateinit var errorManager: ErrorManager
-    @Inject
-    lateinit var compositeDisposable: CompositeDisposable
+
+    val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     /**
      * This method will be called when this ViewModel is created.
