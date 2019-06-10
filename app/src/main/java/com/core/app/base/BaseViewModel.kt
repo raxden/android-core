@@ -1,5 +1,6 @@
 package com.core.app.base
 
+import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import com.core.app.util.ErrorManager
 import com.core.app.util.LoaderManager
@@ -9,19 +10,21 @@ import javax.inject.Inject
 abstract class BaseViewModel : ViewModel() {
 
     @Inject
+    lateinit var resources: Resources
+    @Inject
     lateinit var loaderManager: LoaderManager
     @Inject
     lateinit var errorManager: ErrorManager
 
-    val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     /**
      * This method will be called when this ViewModel is created.
      */
-    open fun onCreated() {}
+    open fun onAttached() {}
 
     override fun onCleared() {
-        compositeDisposable.dispose()
+        compositeDisposable.clear()
         super.onCleared()
     }
 

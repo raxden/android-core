@@ -17,22 +17,22 @@ class LoaderManager(private val resources: Resources) {
 
     @Synchronized
     fun push(message: Int) {
-        counter.inc()
+        counter = counter.inc()
         status.postValue(true)
         this.message.postValue(resources.getString(message))
     }
 
     @Synchronized
     fun push(message: String) {
-        counter.inc()
+        counter = counter.inc()
         status.postValue(true)
         this.message.postValue(message)
     }
 
     @Synchronized
     fun pop() {
-        if (counter > 0) counter.dec()
-        else status.postValue(false)
+        if (counter > 0) counter = counter.dec()
+        if (counter == 0) status.postValue(false)
     }
 
     @Synchronized

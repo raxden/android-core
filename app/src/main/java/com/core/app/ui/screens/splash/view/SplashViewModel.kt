@@ -17,7 +17,7 @@ class SplashViewModel @Inject constructor() : BaseViewModel() {
 
     private val applicationReady: MutableLiveData<Boolean> = MutableLiveData()
 
-    override fun onCreated() {
+    override fun onAttached() {
         makeTime()
                 .subscribeWith(
                         onStart = { loaderManager.push("preparing application to launch...") },
