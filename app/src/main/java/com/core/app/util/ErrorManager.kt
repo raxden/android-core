@@ -27,10 +27,11 @@ class ErrorManager(private val activity: AppCompatActivity) {
                     is ConnectException -> message = activity.getString(R.string.unespected_timeout_message)
                     is SocketTimeoutException -> message = activity.getString(R.string.unespected_timeout_message)
                     is UnknownHostException -> message = activity.getString(R.string.unespected_timeout_message)
-                    else -> {
-
-                    }
+                    else -> message = activity.getString(R.string.unespected_error_message)
                 }
+            }
+            else -> {
+                if (BuildConfig.DEBUG) message = throwable.message ?: message
             }
         }
         set(code, title, message)
