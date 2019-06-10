@@ -18,5 +18,7 @@ object DatabaseModule {
     internal fun appDatabase(context: Context): AppDatabase = when {
         BuildConfig.FLAVOR == "mock" -> Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java)
         else -> Room.databaseBuilder(context, AppDatabase::class.java, "app_database.db")
-    }.build()
+    }
+            .fallbackToDestructiveMigration()
+            .build()
 }
