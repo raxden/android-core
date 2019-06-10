@@ -19,6 +19,8 @@ class RetrofitException internal constructor(
         val retrofit: Retrofit?
 ) : RuntimeException(exception) {
 
+    var parsedBody: Any? = null
+
     /** Identifies the event kind which triggered a [RetrofitException].  */
     enum class Kind {
         /** An [IOException] occurred while communicating to the server.  */
@@ -42,11 +44,13 @@ class RetrofitException internal constructor(
      */
     @Throws(IOException::class)
     fun <T> parseBodyErrorAs(type: Class<T>): T? {
+        if (parsedBody != null) return parsedBody as T
         if (response?.errorBody() == null) {
             return null
         }
         val converter = retrofit?.responseBodyConverter<T>(type, arrayOfNulls(0))
-        return converter?.convert(response.errorBody()!!)
+        parsedBody = converter?.convert(response.errorBody()!!)
+        return parsedBody as T
     }
 
     companion object {
