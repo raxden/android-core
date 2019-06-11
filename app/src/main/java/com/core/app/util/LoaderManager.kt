@@ -16,6 +16,12 @@ class LoaderManager(private val resources: Resources) {
     }
 
     @Synchronized
+    fun push() {
+        counter = counter.inc()
+        status.postValue(true)
+    }
+
+    @Synchronized
     fun push(message: Int) {
         counter = counter.inc()
         status.postValue(true)
