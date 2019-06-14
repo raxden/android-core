@@ -106,7 +106,7 @@ abstract class BaseActivityModule {
         @Provides
         @PerActivity
         internal fun dialogHelper(activity: AppCompatActivity): DialogHelper = DialogHelper(activity)
-        
+
         @JvmStatic
         @Provides
         @PerActivity
