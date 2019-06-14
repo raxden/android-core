@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.helper.AnimationHelper
+import com.core.app.helper.DialogHelper
 import com.core.app.helper.NavigationHelper
 import com.core.app.lifecycle.BaseActivityLifecycle
 import com.core.app.util.BroadcastOperationManager
@@ -26,6 +27,8 @@ abstract class BaseActivity : AppCompatActivity(),
 
     @Inject
     lateinit var navigationHelper: NavigationHelper
+    @Inject
+    lateinit var dialogHelper: DialogHelper
     @Inject
     lateinit var animationHelper: AnimationHelper
     @Inject

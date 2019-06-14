@@ -1,8 +1,10 @@
 package com.core.app.base.fragment
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
+import com.core.app.helper.DialogHelper
 import com.core.app.injector.module.LifecycleFragmentModule
 import com.core.app.injector.scope.PerFragment
 import com.core.app.util.PermissionManager
@@ -24,6 +26,7 @@ abstract class BaseFragmentModule {
 
         const val FRAGMENT_COMPOSITE_DISPOSABLE = "BaseFragmentModule.compositeDisposable"
         const val FRAGMENT_PERMISSION_MANAGER = "BaseFragmentModule.permissionManager"
+        const val FRAGMENT_DIALOG_HELPER = "BaseFragmentModule.dialogHelper"
 
         @JvmStatic
         @Provides
@@ -45,5 +48,11 @@ abstract class BaseFragmentModule {
                 rxPermissions: RxPermissions,
                 @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable
         ): PermissionManager = PermissionManager(context, rxPermissions, compositeDisposable)
+
+        @JvmStatic
+        @Provides
+        @Named(FRAGMENT_DIALOG_HELPER)
+        @PerFragment
+        internal fun dialogHelper(activity: AppCompatActivity): DialogHelper = DialogHelper(activity)
     }
 }

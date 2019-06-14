@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import com.core.app.BuildConfig
 import com.core.app.helper.AnimationHelper
+import com.core.app.helper.DialogHelper
 import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.LifecycleActivityModule
 import com.core.app.injector.module.ViewModelModule
@@ -101,6 +102,11 @@ abstract class BaseActivityModule {
         @PerActivity
         internal fun navigationHelper(activity: Activity): NavigationHelper = NavigationHelper(activity)
 
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun dialogHelper(activity: AppCompatActivity): DialogHelper = DialogHelper(activity)
+        
         @JvmStatic
         @Provides
         @PerActivity
