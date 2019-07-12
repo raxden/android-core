@@ -1,4 +1,4 @@
-package com.core.app.ui.screens.project.list.view
+package com.core.app.ui.screens.home.list
 
 import androidx.fragment.app.Fragment
 import com.core.app.base.fragment.BaseFragmentModule
@@ -11,7 +11,7 @@ import dagger.Module
  * Provides SampleMapFragment fragment dependencies.
  */
 @Module(includes = [BaseViewModelFragmentModule::class])
-abstract class ProjectListFragmentModule {
+abstract class HomeProjectListFragmentModule {
 
     /**
      * As per the contract specified in [BaseFragmentModule]; "This must be included in all
@@ -22,5 +22,5 @@ abstract class ProjectListFragmentModule {
      */
     @Binds
     @PerFragment
-    internal abstract fun fragment(fragment: ProjectListFragment): Fragment
+    internal abstract fun fragment(fragment: HomeProjectListFragment): Fragment
 }

@@ -6,7 +6,7 @@ import com.core.app.util.ViewModelKey
 import com.core.app.util.ViewModelProviderFactory
 import com.core.app.injector.scope.PerActivity
 import com.core.app.ui.screens.login.LoginViewModel
-import com.core.app.ui.screens.project.list.ProjectListViewModel
+import com.core.app.ui.screens.home.HomeViewModel
 import com.core.app.ui.screens.splash.SplashViewModel
 import dagger.Binds
 import dagger.Module
@@ -34,6 +34,6 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @PerActivity
-    @ViewModelKey(ProjectListViewModel::class)
-    internal abstract fun projectListViewModel(viewModel: ProjectListViewModel): ViewModel
+    @ViewModelKey(HomeViewModel::class)
+    internal abstract fun projectListViewModel(viewModel: HomeViewModel): ViewModel
 }

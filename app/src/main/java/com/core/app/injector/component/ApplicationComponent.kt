@@ -62,6 +62,6 @@ import javax.inject.Singleton
 ])
 interface ApplicationComponent : AndroidInjector<AppApplication> {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<AppApplication>()
+    @Component.Factory
+    abstract class Factory: AndroidInjector.Factory<AppApplication>
 }

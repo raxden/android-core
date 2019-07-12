@@ -6,9 +6,10 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
 import com.core.app.ui.screens.login.LoginActivity
-import com.core.app.ui.screens.project.list.ProjectListActivity
+import com.core.app.ui.screens.home.HomeActivity
 import com.core.app.ui.screens.splash.SplashActivity
 import com.core.commons.AppUtils
+import com.core.domain.Project
 import com.core.domain.User
 
 class NavigationHelper(private val activity: Activity) {
@@ -28,9 +29,16 @@ class NavigationHelper(private val activity: Activity) {
     }
 
     fun launchHome(user: User, finishCurrentActivity: Boolean = false) {
-        ProjectListActivity.intent(activity, user).run {
+        HomeActivity.intent(activity, user).run {
             ContextCompat.startActivity(activity, this, null)
         }
+        if (finishCurrentActivity) activity.finish()
+    }
+
+    fun launchProject(project: Project, finishCurrentActivity: Boolean = false) {
+//        ProjectDetailActivity.intent(activity, project).run {
+//            ContextCompat.startActivity(activity, this, null)
+//        }
         if (finishCurrentActivity) activity.finish()
     }
 

@@ -26,7 +26,7 @@ class AppApplication : BaseApplication() {
     }
 
     override fun initDaggerApplicationComponent() {
-        DaggerApplicationComponent.builder().create(this).inject(this)
+        DaggerApplicationComponent.factory().create(this).inject(this)
     }
 
     private fun initRxPlugins() {

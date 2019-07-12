@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.core.app.ui.screens.project.list.ProjectListViewModel" />
+            type="com.core.app.ui.screens.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:tint="@color/colorPrimary"
-            app:visibleGone="@{viewModel.projectModelList.isEmpty()}"
+            app:visibleGone="@{viewModel.projectList.isEmpty()}"
             app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"
             app:layout_constraintEnd_toEndOf="@+id/swipe_refresh_layout"
             app:layout_constraintStart_toStartOf="@+id/swipe_refresh_layout"

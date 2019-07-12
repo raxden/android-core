@@ -52,7 +52,7 @@
             android:windowSoftInputMode="adjustPan" />
 
         <activity
-            android:name="com.core.app.ui.screens.project.list.ProjectListActivity"
+            android:name="com.core.app.ui.screens.home.HomeActivity"
             android:windowSoftInputMode="adjustPan" />
 
     </application>
