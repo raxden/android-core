@@ -9,33 +9,35 @@ This project is created like a template to start another projets. It`s based in 
     Crashlytics - Library to register any crashes in app.
     ThreeTenABP - Library to use dates
 
-# Steps to configure project
+### Steps to configure project
 
     1. Rename androidApplicationId and testApplicationId in /build.gradle.
-    com.core.app -> com.yourcompanyname.yourprojectname
+    
+        com.core.app -> com.yourcompanyname.yourprojectname
 
     2. Register application in Firebase and download|replace google-services.json contained in
-app module. Remember that proyect has n(flavours) diferences configurations, dev and prod.
-Therefore you must register n(flavours) applications instead of one.
+    app module. Remember that proyect has n(flavours) diferences configurations, dev and prod.
+    herefore you must register n(flavours) applications instead of one.
 
-    {androidApplicationId}
-    {androidApplicationId}.dev
-    {androidApplicationId}.mock
+        {androidApplicationId}
+        {androidApplicationId}.dev
+        {androidApplicationId}.mock
 
     3. Create|Replace release.jks keystore
 
-    buildSystem/release.jks
+        buildSystem/release.jks
 
-    6. To use Crashlytics, rename fabric.properties.template -> fabric.properties To personalize configuration like distribution or release notes, modify preferences in build.gradle.
+    6. To use Crashlytics, rename fabric.properties.template -> fabric.properties To personalize configuration like distribution or
+    release notes, modify preferences in build.gradle.
 
     7. Define what languages will be use the application in com.omvp.app.injector.module.LocaleModule
 
     8. Defines path to store pictures in device in: (Replace package com.core.app by yours)
 
-    dev/res/xml/provider_paths.xml
-    prod/res/xml/provider_paths.xml
+        dev/res/xml/provider_paths.xml
+        prod/res/xml/provider_paths.xml
 
-# Tips
+### Tips
 
     1. All project configuration is located in build.gradle
     2. Library dependency configuration is located in buildSystem/dependencies.gradle.
