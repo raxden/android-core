@@ -1,4 +1,4 @@
-============ HOW IS THAT ===============================================
+# How is that
 
     This project is created like a template to start another projets. 
     It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, 
@@ -11,9 +11,9 @@
     - Crashlytics - Library to register any crash in app.
     - ThreeTenABP - Library to use dates
 
-============ STEPS TO CONFIGURE PROJECT ======================================
+# Steps to configure project
 
-    1. Rename androidApplicationId and testApplicationId in build.gradle.
+    1. Rename androidApplicationId and testApplicationId in /build.gradle.
         com.core.app -> com.yourcompanyname.yourprojectname
 
     2. Register application in Firebase and download|replace google-services.json contained in
