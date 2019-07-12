@@ -1,29 +1,33 @@
 package com.core.commons
 
 class Pager<T> constructor(
-        var page: Int = 0,
-        var pageSize: Int = 50
+        private var page: Int = 0,
+        private var pageSize: Int = 50
 ) {
 
     private var initPage: Int = page
-    var pageData: MutableMap<Int, MutableList<T>> = mutableMapOf()
+    private var moreResults: Boolean = true
+    private var pageData: MutableMap<Int, MutableList<T>> = mutableMapOf()
 
-    fun addPage(page: Int, data: MutableList<T>): Pager<T> {
-        pageData[page] = data
+    fun addPageData(page: Int? = null, data: MutableList<T>): Pager<T> {
+        if (page != null)
+            pageData[page] = data
+        else
+            pageData[this.page] = data
         return this
     }
 
-    fun getPage(page: Int): MutableList<T> = pageData[page] ?: mutableListOf()
+    fun hasPageData(page: Int? = null) = getPageData(page).isNotEmpty()
 
-    fun getData(): MutableList<T> {
-        val data = mutableListOf<T>()
-        pageData.values.forEach { data.addAll(it) }
-        return data
+    fun getPageData(page: Int? = null) = page?.let {
+        pageData[page] ?: mutableListOf()
+    } ?: pageData[this.page] ?: mutableListOf()
+
+    fun getAllData() = mutableListOf<T>().also { list ->
+        pageData.values.forEach { list.addAll(it) }
     }
 
-    fun remove(item: T) {
-        pageData.values.forEach { it.remove(item) }
-    }
+    fun remove(item: T) = pageData.values.forEach { it.remove(item) }
 
     fun next(): Pager<T> {
         page = page.inc()
@@ -33,6 +37,26 @@ class Pager<T> constructor(
     fun restart(): Pager<T> {
         page = initPage
         pageData.clear()
+        moreResults = true
         return this
     }
+
+    fun clear(): Pager<T> {
+        page = initPage
+        pageData.clear()
+        moreResults = true
+        return this
+    }
+
+    fun setMoreResults(value: Boolean) {
+        moreResults = value
+    }
+
+    fun currentPage() = page
+
+    fun pageSize() = pageSize
+
+    fun hasMoreResults() = moreResults
+
+    fun isFirstPage() = initPage == page
 }

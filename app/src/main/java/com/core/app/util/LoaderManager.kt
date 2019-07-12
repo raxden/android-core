@@ -1,36 +1,30 @@
 package com.core.app.util
 
-import android.content.res.Resources
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import timber.log.Timber
 
-class LoaderManager(private val resources: Resources) {
+class LoaderManager {
 
-    private val status: MutableLiveData<Boolean> = MutableLiveData()
-    private val message: MutableLiveData<String> = MutableLiveData()
+    val status: MutableLiveData<Boolean> = MutableLiveData()
+    val message: MutableLiveData<Int> = MutableLiveData()
     private var counter: Int = 0
 
     init {
         status.postValue(false)
-        message.postValue("")
+        message.postValue(0)
     }
 
     @Synchronized
     fun push() {
         counter = counter.inc()
+        Timber.d("[push]counter: %s", counter)
         status.postValue(true)
     }
 
     @Synchronized
     fun push(message: Int) {
         counter = counter.inc()
-        status.postValue(true)
-        this.message.postValue(resources.getString(message))
-    }
-
-    @Synchronized
-    fun push(message: String) {
-        counter = counter.inc()
+        Timber.d("[push]counter: %s", counter)
         status.postValue(true)
         this.message.postValue(message)
     }
@@ -38,6 +32,7 @@ class LoaderManager(private val resources: Resources) {
     @Synchronized
     fun pop() {
         if (counter > 0) counter = counter.dec()
+        Timber.d("[pop]counter: %s", counter)
         if (counter == 0) status.postValue(false)
     }
 
@@ -46,9 +41,4 @@ class LoaderManager(private val resources: Resources) {
         counter = 0
         status.postValue(false)
     }
-
-    fun getStatus(): LiveData<Boolean> = status
-
-    fun getMessage(): LiveData<String> = message
-
 }

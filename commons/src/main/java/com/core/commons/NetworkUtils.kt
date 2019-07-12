@@ -18,8 +18,6 @@ package com.core.commons
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
-import android.os.Build
 
 object NetworkUtils {
 
@@ -39,7 +37,7 @@ object NetworkUtils {
     }
 
     private fun getConnectionType(cm: ConnectivityManager): Int {
-        return if (SDKUtils.hasMarshmallow()) {
+        return if (AppUtils.hasMarshmallow()) {
             cm.getNetworkCapabilities(cm.activeNetwork).let {
                 when {
                     it.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> 2

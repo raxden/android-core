@@ -4,8 +4,9 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.util.AttributeSet
 import com.core.app.R
+import com.core.app.base.component.BaseComponentBindingView
 import com.core.app.databinding.ProjectListItemViewBinding
-import com.core.app.model.ProjectModel
+import com.core.domain.Project
 
 class ProjectListItemView @JvmOverloads constructor(
         context: Context,
@@ -24,10 +25,8 @@ class ProjectListItemView @JvmOverloads constructor(
 
     override fun onBindingCreated(binding: ProjectListItemViewBinding) {}
 
-    override fun onLoadData() {}
-
-    fun setModel(model: ProjectModel) {
-        mBinding.model = model
+    fun setItem(item: Project) {
+        mBinding.item = item
         mBinding.executePendingBindings()
     }
 }

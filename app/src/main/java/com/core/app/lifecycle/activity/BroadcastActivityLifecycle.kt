@@ -3,24 +3,24 @@ package com.core.app.lifecycle.activity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
-import com.core.app.injector.scope.PerActivity
 import com.core.app.lifecycle.BaseActivityLifecycle
-import com.core.app.util.BroadcastOperationManager
+import com.core.app.util.BroadcastManager
 import javax.inject.Inject
 
-@PerActivity
 class BroadcastActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity,
-        private val broadcastOperationManager: BroadcastOperationManager
+        private val broadcastManager: BroadcastManager
 ) : BaseActivityLifecycle(activity) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {
-        broadcastOperationManager.registerReceiver()
+        broadcastManager.registerReceiver()
+        (activity as? BroadcastManager.Listener)?.let { broadcastManager.addListener(it) }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     private fun onDestroy() {
-        broadcastOperationManager.unregisterReceiver()
+        (activity as? BroadcastManager.Listener)?.let { broadcastManager.removeListener(it) }
+        broadcastManager.unregisterReceiver()
     }
 }

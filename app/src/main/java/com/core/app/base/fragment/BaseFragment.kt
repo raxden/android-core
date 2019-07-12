@@ -2,6 +2,8 @@ package com.core.app.base.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
@@ -10,6 +12,9 @@ import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_PERMISSI
 import com.core.app.helper.AnimationHelper
 import com.core.app.helper.DialogHelper
 import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
+import com.core.app.lifecycle.BaseFragmentLifecycle
+import com.core.app.util.ErrorManager
+import com.core.app.util.KeyboardManager
 import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -44,10 +49,8 @@ import javax.inject.Named
  * **VIEW BINDING**
  * This fragment handles view bind and unbinding.
  */
-abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Fragment(),
+abstract class BaseFragment : DialogFragment(),
         HasSupportFragmentInjector {
-
-    interface BaseFragmentCallback
 
     @Inject
     @field:Named(FRAGMENT_DIALOG_HELPER)
@@ -58,21 +61,31 @@ abstract class BaseFragment<TCallback: BaseFragment.BaseFragmentCallback> : Frag
     @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
     lateinit var compositeDisposable: CompositeDisposable
     @Inject
+    lateinit var keyboardManager: KeyboardManager
+    @Inject
     @field:Named(FRAGMENT_PERMISSION_MANAGER)
     lateinit var permissionManager: PermissionManager
+    @Inject
+    lateinit var errorManager: ErrorManager
     @Inject
     @field:Named(LIFECYCLE_FRAGMENT_OBSERVER)
     lateinit var lifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
     @Inject
     lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
-    @Inject
-    lateinit var callback: TCallback
 
     // =============== LifeCycle ===================================================================
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+
+        lifecycleObserverList.forEach { (it as? BaseFragmentLifecycle)?.onCreate(savedInstanceState) }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleObserverList.forEach { (it as? BaseFragmentLifecycle)?.onViewCreated() }
     }
 
     // =============== HasFragmentInjector =========================================================

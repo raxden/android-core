@@ -1,6 +1,7 @@
 package com.core.data.network
 
 import android.text.TextUtils
+import com.core.commons.AssetsUtils
 import com.core.data.BaseTest
 import com.core.data.network.entity.ErrorEntity
 import com.core.data.network.entity.ProjectEntity
@@ -11,7 +12,6 @@ import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapter
 import com.core.data.network.gateway.retrofit.exception.RetrofitException
 import com.core.data.network.gateway.retrofit.service.AppRetrofitService
 import com.google.gson.GsonBuilder
-import com.raxdenstudios.commons.util.AssetsUtils
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Before
 import org.junit.Test

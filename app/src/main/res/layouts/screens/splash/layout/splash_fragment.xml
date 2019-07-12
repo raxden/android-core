@@ -5,53 +5,40 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
-            type="com.core.app.ui.screens.splash.view.SplashViewModel" />
+            type="com.core.app.ui.screens.splash.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        tools:background="@color/teal">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:tint="@color/white"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/logo_github" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/version_name_view"
+            style="@style/CodeFont.Caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:visibility="visible"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Versión 1.0.0"
-            tools:visibility="visible" />
-
-        <com.core.components.ProgressView
-            android:id="@+id/content_loading_progress_bar_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:visibleGone="@{viewModel.loader.status}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.92"
-            app:progressBackgroundColor="#00000000"
-            app:progressText="@{viewModel.loader.message}"
-            tools:visibility="visible" />
+            app:text="@{viewModel.version}"
+            tools:text="Versión 1.0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

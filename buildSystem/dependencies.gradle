@@ -50,8 +50,7 @@ ext {
     def firebaseLibs = [
             core     : [group: 'com.google.firebase', name: 'firebase-core', version: '16.0.6'],
             analytics: [group: 'com.google.firebase', name: 'firebase-analytics', version: '16.0.5'],
-            messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4'],
-            config   : [group: 'com.google.firebase', name: 'firebase-config', version: '17.0.0']
+            messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4']
     ]
 
     def daggerLibs = [
@@ -119,14 +118,11 @@ ext {
             app       : ':app',
             data      : ':data',
             domain    : ':domain',
-            commons   : ':commons',
-            components: ':components',
-            resources : ':resources'
+            commons   : ':commons'
     ]
 
     appDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
-            [configuration: "implementation", dependency: project(modules.components)],
             [configuration: "implementation", dependency: project(modules.domain)],
             [configuration: "implementation", dependency: project(modules.data)],
 
@@ -137,7 +133,6 @@ ext {
             [configuration: "implementation", dependency: firebaseLibs.core],
             [configuration: "implementation", dependency: firebaseLibs.analytics],
             [configuration: "implementation", dependency: firebaseLibs.messaging],
-            [configuration: "implementation", dependency: firebaseLibs.config],
             [configuration: "implementation", dependency: daggerLibs.androidSupport],
             [configuration: "kapt", dependency: daggerLibs.compiler],
             [configuration: "kapt", dependency: daggerLibs.androidProcessor],
@@ -230,19 +225,7 @@ ext {
             [configuration: "testImplementation", dependency: robolectricLibs.multidex]
     ]
 
-    componentsDependencies = [
-            [configuration: "implementation", dependency: project(modules.commons)],
-
-            [configuration: "implementation", dependency: support.material],
-            [configuration: "implementation", dependency: support.constraintLayout],
-            [configuration: "implementation", dependency: kotlinLibs.core],
-            [configuration: "implementation", dependency: libs.threetenabp],
-            [configuration: "implementation", dependency: libs.timber]
-    ]
-
     commonsDependencies = [
-            [configuration: "implementation", dependency: project(modules.resources)],
-
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: kotlinLibs.core],
             [configuration: "implementation", dependency: rxLibs.android],
@@ -253,7 +236,4 @@ ext {
             [configuration: "implementation", dependency: glideLibs.core],
             [configuration: "implementation", dependency: mockitoLibs.mockito]
     ]
-
-    resourcesDependencies = []
-
 }

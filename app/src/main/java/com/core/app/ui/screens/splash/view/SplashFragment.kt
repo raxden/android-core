@@ -1,16 +1,15 @@
 package com.core.app.ui.screens.splash.view
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.SplashFragmentBinding
+import com.core.app.ui.screens.splash.SplashViewModel
+import com.core.commons.extension.startFadeInAnimation
 
-class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, SplashFragment.FragmentCallback>() {
-
-    interface FragmentCallback : AppFragmentCallback {
-        fun launchLogin()
-    }
+class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding>() {
 
     override val viewModelClass: Class<SplashViewModel>
         get() = SplashViewModel::class.java
@@ -21,9 +20,15 @@ class SplashFragment : AppFragment<SplashViewModel, SplashFragmentBinding, Splas
         }
     }
 
-    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: SplashViewModel) {
-        viewModel.isApplicationReadyToLaunch().observe(owner, Observer { isReady ->
-            if (isReady) callback.launchLogin()
-        })
+    override fun onBindingCreated(binding: SplashFragmentBinding) {
+        super.onBindingCreated(binding)
+        binding.logoImageView.apply {
+            postDelayed({
+                visibility = View.VISIBLE
+                startFadeInAnimation()
+            }, 1000)
+        }
     }
+
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: SplashViewModel) {}
 }

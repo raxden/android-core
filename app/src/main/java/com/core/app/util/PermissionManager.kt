@@ -1,7 +1,7 @@
 package com.core.app.util
 
 import android.Manifest
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import com.core.app.R
 import com.core.commons.extension.subscribeWith
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,9 +12,10 @@ import io.reactivex.rxkotlin.addTo
 import timber.log.Timber
 
 class PermissionManager(
-        private val context: Context,
-        private val permissions: RxPermissions,
-        private val compositeDisposable: CompositeDisposable) {
+        private val activity: AppCompatActivity,
+        private val rxPermissions: RxPermissions,
+        private val compositeDisposable: CompositeDisposable
+) {
 
     interface Callback {
         fun onPermissionGranted(permission: Permission)
@@ -23,16 +24,25 @@ class PermissionManager(
 
     private var requestingPermission: Boolean = false
 
-    fun hasPermission(permission: String): Boolean = permissions.isGranted(permission)
+    fun hasPermission(permission: String): Boolean = rxPermissions.isGranted(permission)
 
     fun requestPermission(callback: Callback, vararg permissions: String) {
         if (requestingPermission) return
-        this.permissions.requestEach(*permissions)
+        this.rxPermissions.requestEach(*permissions)
                 .subscribeWith(
-                        onStart = { requestingPermission = true },
-                        onNext = { handlePermission(it, callback) },
-                        onError = { Timber.e(it) },
-                        onComplete = { requestingPermission = false }
+                        onStart = {
+                            requestingPermission = true
+                        },
+                        onNext = {
+                            handlePermission(it, callback)
+                        },
+                        onError = {
+                            requestingPermission = false
+                            Timber.e(it)
+                        },
+                        onComplete = {
+                            requestingPermission = false
+                        }
                 )
                 .addTo(compositeDisposable)
     }
@@ -55,7 +65,7 @@ class PermissionManager(
     }
 
     private fun showRequestPermissionRationale(title: Int, message: Int, positive: Int, negative: Int, permission: Permission, callback: Callback) {
-        MaterialAlertDialogBuilder(context)
+        MaterialAlertDialogBuilder(activity)
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(positive) { _, _ -> requestPermission(callback, permission.name) }

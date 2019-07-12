@@ -2,7 +2,7 @@ package com.core.app.injector.module
 
 import android.app.Application
 import com.core.app.ui.screens.login.view.LoginFragment
-import com.core.app.ui.screens.project.list.view.ProjectListFragment
+import com.core.app.ui.screens.home.list.HomeProjectListFragment
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.app.util.TrackerManager
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -27,7 +27,7 @@ object AnalyticsModule {
     internal fun screensToTrack(): MutableMap<String, String> = mutableMapOf(
             Pair(SplashFragment::class.java.name, ""),
             Pair(LoginFragment::class.java.name, ""),
-            Pair(ProjectListFragment::class.java.name, "project_list"))
+            Pair(HomeProjectListFragment::class.java.name, "project_list"))
 
     @JvmStatic
     @Provides

@@ -29,7 +29,6 @@ class DialogHelper {
             val ft = fragmentManager.beginTransaction()
             ft.add(dialog, tag)
             ft.commitAllowingStateLoss()
-            //                show(fragmentManager, tag);
         } catch (e: IllegalStateException) {
             Timber.e(e)
         }

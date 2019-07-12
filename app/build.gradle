@@ -45,8 +45,7 @@ android {
                             'src/main/res/layouts/components',
                             'src/main/res/layouts/screens/login',
                             'src/main/res/layouts/screens/splash',
-                            'src/main/res/layouts/screens/project/list',
-                            'src/main/res/layouts/screens/project/detail',
+                            'src/main/res/layouts/screens/home',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]

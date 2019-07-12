@@ -17,22 +17,15 @@ package com.core.commons
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.util.Log
 import com.core.commons.extension.closeSilently
 import com.core.commons.extension.readContent
 import timber.log.Timber
-
 import java.io.IOException
 import java.io.InputStream
 import java.io.ObjectInputStream
-import java.util.Properties
+import java.util.*
 
-/**
- *
- */
 object AssetsUtils {
-
-    private val TAG = AssetsUtils::class.java.simpleName
 
     fun getDrawable(context: Context, name: String): Drawable? {
         var drawable: Drawable? = null

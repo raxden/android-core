@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseViewFragment<VDB : ViewDataBinding, TCallback : BaseViewFragment.BaseViewFragmentCallback>
-    : BaseFragment<TCallback>() {
-
-    interface BaseViewFragmentCallback : BaseFragmentCallback
+abstract class BaseViewFragment<VDB : ViewDataBinding>
+    : BaseFragment() {
 
     protected abstract val layoutId: Int
     lateinit var binding: VDB

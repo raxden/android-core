@@ -3,8 +3,6 @@ package com.core.app.base.activity
 import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
-import android.os.Bundle
-import androidx.fragment.app.FragmentManager
 import androidx.appcompat.app.AppCompatActivity
 import com.core.app.BuildConfig
 import com.core.app.helper.AnimationHelper
@@ -13,11 +11,7 @@ import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.LifecycleActivityModule
 import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
-import com.core.app.util.BroadcastOperationManager
-import com.core.app.util.ErrorManager
-import com.core.app.util.LoaderManager
-import com.core.app.util.PermissionManager
-import com.core.commons.extension.getExtras
+import com.core.app.util.*
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Binds
 import dagger.Module
@@ -58,34 +52,23 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun extras(activity: AppCompatActivity): Bundle? = activity.getExtras()
-
-        @JvmStatic
-        @Provides
-        @PerActivity
         internal fun compositeDisposable(): CompositeDisposable = CompositeDisposable()
 
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun fragmentManager(activity: AppCompatActivity): FragmentManager = activity.supportFragmentManager
+        internal fun rxPermissions(
+                activity: AppCompatActivity
+        ): RxPermissions = RxPermissions(activity).apply { setLogging(BuildConfig.DEBUG) }
 
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun rxPermissions(activity: AppCompatActivity): RxPermissions = RxPermissions(activity).apply {
-            setLogging(BuildConfig.DEBUG)
-        }
-
-        @JvmStatic
-        @Provides
-        @PerActivity
-        internal fun permissionManager(context: Context, rxPermissions: RxPermissions, compositeDisposable: CompositeDisposable): PermissionManager = PermissionManager(context, rxPermissions, compositeDisposable)
-
-        @JvmStatic
-        @Provides
-        @PerActivity
-        internal fun loaderManager(resources: Resources): LoaderManager = LoaderManager(resources)
+        internal fun permissionManager(
+                activity: AppCompatActivity,
+                rxPermissions: RxPermissions,
+                compositeDisposable: CompositeDisposable
+        ): PermissionManager = PermissionManager(activity, rxPermissions, compositeDisposable)
 
         @JvmStatic
         @Provides
@@ -95,12 +78,25 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun broadcastOperationManager(activity: AppCompatActivity): BroadcastOperationManager = BroadcastOperationManager(activity)
+        internal fun broadcastManager(activity: AppCompatActivity): BroadcastManager = BroadcastManager(activity)
 
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun navigationHelper(activity: Activity): NavigationHelper = NavigationHelper(activity)
+        internal fun keyboardManager(activity: AppCompatActivity): KeyboardManager = KeyboardManager(activity)
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun takePictureManager(
+                activity: AppCompatActivity,
+                permissionManager: PermissionManager
+        ): TakePictureManager = TakePictureManager(activity.supportFragmentManager, permissionManager)
+
+        @JvmStatic
+        @Provides
+        @PerActivity
+        internal fun navigationHelper(activity: AppCompatActivity): NavigationHelper = NavigationHelper(activity)
 
         @JvmStatic
         @Provides
@@ -110,6 +106,6 @@ abstract class BaseActivityModule {
         @JvmStatic
         @Provides
         @PerActivity
-        internal fun animationHelper(context: Context): AnimationHelper = AnimationHelper(context)
+        internal fun animationHelper(activity: AppCompatActivity): AnimationHelper = AnimationHelper(activity)
     }
 }

@@ -5,13 +5,9 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.core.app.AppFragment
 import com.core.app.databinding.LoginFragmentBinding
-import com.core.domain.Account
+import com.core.app.ui.screens.login.LoginViewModel
 
-class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFragment.FragmentCallback>() {
-
-    interface FragmentCallback : AppFragmentCallback {
-        fun onLoginSuccess()
-    }
+class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding>() {
 
     override val viewModelClass: Class<LoginViewModel>
         get() = LoginViewModel::class.java
@@ -22,7 +18,5 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding, LoginFra
         }
     }
 
-    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: LoginViewModel) {
-        viewModel.userLogged.observe(owner, Observer { callback.onLoginSuccess() })
-    }
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: LoginViewModel) {}
 }

@@ -18,6 +18,7 @@ import javax.inject.Singleton
     AnalyticsModule::class,
     RepositoryModule::class,
     UseCaseModule::class,
+    PreferencesModule::class,
     NetworkModule::class,
     DatabaseModule::class
 ])
