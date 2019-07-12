@@ -29,9 +29,9 @@ This project is created like a template to start another projets. It`s based in 
     
         com.core.app -> com.yourcompanyname.yourprojectname
 
-    2. Register application in Firebase and download|replace google-services.json contained in
-    app module. Remember that proyect has n(flavours) diferences configurations, dev and prod.
-    herefore you must register n(flavours) applications instead of one.
+    2. To use Firebase in project, register application in Firebase and download|replace google-services.json contained in
+    app module. That proyect has n(flavours) diferences configurations. Therefore you must register n(flavours) 
+    applications instead of one.
 
         {androidApplicationId}
         {androidApplicationId}.dev
