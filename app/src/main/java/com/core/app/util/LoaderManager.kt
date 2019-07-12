@@ -1,48 +1,44 @@
 package com.core.app.util
 
-import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import timber.log.Timber
 
-class LoaderManager(val mContext: Context) {
+class LoaderManager {
 
-    private val mStatus: MutableLiveData<Boolean> = MutableLiveData()
-    private val mMessage: MutableLiveData<String> = MutableLiveData()
-    private var mCounter: Int = 0
+    val status: MutableLiveData<Boolean> = MutableLiveData()
+    val message: MutableLiveData<Int> = MutableLiveData()
+    private var counter: Int = 0
 
     init {
-        mStatus.postValue(false)
-        mMessage.postValue("")
+        status.postValue(false)
+        message.postValue(0)
+    }
+
+    @Synchronized
+    fun push() {
+        counter = counter.inc()
+        Timber.d("[push]counter: %s", counter)
+        status.postValue(true)
     }
 
     @Synchronized
     fun push(message: Int) {
-        mCounter.inc()
-        mStatus.postValue(true)
-        mMessage.postValue(mContext.resources.getString(message))
-    }
-
-    @Synchronized
-    fun push(message: String) {
-        mCounter.inc()
-        mStatus.postValue(true)
-        mMessage.postValue(message)
+        counter = counter.inc()
+        Timber.d("[push]counter: %s", counter)
+        status.postValue(true)
+        this.message.postValue(message)
     }
 
     @Synchronized
     fun pop() {
-        if (mCounter > 0) mCounter.dec()
-        else mStatus.postValue(false)
+        if (counter > 0) counter = counter.dec()
+        Timber.d("[pop]counter: %s", counter)
+        if (counter == 0) status.postValue(false)
     }
 
     @Synchronized
     fun clear() {
-        mCounter = 0
-        mStatus.postValue(false)
+        counter = 0
+        status.postValue(false)
     }
-
-    fun getStatus(): LiveData<Boolean> = mStatus
-
-    fun getMessage(): LiveData<String> = mMessage
-
 }

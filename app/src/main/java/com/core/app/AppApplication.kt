@@ -4,10 +4,10 @@ import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.core.app.base.BaseApplication
-import com.core.app.util.AppUrbanAirshipNotificationFactory
+import com.core.app.injector.component.DaggerApplicationComponent
 import com.core.app.util.CrashReportingTree
-import com.urbanairship.UAirship
 import io.fabric.sdk.android.Fabric
+import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
 
 /**
@@ -19,20 +19,21 @@ class AppApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
-//        initFabric()
+        initRxPlugins()
+        initFabric()
         initTimber()
         initTreeTen()
-//        initUrbanAirship()
     }
 
-//    override fun attachBaseContext(base: Context) {
-//        super.attachBaseContext(LanguageManager(base).setDefaultLocale())
-//    }
+    override fun initDaggerApplicationComponent() {
+        DaggerApplicationComponent.factory().create(this).inject(this)
+    }
 
-//    override fun onConfigurationChanged(newConfig: Configuration) {
-//        super.onConfigurationChanged(newConfig)
-//        LanguageManager(this).setDefaultLocale()
-//    }
+    private fun initRxPlugins() {
+        RxJavaPlugins.setErrorHandler { throwable: Throwable ->
+            Timber.d(throwable)
+        }
+    }
 
     private fun initFabric() {
         // Initializes Fabric for builds that don't use the debug build type.
@@ -52,12 +53,4 @@ class AppApplication : BaseApplication() {
         // Initialize the timezone information
         AndroidThreeTen.init(this)
     }
-
-    private fun initUrbanAirship() {
-        UAirship.takeOff(this) {
-            it.pushManager.userNotificationsEnabled = true
-            it.pushManager.notificationFactory = AppUrbanAirshipNotificationFactory(applicationContext)
-        }
-    }
-
 }

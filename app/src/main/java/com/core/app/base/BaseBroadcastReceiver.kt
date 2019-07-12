@@ -13,7 +13,7 @@ abstract class BaseBroadcastReceiver : BroadcastReceiver() {
 
     @Inject
     @field:Named(DISPOSABLE_BROADCAST_RECEIVER_MANAGER)
-    lateinit var mCompositeDisposable: CompositeDisposable
+    lateinit var compositeDisposable: CompositeDisposable
 
     override fun onReceive(context: Context, intent: Intent) {
         AndroidInjection.inject(this, context)

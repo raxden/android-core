@@ -1,7 +1,9 @@
 package com.core.app.injector.module
 
+import com.core.data.repository.AccountRepositoryImpl
 import com.core.data.repository.ProjectRepositoryImpl
 import com.core.data.repository.UserRepositoryImpl
+import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.ProjectRepository
 import com.core.domain.repository.UserRepository
 import dagger.Binds
@@ -13,10 +15,13 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
+    internal abstract fun accountRepository(repository: AccountRepositoryImpl): AccountRepository
+
+    @Binds
+    @Singleton
     internal abstract fun projectRepository(repository: ProjectRepositoryImpl): ProjectRepository
 
     @Binds
     @Singleton
     internal abstract fun userRepository(repository: UserRepositoryImpl): UserRepository
-
 }

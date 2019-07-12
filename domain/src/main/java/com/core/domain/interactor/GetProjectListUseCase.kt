@@ -5,6 +5,7 @@ import io.reactivex.Maybe
 
 interface GetProjectListUseCase {
 
-    fun execute(userId: String): Maybe<List<Project>>
+    fun execute(): Maybe<List<Project>>
 
+    fun execute(username: String): Maybe<List<Project>>
 }

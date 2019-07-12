@@ -11,13 +11,13 @@ import android.text.style.ClickableSpan
 import android.text.style.URLSpan
 import android.view.View
 import android.widget.TextView
+import com.core.commons.AppUtils
 import com.core.commons.ValidationHelper
-import com.raxdenstudios.commons.util.SDKUtils
 
 @Suppress("DEPRECATION")
 @TargetApi(23)
 fun TextView.setCompatTextAppearance(resId: Int) {
-    if (SDKUtils.hasMarshmallow()) setTextAppearance(resId)
+    if (AppUtils.hasMarshmallow()) setTextAppearance(resId)
     else setTextAppearance(context, resId)
 }
 
@@ -52,7 +52,7 @@ fun TextView.setHtml(html: String, listener: OnHyperlinkClickListener? = null) {
 @Suppress("DEPRECATION")
 @TargetApi(24)
 private fun fromHtml(html: String): Spanned {
-    return if (SDKUtils.hasNougat()) Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
+    return if (AppUtils.hasNougat()) Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY)
     else Html.fromHtml(html)
 }
 

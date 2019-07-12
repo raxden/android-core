@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="AppTheme.Translucent.Navigation" parent="BaseTheme.Translucent.Navigation">
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:windowTranslucentStatus">false</item>
-    </style>
-
-</resources>

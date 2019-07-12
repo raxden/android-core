@@ -2,17 +2,20 @@ package com.core.commons.extension
 
 import io.reactivex.Completable
 import io.reactivex.Maybe
+import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableCompletableObserver
 import io.reactivex.observers.DisposableMaybeObserver
+import io.reactivex.observers.DisposableObserver
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
 private val onStartStub: () -> Unit = {}
 private val onErrorStub: (e: Throwable) -> Unit = { _ -> }
 private val onSuccessStub: (Any) -> Unit = {}
+private val onNextStup: (Any) -> Unit = {}
 private val onCompleteStub: () -> Unit = {}
 
 fun <T : Any> Single<T>.subscribeWith(
@@ -53,6 +56,31 @@ fun <T : Any> Maybe<T>.subscribeWith(
 
             override fun onComplete() {
                 onComplete()
+            }
+
+            override fun onError(e: Throwable) {
+                onError(e)
+            }
+        })
+
+fun <T : Any> Observable<T>.subscribeWith(
+        onStart: () -> Unit = onStartStub,
+        onError: (e: Throwable) -> Unit = onErrorStub,
+        onNext: (t: T) -> Unit = onNextStup,
+        onComplete: () -> Unit = onCompleteStub
+): Disposable = subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeWith(object : DisposableObserver<T>() {
+            override fun onStart() {
+                onStart()
+            }
+
+            override fun onComplete() {
+                onComplete()
+            }
+
+            override fun onNext(t: T) {
+                onNext(t)
             }
 
             override fun onError(e: Throwable) {

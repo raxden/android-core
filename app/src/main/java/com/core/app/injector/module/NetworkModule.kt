@@ -5,8 +5,9 @@ import com.google.gson.Gson
 import com.core.app.BuildConfig
 import com.core.app.R
 import com.core.data.network.gateway.AppGateway
+import com.core.data.network.gateway.stream.AppFileStreamGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway
-import com.core.data.network.gateway.retrofit.callAdapter.RxErrorHandlingCallAdapterFactory
+import com.core.data.network.gateway.retrofit.adapter.RxErrorHandlingCallAdapterFactory
 import com.core.data.network.gateway.retrofit.service.AppRetrofitService
 import com.core.data.network.interceptor.HttpCacheInterceptor
 import dagger.Module
@@ -17,7 +18,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import java.io.File
 import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
@@ -25,6 +26,8 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
 
+    private const val CACHE_DIRECTORY = "responses"
+    private const val CACHE_SIZE = 10 * 1024 * 1024         // 10 MiB;
     private const val CACHE_MAX_AGE = 60 * 10               // read from cache for 10 minutes
     private const val CACHE_MAX_STALE = 60 * 60 * 24 * 28   // tolerate 4-weeks stale
     private const val TIMEOUT = 35                          // 30 sec
@@ -33,7 +36,7 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun httpLogginInterceptorLevel(): HttpLoggingInterceptor.Level {
+    internal fun httpLoggingInterceptorLevel(): HttpLoggingInterceptor.Level {
         return if (BuildConfig.DEBUG)
             HttpLoggingInterceptor.Level.BODY
         else
@@ -66,6 +69,13 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @Singleton
+    internal fun cache(context: Context): Cache {
+        return Cache(File(context.cacheDir, CACHE_DIRECTORY), CACHE_SIZE.toLong())
+    }
+
+    @JvmStatic
+    @Provides
+    @Singleton
     internal fun httpClient(httpLoggingInterceptor: HttpLoggingInterceptor, cache: Cache, httpCacheInterceptor: HttpCacheInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
                 .addNetworkInterceptor(httpLoggingInterceptor)
@@ -89,7 +99,6 @@ object NetworkModule {
                 .client(httpClient)
                 .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
     }
@@ -108,8 +117,10 @@ object NetworkModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun appGateway(service: AppRetrofitService): AppGateway {
-        return AppRetrofitGateway(service)
+    internal fun appGateway(context: Context, @Named("excludeFieldsWithoutExposeAnnotation") gson: Gson, service: AppRetrofitService): AppGateway {
+        return when {
+            BuildConfig.FLAVOR == "mock" -> AppFileStreamGateway(context, gson)
+            else -> AppRetrofitGateway(service)
+        }
     }
-
 }

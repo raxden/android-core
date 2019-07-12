@@ -1,5 +1,7 @@
 package com.core.app.injector.component
 
+import com.core.app.AppApplication
+import com.core.app.AppApplicationModule
 import com.core.app.base.BaseApplication
 import com.core.app.base.BaseApplicationModule
 import com.core.app.injector.module.InjectorModule
@@ -53,14 +55,13 @@ import javax.inject.Singleton
  *
  */
 @Singleton
-@Component(modules = arrayOf(
+@Component(modules = [
         AndroidInjectionModule::class,
-        BaseApplicationModule::class,
+        AppApplicationModule::class,
         InjectorModule::class
-))
-interface ApplicationComponent : AndroidInjector<BaseApplication> {
+])
+interface ApplicationComponent : AndroidInjector<AppApplication> {
 
-    @Component.Builder
-    abstract class Builder : AndroidInjector.Builder<BaseApplication>()
-
+    @Component.Factory
+    abstract class Factory: AndroidInjector.Factory<AppApplication>
 }

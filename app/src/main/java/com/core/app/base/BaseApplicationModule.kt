@@ -12,30 +12,17 @@ import javax.inject.Singleton
 /**
  * Provides application-wide dependencies.
  */
-@Module(includes = arrayOf(
-        SchedulerModule::class,
-        LocaleModule::class,
-        GsonModule::class,
-        AnalyticsModule::class,
-        PreferencesModule::class,
-        CacheModule::class,
-        RepositoryModule::class,
-        UseCaseModule::class,
-        NetworkModule::class
-))
+@Module(includes = [
+    SchedulerModule::class,
+    GsonModule::class,
+    AnalyticsModule::class,
+    RepositoryModule::class,
+    UseCaseModule::class,
+    PreferencesModule::class,
+    NetworkModule::class,
+    DatabaseModule::class
+])
 abstract class BaseApplicationModule {
-
-    /*
-     * Singleton annotation isn't necessary since Application instance is unique but is here for
-     * convention. In general, providing Activity, Fragment, BroadcastReceiver, etc does not require
-     * them to be scoped since they are the components being injected and their instance is unique.
-     *
-     * However, having a scope annotation makes the module easier to read. We wouldn't have to look
-     * at what is being provided in order to understand its scope.
-     */
-    @Binds
-    @Singleton
-    internal abstract fun application(application: BaseApplication): Application
 
     @Binds
     @Singleton
@@ -47,6 +34,6 @@ abstract class BaseApplicationModule {
         @JvmStatic
         @Provides
         @Singleton
-        internal fun contentResolver(application: Application): ContentResolver =  application.contentResolver
+        internal fun contentResolver(application: Application): ContentResolver = application.contentResolver
     }
 }

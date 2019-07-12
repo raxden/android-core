@@ -21,11 +21,9 @@ android {
         applicationId rootProject.ext.androidApplicationId
         versionCode rootProject.ext.androidVersionCode
         versionName rootProject.ext.androidVersionName
+
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
         testApplicationId rootProject.ext.testApplicationId
-
-        resValue "string", "dev_username", "mobile@berepublic.es"
-        resValue "string", "dev_password", "mobile18"
 
         setProperty("archivesBaseName", "core")
 
@@ -44,11 +42,10 @@ android {
         main {
             res.srcDirs =
                     [
-                            'src/main/res/layouts/commons/fields',
-                            'src/main/res/layouts/login',
-                            'src/main/res/layouts/splash',
-                            'src/main/res/layouts/project/list',
-                            'src/main/res/layouts/project/detail',
+                            'src/main/res/layouts/components',
+                            'src/main/res/layouts/screens/login',
+                            'src/main/res/layouts/screens/splash',
+                            'src/main/res/layouts/screens/home',
                             'src/main/res/layouts',
                             'src/main/res'
                     ]
@@ -77,7 +74,14 @@ android {
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
             resValue "string", "app_name", "Dev core"
-            resConfigs "es", "xxhdpi"
+            resConfigs "xxhdpi"
+        }
+        mock {
+            dimension "tier"
+            applicationIdSuffix ".mock"
+            versionNameSuffix "-mock"
+            resValue "string", "app_name", "Mock core"
+            resConfigs "xxhdpi"
         }
         prod {
             dimension "tier"
@@ -115,11 +119,7 @@ android {
         }
     }
 
-    testOptions {
-        unitTests {
-            includeAndroidResources = true
-        }
-    }
+    testOptions.unitTests.includeAndroidResources = true
 
     lintOptions {
         checkReleaseBuilds false

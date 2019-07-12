@@ -1,9 +1,8 @@
 package com.core.app.injector.module
 
-import android.app.Application
 import android.content.Context
-import com.raxdenstudios.commons.util.Utils
-import com.raxdenstudios.preferences.AdvancedPreferences
+import android.content.SharedPreferences
+import com.core.commons.AppUtils
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -17,8 +16,7 @@ object PreferencesModule {
     @JvmStatic
     @Provides
     @Singleton
-    internal fun advancedPreferences(application: Application): AdvancedPreferences {
-        return AdvancedPreferences(application, Utils.getPackageName(application), Context.MODE_PRIVATE)
+    internal fun advancedPreferences(context: Context): SharedPreferences {
+        return context.getSharedPreferences(AppUtils.getPackageName(context), Context.MODE_PRIVATE)
     }
-
 }

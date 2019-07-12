@@ -2,16 +2,23 @@ package com.core.domain.interactor.impl
 
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectDetailUseCase
+import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.ProjectRepository
+import io.reactivex.Maybe
 import io.reactivex.Single
 import javax.inject.Inject
 
 class GetProjectDetailUseCaseImpl @Inject constructor(
-    projectRepository: ProjectRepository
-) : BaseUseCaseImpl<ProjectRepository>(projectRepository),
-    GetProjectDetailUseCase {
+        private val projectRepository: ProjectRepository,
+        private val accountRepository: AccountRepository
+) : GetProjectDetailUseCase {
 
-    override fun execute(userId: String, projectName: String): Single<Project> {
-        return repository.detail(userId, projectName)
-    }
+    override fun execute(projectName: String): Single<Project> = accountRepository
+            .retrieve()
+            .flatMap {
+                projectRepository.detail(it.username, projectName)
+            }
+
+    override fun execute(username: String, projectName: String): Single<Project> = projectRepository
+            .detail(username, projectName)
 }

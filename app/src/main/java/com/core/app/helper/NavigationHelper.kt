@@ -1,36 +1,55 @@
 package com.core.app.helper
 
 import android.app.Activity
-import android.os.Bundle
-import com.core.app.ui.login.LoginActivity
-import com.core.app.ui.project.list.ProjectListActivity
-import com.core.app.ui.splash.SplashActivity
-import com.raxdenstudios.navigation.NavigationManager
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat
+import com.core.app.ui.screens.login.LoginActivity
+import com.core.app.ui.screens.home.HomeActivity
+import com.core.app.ui.screens.splash.SplashActivity
+import com.core.commons.AppUtils
+import com.core.domain.Project
+import com.core.domain.User
 
-class NavigationHelper(private val mActivity: Activity) {
+class NavigationHelper(private val activity: Activity) {
 
     fun launchSplash() {
-        NavigationManager.Builder(mActivity)
-                .navigateToClass(SplashActivity::class.java)
-                .launchAndFinish()
+        SplashActivity.intent(activity).run {
+            ContextCompat.startActivity(activity, this, null)
+            activity.finish()
+        }
     }
 
-    fun launchLoginAndFinishCurrentView() {
-        NavigationManager.Builder(mActivity)
-                .putData(getExtras())
-                .navigateToClass(LoginActivity::class.java)
-                .launchAndFinish()
+    fun launchLogin(finishCurrentActivity: Boolean = false) {
+        LoginActivity.intent(activity).run {
+            ContextCompat.startActivity(activity, this, null)
+        }
+        if (finishCurrentActivity) activity.finish()
     }
 
-    fun launchProjectListAndFinishCurrentView() {
-        NavigationManager.Builder(mActivity)
-                .putData(getExtras())
-                .navigateToClass(ProjectListActivity::class.java)
-                .launchAndFinish()
+    fun launchHome(user: User, finishCurrentActivity: Boolean = false) {
+        HomeActivity.intent(activity, user).run {
+            ContextCompat.startActivity(activity, this, null)
+        }
+        if (finishCurrentActivity) activity.finish()
     }
 
-    private fun getExtras(): Bundle {
-        return mActivity.intent.extras ?: Bundle()
+    fun launchProject(project: Project, finishCurrentActivity: Boolean = false) {
+//        ProjectDetailActivity.intent(activity, project).run {
+//            ContextCompat.startActivity(activity, this, null)
+//        }
+        if (finishCurrentActivity) activity.finish()
     }
 
+    fun launchGooglePlay(finishCurrentActivity: Boolean = false) {
+        AppUtils.getPackageName(activity).run {
+            try {
+                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?userId=$this")))
+            } catch (e: ActivityNotFoundException) {
+                activity.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?userId=$this")))
+            }
+        }
+        if (finishCurrentActivity) activity.finish()
+    }
 }

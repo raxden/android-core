@@ -1,7 +1,7 @@
 package com.core.data.network.interceptor
 
 import android.content.Context
-import com.raxdenstudios.commons.util.NetworkUtils
+import com.core.commons.NetworkUtils
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber

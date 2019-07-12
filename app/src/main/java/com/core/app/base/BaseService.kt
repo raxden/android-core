@@ -11,7 +11,7 @@ abstract class BaseService : Service() {
 
     @Inject
     @field:Named(DISPOSABLE_SERVICE_MANAGER)
-    lateinit var mCompositeDisposable: CompositeDisposable
+    lateinit var compositeDisposable: CompositeDisposable
 
     override fun onCreate() {
         AndroidInjection.inject(this)
@@ -20,6 +20,6 @@ abstract class BaseService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        mCompositeDisposable.dispose()
+        compositeDisposable.dispose()
     }
 }

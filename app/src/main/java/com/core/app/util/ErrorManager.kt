@@ -1,38 +1,72 @@
 package com.core.app.util
 
-import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.appcompat.app.AppCompatActivity
+import com.core.app.BuildConfig
+import com.core.app.R
+import com.core.data.network.gateway.retrofit.exception.RetrofitException
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.reactivex.exceptions.CompositeException
+import java.net.ConnectException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 
-class ErrorManager(val mContext: Context) {
+class ErrorManager(private val activity: AppCompatActivity) {
 
-    private val mCode: MutableLiveData<Long> = MutableLiveData()
-    private val mTitle: MutableLiveData<String> = MutableLiveData()
-    private val mMessage: MutableLiveData<String> = MutableLiveData()
-
-    init {
-        mCode.postValue(0)
-        mTitle.postValue("")
-        mMessage.postValue("")
-    }
+    private val mErrorList = mutableSetOf<BundleError>()
 
     fun set(throwable: Throwable) {
-//        TODO
+        var code = 0
+        var title: String = activity.getString(R.string.unespected_error_title)
+        var message: String = activity.getString(R.string.unespected_error_message)
+        when (throwable) {
+            is CompositeException -> for (childThrowable in throwable.exceptions) set(childThrowable)
+            is RetrofitException -> {
+                code = throwable.response?.code() ?: 0
+                message = if (BuildConfig.DEBUG) throwable.cause?.message ?: message
+                else when (throwable.cause) {
+                    is ConnectException -> activity.getString(R.string.unespected_timeout_message)
+                    is SocketTimeoutException -> activity.getString(R.string.unespected_timeout_message)
+                    is UnknownHostException -> activity.getString(R.string.unespected_timeout_message)
+                    else -> activity.getString(R.string.unespected_error_message)
+                }
+            }
+            else -> {
+                if (BuildConfig.DEBUG) message = throwable.message ?: message
+            }
+        }
+        set(code, title, message)
     }
 
-    fun set(code: Long, title: Int, message: Int) {
-//        TODO
+    fun set(code: Int, title: Int, message: Int) {
+        handleError(BundleError(code, activity.getString(title), activity.getString(message)))
     }
 
-    fun set(code: Long, title: String, message: String) {
-        mCode.postValue(code)
-        mTitle.postValue(title)
-        mMessage.postValue(message)
+    fun set(code: Int, title: String, message: String) {
+        handleError(BundleError(code, title, message))
     }
 
-    fun getCode(): LiveData<Long> = mCode
+    @Synchronized
+    private fun handleError(error: BundleError) {
+        if (mErrorList.isEmpty()) {
+            mErrorList.add(error)
+            showError(error)
+        } else mErrorList.add(error)
+    }
 
-    fun getTitle(): LiveData<String> = mTitle
+    @Synchronized
+    private fun showError(error: BundleError) {
+        MaterialAlertDialogBuilder(activity)
+                .setTitle(error.title)
+                .setMessage(error.message)
+                .setPositiveButton(android.R.string.ok) { dialog, _ -> dialog.dismiss() }
+                .setOnDismissListener {
+                    mErrorList.remove(mErrorList.first())
+                    if (mErrorList.isNotEmpty()) showError(mErrorList.first())
+                }
+                .create()
+                .show()
+    }
 
-    fun getMessage(): LiveData<String> = mMessage
+    private class BundleError(val code: Int, val title: String, val message: String)
+
 }

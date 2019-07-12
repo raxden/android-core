@@ -1,1 +1,3 @@
 /build
+/session_analytics_to_send
+*.tap

@@ -1,12 +1,12 @@
 package com.core.app.injector.module
 
 import com.core.app.injector.scope.PerActivity
-import com.core.app.ui.login.LoginActivity
-import com.core.app.ui.login.LoginActivityModule
-import com.core.app.ui.project.list.ProjectListActivity
-import com.core.app.ui.project.list.ProjectListActivityModule
-import com.core.app.ui.splash.SplashActivity
-import com.core.app.ui.splash.SplashActivityModule
+import com.core.app.ui.screens.login.LoginActivity
+import com.core.app.ui.screens.login.LoginActivityModule
+import com.core.app.ui.screens.home.HomeActivity
+import com.core.app.ui.screens.home.HomeActivityModule
+import com.core.app.ui.screens.splash.SplashActivity
+import com.core.app.ui.screens.splash.SplashActivityModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -35,12 +35,10 @@ abstract class InjectorModule {
     internal abstract fun loginActivity(): LoginActivity
 
     /**
-     * Provides the injector for the [ProjectListActivity], which has access to the dependencies
+     * Provides the injector for the [HomeActivity], which has access to the dependencies
      * provided by this application instance (singleton scoped objects).
      */
     @PerActivity
-    @ContributesAndroidInjector(modules = arrayOf(ProjectListActivityModule::class))
-    internal abstract fun projectListActivity(): ProjectListActivity
-
-
+    @ContributesAndroidInjector(modules = arrayOf(HomeActivityModule::class))
+    internal abstract fun projectListActivity(): HomeActivity
 }
