@@ -25,6 +25,10 @@ This project is created like a template to start another projets. It`s based in 
 
 ### Flavours
 
+    mock
+    dev
+    prod
+
 ### Libraries used in project
 
     ConstraintLayout        - https://developer.android.com/reference/android/support/constraint/ConstraintLayout
