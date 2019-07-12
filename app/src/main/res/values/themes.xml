@@ -6,6 +6,7 @@
         <item name="materialCardViewStyle">@style/AppCard</item>
         <item name="bottomNavigationStyle">@style/AppBottomNavigation</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <item name="radioButtonStyle">@style/AppRadioButton</item>
         <item name="textInputStyle">@style/AppTextField</item>
         <item name="toolbarStyle">@style/AppToolbar</item>
         <item name="floatingActionButtonStyle">@style/AppFloatingActionButton</item>
@@ -25,6 +26,7 @@
         <item name="textAppearanceOverline">@style/CodeFont.Overline</item>
 
         <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
     <!-- https://material.io/develop/android/components/dialog/ -->
@@ -34,7 +36,7 @@
     <style name="AppButton" parent="Widget.MaterialComponents.Button" />
 
     <!-- https://material.io/develop/android/components/text-input-layout/ -->
-    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense" />
 
     <!-- https://material.io/develop/android/components/material-card-view/ -->
     <style name="AppCard" parent="Widget.MaterialComponents.CardView" />
@@ -42,13 +44,16 @@
     <!-- https://material.io/develop/android/components/bottom-navigation-view/ -->
     <style name="AppBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored" />
 
-    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar" >
-        <item name="android:background">@color/colorPrimary</item>
-    </style>
+    <style name="AppToolbar" parent="Widget.MaterialComponents.Toolbar.Primary" />
 
     <!-- https://material.io/develop/android/components/floating-action-button/ -->
     <style name="AppFloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton" />
 
-    <style name="AppTabStyle" parent="Widget.MaterialComponents.TabLayout.Colored" />
+    <style name="AppTabStyle" parent="Widget.MaterialComponents.TabLayout.Colored">
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <!-- https://material.io/develop/android/components/radiobutton/ -->
+    <style name="AppRadioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton" />
 
 </resources>

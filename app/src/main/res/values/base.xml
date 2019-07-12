@@ -24,10 +24,16 @@
         <item name="colorSurface">@color/colorSurface</item>
         <!-- A color that passes accessibility guidelines for text/iconography when drawn on top of the surface color. -->
         <item name="colorOnSurface">@color/colorOnSurface</item>
+
+        <item name="colorControlActivated">@color/colorControlActivated</item>
         <!-- Error color indicates errors states, for components such as text fields. -->
         <item name="colorError">@color/colorError</item>
         <!-- A color that passes accessibility guidelines for text/iconography when drawn on top of the error color. -->
         <item name="colorOnError">@color/colorOnError</item>
+        <!-- status bar color -->
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <!-- navigation bar color -->
+        <item name="android:navigationBarColor">@color/navigationBarColor</item>
     </style>
 
     <style name="BaseTheme.Translucent">

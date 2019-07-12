@@ -14,8 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo_image_view"
@@ -37,20 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="Versión 1.0.0"
-            tools:visibility="visible" />
-
-        <com.core.components.ProgressView
-            android:id="@+id/content_loading_progress_bar_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:visibleGone="@{viewModel.loader.status}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.92"
-            app:progressBackgroundColor="#00000000"
-            app:progressText="@{viewModel.loader.message}"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
