@@ -29,9 +29,7 @@ This project is created like a template to start another projets. It`s based in 
 
     6. To use Crashlytics, rename fabric.properties.template -> fabric.properties To personalize configuration like distribution or
     release notes, modify preferences in build.gradle.
-
-    7. Define what languages will be use the application in com.omvp.app.injector.module.LocaleModule
-
+    
     8. Defines path to store pictures in device in: (Replace package com.core.app by yours)
 
         dev/res/xml/provider_paths.xml
