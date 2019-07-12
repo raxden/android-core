@@ -118,14 +118,11 @@ ext {
             app       : ':app',
             data      : ':data',
             domain    : ':domain',
-            commons   : ':commons',
-            components: ':components',
-            resources : ':resources'
+            commons   : ':commons'
     ]
 
     appDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
-            [configuration: "implementation", dependency: project(modules.components)],
             [configuration: "implementation", dependency: project(modules.domain)],
             [configuration: "implementation", dependency: project(modules.data)],
 
@@ -228,19 +225,7 @@ ext {
             [configuration: "testImplementation", dependency: robolectricLibs.multidex]
     ]
 
-    componentsDependencies = [
-            [configuration: "implementation", dependency: project(modules.commons)],
-
-            [configuration: "implementation", dependency: support.material],
-            [configuration: "implementation", dependency: support.constraintLayout],
-            [configuration: "implementation", dependency: kotlinLibs.core],
-            [configuration: "implementation", dependency: libs.threetenabp],
-            [configuration: "implementation", dependency: libs.timber]
-    ]
-
     commonsDependencies = [
-            [configuration: "implementation", dependency: project(modules.resources)],
-
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: kotlinLibs.core],
             [configuration: "implementation", dependency: rxLibs.android],
@@ -251,7 +236,4 @@ ext {
             [configuration: "implementation", dependency: glideLibs.core],
             [configuration: "implementation", dependency: mockitoLibs.mockito]
     ]
-
-    resourcesDependencies = []
-
 }
