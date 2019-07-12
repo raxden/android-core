@@ -14,5 +14,4 @@ class AnimationHelper(private val context: Context) {
         }
         view.startAnimation(anim)
     }
-
 }

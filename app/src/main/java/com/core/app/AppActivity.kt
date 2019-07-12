@@ -1,9 +1,10 @@
 package com.core.app
 
 import androidx.databinding.ViewDataBinding
-import com.core.app.base.activity.BaseFragmentActivity
+import com.core.app.base.BaseViewModel
+import com.core.app.base.activity.BaseViewModelFragmentActivity
 
-abstract class AppActivity<VDB : ViewDataBinding> : BaseFragmentActivity<VDB>() {
+abstract class AppActivity<VM : BaseViewModel, VDB : ViewDataBinding> : BaseViewModelFragmentActivity<VM, VDB>() {
 
     override val layoutId: Int
         get() = javaClass.simpleName
@@ -14,7 +15,5 @@ abstract class AppActivity<VDB : ViewDataBinding> : BaseFragmentActivity<VDB>() 
                 .takeIf { it.isNotEmpty() }?.let {
                     resources.getIdentifier(it.replace("R.layout.", ""), "layout", packageName)
                 } ?: 0
-
-    override fun onBindingCreated(binding: VDB) {}
 }
 

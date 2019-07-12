@@ -1,13 +1,14 @@
 package com.core.app.base.fragment
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.core.app.helper.DialogHelper
 import com.core.app.injector.module.LifecycleFragmentModule
+import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
 import com.core.app.util.PermissionManager
+import com.core.app.util.TakePictureManager
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Module
 import dagger.Provides
@@ -26,6 +27,7 @@ abstract class BaseFragmentModule {
 
         const val FRAGMENT_COMPOSITE_DISPOSABLE = "BaseFragmentModule.compositeDisposable"
         const val FRAGMENT_PERMISSION_MANAGER = "BaseFragmentModule.permissionManager"
+        const val FRAGMENT_TAKE_PICTURE_MANAGER = "BaseFragmentModule.takePictureManager"
         const val FRAGMENT_DIALOG_HELPER = "BaseFragmentModule.dialogHelper"
 
         @JvmStatic
@@ -44,10 +46,19 @@ abstract class BaseFragmentModule {
         @Named(FRAGMENT_PERMISSION_MANAGER)
         @PerFragment
         internal fun permissionManager(
-                context: Context,
+                activity: AppCompatActivity,
                 rxPermissions: RxPermissions,
                 @Named(FRAGMENT_COMPOSITE_DISPOSABLE) compositeDisposable: CompositeDisposable
-        ): PermissionManager = PermissionManager(context, rxPermissions, compositeDisposable)
+        ): PermissionManager = PermissionManager(activity, rxPermissions, compositeDisposable)
+
+        @JvmStatic
+        @Provides
+        @Named(FRAGMENT_TAKE_PICTURE_MANAGER)
+        @PerFragment
+        internal fun takePictureManager(
+                fragment: Fragment,
+                @Named(FRAGMENT_PERMISSION_MANAGER) permissionManager: PermissionManager
+        ): TakePictureManager = TakePictureManager(fragment.childFragmentManager, permissionManager)
 
         @JvmStatic
         @Provides

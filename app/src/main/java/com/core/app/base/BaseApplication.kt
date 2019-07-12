@@ -12,11 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.core.app.util.LocaleManager
-import com.core.commons.SDKUtils
+import com.core.commons.AppUtils
 import dagger.android.*
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.HasSupportFragmentInjector
-import java.util.*
 import javax.inject.Inject
 
 abstract class BaseApplication : Application(),
@@ -63,7 +62,7 @@ abstract class BaseApplication : Application(),
     // =============== Support methods =============================================================
 
     private fun initCompatVector() {
-        if (!SDKUtils.hasLollipop()) AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+        if (!AppUtils.hasLollipop()) AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
 
     private fun initDagger() {

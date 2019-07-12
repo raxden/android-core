@@ -2,9 +2,8 @@ package com.core.commons.extension
 
 import com.core.commons.gson.LocalDateFactory
 import com.core.commons.gson.LocalDateTimeFactory
-import com.google.gson.*
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonWriter
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalDateTime
 

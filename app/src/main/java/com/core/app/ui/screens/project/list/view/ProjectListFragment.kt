@@ -1,8 +1,6 @@
 package com.core.app.ui.screens.project.list.view
 
 import android.os.Bundle
-import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
@@ -14,13 +12,10 @@ import com.core.app.base.adapter.BaseListAdapter
 import com.core.app.databinding.ProjectListFragmentBinding
 import com.core.app.databinding.ProjectListItemBinding
 import com.core.app.model.ProjectModel
+import com.core.app.ui.screens.project.list.ProjectListViewModel
 import com.core.domain.Project
 
-class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding, ProjectListFragment.FragmentCallback>() {
-
-    interface FragmentCallback : AppFragmentCallback {
-        fun onProjectSelected(project: Project)
-    }
+class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmentBinding>() {
 
     companion object {
         fun newInstance(bundle: Bundle?) = ProjectListFragment().apply {
@@ -54,7 +49,7 @@ class ProjectListFragment : AppFragment<ProjectListViewModel, ProjectListFragmen
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
         viewModel.projectModelList.observe(owner, Observer { data -> listAdapter.submitList(data) })
-        viewModel.projectSelected.observe(owner, Observer { data -> callback.onProjectSelected(data) })
+//        viewModel.projectSelected.observe(owner, Observer { data -> callback.onProjectSelected(data) })
         viewModel.retrieveProjectList()
     }
 

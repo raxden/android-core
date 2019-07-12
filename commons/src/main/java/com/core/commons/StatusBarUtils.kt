@@ -2,9 +2,6 @@ package com.core.commons
 
 import android.app.Activity
 import android.content.Context
-import android.view.View
-
-import com.core.commons.SDKUtils
 
 /**
  * Created by Angel on 15/05/2017.

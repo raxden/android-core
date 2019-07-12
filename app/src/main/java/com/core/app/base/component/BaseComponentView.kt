@@ -1,21 +1,17 @@
-package com.core.app.ui.components
+package com.core.app.base.component
 
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.TypedArray
 import android.os.Build
 import android.util.AttributeSet
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 
-abstract class BaseComponentBindingView<VDB : ViewDataBinding> : FrameLayout {
+abstract class BaseComponentView : FrameLayout {
 
     protected abstract val mStyleable: IntArray
     protected abstract val mLayoutId: Int
-    protected lateinit var mBinding: VDB
 
     @JvmOverloads
     constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
@@ -40,17 +36,14 @@ abstract class BaseComponentBindingView<VDB : ViewDataBinding> : FrameLayout {
                     }
                 }
             }
-            val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            mBinding = DataBindingUtil.inflate(inflater, mLayoutId, this, true)
-            onBindingCreated(mBinding)
+            View.inflate(context, mLayoutId, this)
+            onViewCreated()
         }
     }
 
     abstract fun onLoadStyledAttributes(attrs: TypedArray)
 
-    abstract fun onBindingCreated(binding: VDB)
-
-    abstract fun onLoadData()
+    abstract fun onViewCreated()
 
     override fun onFinishInflate() {
         super.onFinishInflate()
@@ -58,4 +51,3 @@ abstract class BaseComponentBindingView<VDB : ViewDataBinding> : FrameLayout {
             View.inflate(context, mLayoutId, this)
     }
 }
-

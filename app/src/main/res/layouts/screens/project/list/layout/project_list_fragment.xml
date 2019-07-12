@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.core.app.ui.screens.project.list.view.ProjectListViewModel" />
+            type="com.core.app.ui.screens.project.list.ProjectListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

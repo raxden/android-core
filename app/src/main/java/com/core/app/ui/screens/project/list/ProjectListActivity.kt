@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.core.app.AppActivity
 import com.core.app.databinding.ProjectListActivityBinding
 import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
@@ -11,16 +13,20 @@ import com.core.app.lifecycle.activity.ToolbarActivityLifecycle
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras
-import com.core.domain.Project
-import timber.log.Timber
 
-class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
+class ProjectListActivity : AppActivity<ProjectListViewModel, ProjectListActivityBinding>(),
         ToolbarActivityLifecycle.Callback,
-        InjectFragmentActivityLifecycle.Callback<ProjectListFragment>,
-        ProjectListFragment.FragmentCallback {
+        InjectFragmentActivityLifecycle.Callback<ProjectListFragment> {
 
     companion object {
         fun intent(context: Context): Intent = Intent(context, ProjectListActivity::class.java)
+    }
+
+    override val viewModelClass: Class<ProjectListViewModel>
+        get() = ProjectListViewModel::class.java
+
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: ProjectListViewModel) {
+        viewModel.throwable.observe(owner, Observer { errorManager.set(it) })
     }
 
     // =============== HasToolbarInterceptor =======================================================
@@ -41,7 +47,7 @@ class ProjectListActivity : AppActivity<ProjectListActivityBinding>(),
 
     // =============== HasInjectFragmentInterceptor ================================================
 
-    override fun onProjectSelected(project: Project) {
-        Timber.d("onProjectSelected ${project.name}")
-    }
+//    override fun onProjectSelected(project: Project) {
+//        Timber.d("onProjectSelected ${project.name}")
+//    }
 }

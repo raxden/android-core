@@ -35,16 +35,6 @@ abstract class LoginActivityModule {
     @PerActivity
     internal abstract fun activity(activity: LoginActivity): Activity
 
-    /**
-     * The main activity listens to the events in the [LoginFragment].
-     *
-     * @param activity the activity
-     * @return the main fragment callback
-     */
-    @Binds
-    @PerActivity
-    internal abstract fun fragmentCallback(activity: LoginActivity): LoginFragment.FragmentCallback
-
     @Binds
     @IntoSet
     @PerActivity

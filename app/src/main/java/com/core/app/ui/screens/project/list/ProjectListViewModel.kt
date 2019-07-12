@@ -1,4 +1,4 @@
-package com.core.app.ui.screens.project.list.view
+package com.core.app.ui.screens.project.list
 
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel
@@ -32,11 +32,11 @@ class ProjectListViewModel @Inject constructor(
                 }
                 .subscribeWith(
                         onStart = {
-                            loaderManager.push("retrieve project list")
+                            loaderManager.push()
                         },
                         onError = {
                             loaderManager.pop()
-                            errorManager.set(it)
+                            mThrowable.value = it
                             projectModelList.value = emptyList()
                         },
                         onSuccess = {

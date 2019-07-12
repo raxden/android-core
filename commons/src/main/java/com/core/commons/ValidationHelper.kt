@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 
 object ValidationHelper {
 
-    private val PASSWORD_PATTERN = Pattern.compile("^[0-9A-Za-z!@#$%]{8,}$")
+    private val PASSWORD_PATTERN = Pattern.compile("^[0-8A-Za-z!@#$%]{8,}$")
 
     fun isEmail(email: String): Boolean {
         return if (email.isEmpty()) false else Patterns.EMAIL_ADDRESS.matcher(email).matches()

@@ -36,16 +36,6 @@ abstract class SplashActivityModule {
     @PerActivity
     internal abstract fun activity(activity: SplashActivity): Activity
 
-    /**
-     * The main activity listens to the events in the [SplashFragment].
-     *
-     * @param activity the activity
-     * @return the main fragment callback
-     */
-    @Binds
-    @PerActivity
-    internal abstract fun fragmentCallback(activity: SplashActivity): SplashFragment.FragmentCallback
-
     @Binds
     @IntoSet
     @PerActivity

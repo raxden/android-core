@@ -3,15 +3,10 @@ package com.core.app.util
 import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Build
-import android.os.LocaleList
 import android.preference.PreferenceManager
-import timber.log.Timber
 import java.util.*
-import androidx.core.os.ConfigurationCompat
-import androidx.core.os.LocaleListCompat
-import com.core.commons.SDKUtils
+import com.core.commons.AppUtils
 
 object LocaleManager {
 
@@ -63,7 +58,7 @@ object LocaleManager {
     }
 
     private fun updateResources(context: Context, locale: Locale): Context = when {
-        SDKUtils.hasNougat() -> updateResourcesLocale(context, locale)
+        AppUtils.hasNougat() -> updateResourcesLocale(context, locale)
         else -> updateResourcesLocaleLegacy(context, locale)
     }
 

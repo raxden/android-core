@@ -36,16 +36,6 @@ abstract class ProjectListActivityModule {
     @PerActivity
     internal abstract fun activity(activity: ProjectListActivity): Activity
 
-    /**
-     * The main activity listens to the events in the [ProjectListFragment].
-     *
-     * @param activity the activity
-     * @return the main fragment callback
-     */
-    @Binds
-    @PerActivity
-    internal abstract fun fragmentCallback(activity: ProjectListActivity): ProjectListFragment.FragmentCallback
-
     @Binds
     @IntoSet
     @PerActivity

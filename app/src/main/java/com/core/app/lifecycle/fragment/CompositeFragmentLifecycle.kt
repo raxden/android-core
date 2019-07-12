@@ -13,7 +13,7 @@ import javax.inject.Named
 @PerFragment
 class CompositeFragmentLifecycle @Inject internal constructor(
         fragment: Fragment,
-        @field:Named(BaseFragmentModule.FRAGMENT_COMPOSITE_DISPOSABLE) private val compositeDisposable: CompositeDisposable
+        @Named(BaseFragmentModule.FRAGMENT_COMPOSITE_DISPOSABLE) private val compositeDisposable: CompositeDisposable
 ) : BaseFragmentLifecycle(fragment) {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

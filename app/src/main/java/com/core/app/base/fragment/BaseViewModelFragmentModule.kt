@@ -1,7 +1,6 @@
 package com.core.app.base.fragment
 
 import androidx.fragment.app.Fragment
-import com.core.app.base.fragment.BaseFragmentModule
 import dagger.Module
 
 /**

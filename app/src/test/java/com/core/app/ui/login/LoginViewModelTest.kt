@@ -4,7 +4,7 @@ import android.text.TextUtils
 import com.core.app.BaseTest
 import com.core.app.ui.screens.login.LoginActivity
 import com.core.app.ui.screens.login.view.LoginFragment
-import com.core.app.ui.screens.login.view.LoginViewModel
+import com.core.app.ui.screens.login.LoginViewModel
 import org.junit.Assert
 
 import org.junit.Before

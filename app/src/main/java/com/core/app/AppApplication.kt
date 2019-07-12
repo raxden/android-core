@@ -7,6 +7,7 @@ import com.core.app.base.BaseApplication
 import com.core.app.injector.component.DaggerApplicationComponent
 import com.core.app.util.CrashReportingTree
 import io.fabric.sdk.android.Fabric
+import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
 
 /**
@@ -18,6 +19,7 @@ class AppApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
 
+        initRxPlugins()
         initFabric()
         initTimber()
         initTreeTen()
@@ -25,6 +27,12 @@ class AppApplication : BaseApplication() {
 
     override fun initDaggerApplicationComponent() {
         DaggerApplicationComponent.builder().create(this).inject(this)
+    }
+
+    private fun initRxPlugins() {
+        RxJavaPlugins.setErrorHandler { throwable: Throwable ->
+            Timber.d(throwable)
+        }
     }
 
     private fun initFabric() {

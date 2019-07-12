@@ -9,7 +9,7 @@ import com.core.app.lifecycle.BaseActivityLifecycle
 import javax.inject.Inject
 
 @PerActivity
-class ToolbarActivityLifecycle @Inject internal constructor(
+open class ToolbarActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity
 ) : BaseActivityLifecycle(activity) {
 
@@ -31,8 +31,10 @@ class ToolbarActivityLifecycle @Inject internal constructor(
     private fun onCreate() {
         mToolbar = callback.onCreateToolbarView().also {
             activity.setSupportActionBar(it)
+//            activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
             activity.supportActionBar?.setDisplayShowTitleEnabled(false)
-            it.setOnMenuItemClickListener { item -> activity.onOptionsItemSelected(item) }
+//            it.setOnMenuItemClickListener { item -> activity.onOptionsItemSelected(item) } // comment this line to expand onOptionsItemSelected on fragments
+            it.setNavigationOnClickListener { activity.onBackPressed() }
             callback.onToolbarViewCreated(it)
         }
     }

@@ -22,12 +22,12 @@ class ErrorManager(private val activity: AppCompatActivity) {
             is CompositeException -> for (childThrowable in throwable.exceptions) set(childThrowable)
             is RetrofitException -> {
                 code = throwable.response?.code() ?: 0
-                if (BuildConfig.DEBUG) message = throwable.cause?.message ?: message
+                message = if (BuildConfig.DEBUG) throwable.cause?.message ?: message
                 else when (throwable.cause) {
-                    is ConnectException -> message = activity.getString(R.string.unespected_timeout_message)
-                    is SocketTimeoutException -> message = activity.getString(R.string.unespected_timeout_message)
-                    is UnknownHostException -> message = activity.getString(R.string.unespected_timeout_message)
-                    else -> message = activity.getString(R.string.unespected_error_message)
+                    is ConnectException -> activity.getString(R.string.unespected_timeout_message)
+                    is SocketTimeoutException -> activity.getString(R.string.unespected_timeout_message)
+                    is UnknownHostException -> activity.getString(R.string.unespected_timeout_message)
+                    else -> activity.getString(R.string.unespected_error_message)
                 }
             }
             else -> {

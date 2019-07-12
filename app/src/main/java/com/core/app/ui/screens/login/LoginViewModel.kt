@@ -1,4 +1,4 @@
-package com.core.app.ui.screens.login.view
+package com.core.app.ui.screens.login
 
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
@@ -32,11 +32,11 @@ class LoginViewModel @Inject constructor(
         loginUseCase.execute(username)
                 .subscribeWith(
                         onStart = {
-                            loaderManager.push("validando credenciales...")
+                            loaderManager.push()
                         },
                         onError = {
                             loaderManager.pop()
-                            errorManager.set(it)
+                            mThrowable.value = it
                         },
                         onSuccess = {
                             userLogged.postValue(it)

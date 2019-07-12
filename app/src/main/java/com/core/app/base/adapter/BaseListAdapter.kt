@@ -28,8 +28,8 @@ abstract class BaseListAdapter<T : Any, VM : BaseViewModel, VDB : ViewDataBindin
     abstract override fun getItemViewType(position: Int): Int
 
     class ViewDataBindingHolder<T : Any, VM : BaseViewModel, VDB : ViewDataBinding>(
-            private val viewModel: VM,
-            private val binding: VDB
+            val viewModel: VM,
+            val binding: VDB
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: T) {
