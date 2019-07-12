@@ -42,8 +42,8 @@ allprojects {
         testApplicationId = 'com.core.test'
 
         // Crashlytics configuration
-        betaDistributionReleaseNotesFilePath = 'buildSystem/release_notes.txt'
-        betaDistributionGroupAliasesFilePath = 'buildSystem/group_aliases.txt'
+        betaDistributionReleaseNotesFilePath = 'buildSystem/crashlytics/release_notes.txt'
+        betaDistributionGroupAliasesFilePath = 'buildSystem/crashlytics/group_aliases.txt'
         betaDistributionNotifications = true
     }
 }
