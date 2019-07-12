@@ -11,7 +11,6 @@ import org.junit.Test
 class AccountDaoTest : BaseTest() {
 
     private lateinit var database: AppDatabase
-    private lateinit var account: Account
 
     @Before
     fun initDb() {
@@ -20,10 +19,6 @@ class AccountDaoTest : BaseTest() {
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()
                 .build()
-
-        account = Account(username = "username").also {
-            it.id = database.accountDao().insert(it).blockingGet()
-        }
     }
 
     @After
@@ -39,36 +34,66 @@ class AccountDaoTest : BaseTest() {
     }
 
     @Test
-    fun retrieve() {
-        database.accountDao().find(account.id)
-                .test()
-                .assertNoErrors()
-                .assertValue { it.id == account.id && it.username == account.username }
+    fun retrieveById() {
+        database.accountDao().apply {
+            val account = Account(username = "username").also {
+                it.id = insert(it).blockingGet()
+            }
+            find(account.id)
+                    .test()
+                    .assertNoErrors()
+                    .assertValue { it.id == account.id && it.username == account.username }
+        }
     }
 
     @Test
     fun insert() {
-        database.accountDao().find(account.id)
-                .test()
-                .assertNoErrors()
-                .assertValue { it.id == account.id && it.username == account.username }
+        database.accountDao().apply {
+            insert(Account(username = "username"))
+                    .test()
+                    .assertNoErrors()
+                    .assertValue { it > 0 }
+        }
     }
 
     @Test
     fun update() {
-        account.username = "usernameUpdated"
-        database.accountDao().update(account).blockingAwait()
-        database.accountDao().find(account.id)
-                .test()
-                .assertNoErrors()
-                .assertValue { it.id == account.id && it.username == account.username }
+        database.accountDao().apply {
+            val account = Account(username = "username").also {
+                it.id = insert(it).blockingGet()
+            }
+            account.username = "usernameUpdated"
+            update(account).blockingAwait()
+            find(account.id)
+                    .test()
+                    .assertNoErrors()
+                    .assertValue { it.id == account.id && it.username == account.username }
+        }
+    }
+
+    @Test
+    fun deleteById() {
+        database.accountDao().apply {
+            val account = Account(username = "username").also {
+                it.id = insert(it).blockingGet()
+            }
+            delete(account.id).blockingAwait()
+            find(account.id)
+                    .test()
+                    .assertNoValues()
+        }
     }
 
     @Test
     fun delete() {
-        database.accountDao().delete(account.id).blockingAwait()
-        database.accountDao().find(account.id)
-                .test()
-                .assertNoValues()
+        database.accountDao().apply {
+            val account = Account(username = "username").also {
+                it.id = insert(it).blockingGet()
+            }
+            delete(account).blockingAwait()
+            find(account.id)
+                    .test()
+                    .assertNoValues()
+        }
     }
 }

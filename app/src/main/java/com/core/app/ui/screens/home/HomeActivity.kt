@@ -2,11 +2,14 @@ package com.core.app.ui.screens.home
 
 import android.content.Context
 import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.core.app.AppActivity
+import com.core.app.R
 import com.core.app.databinding.HomeActivityBinding
 import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.lifecycle.activity.ToolbarActivityLifecycle
@@ -29,9 +32,24 @@ class HomeActivity : AppActivity<HomeViewModel, HomeActivityBinding>(),
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: HomeViewModel) {
         viewModel.throwable.observe(owner, Observer { errorManager.set(it) })
+        viewModel.logoutCompleted.observe(owner, Observer {
+            it.getContentIfNotHandled()?.let { navigationHelper.launchLogin(true) }
+        })
         viewModel.projectSelected.observe(owner, Observer {
             it.getContentIfNotHandled()?.let { project -> navigationHelper.launchProject(project) }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_toolbar, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> viewModel.performLogout()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     // =============== HasToolbarInterceptor =======================================================

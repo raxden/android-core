@@ -23,6 +23,10 @@ abstract class UseCaseModule {
 
     @Binds
     @Singleton
+    internal abstract fun logoutUseCase(useCase: LogoutUseCaseImpl): LogoutUseCase
+
+    @Binds
+    @Singleton
     internal abstract fun forwardUseCase(useCase: ForwardUseCaseImpl): ForwardUseCase
 
     @Binds

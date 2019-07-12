@@ -14,3 +14,7 @@
     tags=ios,android
     es=Login
     en=Login
+[logout]
+    tags=ios,android
+    es=Logout
+    en=Logout

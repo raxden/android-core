@@ -13,5 +13,19 @@ class ForwardUseCaseImpl @Inject constructor(
         private val userRepository: UserRepository
 ) : ForwardUseCase {
 
-    override fun execute(): Single<Pair<Forward, User?>> = Single.just(Pair(Forward.LOGIN, null))
+    override fun execute(): Single<Pair<Forward, User?>> = accountRepository
+            .retrieve().map { true }
+            .onErrorResumeNext { Single.just(false) }
+            .map { hasAccount ->
+                if (hasAccount) Forward.HOME
+                else Forward.LOGIN
+            }
+            .flatMap {
+                when (it) {
+                    Forward.LOGIN -> Single.just(Pair(it, null))
+                    Forward.HOME -> accountRepository.retrieve()
+                            .flatMap { account -> userRepository.retrieve(account.username) }
+                            .map { user -> Pair(it, user) }
+                }
+            }
 }
