@@ -13,13 +13,16 @@ import com.core.app.lifecycle.activity.ToolbarActivityLifecycle
 import com.core.app.ui.screens.project.list.view.ProjectListFragment
 import com.core.commons.extension.alignToStatusBarBottom
 import com.core.commons.extension.getExtras
+import com.core.domain.User
 
 class ProjectListActivity : AppActivity<ProjectListViewModel, ProjectListActivityBinding>(),
         ToolbarActivityLifecycle.Callback,
         InjectFragmentActivityLifecycle.Callback<ProjectListFragment> {
 
     companion object {
-        fun intent(context: Context): Intent = Intent(context, ProjectListActivity::class.java)
+        fun intent(context: Context, user: User): Intent = Intent(context, ProjectListActivity::class.java).apply {
+            putExtra(User::class.java.simpleName, user)
+        }
     }
 
     override val viewModelClass: Class<ProjectListViewModel>

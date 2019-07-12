@@ -15,9 +15,9 @@ class LoginUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : LoginUseCase {
 
-    override fun execute(username: String): Single<Account> = userRepository
+    override fun execute(username: String): Single<User> = userRepository
             .retrieve(username)
-            .flatMap {
-                accountRepository.save(Account(username = it.username))
+            .flatMap { user ->
+                accountRepository.save(Account(username = user.username)).map { user }
             }
 }

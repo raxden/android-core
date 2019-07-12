@@ -29,6 +29,12 @@
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
 
+    <style name="AppTheme.Splash">
+        <item name="android:windowBackground">@color/teal</item>
+    </style>
+
+    <!-- ======================================================================================= -->
+
     <!-- https://material.io/develop/android/components/dialog/ -->
     <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert" />
 
@@ -36,7 +42,9 @@
     <style name="AppButton" parent="Widget.MaterialComponents.Button" />
 
     <!-- https://material.io/develop/android/components/text-input-layout/ -->
-    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense" />
+    <style name="AppTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense" >
+        <item name="boxBackgroundColor">@color/box_background_color</item>
+    </style>
 
     <!-- https://material.io/develop/android/components/material-card-view/ -->
     <style name="AppCard" parent="Widget.MaterialComponents.CardView" />

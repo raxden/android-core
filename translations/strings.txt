@@ -1,0 +1,16 @@
+[username]
+    tags=ios,android
+    es=Nombre de usuario
+    en=Username
+[loading]
+    tags=ios,android
+    es=Cargando
+    en=Loading
+[enter_username]
+    tags=ios,android
+    es=Introduce un nombre de usuario
+    en=Enter a username
+[login]
+    tags=ios,android
+    es=Login
+    en=Login

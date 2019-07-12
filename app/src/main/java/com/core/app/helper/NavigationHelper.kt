@@ -9,6 +9,7 @@ import com.core.app.ui.screens.login.LoginActivity
 import com.core.app.ui.screens.project.list.ProjectListActivity
 import com.core.app.ui.screens.splash.SplashActivity
 import com.core.commons.AppUtils
+import com.core.domain.User
 
 class NavigationHelper(private val activity: Activity) {
 
@@ -26,8 +27,8 @@ class NavigationHelper(private val activity: Activity) {
         if (finishCurrentActivity) activity.finish()
     }
 
-    fun launchProjectList(finishCurrentActivity: Boolean = false) {
-        ProjectListActivity.intent(activity).run {
+    fun launchHome(user: User, finishCurrentActivity: Boolean = false) {
+        ProjectListActivity.intent(activity, user).run {
             ContextCompat.startActivity(activity, this, null)
         }
         if (finishCurrentActivity) activity.finish()

@@ -27,7 +27,7 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
         viewModel.applicationReady.observe(owner, Observer {
             when (it.first) {
                 Forward.LOGIN -> navigationHelper.launchLogin(finishCurrentActivity = true)
-                Forward.HOME -> navigationHelper.launchProjectList(finishCurrentActivity = true)
+                Forward.HOME -> it.second?.let { user -> navigationHelper.launchHome(user, finishCurrentActivity = true) }
             }
         })
     }

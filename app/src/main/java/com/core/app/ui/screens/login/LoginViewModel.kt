@@ -1,59 +1,73 @@
 package com.core.app.ui.screens.login
 
-import android.text.TextUtils
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.core.app.R
 import com.core.app.base.BaseViewModel
 import com.core.commons.extension.subscribeWith
-import com.core.domain.Account
+import com.core.domain.User
+import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
 import io.reactivex.rxkotlin.addTo
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
+        private val getVersionUseCase: GetVersionUseCase,
         private val loginUseCase: LoginUseCase
 ) : BaseViewModel() {
 
-    val username: MutableLiveData<String> = MutableLiveData()
-    val usernameError: MutableLiveData<String> = MutableLiveData()
-    val userLogged: MutableLiveData<Account> = MutableLiveData()
+    private val mVersion = MutableLiveData<String>()
+    private val mUsernameError = MutableLiveData<Int>()
+    private val mUserLogged = MutableLiveData<User>()
 
-    private var mValidForm = false
+    val version: LiveData<String> get() = mVersion
+    val usernameError: LiveData<Int> get() = mUsernameError
+    val username = MutableLiveData<String>()
+    val userLogged: LiveData<User> get() = mUserLogged
 
-    fun onLoginClicked() {
-        mValidForm = validateUsername()
-        if (mValidForm) performLogin(username.value ?: "")
+    init {
+        retrieveVersion()
     }
 
     fun onUsernameChanged() {
-        usernameError.postValue("")
+        mUsernameError.value = 0
+    }
+
+    fun performLogin() {
+        if (!validateUsername()) return
+        username.value?.let { performLogin(it) }
+    }
+
+    private fun retrieveVersion() {
+        getVersionUseCase.execute()
+                .subscribeWith(onSuccess = { mVersion.value = it })
+                .addTo(mCompositeDisposable)
     }
 
     private fun performLogin(username: String) {
         loginUseCase.execute(username)
                 .subscribeWith(
                         onStart = {
-                            loaderManager.push()
+                            mLoaderManager.push()
                         },
                         onError = {
-                            loaderManager.pop()
                             mThrowable.value = it
+                            mLoaderManager.pop()
                         },
                         onSuccess = {
-                            userLogged.postValue(it)
-                            loaderManager.pop()
+                            mUserLogged.value = it
+                            mLoaderManager.pop()
                         }
                 )
-                .addTo(compositeDisposable)
+                .addTo(mCompositeDisposable)
     }
 
-    private fun validateUsername(): Boolean = when {
-        TextUtils.isEmpty(username.value) -> {
-            usernameError.postValue("El campo username no puede estar vacio")
+    private fun validateUsername(): Boolean {
+        val username = username.value ?: ""
+        return if (username.isEmpty()) {
+            mUsernameError.value = R.string.enter_username
             false
-        }
-        else -> {
-            usernameError.postValue("")
-            true
-        }
+        } else true
     }
 }

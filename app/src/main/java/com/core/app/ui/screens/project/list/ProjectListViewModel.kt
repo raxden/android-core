@@ -25,22 +25,22 @@ class ProjectListViewModel @Inject constructor(
         getProjectListUseCase.execute()
                 .subscribeWith(
                         onStart = {
-                            loaderManager.push()
+                            mLoaderManager.push()
                         },
                         onError = {
-                            loaderManager.pop()
+                            mLoaderManager.pop()
                             mThrowable.value = it
                             projectModelList.value = emptyList()
                         },
                         onSuccess = {
-                            loaderManager.pop()
+                            mLoaderManager.pop()
                             projectModelList.value = it
                         },
                         onComplete = {
-                            loaderManager.pop()
+                            mLoaderManager.pop()
                             projectModelList.value = emptyList()
                         }
                 )
-                .addTo(compositeDisposable)
+                .addTo(mCompositeDisposable)
     }
 }

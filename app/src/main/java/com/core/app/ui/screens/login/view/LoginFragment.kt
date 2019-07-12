@@ -18,7 +18,5 @@ class LoginFragment : AppFragment<LoginViewModel, LoginFragmentBinding>() {
         }
     }
 
-    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: LoginViewModel) {
-//        viewModel.userLogged.observe(owner, Observer { callback.onLoginSuccess() })
-    }
+    override fun onViewModelAttached(owner: LifecycleOwner, viewModel: LoginViewModel) {}
 }

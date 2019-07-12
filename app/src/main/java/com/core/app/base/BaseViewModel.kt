@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.core.app.util.LoaderManager
-import com.core.commons.Event
-import com.core.domain.User
 import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
 
     protected val mThrowable: MutableLiveData<Throwable> = MutableLiveData()
-    protected val loaderManager: LoaderManager = LoaderManager()
-    protected val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    protected val mLoaderManager: LoaderManager = LoaderManager()
+    protected val mCompositeDisposable: CompositeDisposable = CompositeDisposable()
+
+    val loader: LoaderManager
+        get() = mLoaderManager
 
     val throwable: LiveData<Throwable>
         get() = mThrowable
@@ -23,10 +24,8 @@ abstract class BaseViewModel : ViewModel() {
     open fun onAttached() {}
 
     override fun onCleared() {
-        loaderManager.clear()
-        compositeDisposable.clear()
+        mLoaderManager.clear()
+        mCompositeDisposable.clear()
         super.onCleared()
     }
-
-    fun getLoader(): LoaderManager = loaderManager
 }

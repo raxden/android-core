@@ -34,10 +34,12 @@
         </provider>
 
         <!--<meta-data-->
-            <!--android:name="io.fabric.ApiKey"-->
-            <!--android:value="" />-->
+        <!--android:name="io.fabric.ApiKey"-->
+        <!--android:value="" />-->
 
-        <activity android:name="com.core.app.ui.screens.splash.SplashActivity">
+        <activity
+            android:name="com.core.app.ui.screens.splash.SplashActivity"
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
