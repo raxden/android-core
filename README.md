@@ -1,8 +1,9 @@
-======================================== HOW IS THAT ===============================================
+============ HOW IS THAT ===============================================
 
-    This project is created like a template to start another projets.
-    It`s based in MVVM pattern and Onion arquitecture,  besides use Dagger2 to injection
-    dependencies, RX2 to reactive programing and Retrofit2 to HTTP layer.
+    This project is created like a template to start another projets. 
+    It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, 
+    RX2 to reactive programing and Retrofit2 to HTTP layer.
+    
     Another libraries used in project:
 
     - Timber - Library to print logs
@@ -10,7 +11,7 @@
     - Crashlytics - Library to register any crash in app.
     - ThreeTenABP - Library to use dates
 
-================================== STEPS TO CONFIGURE PROJECT ======================================
+============ STEPS TO CONFIGURE PROJECT ======================================
 
     1. Rename androidApplicationId and testApplicationId in build.gradle.
         com.core.app -> com.yourcompanyname.yourprojectname
