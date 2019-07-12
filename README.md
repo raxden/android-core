@@ -2,12 +2,29 @@
 
 This project is created like a template to start another projets. It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, RX2 to reactive programing and Retrofit2 to HTTP layer.
     
-### Another libraries used in project
+### Libraries used in project
 
-    Timber      - Library to print logs
-    Glide       - Library to load images.
-    Crashlytics - Library to register any crashes in app.
-    ThreeTenABP - Library to use dates
+    ConstraintLayout        - https://developer.android.com/reference/android/support/constraint/ConstraintLayout
+    Material Components     - https://github.com/material-components/material-components-android
+    Kotlin
+    Rx2                     - https://github.com/ReactiveX/RxKotlin
+    RxPermissions           - https://github.com/tbruyelle/RxPermissions
+    Room                    - https://developer.android.com/jetpack/androidx/releases/room
+    ThreeTenVersion         - https://github.com/JakeWharton/ThreeTenABP
+    Crashlytics             - https://fabric.io/kits/android/crashlytics/install
+    Gson                    - https://github.com/google/gson
+    Dagger                  - https://github.com/google/dagger
+    Glide                   - https://github.com/bumptech/glide
+    OkHttp                  - https://github.com/square/okhttp
+    Retrofit                - https://github.com/square/retrofit
+    Timber                  - https://github.com/JakeWharton/timber
+    
+#### For testing...
+    
+    Junit
+    AssertJ
+    Mockito
+    Robolectric
 
 ### Steps to configure project
 
