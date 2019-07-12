@@ -18,13 +18,6 @@ This project is created like a template to start another projets. It`s based in 
     OkHttp                  - https://github.com/square/okhttp
     Retrofit                - https://github.com/square/retrofit
     Timber                  - https://github.com/JakeWharton/timber
-    
-#### For testing...
-    
-    Junit
-    AssertJ
-    Mockito
-    Robolectric
 
 ### Steps to configure project
 
