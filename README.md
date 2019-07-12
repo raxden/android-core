@@ -1,44 +1,81 @@
-======================================== HOW IS THAT ===============================================
+# How is that
 
-    This project is created like a template to start another projets.
-    It`s based in MVVM pattern and Onion arquitecture,  besides use Dagger2 to injection
-    dependencies, RX2 to reactive programing and Retrofit2 to HTTP layer.
-    Another libraries used in project:
+This project is created like a template to start another projets. It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, RX2 to reactive programing and Retrofit2 to HTTP layer.
+    
+### Project structure    
 
-    - Timber - Library to print logs
-    - Glide - Library to load images.
-    - Crashlytics - Library to register any crash in app.
-    - ThreeTenABP - Library to use dates
+    app
+    commons
+    data 
+    domain
+    translations
 
-================================== STEPS TO CONFIGURE PROJECT ======================================
+#### Module dependency
 
-    1. Rename androidApplicationId and testApplicationId in build.gradle.
+    app     -> commons
+            -> domain
+            -> data
+    
+    domain  -> commons
+    
+    data    -> commons
+            -> domain
+    
+    commons -> no dependencies
+
+### Flavours
+
+    mock
+    dev
+    prod
+
+### Libraries used in project
+
+    ConstraintLayout        - https://developer.android.com/reference/android/support/constraint/ConstraintLayout
+    Material Components     - https://github.com/material-components/material-components-android
+    Kotlin
+    Rx2                     - https://github.com/ReactiveX/RxKotlin
+    RxPermissions           - https://github.com/tbruyelle/RxPermissions
+    Room                    - https://developer.android.com/jetpack/androidx/releases/room
+    ThreeTenVersion         - https://github.com/JakeWharton/ThreeTenABP
+    Crashlytics             - https://fabric.io/kits/android/crashlytics/install
+    Gson                    - https://github.com/google/gson
+    Dagger                  - https://github.com/google/dagger
+    Glide                   - https://github.com/bumptech/glide
+    OkHttp                  - https://github.com/square/okhttp
+    Retrofit                - https://github.com/square/retrofit
+    Timber                  - https://github.com/JakeWharton/timber
+
+All library dependencies configuration is located in buildSystem/dependencies.gradle.
+
+### Steps to configure project
+
+    1. Rename androidApplicationId and testApplicationId in /build.gradle.
+    
         com.core.app -> com.yourcompanyname.yourprojectname
 
-    2. Register application in Firebase and download|replace google-services.json contained in
-    app module. Remember that proyect has n(flavours) diferences configurations, dev and prod.
-    Therefore you must register n(flavours) applications instead of one.
+    2. To use Firebase in project, register application in Firebase and download|replace google-services.json 
+    contained in app module. That proyect has n(flavours) diferences configurations. Therefore you must 
+    register n(flavours) applications instead of one. For example:
+
         {androidApplicationId}
         {androidApplicationId}.dev
         {androidApplicationId}.mock
+        
+    Once this is done you will have to uncomment this line "apply plugin: 'com.google.gms.google-services'" 
+    from app/build.gradle on bottom from file.
 
-    3. Create|Replace release.jks keystore
+    3. To use Crashlytics, enter your keys in fabric.properties contained in app module. In addition you 
+    must also apply the fabric plugin uncomment this line "apply plugin: 'io.fabric'" on top from file.
+
+    4. Generate your release.jks keystore through AndroidStudio
+    
         buildSystem/release.jks
+    
+    5. Defines your path to store pictures or files in device: (Replace package com.core.app by yours)
 
-    6. To use Crashlytics, rename fabric.properties.template -> fabric.properties
-    To personalize configuration like distribution or release notes, modify preferences in build.gradle.
+        dev/res/xml/provider_paths.xml
+        prod/res/xml/provider_paths.xml
 
-    7. Define what languages will be use the application in
-    com.omvp.app.injector.module.LocaleModule
-
-    8. Defines path to store pictures in device in: (Replace package com.core.app by yours)
-        + dev/res/xml/provider_paths.xml
-        + prod/res/xml/provider_paths.xml
-
-============================================= TIPS =================================================
-
-    1. All project configuration is located in build.gradle
-    2. Library dependency configuration is located in buildSystem/dependencies.gradle.
-    3. keystore's is located in buildSystem/*
-
+### Tips
 
