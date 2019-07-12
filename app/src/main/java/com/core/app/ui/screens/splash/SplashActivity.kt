@@ -10,6 +10,7 @@ import com.core.app.databinding.SplashActivityBinding
 import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
+import com.core.domain.Forward
 
 class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
         InjectFragmentActivityLifecycle.Callback<SplashFragment> {
@@ -23,6 +24,12 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: SplashViewModel) {
         viewModel.throwable.observe(owner, Observer { errorManager.set(it) })
+        viewModel.applicationReady.observe(owner, Observer {
+            when (it.first) {
+                Forward.LOGIN -> navigationHelper.launchLogin(finishCurrentActivity = true)
+                Forward.HOME -> navigationHelper.launchProjectList(finishCurrentActivity = true)
+            }
+        })
     }
 
     override fun finish() {
@@ -37,11 +44,4 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
     override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
 
     override fun onFragmentLoaded(fragment: SplashFragment) {}
-
-    // =============== SplashFragment.FragmentCallback =============================================
-
-//    override fun launchLogin() {
-//        navigationHelper.launchLogin(finishCurrentActivity = true)
-//        navigationHelper.launchProjectList(finishCurrentActivity = true)
-//    }
 }
