@@ -12,7 +12,7 @@ This project is created like a template to start another projets. It`s based in 
 
 #### Module dependency
 
-<p align="center">
+<p align="right">
 <img src="https://raw.githubusercontent.com/raxden/android-blueprints/master/module_dependencies.png"/>
 </p>
 
