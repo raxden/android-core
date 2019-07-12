@@ -2,6 +2,10 @@
 
 This project is created like a template to start another projets. It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, RX2 to reactive programing and Retrofit2 to HTTP layer.
     
+### Project structure    
+    
+### Flavours
+
 ### Libraries used in project
 
     ConstraintLayout        - https://developer.android.com/reference/android/support/constraint/ConstraintLayout
