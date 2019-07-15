@@ -8,12 +8,12 @@ This project is created like a template to start another projets. It`s based in 
     
 ### Project structure    
 
-    app
-    data 
-    domain
+    app             - Presentation layer
+    domain          - Business logic layer
+    data            - Data access layer
     
-    commons
-    translations
+    commons         - Contains util classes used by any module of project. Like a utils library.
+    translations    - Contains files to translate application with Twine.
 
 #### app - Presentation layer
 
