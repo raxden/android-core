@@ -9,20 +9,23 @@ This project is created like a template to start another projets. It`s based in 
 ### Project structure    
 
     app
-    commons
     data 
     domain
+    
+    commons
     translations
 
-#### app
+#### app - Presentation layer
 
-#### domain
+##### MVVM with Data binding
 
-#### data
+#### domain - Business logic layer
 
-#### commons
+##### Use cases
 
-#### translations
+#### data - Data access layer
+
+##### Repository pattern
 
 #### Module dependency
 
