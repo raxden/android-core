@@ -1,6 +1,10 @@
 # How is that
 
-This project is created like a template to start another projets. It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, RX2 to reactive programing and Retrofit2 to HTTP layer.
+This project is created like a template to start another projets. It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, RX2 to reactive programing and Retrofit2 with OkHttp3 to HTTP layer.
+    
+### Architecture
+
+
     
 ### Project structure    
 
@@ -9,6 +13,16 @@ This project is created like a template to start another projets. It`s based in 
     data 
     domain
     translations
+
+#### app
+
+#### domain
+
+#### data
+
+#### commons
+
+#### translations
 
 #### Module dependency
 
