@@ -17,12 +17,13 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val mProjectList = MutableLiveData<List<Project>>()
-    private val mProjectSelected = MutableLiveData<Event<Project>>()
-    private val mLogoutCompleted = MutableLiveData<Event<Boolean>>()
+    val projectList: LiveData<List<Project>> = mProjectList
 
-    val projectList: LiveData<List<Project>> get() = mProjectList
-    val projectSelected: LiveData<Event<Project>> get() = mProjectSelected
-    val logoutCompleted: LiveData<Event<Boolean>> get() = mLogoutCompleted
+    private val mProjectSelected = MutableLiveData<Event<Project>>()
+    val projectSelected: LiveData<Event<Project>> = mProjectSelected
+
+    private val mLogoutCompleted = MutableLiveData<Event<Boolean>>()
+    val logoutCompleted: LiveData<Event<Boolean>> = mLogoutCompleted
 
     init {
         retrieveProjectList()

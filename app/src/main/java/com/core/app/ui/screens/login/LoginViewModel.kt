@@ -18,13 +18,15 @@ class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val mVersion = MutableLiveData<String>()
-    private val mUsernameError = MutableLiveData<Int>()
-    private val mUserLogged = MutableLiveData<User>()
+    val version: LiveData<String> = mVersion
 
-    val version: LiveData<String> get() = mVersion
-    val usernameError: LiveData<Int> get() = mUsernameError
+    private val mUsernameError = MutableLiveData<Int>()
+    val usernameError: LiveData<Int> = mUsernameError
+
+    private val mUserLogged = MutableLiveData<User>()
+    val userLogged: LiveData<User> = mUserLogged
+
     val username = MutableLiveData<String>()
-    val userLogged: LiveData<User> get() = mUserLogged
 
     init {
         retrieveVersion()

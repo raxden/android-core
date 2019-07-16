@@ -25,10 +25,10 @@ class SplashViewModel @Inject constructor(
     }
 
     private val mVersion = MutableLiveData<String>()
-    private val mApplicationReady = MutableLiveData<Pair<Forward, User?>>()
+    val version: LiveData<String> = mVersion
 
-    val version: LiveData<String> get() = mVersion
-    val applicationReady: LiveData<Pair<Forward, User?>> get() = mApplicationReady
+    private val mApplicationReady = MutableLiveData<Pair<Forward, User?>>()
+    val applicationReady: LiveData<Pair<Forward, User?>> = mApplicationReady
 
     init {
         retrieveVersion()
