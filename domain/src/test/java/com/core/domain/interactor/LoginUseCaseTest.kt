@@ -1,4 +1,5 @@
 package com.core.domain.interactor
+
 import com.core.commons.MockitoUtils
 import com.core.domain.Account
 import com.core.domain.BaseTest
@@ -37,6 +38,6 @@ class LoginUseCaseTest : BaseTest() {
         loginUseCase.execute("username")
                 .test()
                 .assertNoErrors()
-                .assertValue(account)
+                .assertValue(user)
     }
 }

@@ -11,7 +11,7 @@ interface AccountRepository : Repository {
 
     fun retrieve(id: Long): Single<Account>
 
-    fun save(account: Account) : Single<Account>
+    fun save(account: Account): Single<Account>
 
     fun remove(account: Account): Completable
 }
