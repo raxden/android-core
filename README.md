@@ -1,11 +1,7 @@
 # How is that
 
 This project is created like a template to start another projets. It`s based in MVVM pattern with LiveData and Data Binding, besides use Dagger2 to injection dependencies, RX2 to reactive programing and Retrofit2 with OkHttp3 to HTTP layer.
-    
-### Architecture
-
-
-    
+        
 ### Project structure    
 
     app             - Presentation layer
@@ -14,18 +10,6 @@ This project is created like a template to start another projets. It`s based in 
     
     commons         - Contains util classes used by any module of project. Like a utils library.
     translations    - Contains files to translate application with Twine.
-
-#### app - Presentation layer
-
-##### MVVM with Data binding
-
-#### domain - Business logic layer
-
-##### Use cases
-
-#### data - Data access layer
-
-##### Repository pattern
 
 #### Module dependency
 
@@ -93,8 +77,6 @@ All library dependencies configuration is located in buildSystem/dependencies.gr
 
         dev/res/xml/provider_paths.xml
         prod/res/xml/provider_paths.xml
-
-### Tips
 
 ### License
 
