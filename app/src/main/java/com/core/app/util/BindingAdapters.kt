@@ -14,50 +14,50 @@ import org.threeten.bp.format.DateTimeFormatter
 object BindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("bind:error")
+    @BindingAdapter("error")
     fun error(view: TextInputLayout, resourceId: Int) {
         if (resourceId != 0) view.error = view.context.getString(resourceId)
         else view.error = ""
     }
 
     @JvmStatic
-    @BindingAdapter("bind:onSafeClick")
+    @BindingAdapter("onSafeClick")
     fun click(view: View, listener: View.OnClickListener) {
         view.setSafeOnClickListener { listener.onClick(it) }
     }
 
     @JvmStatic
-    @BindingAdapter("bind:selected")
+    @BindingAdapter("selected")
     fun selected(view: View, selected: Boolean) {
         view.isSelected = selected
     }
 
     @JvmStatic
-    @BindingAdapter("bind:visibleGone")
+    @BindingAdapter("visibleGone")
     fun visibleGone(view: View, show: Boolean) {
         view.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
-    @BindingAdapter("bind:visibleInvisible")
+    @BindingAdapter("visibleInvisible")
     fun visibleInvisible(view: View, show: Boolean) {
         view.visibility = if (show) View.VISIBLE else View.INVISIBLE
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["bind:text_date", "bind:text_date_format"], requireAll = false)
+    @BindingAdapter(value = ["text_date", "text_date_format"], requireAll = false)
     fun parseLocalDateTimeToDate(view: TextView, date: LocalDateTime?, format: String? = "dd MMM yyyy") {
         view.text = date?.format(DateTimeFormatter.ofPattern(format ?: "dd MMM yyyy")) ?: view.text
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["bind:text_date", "bind:text_date_format"], requireAll = false)
+    @BindingAdapter(value = ["text_date", "text_date_format"], requireAll = false)
     fun parseLocalDateToDate(view: TextView, date: LocalDate?, format: String? = "dd MMM yyyy") {
         view.text = date?.format(DateTimeFormatter.ofPattern(format ?: "dd MMM yyyy")) ?: view.text
     }
 
     @JvmStatic
-    @BindingAdapter("bind:urlImage")
+    @BindingAdapter("urlImage")
     fun loadImage(view: ImageView, url: String?) {
         url?.run {
             if (view.getTag(view.id) == null || view.getTag(view.id) != (url)) {
