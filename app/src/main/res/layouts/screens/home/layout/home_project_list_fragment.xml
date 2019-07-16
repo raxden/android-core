@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:refreshing="@{viewModel.loader.status}">
+            app:refreshing="@{safeUnbox(viewModel.loader.status)}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
