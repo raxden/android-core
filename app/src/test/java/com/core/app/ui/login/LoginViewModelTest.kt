@@ -1,66 +1,83 @@
 package com.core.app.ui.login
 
-import com.core.app.BaseTest
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.core.app.RxSchedulerRule
 import com.core.app.ui.screens.login.LoginViewModel
+import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
+import io.reactivex.Single
 import org.junit.Before
-import org.mockito.InjectMocks
+import org.junit.Test
 import org.mockito.Mock
+import org.mockito.Mockito
+import org.junit.Rule
+import org.junit.runner.RunWith
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
+import org.robolectric.RobolectricTestRunner
+import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 
-class LoginViewModelTest : BaseTest() {
+@RunWith(RobolectricTestRunner::class)
+class LoginViewModelTest {
+
+    @get:Rule
+    val mockitoRule: MockitoRule = MockitoJUnit.rule()
+
+    @get:Rule
+    val taskExecutorRule = InstantTaskExecutorRule()
+
+    @get:Rule
+    val rxSchedulerRule = RxSchedulerRule()
 
     @Mock
     lateinit var getVersionUseCase: GetVersionUseCase
     @Mock
     lateinit var loginUseCase: LoginUseCase
 
-    @InjectMocks
-    lateinit var loginViewModel: LoginViewModel
+    private lateinit var viewModel: LoginViewModel
+
+    private val user = User(username = "raxden")
 
     @Before
     fun setUp() {
-
+        getVersionUseCase.apply {
+            Mockito.`when`(execute()).thenReturn(Single.just("version_1"))
+        }
+        loginUseCase.apply {
+            Mockito.`when`(execute("raxden")).thenReturn(Single.just(user))
+            Mockito.`when`(execute("userNotExists")).thenReturn(Single.error(IllegalStateException()))
+        }
+        viewModel = LoginViewModel(getVersionUseCase, loginUseCase)
     }
 
-//    private lateinit var mActivityController: ActivityController<LoginActivity>
-//    private lateinit var mLoginActivity: LoginActivity
-//    private lateinit var mLoginFragment: LoginFragment
-//    private lateinit var mLoginViewModel: LoginViewModel
-//
-//    @Before
-//    fun setUp() {
-//        mActivityController = Robolectric.buildActivity(LoginActivity::class.java).apply {
-//            create().start().resume()
-//            mLoginActivity = get()
-//            mLoginActivity.loginFragment?.also {
-//                mLoginFragment = it
-//                mLoginViewModel = mLoginFragment.viewModel
-//            }
-//        }
-//    }
-//
-//    @Test
-//    fun check() {
-//        Assert.assertNotNull(mActivityController)
-//        Assert.assertNotNull(mLoginActivity)
-//        Assert.assertNotNull(mLoginFragment)
-//        Assert.assertNotNull(mLoginViewModel)
-//    }
-//
-//    @Test
-//    fun checkEmptyLogin() {
-//        mLoginViewModel.username.postValue("")
-//        mLoginViewModel.onLoginClicked()
-//        Assert.assertFalse(TextUtils.isEmpty(mLoginViewModel.usernameError.value))
-//        Assert.assertNull(mLoginViewModel.userLogged.value)
-//    }
-//
-//    @Test
-//    fun checkSuccessLogin() {
-//        mLoginViewModel.username.postValue("username")
-//        mLoginViewModel.onLoginClicked()
-//        Assert.assertTrue(TextUtils.isEmpty(mLoginViewModel.usernameError.value))
-//        Assert.assertNotNull(mLoginViewModel.userLogged.value)
-//    }
+    @Test
+    fun checkApplicationVersion() {
+        assertEquals("version_1", viewModel.version.value)
+    }
+
+    @Test
+    fun performLogin() {
+        viewModel.username.value = "raxden"
+        viewModel.performLogin()
+
+        assertEquals(user, viewModel.userLogged.value)
+    }
+
+    @Test
+    fun performLoginWithEmptyUsername() {
+        viewModel.username.value = ""
+        viewModel.performLogin()
+
+        assertNotNull(viewModel.usernameError.value)
+    }
+
+    @Test
+    fun performLoginWithInvalidUsername() {
+        viewModel.username.value = "userNotExists"
+        viewModel.performLogin()
+
+        assertNotNull(viewModel.throwable.value)
+    }
 }

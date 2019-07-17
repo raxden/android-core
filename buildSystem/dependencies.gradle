@@ -30,6 +30,7 @@ ext {
     def assertJVersion = '1.7.0'
     def mockitoVersion = '2.27.0'
     def robolectricVersion = '4.2.1'
+    def archVersion = '1.1.1'
 
     // ========== LIBRARIES ========================================================================
 
@@ -109,7 +110,8 @@ ext {
 
     def testLibs = [
             junit  : [group: 'junit', name: 'junit', version: junitVersion],
-            assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion]
+            assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion],
+            arch: [group: 'android.arch.core', name: 'core-testing', version: archVersion]
     ]
 
     // ========== MODULES DEPENDENCIES =============================================================
@@ -160,6 +162,7 @@ ext {
             [configuration: "testImplementation", dependency: project(modules.commons)],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
+            [configuration: "testImplementation", dependency: testLibs.arch],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
             [configuration: "testImplementation", dependency: mockitoLibs.mockito],
             [configuration: "testImplementation", dependency: robolectricLibs.core],

@@ -1,20 +1,26 @@
 package com.core.domain.interactor
 import com.core.domain.Account
-import com.core.domain.BaseTest
 import com.core.domain.Project
 import com.core.domain.interactor.impl.GetProjectDetailUseCaseImpl
-import com.core.domain.interactor.impl.GetProjectListUseCaseImpl
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.ProjectRepository
-import io.reactivex.Maybe
 import io.reactivex.Single
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
+import org.robolectric.RobolectricTestRunner
 
-class GetProjectDetailUseCaseTest : BaseTest() {
+@RunWith(RobolectricTestRunner::class)
+class GetProjectDetailUseCaseTest {
+
+    @get:Rule
+    val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Mock
     lateinit var accountRepository: AccountRepository
