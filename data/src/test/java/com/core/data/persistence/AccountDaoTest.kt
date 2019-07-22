@@ -11,6 +11,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
+// MOVE TO INSTRUMENTAL TEST -> https://developer.android.com/training/data-storage/room/testing-db#kotlin
+
 @RunWith(RobolectricTestRunner::class)
 class AccountDaoTest {
 
