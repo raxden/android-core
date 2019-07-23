@@ -63,31 +63,31 @@ class AppGatewayTest {
     }
 
     @Test
-    fun serverError() {
+    fun `throw server error and catch it`() {
         server.enqueue(MockResponse().apply { setResponseCode(500) })
         gateway.user("").test().assertError { (it as RetrofitException).kind == RetrofitException.Kind.SERVER_ERROR }
     }
 
     @Test
-    fun unexpectedError() {
+    fun `throw unexpected error and catch it`() {
         server.enqueue(MockResponse().apply { setResponseCode(600) })
         gateway.user("").test().assertError { (it as RetrofitException).kind == RetrofitException.Kind.UNEXPECTED }
     }
 
     @Test
-    fun unauthenticatedError() {
+    fun `throw unauthenticated error and catch it`() {
         server.enqueue(MockResponse().apply { setResponseCode(401) })
         gateway.user("").test().assertError { (it as RetrofitException).kind == RetrofitException.Kind.UNAUTHENTICATED }
     }
 
     @Test
-    fun clientError() {
+    fun `throw client error and catch it`() {
         server.enqueue(MockResponse().apply { setResponseCode(400) })
         gateway.user("").test().assertError { (it as RetrofitException).kind == RetrofitException.Kind.CLIENT_ERROR }
     }
 
     @Test
-    fun userEntity() {
+    fun `validate mock user entity`() {
         server.enqueue(
                 MockResponse().apply {
                     setResponseCode(200)
