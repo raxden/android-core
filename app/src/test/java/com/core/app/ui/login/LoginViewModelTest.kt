@@ -53,12 +53,12 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun checkApplicationVersion() {
+    fun `check application version`() {
         assertEquals("version_1", viewModel.version.value)
     }
 
     @Test
-    fun performLogin() {
+    fun `perform a success login`() {
         viewModel.username.value = "raxden"
         viewModel.performLogin()
 
@@ -66,7 +66,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun performLoginWithEmptyUsername() {
+    fun `perform a fail login with empty username`() {
         viewModel.username.value = ""
         viewModel.performLogin()
 
@@ -74,7 +74,7 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun performLoginWithInvalidUsername() {
+    fun `perform a fail login with invalid username`() {
         viewModel.username.value = "userNotExists"
         viewModel.performLogin()
 

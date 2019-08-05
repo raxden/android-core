@@ -61,7 +61,7 @@ class HomeViewModelTest {
 
     @Test
     fun checkProjectList() {
-        assert(viewModel.projectList.value?.isNotEmpty() == true)
+        assert(viewModel.projectModelList.value?.isNotEmpty() == true)
     }
 
     @Test
