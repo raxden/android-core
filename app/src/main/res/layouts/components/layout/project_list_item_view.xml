@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.core.domain.Project" />
+            type="com.core.app.model.ProjectModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -16,7 +16,7 @@
 
         <variable
             name="item"
-            type="com.core.domain.Project" />
+            type="com.core.app.model.ProjectModel" />
     </data>
 
     <com.core.app.ui.components.ProjectListItemView
@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         app:item="@{item}"
-        bind:onSafeClick="@{()-> viewModel.onItemSelected(item)}" />
+        bind:onSafeClick="@{()-> viewModel.onItemSelected(position)}" />
 
 </layout>

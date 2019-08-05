@@ -2,7 +2,9 @@ package com.core.app.ui.screens.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.core.app.base.BaseViewModel
+import com.core.app.model.ProjectModel
 import com.core.commons.Event
 import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
@@ -17,7 +19,9 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val mProjectList = MutableLiveData<List<Project>>()
-    val projectList: LiveData<List<Project>> = mProjectList
+    val projectModelList: LiveData<List<ProjectModel>> = Transformations.map(mProjectList) {
+        it.map { project -> ProjectModel(project) }
+    }
 
     private val mProjectSelected = MutableLiveData<Event<Project>>()
     val projectSelected: LiveData<Event<Project>> = mProjectSelected
@@ -29,8 +33,8 @@ class HomeViewModel @Inject constructor(
         retrieveProjectList()
     }
 
-    fun onItemSelected(project: Project) {
-        mProjectSelected.value = Event(project)
+    fun onItemSelected(position: Int) {
+        mProjectList.value?.get(position)?.let { mProjectSelected.value = Event(it) }
     }
 
     fun performLogout() {

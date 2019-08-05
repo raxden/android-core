@@ -11,8 +11,8 @@ import com.core.app.R
 import com.core.app.base.adapter.BaseListAdapter
 import com.core.app.databinding.HomeProjectListFragmentBinding
 import com.core.app.databinding.HomeProjectListItemBinding
+import com.core.app.model.ProjectModel
 import com.core.app.ui.screens.home.HomeViewModel
-import com.core.domain.Project
 
 class HomeProjectListFragment : AppFragment<HomeViewModel, HomeProjectListFragmentBinding>() {
 
@@ -30,9 +30,9 @@ class HomeProjectListFragment : AppFragment<HomeViewModel, HomeProjectListFragme
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        listAdapter = HomeProjectListAdapter(this, viewModel, object : DiffUtil.ItemCallback<Project>() {
-            override fun areItemsTheSame(oldItem: Project, newItem: Project): Boolean = oldItem.name == newItem.name
-            override fun areContentsTheSame(oldItem: Project, newItem: Project): Boolean = oldItem == newItem
+        listAdapter = HomeProjectListAdapter(this, viewModel, object : DiffUtil.ItemCallback<ProjectModel>() {
+            override fun areItemsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem.name == newItem.name
+            override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem == newItem
         })
     }
 
@@ -47,14 +47,14 @@ class HomeProjectListFragment : AppFragment<HomeViewModel, HomeProjectListFragme
     }
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: HomeViewModel) {
-        viewModel.projectList.observe(owner, Observer { listAdapter.submitList(it) })
+        viewModel.projectModelList.observe(owner, Observer { listAdapter.submitList(it) })
     }
 
     internal class HomeProjectListAdapter(
             val fragment: HomeProjectListFragment,
             viewModel: HomeViewModel,
-            diffCallback: DiffUtil.ItemCallback<Project>
-    ) : BaseListAdapter<Project, HomeViewModel, HomeProjectListItemBinding>(viewModel, diffCallback) {
+            diffCallback: DiffUtil.ItemCallback<ProjectModel>
+    ) : BaseListAdapter<ProjectModel, HomeViewModel, HomeProjectListItemBinding>(viewModel, diffCallback) {
 
         override fun getItemViewType(position: Int): Int = R.layout.home_project_list_item
     }
