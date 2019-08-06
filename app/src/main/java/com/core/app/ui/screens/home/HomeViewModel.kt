@@ -19,9 +19,10 @@ class HomeViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val mProjectList = MutableLiveData<List<Project>>()
-    val projectModelList: LiveData<List<ProjectModel>> = Transformations.map(mProjectList) {
-        it.map { project -> ProjectModel(project) }
-    }
+    val projectModelList: LiveData<List<ProjectModel>> = Transformations
+            .map(mProjectList) {
+                it.map { project -> ProjectModel(project) }
+            }
 
     private val mProjectSelected = MutableLiveData<Event<Project>>()
     val projectSelected: LiveData<Event<Project>> = mProjectSelected

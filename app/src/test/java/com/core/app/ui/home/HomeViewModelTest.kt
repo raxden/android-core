@@ -1,18 +1,15 @@
 package com.core.app.ui.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import com.core.app.RxSchedulerRule
+import com.core.app.model.ProjectModel
 import com.core.app.ui.screens.home.HomeViewModel
-import com.core.app.ui.screens.login.LoginViewModel
 import com.core.domain.Project
-import com.core.domain.User
 import com.core.domain.interactor.GetProjectListUseCase
-import com.core.domain.interactor.GetVersionUseCase
-import com.core.domain.interactor.LoginUseCase
 import com.core.domain.interactor.LogoutUseCase
 import io.reactivex.Completable
 import io.reactivex.Maybe
-import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -22,8 +19,6 @@ import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 @RunWith(RobolectricTestRunner::class)
 class HomeViewModelTest {
@@ -42,16 +37,23 @@ class HomeViewModelTest {
     @Mock
     lateinit var logoutUseCase: LogoutUseCase
 
+    @Mock
+    lateinit var statusObserver: Observer<Boolean>
+    @Mock
+    lateinit var projectListObserver: Observer<List<ProjectModel>>
+
     private lateinit var viewModel: HomeViewModel
+
+    private val projectListData = listOf(
+            Project(1),
+            Project(2),
+            Project(3)
+    )
 
     @Before
     fun setUp() {
         getProjectListUseCase.apply {
-            Mockito.`when`(execute()).thenReturn(Maybe.just(mutableListOf<Project>().apply {
-                add(Project(1))
-                add(Project(2))
-                add(Project(3))
-            }))
+            Mockito.`when`(execute()).thenReturn(Maybe.just(projectListData))
         }
         logoutUseCase.apply {
             Mockito.`when`(execute()).thenReturn(Completable.complete())
@@ -60,12 +62,20 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun checkProjectList() {
+    fun `retrieve project list data`() {
+        viewModel.loader.status.observeForever(statusObserver)
+        viewModel.projectModelList.observeForever(projectListObserver)
+        viewModel.retrieveProjectList()
+
+        Mockito.inOrder(statusObserver).apply {
+            verify(statusObserver).onChanged(true)
+            verify(statusObserver).onChanged(false)
+        }
         assert(viewModel.projectModelList.value?.isNotEmpty() == true)
     }
 
     @Test
-    fun performLogout() {
+    fun `perform logout operation`() {
         viewModel.performLogout()
 
         assert(viewModel.logoutCompleted.value?.getContentIfNotHandled() == true)
