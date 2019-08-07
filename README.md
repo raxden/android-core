@@ -35,7 +35,15 @@ This project is created like a template to start another projets. It`s based in 
 
 ### Objectives to accomplish
 
-- [x] Clean architecture
+- [x] Clean code.
+- [x] Clean architecture.
+- [x] SOLID
+- [x] Project based in layers (modules).
+- [x] MVVM pattern in app layer.
+- [x] Repository pattern in data layer.
+- [x] Material components
+- [x] Constraint layouts.
+- [x] TDD
         
 
 ### Libraries used in project
