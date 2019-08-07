@@ -9,7 +9,8 @@ This project is created like a template to start another projets. It`s based in 
     data            - Data access layer. That layer is responsable to handle data with thirds.
     
     commons         - Contains util classes used by any module of project. Like a utils library.
-    translations    - Contains files to translate application with Twine. This is util when locale files is shared with iOS applications.
+    translations    - Contains files to translate application with Twine. This is util when locale 
+                      files is shared with iOS applications.
 
 #### Module dependency
 
@@ -26,9 +27,11 @@ This project is created like a template to start another projets. It`s based in 
 
 ### Flavours
 
-    mock - No dependency with server. All retrofit service is mocked with API specification.
-    dev - Currenly not exists difference between dev and prod. This flavour make sense when use project base in your envioronment
-    prod - Currenly not exists difference between dev and prod. This flavour make sense when use project base in your envioronment
+    mock  - No dependency with server. All retrofit service is mocked with API specification.
+    dev   - Currenly not exists difference between dev and prod. This flavour make sense when 
+            use project base in your envioronment
+    prod  - Currenly not exists difference between dev and prod. This flavour make sense when 
+            use project base in your envioronment
 
 ### Libraries used in project
 
