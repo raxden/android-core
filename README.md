@@ -97,6 +97,10 @@ All library dependencies configuration is located in buildSystem/dependencies.gr
 
         dev/res/xml/provider_paths.xml
         prod/res/xml/provider_paths.xml
+        
+    6. This project use Twine to generate strings. This aproach is very useful when locale strings is shared
+    with another projects like a iOS app version in another Git repository (submodule). To generate files,
+    use the script updateTranslations.sh
 
 ### License
 
