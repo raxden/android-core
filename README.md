@@ -33,6 +33,11 @@ This project is created like a template to start another projets. It`s based in 
     prod  - Currenly not exists difference between dev and prod. This flavour make sense when 
             use project base in your envioronment
 
+### Objectives to accomplish
+
+- [x] Clean architecture
+        
+
 ### Libraries used in project
 
     ConstraintLayout        - https://developer.android.com/reference/android/support/constraint/ConstraintLayout
