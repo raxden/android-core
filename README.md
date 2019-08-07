@@ -35,15 +35,19 @@ This project is created like a template to start another projets. It`s based in 
 
 ### Objectives to accomplish
 
-- [x] Clean code.
-- [x] Clean architecture.
-- [x] SOLID
-- [x] Project based in layers (modules).
-- [x] MVVM pattern in app layer.
-- [x] Repository pattern in data layer.
-- [x] Material components
-- [x] Constraint layouts.
-- [x] TDD
+- [x] Clean code
+- [x] Clean architecture
+- [x] SOLID principles
+- [x] Project based in layers (modules)
+- [x] MVVM pattern in app layer with data binding
+- [x] Repository pattern in data layer
+- [x] Domain layer without android framework dependencies 
+- [x] Material components with Constraint layouts
+- [x] TDD - Junit, mockito and instrumental tests applied to three layers
+- [x] Room to persist data
+- [x] Dagger2 to inject dependencies
+- [x] Reactive programing with RX2
+- [] Coroutines
         
 
 ### Libraries used in project
