@@ -48,6 +48,8 @@ This project is created like a template to start another projets. It`s based in 
 - [x] Dagger2 to inject dependencies
 - [x] Reactive programing with RX2
 - [ ] Coroutines
+- [ ] Firebase - Realtime Database
+- [ ] Firebase - Remote Config
         
 
 ### Libraries used in project
