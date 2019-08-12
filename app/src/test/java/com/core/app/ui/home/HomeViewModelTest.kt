@@ -16,6 +16,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
@@ -36,12 +37,7 @@ class HomeViewModelTest {
     lateinit var getProjectListUseCase: GetProjectListUseCase
     @Mock
     lateinit var logoutUseCase: LogoutUseCase
-
-    @Mock
-    lateinit var statusObserver: Observer<Boolean>
-    @Mock
-    lateinit var projectListObserver: Observer<List<ProjectModel>>
-
+    
     private lateinit var viewModel: HomeViewModel
 
     private val projectListData = listOf(
@@ -63,14 +59,19 @@ class HomeViewModelTest {
 
     @Test
     fun `retrieve project list data`() {
+        val statusObserver = mock(Observer::class.java) as Observer<Boolean>
         viewModel.loader.status.observeForever(statusObserver)
-        viewModel.projectModelList.observeForever(projectListObserver)
+
+        val dataObserver = mock(Observer::class.java) as Observer<List<ProjectModel>>
+        viewModel.projectModelList.observeForever(dataObserver)
+
         viewModel.retrieveProjectList()
 
         Mockito.inOrder(statusObserver).apply {
             verify(statusObserver).onChanged(true)
             verify(statusObserver).onChanged(false)
         }
+
         assert(viewModel.projectModelList.value?.isNotEmpty() == true)
     }
 
