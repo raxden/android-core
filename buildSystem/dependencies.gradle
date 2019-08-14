@@ -11,7 +11,7 @@ versions.material = '1.1.0-alpha05'
 versions.rx_android = '2.1.1'           // https://github.com/ReactiveX/RxAndroid
 versions.rx_kotlin = '2.3.0'            // https://github.com/ReactiveX/RxKotlin
 versions.rx_permissions = '0.10.2'      // https://github.com/tbruyelle/RxPermissions
-versions.room  = '2.1.0-beta01'         // https://developer.android.com/jetpack/androidx/releases/room
+versions.room = '2.1.0-beta01'         // https://developer.android.com/jetpack/androidx/releases/room
 versions.threeten = '1.2.0'             // https://github.com/JakeWharton/ThreeTenABP
 versions.timber = '4.7.1'               // https://github.com/JakeWharton/timber
 versions.crashlytics = '2.10.1'         // https://fabric.io/kits/android/crashlytics/install
@@ -39,40 +39,40 @@ ext {
             constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: versions.contraint_layout]
     ]
 
-    def kotlinLibs = [
+    def kotlin = [
             core: [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: versions.kotlin],
             test: [group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: versions.kotlin]
     ]
 
-    def playServicesLibs = [
+    def services = [
             location: [group: 'com.google.android.gms', name: 'play-services-location', version: '16.0.0']
     ]
 
-    def firebaseLibs = [
+    def firebase = [
             core     : [group: 'com.google.firebase', name: 'firebase-core', version: '16.0.6'],
             analytics: [group: 'com.google.firebase', name: 'firebase-analytics', version: '16.0.5'],
             messaging: [group: 'com.google.firebase', name: 'firebase-messaging', version: '17.3.4']
     ]
 
-    def daggerLibs = [
+    def dagger = [
             androidSupport  : [group: 'com.google.dagger', name: 'dagger-android-support', version: versions.dagger],
             compiler        : [group: 'com.google.dagger', name: 'dagger-compiler', version: versions.dagger],
             androidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: versions.dagger]
     ]
 
-    def roomLibs = [
+    def room = [
             runtime : [group: 'androidx.room', name: 'room-runtime', version: versions.room],
             compiler: [group: 'androidx.room', name: 'room-compiler', version: versions.room],
             rxjava2 : [group: 'androidx.room', name: 'room-rxjava2', version: versions.room],
             test    : [group: 'androidx.room', name: 'room-testing', version: versions.room]
     ]
 
-    def rxLibs = [
+    def rx = [
             android: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versions.rx_android],
             kotlin : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: versions.rx_kotlin]
     ]
 
-    def retrofitLibs = [
+    def retrofit = [
             core            : [group: 'com.squareup.retrofit2', name: 'retrofit', version: versions.retrofit],
             rx              : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: versions.retrofit],
             converterGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versions.retrofit],
@@ -80,42 +80,53 @@ ext {
             mock            : [group: 'com.squareup.retrofit2', name: 'retrofit-mock', version: versions.retrofit]
     ]
 
-    def okHttpLibs = [
+    def okhttp = [
             core              : [group: 'com.squareup.okhttp3', name: 'okhttp', version: versions.okhttp],
             loggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: versions.okhttp],
             mockWebServer     : [group: 'com.squareup.okhttp3', name: 'mockwebserver', version: versions.okhttp],
     ]
 
-    def glideLibs = [
+    def glide = [
             core    : [group: 'com.github.bumptech.glide', name: 'glide', version: versions.glide],
             compiler: [group: 'com.github.bumptech.glide', name: 'compiler', version: versions.glide]
     ]
 
-    def libs = [
-            gson         : [group: 'com.google.code.gson', name: 'gson', version: versions.gson],
-            timber       : [group: 'com.jakewharton.timber', name: 'timber', version: versions.timber],
-            threetenabp  : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: versions.threeten],
-            rxPermissions: [group: 'com.github.tbruyelle', name: 'rxpermissions', version: versions.rx_permissions],
-            crashlytics  : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: versions.crashlytics, ext: 'aar']
+    def gson = [
+            core: [group: 'com.google.code.gson', name: 'gson', version: versions.gson]
     ]
 
-    def robolectricLibs = [
+    def timber = [
+            core: [group: 'com.jakewharton.timber', name: 'timber', version: versions.timber]
+    ]
+
+    def threetenabp = [
+            core  : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: versions.threeten]
+    ]
+
+    def rxpermissions = [
+            core: [group: 'com.github.tbruyelle', name: 'rxpermissions', version: versions.rx_permissions]
+    ]
+    def crashlytics = [
+            core  : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: versions.crashlytics, ext: 'aar']
+    ]
+
+    def robolectric = [
             core    : [group: 'org.robolectric', name: 'robolectric', version: versions.robolectric],
             multidex: [group: 'org.robolectric', name: 'shadows-multidex', version: versions.robolectric]
     ]
 
-    def mockitoLibs = [
+    def mockito = [
             core   : [group: 'org.mockito', name: 'mockito-core', version: versions.mockito],
             android: [group: 'org.mockito', name: 'mockito-android', version: versions.mockito]
     ]
 
-    def atslLibs = [
+    def atsl = [
             runner: [group: 'androidx.test', name: 'runner', version: versions.atsl_runner],
             rules : [group: 'androidx.test', name: 'rules', version: versions.atsl_rules],
             junit : [group: 'androidx.test.ext', name: 'junit', version: versions.atsl_junit]
     ]
 
-    def espressoLibs = [
+    def espresso = [
             core   : [group: 'androidx.test.espresso', name: 'espresso-core', version: versions.espresso],
             contrib: [group: 'androidx.test.espresso', name: 'espresso-contrib', version: versions.espresso],
             intents: [group: 'androidx.test.espresso', name: 'espresso-intents', version: versions.espresso],
@@ -143,119 +154,119 @@ ext {
 
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
-            [configuration: "implementation", dependency: kotlinLibs.core],
-            [configuration: "implementation", dependency: playServicesLibs.location],
-            [configuration: "implementation", dependency: firebaseLibs.core],
-            [configuration: "implementation", dependency: firebaseLibs.analytics],
-            [configuration: "implementation", dependency: firebaseLibs.messaging],
-            [configuration: "implementation", dependency: daggerLibs.androidSupport],
-            [configuration: "kapt", dependency: daggerLibs.compiler],
-            [configuration: "kapt", dependency: daggerLibs.androidProcessor],
-            [configuration: "implementation", dependency: rxLibs.android],
-            [configuration: "implementation", dependency: rxLibs.kotlin],
-            [configuration: "implementation", dependency: retrofitLibs.core],
-            [configuration: "implementation", dependency: retrofitLibs.rx],
-            [configuration: "implementation", dependency: retrofitLibs.converterGson],
-            [configuration: "implementation", dependency: retrofitLibs.converterScalars],
-            [configuration: "implementation", dependency: okHttpLibs.core],
-            [configuration: "implementation", dependency: okHttpLibs.loggingInterceptor],
-            [configuration: "implementation", dependency: roomLibs.runtime],
-            [configuration: "kapt", dependency: roomLibs.compiler],
-            [configuration: "implementation", dependency: roomLibs.rxjava2],
-            [configuration: "implementation", dependency: glideLibs.core],
-            [configuration: "kapt", dependency: glideLibs.compiler],
-            [configuration: "implementation", dependency: libs.gson],
-            [configuration: "implementation", dependency: libs.threetenabp],
-            [configuration: "implementation", dependency: libs.timber],
-            [configuration: "implementation", dependency: libs.rxPermissions],
-            [configuration: "implementation", dependency: libs.crashlytics, options: {
+            [configuration: "implementation", dependency: kotlin.core],
+            [configuration: "implementation", dependency: services.location],
+            [configuration: "implementation", dependency: firebase.core],
+            [configuration: "implementation", dependency: firebase.analytics],
+            [configuration: "implementation", dependency: firebase.messaging],
+            [configuration: "implementation", dependency: dagger.androidSupport],
+            [configuration: "kapt", dependency: dagger.compiler],
+            [configuration: "kapt", dependency: dagger.androidProcessor],
+            [configuration: "implementation", dependency: rx.android],
+            [configuration: "implementation", dependency: rx.kotlin],
+            [configuration: "implementation", dependency: retrofit.core],
+            [configuration: "implementation", dependency: retrofit.rx],
+            [configuration: "implementation", dependency: retrofit.converterGson],
+            [configuration: "implementation", dependency: retrofit.converterScalars],
+            [configuration: "implementation", dependency: okhttp.core],
+            [configuration: "implementation", dependency: okhttp.loggingInterceptor],
+            [configuration: "implementation", dependency: room.runtime],
+            [configuration: "kapt", dependency: room.compiler],
+            [configuration: "implementation", dependency: room.rxjava2],
+            [configuration: "implementation", dependency: glide.core],
+            [configuration: "kapt", dependency: glide.compiler],
+            [configuration: "implementation", dependency: gson.core],
+            [configuration: "implementation", dependency: threetenabp.core],
+            [configuration: "implementation", dependency: timber.core],
+            [configuration: "implementation", dependency: rxpermissions.core],
+            [configuration: "implementation", dependency: crashlytics.core, options: {
                 transitive = true
             }],
 
-            [configuration: "androidTestImplementation", dependency: atslLibs.runner],
-            [configuration: "androidTestImplementation", dependency: atslLibs.rules],
-            [configuration: "androidTestImplementation", dependency: atslLibs.junit],
-            [configuration: "androidTestImplementation", dependency: espressoLibs.core],
-            [configuration: "androidTestImplementation", dependency: espressoLibs.contrib],
-            [configuration: "androidTestImplementation", dependency: espressoLibs.intents],
-            [configuration: "androidTestImplementation", dependency: mockitoLibs.core],
-            [configuration: "androidTestImplementation", dependency: mockitoLibs.android],
+            [configuration: "androidTestImplementation", dependency: atsl.runner],
+            [configuration: "androidTestImplementation", dependency: atsl.rules],
+            [configuration: "androidTestImplementation", dependency: atsl.junit],
+            [configuration: "androidTestImplementation", dependency: espresso.core],
+            [configuration: "androidTestImplementation", dependency: espresso.contrib],
+            [configuration: "androidTestImplementation", dependency: espresso.intents],
+            [configuration: "androidTestImplementation", dependency: mockito.core],
+            [configuration: "androidTestImplementation", dependency: mockito.android],
 
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: testLibs.arch],
-            [configuration: "testImplementation", dependency: kotlinLibs.test],
-            [configuration: "testImplementation", dependency: mockitoLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.multidex],
-            [configuration: "kaptTest", dependency: daggerLibs.compiler]
+            [configuration: "testImplementation", dependency: kotlin.test],
+            [configuration: "testImplementation", dependency: mockito.core],
+            [configuration: "testImplementation", dependency: robolectric.core],
+            [configuration: "testImplementation", dependency: robolectric.multidex],
+            [configuration: "kaptTest", dependency: dagger.compiler]
     ]
 
     domainDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
 
-            [configuration: "implementation", dependency: kotlinLibs.core],
-            [configuration: "implementation", dependency: daggerLibs.androidSupport],
-            [configuration: "kapt", dependency: daggerLibs.compiler],
-            [configuration: "kapt", dependency: daggerLibs.androidProcessor],
-            [configuration: "implementation", dependency: libs.threetenabp],
-            [configuration: "implementation", dependency: libs.timber],
-            [configuration: "implementation", dependency: rxLibs.android],
-            [configuration: "implementation", dependency: rxLibs.kotlin],
-            [configuration: "implementation", dependency: roomLibs.runtime],
-            [configuration: "kapt", dependency: roomLibs.compiler],
-            [configuration: "implementation", dependency: roomLibs.rxjava2],
+            [configuration: "implementation", dependency: kotlin.core],
+            [configuration: "implementation", dependency: dagger.androidSupport],
+            [configuration: "kapt", dependency: dagger.compiler],
+            [configuration: "kapt", dependency: dagger.androidProcessor],
+            [configuration: "implementation", dependency: threetenabp.core],
+            [configuration: "implementation", dependency: timber.core],
+            [configuration: "implementation", dependency: rx.android],
+            [configuration: "implementation", dependency: rx.kotlin],
+            [configuration: "implementation", dependency: room.runtime],
+            [configuration: "kapt", dependency: room.compiler],
+            [configuration: "implementation", dependency: room.rxjava2],
 
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
-            [configuration: "testImplementation", dependency: kotlinLibs.test],
-            [configuration: "testImplementation", dependency: mockitoLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.multidex]
+            [configuration: "testImplementation", dependency: kotlin.test],
+            [configuration: "testImplementation", dependency: mockito.core],
+            [configuration: "testImplementation", dependency: robolectric.core],
+            [configuration: "testImplementation", dependency: robolectric.multidex]
     ]
 
     dataDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
             [configuration: "implementation", dependency: project(modules.domain)],
 
-            [configuration: "implementation", dependency: kotlinLibs.core],
-            [configuration: "implementation", dependency: daggerLibs.androidSupport],
-            [configuration: "kapt", dependency: daggerLibs.compiler],
-            [configuration: "kapt", dependency: daggerLibs.androidProcessor],
-            [configuration: "implementation", dependency: libs.gson],
-            [configuration: "implementation", dependency: libs.threetenabp],
-            [configuration: "implementation", dependency: libs.timber],
-            [configuration: "implementation", dependency: rxLibs.android],
-            [configuration: "implementation", dependency: rxLibs.kotlin],
-            [configuration: "implementation", dependency: retrofitLibs.core],
-            [configuration: "implementation", dependency: retrofitLibs.rx],
-            [configuration: "implementation", dependency: retrofitLibs.converterGson],
-            [configuration: "implementation", dependency: retrofitLibs.converterScalars],
-            [configuration: "implementation", dependency: okHttpLibs.core],
-            [configuration: "implementation", dependency: okHttpLibs.loggingInterceptor],
-            [configuration: "implementation", dependency: roomLibs.runtime],
-            [configuration: "kapt", dependency: roomLibs.compiler],
-            [configuration: "implementation", dependency: roomLibs.rxjava2],
+            [configuration: "implementation", dependency: kotlin.core],
+            [configuration: "implementation", dependency: dagger.androidSupport],
+            [configuration: "kapt", dependency: dagger.compiler],
+            [configuration: "kapt", dependency: dagger.androidProcessor],
+            [configuration: "implementation", dependency: gson.core],
+            [configuration: "implementation", dependency: threetenabp.core],
+            [configuration: "implementation", dependency: timber.core],
+            [configuration: "implementation", dependency: rx.android],
+            [configuration: "implementation", dependency: rx.kotlin],
+            [configuration: "implementation", dependency: retrofit.core],
+            [configuration: "implementation", dependency: retrofit.rx],
+            [configuration: "implementation", dependency: retrofit.converterGson],
+            [configuration: "implementation", dependency: retrofit.converterScalars],
+            [configuration: "implementation", dependency: okhttp.core],
+            [configuration: "implementation", dependency: okhttp.loggingInterceptor],
+            [configuration: "implementation", dependency: room.runtime],
+            [configuration: "kapt", dependency: room.compiler],
+            [configuration: "implementation", dependency: room.rxjava2],
 
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
-            [configuration: "testImplementation", dependency: kotlinLibs.test],
-            [configuration: "testImplementation", dependency: retrofitLibs.mock],
-            [configuration: "testImplementation", dependency: okHttpLibs.mockWebServer],
-            [configuration: "testImplementation", dependency: mockitoLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.core],
-            [configuration: "testImplementation", dependency: robolectricLibs.multidex]
+            [configuration: "testImplementation", dependency: kotlin.test],
+            [configuration: "testImplementation", dependency: retrofit.mock],
+            [configuration: "testImplementation", dependency: okhttp.mockWebServer],
+            [configuration: "testImplementation", dependency: mockito.core],
+            [configuration: "testImplementation", dependency: robolectric.core],
+            [configuration: "testImplementation", dependency: robolectric.multidex]
     ]
 
     commonsDependencies = [
             [configuration: "implementation", dependency: support.material],
-            [configuration: "implementation", dependency: kotlinLibs.core],
-            [configuration: "implementation", dependency: rxLibs.android],
-            [configuration: "implementation", dependency: rxLibs.kotlin],
-            [configuration: "implementation", dependency: libs.gson],
-            [configuration: "implementation", dependency: libs.threetenabp],
-            [configuration: "implementation", dependency: libs.timber],
-            [configuration: "implementation", dependency: glideLibs.core],
-            [configuration: "implementation", dependency: mockitoLibs.core]
+            [configuration: "implementation", dependency: kotlin.core],
+            [configuration: "implementation", dependency: rx.android],
+            [configuration: "implementation", dependency: rx.kotlin],
+            [configuration: "implementation", dependency: gson.core],
+            [configuration: "implementation", dependency: threetenabp.core],
+            [configuration: "implementation", dependency: timber.core],
+            [configuration: "implementation", dependency: glide.core],
+            [configuration: "implementation", dependency: mockito.core]
     ]
 }
