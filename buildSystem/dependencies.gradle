@@ -1,47 +1,47 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+def versions = [:]
+
+versions.android_gradle_plugin = '3.4.1'
+versions.google_services = '4.2.0'
+versions.fabric_tools = '1.28.1'
+versions.kotlin = "1.3.41"
+versions.contraint_layout = '1.1.3'
+versions.material = '1.1.0-alpha05'
+versions.rx_android = '2.1.1'           // https://github.com/ReactiveX/RxAndroid
+versions.rx_kotlin = '2.3.0'            // https://github.com/ReactiveX/RxKotlin
+versions.rx_permissions = '0.10.2'      // https://github.com/tbruyelle/RxPermissions
+versions.room  = '2.1.0-beta01'         // https://developer.android.com/jetpack/androidx/releases/room
+versions.threeten = '1.2.0'             // https://github.com/JakeWharton/ThreeTenABP
+versions.timber = '4.7.1'               // https://github.com/JakeWharton/timber
+versions.crashlytics = '2.10.1'         // https://fabric.io/kits/android/crashlytics/install
+versions.gson = '2.8.5'                 // https://github.com/google/gson
+versions.dagger = '2.22.1'              // https://github.com/google/dagger
+versions.glide = '4.9.0'                // https://github.com/bumptech/glide
+versions.okhttp = '3.12.0'              // https://github.com/square/okhttp
+versions.retrofit = '2.5.0'             // https://github.com/square/retrofit
+versions.atsl_runner = '1.1.1'
+versions.atsl_rules = '1.1.1'
+versions.atsl_junit = '1.1.0'
+versions.espresso = '3.1.1'
+versions.junit = '4.12'
+versions.assertj = '1.7.0'
+versions.mockito = '2.27.0'
+versions.robolectric = '4.2.1'
+versions.arch = '1.1.1'
+
+ext.versions = versions
+
 ext {
 
-    // ========== VERSIONS =========================================================================
-
-    // Androidx dependencies
-    def constraintLayoutVersion = '1.1.3'
-    def materialVersion = '1.1.0-alpha05'
-    def kotlinVersion = '1.3.31'
-
-    // dependencies
-    def rxAndroidVersion = '2.1.1'              // https://github.com/ReactiveX/RxAndroid
-    def rxKotlinVersion = '2.3.0'               // https://github.com/ReactiveX/RxKotlin
-    def rxPermissionsVersion = '0.10.2'         // https://github.com/tbruyelle/RxPermissions
-    def roomVersion = '2.1.0-beta01'
-    // https://developer.android.com/jetpack/androidx/releases/room
-    def androidThreeTenVersion = '1.2.0'        // https://github.com/JakeWharton/ThreeTenABP
-    def crashlyticsVersion = '2.10.1'
-    // https://fabric.io/kits/android/crashlytics/install
-    def gsonVersion = '2.8.5'                   // https://github.com/google/gson
-    def daggerVersion = '2.22.1'                // https://github.com/google/dagger
-    def glideVersion = '4.9.0'                  // https://github.com/bumptech/glide
-    def okHttpVersion = '3.12.0'                // https://github.com/square/okhttp
-    def retrofitVersion = '2.5.0'               // https://github.com/square/retrofit
-    def timberVersion = '4.7.1'                 // https://github.com/JakeWharton/timber
-
-    // Testing
-    def junitVersion = '4.12'
-    def assertJVersion = '1.7.0'
-    def mockitoVersion = '2.27.0'
-    def robolectricVersion = '4.2.1'
-    def archVersion = '1.1.1'
-
-    // ========== LIBRARIES ========================================================================
-
     def support = [
-            material        : [group: 'com.google.android.material', name: 'material', version: materialVersion],
-            constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: constraintLayoutVersion]
+            material        : [group: 'com.google.android.material', name: 'material', version: versions.material],
+            constraintLayout: [group: 'androidx.constraintlayout', name: 'constraintlayout', version: versions.contraint_layout]
     ]
 
     def kotlinLibs = [
-            core: [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: kotlinVersion],
-            test: [group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: kotlinVersion]
+            core: [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk7', version: versions.kotlin],
+            test: [group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: versions.kotlin]
     ]
 
     def playServicesLibs = [
@@ -55,72 +55,85 @@ ext {
     ]
 
     def daggerLibs = [
-            androidSupport  : [group: 'com.google.dagger', name: 'dagger-android-support', version: daggerVersion],
-            compiler        : [group: 'com.google.dagger', name: 'dagger-compiler', version: daggerVersion],
-            androidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: daggerVersion]
+            androidSupport  : [group: 'com.google.dagger', name: 'dagger-android-support', version: versions.dagger],
+            compiler        : [group: 'com.google.dagger', name: 'dagger-compiler', version: versions.dagger],
+            androidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: versions.dagger]
     ]
 
     def roomLibs = [
-            runtime : [group: 'androidx.room', name: 'room-runtime', version: roomVersion],
-            compiler: [group: 'androidx.room', name: 'room-compiler', version: roomVersion],
-            rxjava2 : [group: 'androidx.room', name: 'room-rxjava2', version: roomVersion],
-            test    : [group: 'androidx.room', name: 'room-testing', version: roomVersion]
+            runtime : [group: 'androidx.room', name: 'room-runtime', version: versions.room],
+            compiler: [group: 'androidx.room', name: 'room-compiler', version: versions.room],
+            rxjava2 : [group: 'androidx.room', name: 'room-rxjava2', version: versions.room],
+            test    : [group: 'androidx.room', name: 'room-testing', version: versions.room]
     ]
 
     def rxLibs = [
-            android: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: rxAndroidVersion],
-            kotlin : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: rxKotlinVersion]
+            android: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versions.rx_android],
+            kotlin : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: versions.rx_kotlin]
     ]
 
     def retrofitLibs = [
-            core            : [group: 'com.squareup.retrofit2', name: 'retrofit', version: retrofitVersion],
-            rx              : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: retrofitVersion],
-            converterGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: retrofitVersion],
-            converterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: retrofitVersion],
-            mock            : [group: 'com.squareup.retrofit2', name: 'retrofit-mock', version: retrofitVersion]
+            core            : [group: 'com.squareup.retrofit2', name: 'retrofit', version: versions.retrofit],
+            rx              : [group: 'com.squareup.retrofit2', name: 'adapter-rxjava2', version: versions.retrofit],
+            converterGson   : [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versions.retrofit],
+            converterScalars: [group: 'com.squareup.retrofit2', name: 'converter-scalars', version: versions.retrofit],
+            mock            : [group: 'com.squareup.retrofit2', name: 'retrofit-mock', version: versions.retrofit]
     ]
 
     def okHttpLibs = [
-            core              : [group: 'com.squareup.okhttp3', name: 'okhttp', version: okHttpVersion],
-            loggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: okHttpVersion],
-            mockWebServer     : [group: 'com.squareup.okhttp3', name: 'mockwebserver', version: okHttpVersion],
+            core              : [group: 'com.squareup.okhttp3', name: 'okhttp', version: versions.okhttp],
+            loggingInterceptor: [group: 'com.squareup.okhttp3', name: 'logging-interceptor', version: versions.okhttp],
+            mockWebServer     : [group: 'com.squareup.okhttp3', name: 'mockwebserver', version: versions.okhttp],
     ]
 
     def glideLibs = [
-            core    : [group: 'com.github.bumptech.glide', name: 'glide', version: glideVersion],
-            compiler: [group: 'com.github.bumptech.glide', name: 'compiler', version: glideVersion]
+            core    : [group: 'com.github.bumptech.glide', name: 'glide', version: versions.glide],
+            compiler: [group: 'com.github.bumptech.glide', name: 'compiler', version: versions.glide]
     ]
 
     def libs = [
-            gson         : [group: 'com.google.code.gson', name: 'gson', version: gsonVersion],
-            timber       : [group: 'com.jakewharton.timber', name: 'timber', version: timberVersion],
-            threetenabp  : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: androidThreeTenVersion],
-            rxPermissions: [group: 'com.github.tbruyelle', name: 'rxpermissions', version: rxPermissionsVersion],
-            crashlytics  : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: crashlyticsVersion, ext: 'aar']
+            gson         : [group: 'com.google.code.gson', name: 'gson', version: versions.gson],
+            timber       : [group: 'com.jakewharton.timber', name: 'timber', version: versions.timber],
+            threetenabp  : [group: 'com.jakewharton.threetenabp', name: 'threetenabp', version: versions.threeten],
+            rxPermissions: [group: 'com.github.tbruyelle', name: 'rxpermissions', version: versions.rx_permissions],
+            crashlytics  : [group: 'com.crashlytics.sdk.android', name: 'crashlytics', version: versions.crashlytics, ext: 'aar']
     ]
 
     def robolectricLibs = [
-            core    : [group: 'org.robolectric', name: 'robolectric', version: robolectricVersion],
-            multidex: [group: 'org.robolectric', name: 'shadows-multidex', version: robolectricVersion]
+            core    : [group: 'org.robolectric', name: 'robolectric', version: versions.robolectric],
+            multidex: [group: 'org.robolectric', name: 'shadows-multidex', version: versions.robolectric]
     ]
 
     def mockitoLibs = [
-            mockito: [group: 'org.mockito', name: 'mockito-core', version: mockitoVersion]
+            core   : [group: 'org.mockito', name: 'mockito-core', version: versions.mockito],
+            android: [group: 'org.mockito', name: 'mockito-android', version: versions.mockito]
+    ]
+
+    def atslLibs = [
+            runner: [group: 'androidx.test', name: 'runner', version: versions.atsl_runner],
+            rules : [group: 'androidx.test', name: 'rules', version: versions.atsl_rules],
+            junit : [group: 'androidx.test.ext', name: 'junit', version: versions.atsl_junit]
+    ]
+
+    def espressoLibs = [
+            core   : [group: 'androidx.test.espresso', name: 'espresso-core', version: versions.espresso],
+            contrib: [group: 'androidx.test.espresso', name: 'espresso-contrib', version: versions.espresso],
+            intents: [group: 'androidx.test.espresso', name: 'espresso-intents', version: versions.espresso],
     ]
 
     def testLibs = [
-            junit  : [group: 'junit', name: 'junit', version: junitVersion],
-            assertj: [group: 'org.assertj', name: 'assertj-core', version: assertJVersion],
-            arch: [group: 'android.arch.core', name: 'core-testing', version: archVersion]
+            junit  : [group: 'junit', name: 'junit', version: versions.junit],
+            assertj: [group: 'org.assertj', name: 'assertj-core', version: versions.assertj],
+            arch   : [group: 'android.arch.core', name: 'core-testing', version: versions.arch]
     ]
 
     // ========== MODULES DEPENDENCIES =============================================================
 
     def modules = [
-            app       : ':app',
-            data      : ':data',
-            domain    : ':domain',
-            commons   : ':commons'
+            app    : ':app',
+            data   : ':data',
+            domain : ':domain',
+            commons: ':commons'
     ]
 
     appDependencies = [
@@ -159,12 +172,20 @@ ext {
                 transitive = true
             }],
 
-            [configuration: "testImplementation", dependency: project(modules.commons)],
+            [configuration: "androidTestImplementation", dependency: atslLibs.runner],
+            [configuration: "androidTestImplementation", dependency: atslLibs.rules],
+            [configuration: "androidTestImplementation", dependency: atslLibs.junit],
+            [configuration: "androidTestImplementation", dependency: espressoLibs.core],
+            [configuration: "androidTestImplementation", dependency: espressoLibs.contrib],
+            [configuration: "androidTestImplementation", dependency: espressoLibs.intents],
+            [configuration: "androidTestImplementation", dependency: mockitoLibs.core],
+            [configuration: "androidTestImplementation", dependency: mockitoLibs.android],
+
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: testLibs.arch],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
-            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: mockitoLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.multidex],
             [configuration: "kaptTest", dependency: daggerLibs.compiler]
@@ -185,11 +206,10 @@ ext {
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
 
-            [configuration: "testImplementation", dependency: project(modules.commons)],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
-            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: mockitoLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.multidex]
     ]
@@ -217,13 +237,12 @@ ext {
             [configuration: "kapt", dependency: roomLibs.compiler],
             [configuration: "implementation", dependency: roomLibs.rxjava2],
 
-            [configuration: "testImplementation", dependency: project(modules.commons)],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
             [configuration: "testImplementation", dependency: kotlinLibs.test],
             [configuration: "testImplementation", dependency: retrofitLibs.mock],
             [configuration: "testImplementation", dependency: okHttpLibs.mockWebServer],
-            [configuration: "testImplementation", dependency: mockitoLibs.mockito],
+            [configuration: "testImplementation", dependency: mockitoLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.core],
             [configuration: "testImplementation", dependency: robolectricLibs.multidex]
     ]
@@ -237,6 +256,6 @@ ext {
             [configuration: "implementation", dependency: libs.threetenabp],
             [configuration: "implementation", dependency: libs.timber],
             [configuration: "implementation", dependency: glideLibs.core],
-            [configuration: "implementation", dependency: mockitoLibs.mockito]
+            [configuration: "implementation", dependency: mockitoLibs.core]
     ]
 }

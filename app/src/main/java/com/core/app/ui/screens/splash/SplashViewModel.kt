@@ -3,6 +3,7 @@ package com.core.app.ui.screens.splash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel
+import com.core.app.util.OpenForTesting
 import com.core.commons.extension.subscribeWith
 import com.core.domain.Forward
 import com.core.domain.User
@@ -15,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@OpenForTesting
 class SplashViewModel @Inject constructor(
         private val getVersionUseCase: GetVersionUseCase,
         private val forwardUseCase: ForwardUseCase

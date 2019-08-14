@@ -11,6 +11,7 @@ import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.commons.extension.getExtras
 import com.core.domain.Forward
+import org.jetbrains.annotations.TestOnly
 
 class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
         InjectFragmentActivityLifecycle.Callback<SplashFragment> {
@@ -18,6 +19,8 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
     companion object {
         fun intent(context: Context): Intent = Intent(context, SplashActivity::class.java)
     }
+
+    private var mSplashFragment: SplashFragment? = null
 
     override val viewModelClass: Class<SplashViewModel>
         get() = SplashViewModel::class.java
@@ -43,5 +46,9 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
 
     override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
 
-    override fun onFragmentLoaded(fragment: SplashFragment) {}
+    override fun onFragmentLoaded(fragment: SplashFragment) { mSplashFragment = fragment }
+
+    @TestOnly
+    fun getFragment() = mSplashFragment
+
 }

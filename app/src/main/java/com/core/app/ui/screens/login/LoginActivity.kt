@@ -35,6 +35,7 @@ class LoginActivity : AppActivity<LoginViewModel, LoginActivityBinding>(),
     @Inject
     lateinit var mKeyboardManager: KeyboardManager
 
+    private var mLoginFragment: LoginFragment? = null
     private var mHandler = Handler()
     private var mCurtainReady = false
     private var mAnimatorIsWorking = false
@@ -78,7 +79,7 @@ class LoginActivity : AppActivity<LoginViewModel, LoginActivityBinding>(),
 
     override fun onCreateFragment(): LoginFragment = LoginFragment.newInstance(getExtras())
 
-    override fun onFragmentLoaded(fragment: LoginFragment) {}
+    override fun onFragmentLoaded(fragment: LoginFragment) { mLoginFragment = fragment }
 
     // =============================================================================================
 
