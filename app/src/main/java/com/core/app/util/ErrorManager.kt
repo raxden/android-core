@@ -10,7 +10,9 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class ErrorManager(private val activity: AppCompatActivity) {
+class ErrorManager(
+        private val activity: AppCompatActivity
+) {
 
     private val mErrorList = mutableSetOf<BundleError>()
 

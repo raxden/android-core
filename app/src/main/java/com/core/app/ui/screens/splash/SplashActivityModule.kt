@@ -2,23 +2,27 @@ package com.core.app.ui.screens.splash
 
 import android.app.Activity
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ViewModel
 import com.core.app.base.activity.BaseActivityModule
 import com.core.app.base.activity.BaseFragmentActivityModule
+import com.core.app.base.activity.BaseViewModelFragmentActivityModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.injector.scope.PerFragment
 import com.core.app.lifecycle.activity.FullScreenActivityLifecycle
 import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.app.ui.screens.splash.view.SplashFragmentModule
+import com.core.app.util.ViewModelKey
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 
 /**
  * Provides splash activity dependencies
  */
-@Module(includes = [BaseFragmentActivityModule::class])
+@Module(includes = [BaseViewModelFragmentActivityModule::class])
 abstract class SplashActivityModule {
 
     /**
@@ -45,6 +49,12 @@ abstract class SplashActivityModule {
     @IntoSet
     @PerActivity
     internal abstract fun injectFragmentLifecycleObserver(lifecycleObserver: InjectFragmentActivityLifecycle<SplashFragment>): LifecycleObserver
+
+    @Binds
+    @IntoMap
+    @PerActivity
+    @ViewModelKey(SplashViewModel::class)
+    internal abstract fun splashViewModel(viewModel: SplashViewModel): ViewModel
 
     // =============================================================================================
 

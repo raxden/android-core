@@ -4,12 +4,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.core.app.BuildConfig
 import com.core.app.helper.AnimationHelper
 import com.core.app.helper.DialogHelper
 import com.core.app.helper.NavigationHelper
 import com.core.app.injector.module.LifecycleActivityModule
-import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.util.*
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -24,8 +24,7 @@ import javax.inject.Named
  * provide a concrete implementation of [Activity].
  */
 @Module(includes = [
-    LifecycleActivityModule::class,
-    ViewModelModule::class
+    LifecycleActivityModule::class
 ])
 abstract class BaseActivityModule {
 

@@ -16,11 +16,6 @@ abstract class BaseViewModel : ViewModel() {
 
     protected val mCompositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    /**
-     * This method will be called when this ViewModel is created.
-     */
-    open fun onAttached() {}
-
     override fun onCleared() {
         mLoaderManager.clear()
         mCompositeDisposable.clear()
