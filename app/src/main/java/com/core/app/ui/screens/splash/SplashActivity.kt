@@ -40,13 +40,15 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
         overridePendingTransition(0, 0)
     }
 
-    // =============== HasInjectFragmentInterceptor ================================================
+    // =============== InjectFragmentActivityLifecycle =============================================
 
     override fun onLoadFragmentContainer(): View = binding.contentView
 
     override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
 
     override fun onFragmentLoaded(fragment: SplashFragment) { mSplashFragment = fragment }
+
+    // =============================================================================================
 
     @TestOnly
     fun getFragment() = mSplashFragment

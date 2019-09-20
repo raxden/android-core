@@ -63,12 +63,15 @@ abstract class BaseActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        onCreateView()?.also { onViewCreated(it) }
+        rootView = onCreateView(savedInstanceState)
+        rootView?.let {
+            onViewCreated(it, savedInstanceState)
+        }
 
         lifecycleObserverList.forEach { (it as? BaseActivityLifecycle)?.onCreate(savedInstanceState) }
     }
 
-    open fun onCreateView(): View? = when {
+    open fun onCreateView(savedInstanceState: Bundle?): View? = when {
         layoutId != 0 -> {
             setContentView(layoutId)
             findViewById(android.R.id.content)
@@ -76,8 +79,8 @@ abstract class BaseActivity : AppCompatActivity(),
         else -> null
     }
 
-    open fun onViewCreated(view: View) {
-        rootView = view
+    open fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
     }
 
     // =============== BroadcastManager.Listener ===================================================
