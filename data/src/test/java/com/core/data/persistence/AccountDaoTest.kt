@@ -11,8 +11,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
-// MOVE TO INSTRUMENTAL TEST -> https://developer.android.com/training/data-storage/room/testing-db#kotlin
-
 @RunWith(RobolectricTestRunner::class)
 class AccountDaoTest {
 
@@ -23,7 +21,8 @@ class AccountDaoTest {
     fun initDb() {
         context = InstrumentationRegistry.getInstrumentation().context
         // using an in-memory database because the information stored here disappears after test
-        database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java)
+        database = Room
+                .inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java)
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()
                 .build()
