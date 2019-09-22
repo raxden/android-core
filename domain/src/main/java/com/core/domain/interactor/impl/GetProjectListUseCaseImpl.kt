@@ -5,6 +5,7 @@ import com.core.domain.interactor.GetProjectListUseCase
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.ProjectRepository
 import com.core.domain.repository.UserRepository
+import io.reactivex.Flowable
 import io.reactivex.Maybe
 import javax.inject.Inject
 
@@ -21,4 +22,7 @@ class GetProjectListUseCaseImpl @Inject constructor(
 
     override fun execute(username: String): Maybe<List<Project>> = projectRepository
             .list(username)
+
+    override fun test(username: String): Flowable<List<Project>> = projectRepository
+            .test(username)
 }

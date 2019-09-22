@@ -16,7 +16,7 @@ interface AppRetrofitService {
     @GET("users/{user}/repos")
     fun retrieveProjectList(
         @Path("user") username: String
-    ): Maybe<List<ProjectEntity>>
+    ): Single<List<ProjectEntity>>
 
     @GET("repos/{user}/{reponame}")
     fun retrieveProjectDetail(

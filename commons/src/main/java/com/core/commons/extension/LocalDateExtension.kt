@@ -40,3 +40,24 @@ fun String.toLocalDate(vararg formatter: DateTimeFormatter): LocalDate? {
     }
     return null
 }
+
+fun String.toLocalDateTime(vararg pattern: String): LocalDateTime? {
+    pattern.forEach { format ->
+        try {
+            LocalDateTime.parse(this, DateTimeFormatter.ofPattern(format))?.also { return it }
+        } catch (e: Exception) {
+        }
+    }
+    return null
+}
+
+
+fun String.toLocalDateTime(vararg formatter: DateTimeFormatter): LocalDateTime? {
+    formatter.forEach { dtf ->
+        try {
+            LocalDateTime.parse(this, dtf)?.also { return it }
+        } catch (e: Exception) {
+        }
+    }
+    return null
+}

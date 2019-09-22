@@ -10,7 +10,11 @@ import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
 import com.core.domain.interactor.LogoutUseCase
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -32,6 +36,25 @@ class HomeViewModel @Inject constructor(
 
     init {
         retrieveProjectList()
+    }
+
+    fun test() {
+        getProjectListUseCase.test("raxden")
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onNext = {
+                            Timber.d("onNext received!")
+                            if (it.isEmpty()) {
+                                Timber.d("onNext received! EMPTY")
+                            } else {
+                                it.forEach { project ->
+                                    Timber.d("onNext received! $project")
+                                }
+                            }
+                        }
+                )
+                .addTo(mCompositeDisposable)
     }
 
     fun onItemSelected(position: Int) {
