@@ -3,6 +3,8 @@ package com.core.data.repository
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.gateway.AppGateway
 import com.core.data.persistence.dao.ProjectDao
+import com.core.data.util.NetworkBound2Source
+import com.core.data.util.NetworkBound3Source
 import com.core.data.util.NetworkBoundSource
 import com.core.data.util.RateLimiter
 import com.core.domain.Project
@@ -22,6 +24,54 @@ class ProjectRepositoryImpl @Inject internal constructor(
     private val repoListRateLimit = RateLimiter<String>(10, TimeUnit.MINUTES)
 
     override fun test(username: String): Flowable<List<Project>> {
+
+
+        return Flowable.create({ emitter ->
+            object : NetworkBound3Source<List<Project>, List<ProjectEntity>>(emitter) {
+
+                override fun saveCallResult(data: List<ProjectEntity>) {
+                    dao.insert(*data.map { entity -> entity.toProject() }.toTypedArray())
+                }
+
+                override fun shouldFetch(data: List<Project>?): Boolean {
+                    return data == null || data.isEmpty() || repoListRateLimit.shouldFetch(username) || true
+                }
+
+                override fun loadFromDb(): Flowable<List<Project>> {
+                    return dao.findAll()
+                }
+
+                override fun createCall(): Single<List<ProjectEntity>> {
+                    return gateway.projectList(username)
+                }
+            }
+        }, BackpressureStrategy.BUFFER)
+
+
+/*
+        return object: NetworkBound2Source<List<Project>, List<ProjectEntity>>() {
+            override fun saveCallResult(data: List<ProjectEntity>) {
+                val projectList = data.map { entity -> entity.toProject() }
+                projectList[0].name = "esto es una prueba"
+                dao.insert(*projectList.toTypedArray())
+                //dao.insert(*data.map { entity -> entity.toProject() }.toTypedArray())
+            }
+
+            override fun shouldFetch(data: List<Project>?): Boolean {
+                return data == null || data.isEmpty() || repoListRateLimit.shouldFetch(username) || true
+            }
+
+            override fun loadFromDb(): Flowable<List<Project>> {
+                return dao.findAll()
+            }
+
+            override fun createCall(): Single<List<ProjectEntity>> {
+                return gateway.projectList(username)
+            }
+        }.asFlowable()
+*/
+
+        /*
         return Flowable.create({ emitter ->
             object : NetworkBoundSource<List<Project>, List<ProjectEntity>>(emitter) {
 
@@ -42,6 +92,7 @@ class ProjectRepositoryImpl @Inject internal constructor(
                 }
             }
         }, BackpressureStrategy.BUFFER)
+        */
     }
 
     override fun list(username: String): Maybe<List<Project>> = gateway

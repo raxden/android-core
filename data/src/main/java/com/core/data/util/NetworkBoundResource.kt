@@ -6,12 +6,18 @@ import com.core.domain.Resource
 
 import io.reactivex.Flowable
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private lateinit var result: Flowable<Resource<ResultType>>
 
-    fun getResult(): Flowable<Resource<ResultType>> = result
+    init {
+        val source: Flowable<Resource<ResultType>>
+
+    }
+
+    fun asFlowable(): Flowable<Resource<ResultType>> = result
 
     @WorkerThread
     protected abstract fun saveCallResult(data: RequestType)
