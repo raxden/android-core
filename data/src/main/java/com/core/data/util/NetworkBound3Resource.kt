@@ -6,17 +6,34 @@ import com.core.commons.Resource
 import io.reactivex.Completable
 
 import io.reactivex.Flowable
+import io.reactivex.FlowableEmitter
 import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-abstract class NetworkBoundResource<ResultType, RequestType> {
+abstract class NetworkBound3Resource<ResultType, RequestType>(
+        private val emitter: FlowableEmitter<Resource<ResultType>>
+) {
 
     private lateinit var result: Flowable<Resource<ResultType>>
 
     init {
-        val source: Flowable<Resource<ResultType>>
+        val compositeDisposable = CompositeDisposable()
 
+        emitter.onNext(Resource.loading(null))
+
+        networkObservable()
+                .subscribe()
+                .addTo(compositeDisposable)
+
+        diskObservable()
+                //.distinctUntilChanged()
+                .subscribe { emitter.onNext(Resource.success(it)) }
+                .addTo(compositeDisposable)
+
+        emitter.setDisposable(compositeDisposable)
     }
 
     fun asFlowable(): Flowable<Resource<ResultType>> = result
@@ -35,9 +52,13 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     private fun networkObservable() = loadFromDb().take(1)
             .flatMapCompletable { dbData ->
+                emitter.onNext(Resource.loading(dbData))
                 if (shouldFetch(dbData))
                     createCall()
                             .observeOn(Schedulers.computation())
+                            .doOnError { throwable ->
+                                emitter.onNext(Resource.error(throwable, dbData))
+                            }
                             .doOnSuccess { data ->
                                 printData("saveCallResult", data)
                                 saveCallResult(data)

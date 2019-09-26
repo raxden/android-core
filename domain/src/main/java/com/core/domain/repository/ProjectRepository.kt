@@ -1,12 +1,14 @@
 package com.core.domain.repository
 
+import com.core.commons.Resource
 import com.core.domain.Project
-import com.core.domain.Resource
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
 
 interface ProjectRepository : Repository {
+
+    fun observeList(username: String): Flowable<Resource<List<Project>>>
 
     fun test(username: String): Flowable<List<Project>>
 

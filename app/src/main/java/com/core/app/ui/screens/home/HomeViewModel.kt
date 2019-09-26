@@ -39,28 +39,26 @@ class HomeViewModel @Inject constructor(
     }
 
     fun test() {
-        getProjectListUseCase.test("raxden")
-                .map {
-                    val threadName= Thread.currentThread().name
-                    Timber.d("[$threadName] getProjectListUseCase")
-                    it
-                }
+        getProjectListUseCase.test2("raxden")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy(
                         onNext = {
-                            val threadName= Thread.currentThread().name
-                            Timber.d("[$threadName] onNext received!")
-                            if (it.isEmpty()) {
-                                Timber.d("[$threadName] onNext received! EMPTY")
-                            } else {
-                                it.forEach { project ->
-                                    Timber.d("[$threadName] onNext received! $project")
-                                }
-                            }
+                            Timber.d("$it.status")
+                            printData("onNext received: ", it.data)
                         }
                 )
                 .addTo(mCompositeDisposable)
+    }
+
+    private fun printData(message: String, data: Any? = null) {
+        val threadName = Thread.currentThread().name
+        (data as? List<*>)?.let { list ->
+            if (list.isEmpty())
+                Timber.d("[$threadName]: $message - empty list ")
+            else
+                Timber.d("[$threadName]: $message - items(${list.size}) ")
+        } ?: Timber.d("[$threadName]: $message ")
     }
 
     fun onItemSelected(position: Int) {

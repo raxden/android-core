@@ -1,12 +1,10 @@
 package com.core.data.repository
 
+import com.core.commons.Resource
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.gateway.AppGateway
 import com.core.data.persistence.dao.ProjectDao
-import com.core.data.util.NetworkBound2Source
-import com.core.data.util.NetworkBound3Source
-import com.core.data.util.NetworkBoundSource
-import com.core.data.util.RateLimiter
+import com.core.data.util.*
 import com.core.domain.Project
 import com.core.domain.repository.ProjectRepository
 import io.reactivex.Flowable
@@ -22,6 +20,30 @@ class ProjectRepositoryImpl @Inject internal constructor(
 ) : ProjectRepository {
 
     private val repoListRateLimit = RateLimiter<String>(10, TimeUnit.MINUTES)
+
+    override fun observeList(username: String): Flowable<Resource<List<Project>>> {
+        return Flowable.create({ emitter ->
+            object : NetworkBound4Resource<List<Project>, List<ProjectEntity>>(emitter) {
+
+                override fun saveCallResult(data: List<ProjectEntity>) {
+                    dao.insert(*data.map { entity -> entity.toProject() }.toTypedArray())
+                }
+
+                override fun shouldFetch(data: List<Project>?): Boolean {
+                    return data == null || data.isEmpty() || repoListRateLimit.shouldFetch(username) || true
+                }
+
+                override fun loadFromDb(): Flowable<List<Project>> {
+                    return dao.findAll()
+                }
+
+                override fun createCall(): Single<List<ProjectEntity>> {
+                    return Single.just(null)
+//                    return gateway.projectList(username)
+                }
+            }
+        }, BackpressureStrategy.BUFFER)
+    }
 
     override fun test(username: String): Flowable<List<Project>> {
 
