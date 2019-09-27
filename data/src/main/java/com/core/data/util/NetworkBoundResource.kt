@@ -6,20 +6,56 @@ import com.core.commons.Resource
 import io.reactivex.Completable
 
 import io.reactivex.Flowable
+import io.reactivex.FlowableEmitter
 import io.reactivex.Single
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-abstract class NetworkBoundResource<ResultType, RequestType> {
-
-    private lateinit var result: Flowable<Resource<ResultType>>
+abstract class NetworkBoundResource<ResultType, RequestType>(
+        private val emitter: FlowableEmitter<Resource<ResultType>>
+) {
 
     init {
-        val source: Flowable<Resource<ResultType>>
+        val compositeDisposable = CompositeDisposable()
 
+        emitter.onNext(Resource.loading(null))
+
+        loadFromDbOneTime()
+                .flatMapCompletable { dbData ->
+                    emitter.onNext(Resource.loading(dbData))
+                    if (shouldFetch(dbData)) {
+                        createCall()
+                                .observeOn(Schedulers.computation())
+                                .doOnSuccess { saveCallResult(it) }
+                                .ignoreElement()
+                    } else {
+                        emitter.onNext(Resource.success(dbData))
+                        Completable.complete()
+                    }
+                }
+                .subscribeBy(
+                        onError = { throwable ->
+                            loadFromDb()
+                                    .distinctUntilChanged()
+                                    .doOnNext { emitter.onNext(Resource.error(throwable, it)) }
+                                    .subscribe()
+                                    .addTo(compositeDisposable)
+                        },
+                        onComplete = {
+                            loadFromDb()
+                                    .distinctUntilChanged()
+                                    .doOnNext { emitter.onNext(Resource.success(it)) }
+                                    .subscribe()
+                                    .addTo(compositeDisposable)
+                        }
+                )
+                .addTo(compositeDisposable)
+
+        emitter.setDisposable(compositeDisposable)
     }
-
-    fun asFlowable(): Flowable<Resource<ResultType>> = result
 
     @WorkerThread
     protected abstract fun saveCallResult(data: RequestType)
@@ -33,32 +69,5 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     @MainThread
     protected abstract fun createCall(): Single<RequestType>
 
-    private fun networkObservable() = loadFromDb().take(1)
-            .flatMapCompletable { dbData ->
-                if (shouldFetch(dbData))
-                    createCall()
-                            .observeOn(Schedulers.computation())
-                            .doOnSuccess { data ->
-                                printData("saveCallResult", data)
-                                saveCallResult(data)
-                            }
-                            .ignoreElement()
-                else
-                    Completable.complete()
-            }
-            .observeOn(Schedulers.io())
-            .doOnComplete { printData("networkObservable") }
-
-    private fun diskObservable() = loadFromDb()
-            .doOnNext { printData("diskObservable", it) }
-
-    private fun printData(message: String, data: Any? = null) {
-        val threadName = Thread.currentThread().name
-        (data as? List<*>)?.let { list ->
-            if (list.isEmpty())
-                Timber.d("[$threadName]: $message - empty list ")
-            else
-                Timber.d("[$threadName]: $message - items(${list.size}) ")
-        } ?: Timber.d("[$threadName]: $message ")
-    }
+    private fun loadFromDbOneTime() = loadFromDb().take(1)
 }

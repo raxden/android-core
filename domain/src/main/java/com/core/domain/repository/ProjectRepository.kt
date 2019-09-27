@@ -8,11 +8,7 @@ import io.reactivex.Single
 
 interface ProjectRepository : Repository {
 
-    fun observeList(username: String): Flowable<Resource<List<Project>>>
-
-    fun test(username: String): Flowable<List<Project>>
-
-    fun list(username: String): Maybe<List<Project>>
+    fun list(username: String): Flowable<Resource<List<Project>>>
 
     fun detail(username: String, projectName: String): Single<Project>
 }

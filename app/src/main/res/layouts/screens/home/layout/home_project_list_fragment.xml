@@ -6,6 +6,8 @@
 
     <data>
 
+        <import type="com.core.commons.Status" />
+
         <variable
             name="viewModel"
             type="com.core.app.ui.screens.home.HomeViewModel" />
@@ -23,7 +25,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:refreshing="@{safeUnbox(viewModel.loader.status)}">
+            app:refreshing="@{safeUnbox(viewModel.projectModelList.status == Status.LOADING)}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -41,7 +43,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:tint="@color/colorPrimary"
-            app:visibleGone="@{viewModel.projectModelList.isEmpty()}"
+            app:visibleGone="@{viewModel.projectModelList.data.isEmpty()}"
             app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"
             app:layout_constraintEnd_toEndOf="@+id/swipe_refresh_layout"
             app:layout_constraintStart_toStartOf="@+id/swipe_refresh_layout"

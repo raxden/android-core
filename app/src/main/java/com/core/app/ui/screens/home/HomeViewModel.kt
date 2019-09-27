@@ -1,18 +1,19 @@
 package com.core.app.ui.screens.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.core.app.base.BaseViewModel
 import com.core.app.model.ProjectModel
 import com.core.commons.Event
+import com.core.commons.Resource
 import com.core.commons.extension.subscribeWith
+import com.core.commons.extension.toLiveData
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
 import com.core.domain.interactor.LogoutUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,10 +23,15 @@ class HomeViewModel @Inject constructor(
         private val logoutUseCase: LogoutUseCase
 ) : BaseViewModel() {
 
-    private val mProjectList = MutableLiveData<List<Project>>()
-    val projectModelList: LiveData<List<ProjectModel>> = Transformations
+//    private val mProjectList = MutableLiveData<List<Project>>()
+    private val mProjectList = getProjectListUseCase.execute().subscribeOn(Schedulers.io()).toLiveData()
+    val projectModelList: LiveData<Resource<List<ProjectModel>>> = Transformations
             .map(mProjectList) {
-                it.map { project -> ProjectModel(project) }
+                Resource(
+                        it.status,
+                        it.data?.map { project -> ProjectModel(project) },
+                        it.throwable
+                )
             }
 
     private val mProjectSelected = MutableLiveData<Event<Project>>()
@@ -35,20 +41,20 @@ class HomeViewModel @Inject constructor(
     val logoutCompleted: LiveData<Event<Boolean>> = mLogoutCompleted
 
     init {
-        retrieveProjectList()
+//        retrieveProjectList()
     }
 
     fun test() {
-        getProjectListUseCase.test2("raxden")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onNext = {
-                            Timber.d("$it.status")
-                            printData("onNext received: ", it.data)
-                        }
-                )
-                .addTo(mCompositeDisposable)
+//        getProjectListUseCase.test2("raxden")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeBy(
+//                        onNext = {
+//                            Timber.d("$it.status")
+//                            printData("onNext received: ", it.data)
+//                        }
+//                )
+//                .addTo(mCompositeDisposable)
     }
 
     private fun printData(message: String, data: Any? = null) {
@@ -62,7 +68,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onItemSelected(position: Int) {
-        mProjectList.value?.get(position)?.let { mProjectSelected.value = Event(it) }
+//        mProjectList.value?.get(position)?.let { mProjectSelected.value = Event(it) }
     }
 
     fun performLogout() {
@@ -71,26 +77,26 @@ class HomeViewModel @Inject constructor(
                 .addTo(mCompositeDisposable)
     }
 
-    fun retrieveProjectList() {
-        getProjectListUseCase.execute()
-                .subscribeWith(
-                        onStart = {
-                            mLoaderManager.push()
-                        },
-                        onError = {
-                            mThrowable.value = it
-                            mProjectList.value = emptyList()
-                            mLoaderManager.pop()
-                        },
-                        onSuccess = {
-                            mProjectList.value = it
-                            mLoaderManager.pop()
-                        },
-                        onComplete = {
-                            mProjectList.value = emptyList()
-                            mLoaderManager.pop()
-                        }
-                )
-                .addTo(mCompositeDisposable)
-    }
+//    fun retrieveProjectList() {
+//        getProjectListUseCase.execute()
+//                .subscribeWith(
+//                        onStart = {
+//                            mLoaderManager.push()
+//                        },
+//                        onError = {
+//                            mThrowable.value = it
+//                            mProjectList.value = emptyList()
+//                            mLoaderManager.pop()
+//                        },
+//                        onSuccess = {
+//                            mProjectList.value = it
+//                            mLoaderManager.pop()
+//                        },
+//                        onComplete = {
+//                            mProjectList.value = emptyList()
+//                            mLoaderManager.pop()
+//                        }
+//                )
+//                .addTo(mCompositeDisposable)
+//    }
 }
