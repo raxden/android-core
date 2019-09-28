@@ -50,17 +50,17 @@
             app:layout_constraintTop_toTopOf="@+id/swipe_refresh_layout"
             app:srcCompat="@drawable/logo_github" />
 
-        <View
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/cardview_dark_background"
-            app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            bind:onSafeClick="@{()-> viewModel.test()}"/>
+        <!--<View-->
+            <!--android:layout_width="150dp"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:background="@color/cardview_dark_background"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--bind:onSafeClick="@{()-> viewModel.test()}"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

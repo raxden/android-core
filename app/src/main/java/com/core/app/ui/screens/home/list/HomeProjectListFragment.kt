@@ -13,6 +13,7 @@ import com.core.app.databinding.HomeProjectListFragmentBinding
 import com.core.app.databinding.HomeProjectListItemBinding
 import com.core.app.model.ProjectModel
 import com.core.app.ui.screens.home.HomeViewModel
+import com.core.domain.User
 
 class HomeProjectListFragment : AppFragment<HomeViewModel, HomeProjectListFragmentBinding>() {
 
@@ -34,12 +35,16 @@ class HomeProjectListFragment : AppFragment<HomeViewModel, HomeProjectListFragme
             override fun areItemsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem.name == newItem.name
             override fun areContentsTheSame(oldItem: ProjectModel, newItem: ProjectModel): Boolean = oldItem == newItem
         })
+
+        arguments?.getParcelable<User>(User::class.java.simpleName)?.let {
+            viewModel.setUser(it)
+        }
     }
 
     override fun onBindingCreated(binding: HomeProjectListFragmentBinding) {
         super.onBindingCreated(binding)
 
-//        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.retrieveProjectList() }
+        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.refresh() }
         binding.recyclerView.apply {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
