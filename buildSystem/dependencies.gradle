@@ -29,7 +29,6 @@ versions.assertj = '1.7.0'
 versions.mockito = '2.27.0'
 versions.robolectric = '4.2.1'
 versions.arch = '1.1.1'
-versions.reactivestreams = '2.1.0'
 
 ext.versions = versions
 
@@ -71,10 +70,6 @@ ext {
     def rx = [
             android: [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versions.rx_android],
             kotlin : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: versions.rx_kotlin]
-    ]
-
-    def reactivestreams = [
-            core : [group: 'androidx.lifecycle', name: 'lifecycle-reactivestreams', version: versions.reactivestreams],
     ]
 
     def retrofit = [
@@ -169,7 +164,6 @@ ext {
             [configuration: "kapt", dependency: dagger.androidProcessor],
             [configuration: "implementation", dependency: rx.android],
             [configuration: "implementation", dependency: rx.kotlin],
-            [configuration: "implementation", dependency: reactivestreams.core],
             [configuration: "implementation", dependency: retrofit.core],
             [configuration: "implementation", dependency: retrofit.rx],
             [configuration: "implementation", dependency: retrofit.converterGson],
@@ -267,7 +261,6 @@ ext {
     commonsDependencies = [
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: kotlin.core],
-            [configuration: "implementation", dependency: reactivestreams.core],
             [configuration: "implementation", dependency: rx.android],
             [configuration: "implementation", dependency: rx.kotlin],
             [configuration: "implementation", dependency: gson.core],

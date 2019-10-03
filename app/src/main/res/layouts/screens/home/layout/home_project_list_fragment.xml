@@ -6,8 +6,6 @@
 
     <data>
 
-        <import type="com.core.commons.Status" />
-
         <variable
             name="viewModel"
             type="com.core.app.ui.screens.home.HomeViewModel" />
@@ -25,7 +23,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:refreshing="@{safeUnbox(viewModel.projectModelList.status == Status.LOADING)}">
+            app:refreshing="@{safeUnbox(viewModel.loader.status)}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view"
@@ -43,24 +41,12 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:tint="@color/colorPrimary"
-            app:visibleGone="@{viewModel.projectModelList.data.isEmpty()}"
+            app:visibleGone="@{viewModel.projectModelList.isEmpty()}"
             app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"
             app:layout_constraintEnd_toEndOf="@+id/swipe_refresh_layout"
             app:layout_constraintStart_toStartOf="@+id/swipe_refresh_layout"
             app:layout_constraintTop_toTopOf="@+id/swipe_refresh_layout"
             app:srcCompat="@drawable/logo_github" />
-
-        <!--<View-->
-            <!--android:layout_width="150dp"-->
-            <!--android:layout_height="150dp"-->
-            <!--android:layout_marginStart="8dp"-->
-            <!--android:layout_marginEnd="8dp"-->
-            <!--android:layout_marginBottom="8dp"-->
-            <!--android:background="@color/cardview_dark_background"-->
-            <!--app:layout_constraintBottom_toBottomOf="@+id/swipe_refresh_layout"-->
-            <!--app:layout_constraintEnd_toEndOf="parent"-->
-            <!--app:layout_constraintStart_toStartOf="parent"-->
-            <!--bind:onSafeClick="@{()-> viewModel.test()}"/>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
