@@ -16,9 +16,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
 
-/*
-* Migrate to Robolectric (test folder)
-* */
 @RunWith(AndroidJUnit4::class)
 class SplashTest {
 
