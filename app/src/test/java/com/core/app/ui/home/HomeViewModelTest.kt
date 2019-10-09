@@ -18,10 +18,11 @@ import org.junit.Rule
 import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.junit.MockitoRule
 import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
 
     @get:Rule

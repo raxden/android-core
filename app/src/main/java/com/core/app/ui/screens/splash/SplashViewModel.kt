@@ -42,7 +42,7 @@ class SplashViewModel @Inject constructor(
         getVersionUseCase.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy (onSuccess = { mVersion.value = it })
+                .subscribeBy(onSuccess = { mVersion.value = it })
                 .addTo(mCompositeDisposable)
     }
 
@@ -51,10 +51,9 @@ class SplashViewModel @Inject constructor(
                 Single.timer(IN_SECONDS, TimeUnit.SECONDS, Schedulers.io()),
                 forwardUseCase.execute().subscribeOn(Schedulers.io()),
                 BiFunction<Long, Pair<Forward, User?>, Pair<Forward, User?>> { _, forward -> forward })
-                .subscribeBy(
-                        onSuccess = { mApplicationReady.value = it },
-                        onError = { mApplicationReady.value = Pair(Forward.LOGIN, null) }
-                )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onSuccess = { mApplicationReady.value = it } )
                 .addTo(mCompositeDisposable)
     }
 }

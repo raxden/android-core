@@ -6,11 +6,13 @@ import androidx.lifecycle.Transformations
 import com.core.app.base.BaseViewModel
 import com.core.app.model.ProjectModel
 import com.core.commons.Event
-import com.core.commons.extension.subscribeWith
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
 import com.core.domain.interactor.LogoutUseCase
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
@@ -40,16 +42,18 @@ class HomeViewModel @Inject constructor(
 
     fun performLogout() {
         logoutUseCase.execute()
-                .subscribeWith(onComplete = { mLogoutCompleted.value = Event(true) })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onComplete = { mLogoutCompleted.value = Event(true) })
                 .addTo(mCompositeDisposable)
     }
 
     fun retrieveProjectList() {
         getProjectListUseCase.execute()
-                .subscribeWith(
-                        onStart = {
-                            mLoaderManager.push()
-                        },
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { mLoaderManager.push() }
+                .subscribeBy(
                         onError = {
                             mThrowable.value = it
                             mProjectList.value = emptyList()

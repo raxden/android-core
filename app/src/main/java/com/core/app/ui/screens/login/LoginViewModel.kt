@@ -4,12 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.app.R
 import com.core.app.base.BaseViewModel
-import com.core.commons.extension.subscribeWith
 import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
-import timber.log.Timber
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
@@ -43,16 +44,18 @@ class LoginViewModel @Inject constructor(
 
     private fun retrieveVersion() {
         getVersionUseCase.execute()
-                .subscribeWith(onSuccess = { mVersion.value = it })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onSuccess = { mVersion.value = it })
                 .addTo(mCompositeDisposable)
     }
 
     private fun performLogin(username: String) {
         loginUseCase.execute(username)
-                .subscribeWith(
-                        onStart = {
-                            mLoaderManager.push()
-                        },
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { mLoaderManager.push() }
+                .subscribeBy(
                         onError = {
                             mThrowable.value = it
                             mLoaderManager.pop()
