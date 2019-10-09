@@ -1,12 +1,15 @@
 package com.core.app.ui.screens.home
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.core.app.base.BaseViewModel
 import com.core.app.model.ProjectModel
 import com.core.commons.Event
+import com.core.commons.extension.notifyObservers
 import com.core.domain.Project
+import com.core.domain.User
 import com.core.domain.interactor.GetProjectListUseCase
 import com.core.domain.interactor.LogoutUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -20,20 +23,27 @@ class HomeViewModel @Inject constructor(
         private val logoutUseCase: LogoutUseCase
 ) : BaseViewModel() {
 
-    private val mProjectList = MutableLiveData<List<Project>>()
-    val projectModelList: LiveData<List<ProjectModel>> = Transformations
-            .map(mProjectList) {
-                it.map { project -> ProjectModel(project) }
-            }
-
     private val mProjectSelected = MutableLiveData<Event<Project>>()
     val projectSelected: LiveData<Event<Project>> = mProjectSelected
 
     private val mLogoutCompleted = MutableLiveData<Event<Boolean>>()
     val logoutCompleted: LiveData<Event<Boolean>> = mLogoutCompleted
 
-    init {
-        retrieveProjectList()
+    private val mUser = MutableLiveData<User>()
+    val user: LiveData<User> = mUser
+
+    private val mProjectList = MediatorLiveData<List<Project>>().apply {
+        addSource(mUser) { retrieveProjectList() }
+    }
+    val projectModelList: LiveData<List<ProjectModel>> = Transformations
+            .map(mProjectList) { it.map { project -> ProjectModel(project) } }
+
+    fun setUser(user: User) {
+        mUser.value = user
+    }
+
+    fun refresh() {
+        mUser.notifyObservers()
     }
 
     fun onItemSelected(position: Int) {
@@ -48,7 +58,7 @@ class HomeViewModel @Inject constructor(
                 .addTo(mCompositeDisposable)
     }
 
-    fun retrieveProjectList() {
+    private fun retrieveProjectList() {
         getProjectListUseCase.execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

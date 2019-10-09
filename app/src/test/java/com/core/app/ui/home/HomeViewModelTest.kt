@@ -66,7 +66,7 @@ class HomeViewModelTest {
         val dataObserver = mock(Observer::class.java) as Observer<List<ProjectModel>>
         viewModel.projectModelList.observeForever(dataObserver)
 
-        viewModel.retrieveProjectList()
+        //viewModel.retrieveProjectList()
 
         Mockito.inOrder(statusObserver).apply {
             verify(statusObserver).onChanged(true)
