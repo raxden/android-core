@@ -7,5 +7,5 @@ interface GetProjectListUseCase {
 
     fun execute(): Maybe<List<Project>>
 
-    fun execute(userId: String): Maybe<List<Project>>
+    fun execute(username: String): Maybe<List<Project>>
 }

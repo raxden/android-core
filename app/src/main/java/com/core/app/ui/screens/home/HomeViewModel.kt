@@ -33,7 +33,9 @@ class HomeViewModel @Inject constructor(
     val user: LiveData<User> = mUser
 
     private val mProjectList = MediatorLiveData<List<Project>>().apply {
-        addSource(mUser) { retrieveProjectList() }
+        addSource(mUser) {
+            mUser.value?.let { retrieveProjectList(it.username) }
+        }
     }
     val projectModelList: LiveData<List<ProjectModel>> = Transformations
             .map(mProjectList) { it.map { project -> ProjectModel(project) } }
@@ -58,8 +60,8 @@ class HomeViewModel @Inject constructor(
                 .addTo(mCompositeDisposable)
     }
 
-    private fun retrieveProjectList() {
-        getProjectListUseCase.execute()
+    private fun retrieveProjectList(username: String) {
+        getProjectListUseCase.execute(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { mLoaderManager.push() }
