@@ -24,7 +24,7 @@ class AppFileStreamGateway(
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<UserEntity>(AssetsUtils.getString(context, "user.json") ?: "") }
 
-    override fun projectList(username: String): Maybe<List<ProjectEntity>> = Maybe
+    override fun projectList(username: String): Single<List<ProjectEntity>> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<List<ProjectEntity>>(AssetsUtils.getString(context, "repos.json") ?: "") }
 

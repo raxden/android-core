@@ -39,7 +39,7 @@ class HomeProjectListFragment : AppFragment<HomeViewModel, HomeProjectListFragme
     override fun onBindingCreated(binding: HomeProjectListFragmentBinding) {
         super.onBindingCreated(binding)
 
-        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.retrieveProjectList() }
+        binding.swipeRefreshLayout.setOnRefreshListener { viewModel.refresh() }
         binding.recyclerView.apply {
             adapter = listAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)

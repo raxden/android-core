@@ -1,8 +1,10 @@
 package com.core.app.ui.login
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import com.core.app.RxSchedulerRule
 import com.core.app.ui.screens.login.LoginViewModel
+import com.core.commons.MockitoUtils
 import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
@@ -10,16 +12,14 @@ import io.reactivex.Single
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.junit.Rule
 import org.junit.runner.RunWith
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.junit.MockitoRule
-import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(MockitoJUnitRunner::class)
 class LoginViewModelTest {
 
     @get:Rule
@@ -35,49 +35,91 @@ class LoginViewModelTest {
     lateinit var getVersionUseCase: GetVersionUseCase
     @Mock
     lateinit var loginUseCase: LoginUseCase
+    @Mock
+    private lateinit var versionObserver: Observer<String>
+    @Mock
+    private lateinit var userLoggedObserver: Observer<User>
+    @Mock
+    private lateinit var usernameErrorObserver: Observer<Int>
+    @Mock
+    private lateinit var throwableObserver: Observer<Throwable>
 
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
     private val user = User(username = "raxden")
+    private val throwable = Throwable("user does not exist")
 
     @Before
     fun setUp() {
-        getVersionUseCase.apply {
-            Mockito.`when`(execute()).thenReturn(Single.just("version_1"))
-        }
-        loginUseCase.apply {
-            Mockito.`when`(execute("raxden")).thenReturn(Single.just(user))
-            Mockito.`when`(execute("userNotExists")).thenReturn(Single.error(IllegalStateException()))
-        }
-        viewModel = LoginViewModel(getVersionUseCase, loginUseCase)
+        `when`(getVersionUseCase.execute()).thenReturn(Single.just("version_1"))
+
+        loginViewModel = LoginViewModel(getVersionUseCase, loginUseCase)
+
+        loginViewModel.version.observeForever(versionObserver)
+        loginViewModel.userLogged.observeForever(userLoggedObserver)
+        loginViewModel.usernameError.observeForever(usernameErrorObserver)
+        loginViewModel.throwable.observeForever(throwableObserver)
     }
 
     @Test
-    fun `check application version`() {
-        assertEquals("version_1", viewModel.version.value)
+    fun `check that application version is retrieved one time`() {
+        inOrder(versionObserver).apply {
+            verify(versionObserver).onChanged("version_1")
+        }
+        inOrder(throwableObserver).apply {
+            verify(throwableObserver, never()).onChanged(throwable)
+        }
     }
 
     @Test
     fun `perform a success login`() {
-        viewModel.username.value = "raxden"
-        viewModel.performLogin()
+        `when`(loginUseCase.execute("username")).thenReturn(Single.just(user))
 
-        assertEquals(user, viewModel.userLogged.value)
+        loginViewModel.username.value = "username"
+        loginViewModel.performLogin()
+
+        inOrder(userLoggedObserver).apply {
+            verify(userLoggedObserver).onChanged(user)
+        }
+        inOrder(usernameErrorObserver).apply {
+            verify(usernameErrorObserver, never()).onChanged(anyInt())
+        }
+        inOrder(throwableObserver).apply {
+            verify(throwableObserver, never()).onChanged(throwable)
+        }
     }
 
     @Test
     fun `perform a fail login with empty username`() {
-        viewModel.username.value = ""
-        viewModel.performLogin()
+        loginViewModel.username.value = ""
+        loginViewModel.performLogin()
 
-        assertNotNull(viewModel.usernameError.value)
+        inOrder(userLoggedObserver).apply {
+            verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
+        }
+        inOrder(usernameErrorObserver).apply {
+            verify(usernameErrorObserver).onChanged(anyInt())
+        }
+        inOrder(throwableObserver).apply {
+            verify(throwableObserver, never()).onChanged(throwable)
+        }
     }
 
     @Test
     fun `perform a fail login with invalid username`() {
-        viewModel.username.value = "userNotExists"
-        viewModel.performLogin()
+        `when`(loginUseCase.execute("user_not_exists")).thenReturn(Single.error(throwable))
 
-        assertNotNull(viewModel.throwable.value)
+        loginViewModel.username.value = "user_not_exists"
+        loginViewModel.performLogin()
+
+        inOrder(userLoggedObserver).apply {
+            verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
+        }
+        inOrder(usernameErrorObserver).apply {
+            verify(usernameErrorObserver, never()).onChanged(anyInt())
+        }
+        inOrder(throwableObserver).apply {
+            verify(throwableObserver).onChanged(throwable)
+        }
     }
 }

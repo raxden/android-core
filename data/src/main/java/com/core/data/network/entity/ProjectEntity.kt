@@ -2,10 +2,12 @@ package com.core.data.network.entity
 
 import android.net.Uri
 import android.text.TextUtils
+import androidx.room.Entity
 import com.core.domain.Project
 import com.core.domain.User
 import com.google.gson.annotations.Expose
 
+@Entity(tableName = "project_entity")
 data class ProjectEntity(
         @Expose val id: Long? = null,
         @Expose val name: String? = null,

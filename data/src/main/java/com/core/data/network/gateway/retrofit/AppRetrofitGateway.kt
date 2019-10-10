@@ -14,7 +14,7 @@ class AppRetrofitGateway(
     override fun user(username: String): Single<UserEntity> = service
             .retrieveUser(username)
 
-    override fun projectList(username: String): Maybe<List<ProjectEntity>> = service
+    override fun projectList(username: String): Single<List<ProjectEntity>> = service
             .retrieveProjectList(username)
 
     override fun project(username: String, projectName: String): Single<ProjectEntity> = service

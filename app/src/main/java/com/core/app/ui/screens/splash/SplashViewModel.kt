@@ -3,18 +3,21 @@ package com.core.app.ui.screens.splash
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.app.base.BaseViewModel
-import com.core.commons.extension.subscribeWith
+import com.core.app.util.OpenForTesting
 import com.core.domain.Forward
 import com.core.domain.User
 import com.core.domain.interactor.ForwardUseCase
 import com.core.domain.interactor.GetVersionUseCase
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.functions.BiFunction
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@OpenForTesting
 class SplashViewModel @Inject constructor(
         private val getVersionUseCase: GetVersionUseCase,
         private val forwardUseCase: ForwardUseCase
@@ -37,7 +40,9 @@ class SplashViewModel @Inject constructor(
 
     private fun retrieveVersion() {
         getVersionUseCase.execute()
-                .subscribeWith(onSuccess = { mVersion.value = it })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onSuccess = { mVersion.value = it })
                 .addTo(mCompositeDisposable)
     }
 
@@ -46,10 +51,9 @@ class SplashViewModel @Inject constructor(
                 Single.timer(IN_SECONDS, TimeUnit.SECONDS, Schedulers.io()),
                 forwardUseCase.execute().subscribeOn(Schedulers.io()),
                 BiFunction<Long, Pair<Forward, User?>, Pair<Forward, User?>> { _, forward -> forward })
-                .subscribeWith(
-                        onSuccess = { mApplicationReady.value = it },
-                        onError = { mApplicationReady.value = Pair(Forward.LOGIN, null) }
-                )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(onSuccess = { mApplicationReady.value = it } )
                 .addTo(mCompositeDisposable)
     }
 }

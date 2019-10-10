@@ -15,6 +15,7 @@ import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.lifecycle.activity.ToolbarActivityLifecycle
 import com.core.app.ui.screens.home.list.HomeProjectListFragment
 import com.core.commons.extension.getExtras
+import com.core.commons.extension.getParcelable
 import com.core.domain.User
 
 class HomeActivity : AppActivity<HomeViewModel, HomeActivityBinding>(),
@@ -30,6 +31,8 @@ class HomeActivity : AppActivity<HomeViewModel, HomeActivityBinding>(),
     override val viewModelClass: Class<HomeViewModel>
         get() = HomeViewModel::class.java
 
+
+
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: HomeViewModel) {
         viewModel.throwable.observe(owner, Observer { errorManager.set(it) })
         viewModel.logoutCompleted.observe(owner, Observer {
@@ -38,6 +41,7 @@ class HomeActivity : AppActivity<HomeViewModel, HomeActivityBinding>(),
         viewModel.projectSelected.observe(owner, Observer {
             it.getContentIfNotHandled()?.let { project -> navigationHelper.launchProject(project) }
         })
+        getParcelable<User>(User::class.java.simpleName)?.let { viewModel.setUser(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
