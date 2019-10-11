@@ -57,46 +57,36 @@ class SplashViewModelTest {
     fun `check that application version is retrieved one time`() {
         `when`(forwardUseCase.execute()).thenReturn(Single.just(forwardLogin))
 
-        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase)
-
-        splashViewModel.version.observeForever(versionObserver)
-
-        inOrder(versionObserver).apply {
-            verify(versionObserver).onChanged("version_1")
+        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+            it.version.observeForever(versionObserver)
         }
+
+        verify(versionObserver).onChanged("version_1")
     }
 
     @Test
     fun `check that application is ready to launch login`() {
         `when`(forwardUseCase.execute()).thenReturn(Single.just(forwardLogin))
 
-        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase)
-
-        splashViewModel.applicationReady.observeForever(applicationReadyObserver)
-        splashViewModel.throwable.observeForever(throwableObserver)
-
-        inOrder(applicationReadyObserver).apply {
-            verify(applicationReadyObserver).onChanged(forwardLogin)
+        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+            it.applicationReady.observeForever(applicationReadyObserver)
+            it.throwable.observeForever(throwableObserver)
         }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
-        }
+
+        verify(applicationReadyObserver).onChanged(forwardLogin)
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 
     @Test
     fun `check that application is ready to launch home`() {
         `when`(forwardUseCase.execute()).thenReturn(Single.just(forwardHome))
 
-        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase)
-
-        splashViewModel.applicationReady.observeForever(applicationReadyObserver)
-        splashViewModel.throwable.observeForever(throwableObserver)
-
-        inOrder(applicationReadyObserver).apply {
-            verify(applicationReadyObserver).onChanged(forwardHome)
+        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+            it.applicationReady.observeForever(applicationReadyObserver)
+            it.throwable.observeForever(throwableObserver)
         }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
-        }
+
+        verify(applicationReadyObserver).onChanged(forwardHome)
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 }

@@ -63,12 +63,8 @@ class LoginViewModelTest {
 
     @Test
     fun `check that application version is retrieved one time`() {
-        inOrder(versionObserver).apply {
-            verify(versionObserver).onChanged("version_1")
-        }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
-        }
+        verify(versionObserver).onChanged("version_1")
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 
     @Test
@@ -78,15 +74,9 @@ class LoginViewModelTest {
         loginViewModel.username.value = "username"
         loginViewModel.performLogin()
 
-        inOrder(userLoggedObserver).apply {
-            verify(userLoggedObserver).onChanged(user)
-        }
-        inOrder(usernameErrorObserver).apply {
-            verify(usernameErrorObserver, never()).onChanged(anyInt())
-        }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
-        }
+        verify(userLoggedObserver).onChanged(user)
+        verify(usernameErrorObserver, never()).onChanged(anyInt())
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 
     @Test
@@ -94,15 +84,9 @@ class LoginViewModelTest {
         loginViewModel.username.value = ""
         loginViewModel.performLogin()
 
-        inOrder(userLoggedObserver).apply {
-            verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
-        }
-        inOrder(usernameErrorObserver).apply {
-            verify(usernameErrorObserver).onChanged(anyInt())
-        }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
-        }
+        verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
+        verify(usernameErrorObserver).onChanged(anyInt())
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 
     @Test
@@ -112,14 +96,8 @@ class LoginViewModelTest {
         loginViewModel.username.value = "user_not_exists"
         loginViewModel.performLogin()
 
-        inOrder(userLoggedObserver).apply {
-            verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
-        }
-        inOrder(usernameErrorObserver).apply {
-            verify(usernameErrorObserver, never()).onChanged(anyInt())
-        }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver).onChanged(throwable)
-        }
+        verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
+        verify(usernameErrorObserver, never()).onChanged(anyInt())
+        verify(throwableObserver).onChanged(throwable)
     }
 }

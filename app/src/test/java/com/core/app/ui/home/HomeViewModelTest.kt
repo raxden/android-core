@@ -86,19 +86,19 @@ class HomeViewModelTest {
 
         homeViewModel.setUser(user)
 
-        inOrder(projectModelListObserver).apply {
-            verify(projectModelListObserver).onChanged(projectModelListCaptor.capture())
-            projectList.forEachIndexed { index, project ->
-                assert(project.name == projectModelListCaptor.value[index].name)
-            }
-        }
         inOrder(statusObserver).apply {
             verify(statusObserver).onChanged(true)
             verify(statusObserver).onChanged(false)
         }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
+
+        projectModelListCaptor.run {
+            verify(projectModelListObserver).onChanged(capture())
+            projectList.forEachIndexed { index, project ->
+                assert(project.name == value[index].name)
+            }
         }
+
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 
     @Test
@@ -107,12 +107,11 @@ class HomeViewModelTest {
 
         homeViewModel.performLogout()
 
-        inOrder(logoutCompletedObserver).apply {
-            verify(logoutCompletedObserver).onChanged(booleanEventCaptor.capture())
-            assert(booleanEventCaptor.value.peekContent())
+        booleanEventCaptor.run {
+            verify(logoutCompletedObserver).onChanged(capture())
+            assert(value.peekContent())
         }
-        inOrder(throwableObserver).apply {
-            verify(throwableObserver, never()).onChanged(throwable)
-        }
+
+        verify(throwableObserver, never()).onChanged(throwable)
     }
 }
