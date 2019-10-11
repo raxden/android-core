@@ -70,14 +70,14 @@ class HomeViewModelTest {
 
     @Before
     fun setUp() {
-        homeViewModel = HomeViewModel(getProjectListUseCase, logoutUseCase)
-
-        homeViewModel.projectSelected.observeForever(projectSelectedObserver)
-        homeViewModel.logoutCompleted.observeForever(logoutCompletedObserver)
-        homeViewModel.user.observeForever(userObserver)
-        homeViewModel.projectModelList.observeForever(projectModelListObserver)
-        homeViewModel.loader.status.observeForever(statusObserver)
-        homeViewModel.throwable.observeForever(throwableObserver)
+        homeViewModel = HomeViewModel(getProjectListUseCase, logoutUseCase).also {
+            it.projectSelected.observeForever(projectSelectedObserver)
+            it.logoutCompleted.observeForever(logoutCompletedObserver)
+            it.user.observeForever(userObserver)
+            it.projectModelList.observeForever(projectModelListObserver)
+            it.loader.status.observeForever(statusObserver)
+            it.throwable.observeForever(throwableObserver)
+        }
     }
 
     @Test

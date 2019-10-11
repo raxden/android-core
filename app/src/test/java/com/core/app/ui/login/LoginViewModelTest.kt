@@ -53,12 +53,12 @@ class LoginViewModelTest {
     fun setUp() {
         `when`(getVersionUseCase.execute()).thenReturn(Single.just("version_1"))
 
-        loginViewModel = LoginViewModel(getVersionUseCase, loginUseCase)
-
-        loginViewModel.version.observeForever(versionObserver)
-        loginViewModel.userLogged.observeForever(userLoggedObserver)
-        loginViewModel.usernameError.observeForever(usernameErrorObserver)
-        loginViewModel.throwable.observeForever(throwableObserver)
+        loginViewModel = LoginViewModel(getVersionUseCase, loginUseCase).also {
+            it.version.observeForever(versionObserver)
+            it.userLogged.observeForever(userLoggedObserver)
+            it.usernameError.observeForever(usernameErrorObserver)
+            it.throwable.observeForever(throwableObserver)
+        }
     }
 
     @Test
