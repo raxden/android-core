@@ -13,7 +13,7 @@ interface AppGateway {
 
     fun projectList(
             username: String
-    ): Maybe<List<ProjectEntity>>
+    ): Single<List<ProjectEntity>>
 
     fun project(
             username: String,

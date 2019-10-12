@@ -1,19 +1,28 @@
 package com.core.domain.interactor
+
 import com.core.commons.MockitoUtils
 import com.core.domain.Account
-import com.core.domain.BaseTest
 import com.core.domain.User
 import com.core.domain.interactor.impl.LoginUseCaseImpl
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.UserRepository
 import io.reactivex.Single
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoRule
+import org.robolectric.RobolectricTestRunner
 
-class LoginUseCaseTest : BaseTest() {
+@RunWith(RobolectricTestRunner::class)
+class LoginUseCaseTest {
+
+    @get:Rule
+    val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Mock
     lateinit var accountRepository: AccountRepository
@@ -37,6 +46,6 @@ class LoginUseCaseTest : BaseTest() {
         loginUseCase.execute("username")
                 .test()
                 .assertNoErrors()
-                .assertValue(account)
+                .assertValue(user)
     }
 }

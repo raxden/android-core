@@ -3,12 +3,14 @@ package com.core.app.util
 import android.Manifest
 import androidx.appcompat.app.AppCompatActivity
 import com.core.app.R
-import com.core.commons.extension.subscribeWith
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tbruyelle.rxpermissions2.Permission
 import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class PermissionManager(
@@ -29,20 +31,16 @@ class PermissionManager(
     fun requestPermission(callback: Callback, vararg permissions: String) {
         if (requestingPermission) return
         this.rxPermissions.requestEach(*permissions)
-                .subscribeWith(
-                        onStart = {
-                            requestingPermission = true
-                        },
-                        onNext = {
-                            handlePermission(it, callback)
-                        },
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { requestingPermission = true }
+                .subscribeBy(
+                        onNext = { handlePermission(it, callback) },
                         onError = {
                             requestingPermission = false
                             Timber.e(it)
                         },
-                        onComplete = {
-                            requestingPermission = false
-                        }
+                        onComplete = { requestingPermission = false }
                 )
                 .addTo(compositeDisposable)
     }

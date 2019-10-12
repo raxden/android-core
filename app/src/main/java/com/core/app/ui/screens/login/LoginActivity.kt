@@ -17,8 +17,10 @@ import com.core.app.ui.screens.login.view.LoginFragment
 import com.core.app.util.KeyboardManager
 import com.core.app.util.KeyboardStatus
 import com.core.commons.extension.getExtras
-import com.core.commons.extension.subscribeWith
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.login_activity.*
 import javax.inject.Inject
 
@@ -35,6 +37,7 @@ class LoginActivity : AppActivity<LoginViewModel, LoginActivityBinding>(),
     @Inject
     lateinit var mKeyboardManager: KeyboardManager
 
+    private var mLoginFragment: LoginFragment? = null
     private var mHandler = Handler()
     private var mCurtainReady = false
     private var mAnimatorIsWorking = false
@@ -53,13 +56,17 @@ class LoginActivity : AppActivity<LoginViewModel, LoginActivityBinding>(),
         super.onViewCreated(view)
 
         mKeyboardManager.status()
-                .subscribeWith(onNext = {
-                    if (mCurtainReady) when (it) {
-                        KeyboardStatus.OPEN -> animateCurtain(mCurrentCurtainPercent, 0.25f, 250)
-                        KeyboardStatus.CLOSED -> animateCurtain(mCurrentCurtainPercent, 0.60f, 250)
-                    }
-                }
-                ).addTo(compositeDisposable)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeBy(
+                        onNext = {
+                            if (mCurtainReady) when (it) {
+                                KeyboardStatus.OPEN -> animateCurtain(mCurrentCurtainPercent, 0.25f, 250)
+                                KeyboardStatus.CLOSED -> animateCurtain(mCurrentCurtainPercent, 0.60f, 250)
+                            }
+                        }
+                )
+                .addTo(compositeDisposable)
 
         mHandler.postDelayed({
             animateCurtain(1.0f, 0.60f, 400)
@@ -78,7 +85,9 @@ class LoginActivity : AppActivity<LoginViewModel, LoginActivityBinding>(),
 
     override fun onCreateFragment(): LoginFragment = LoginFragment.newInstance(getExtras())
 
-    override fun onFragmentLoaded(fragment: LoginFragment) {}
+    override fun onFragmentLoaded(fragment: LoginFragment) {
+        mLoginFragment = fragment
+    }
 
     // =============================================================================================
 

@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import com.core.app.R
 import com.core.app.base.component.BaseComponentBindingView
 import com.core.app.databinding.ProjectListItemViewBinding
-import com.core.domain.Project
+import com.core.app.model.ProjectModel
 
 class ProjectListItemView @JvmOverloads constructor(
         context: Context,
@@ -25,7 +25,7 @@ class ProjectListItemView @JvmOverloads constructor(
 
     override fun onBindingCreated(binding: ProjectListItemViewBinding) {}
 
-    fun setItem(item: Project) {
+    fun setItem(item: ProjectModel) {
         mBinding.item = item
         mBinding.executePendingBindings()
     }

@@ -15,9 +15,7 @@ class GetProjectListUseCaseImpl @Inject constructor(
 
     override fun execute(): Maybe<List<Project>> = accountRepository
             .retrieve()
-            .flatMapMaybe {
-                projectRepository.list(it.username)
-            }
+            .flatMapMaybe { projectRepository.list(it.username) }
 
     override fun execute(username: String): Maybe<List<Project>> = projectRepository
             .list(username)

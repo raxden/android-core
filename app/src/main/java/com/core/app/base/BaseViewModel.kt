@@ -8,15 +8,13 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
 
-    protected val mThrowable: MutableLiveData<Throwable> = MutableLiveData()
     protected val mLoaderManager: LoaderManager = LoaderManager()
+    val loader: LoaderManager = mLoaderManager
+
+    protected val mThrowable: MutableLiveData<Throwable> = MutableLiveData()
+    val throwable: LiveData<Throwable> = mThrowable
+
     protected val mCompositeDisposable: CompositeDisposable = CompositeDisposable()
-
-    val loader: LoaderManager
-        get() = mLoaderManager
-
-    val throwable: LiveData<Throwable>
-        get() = mThrowable
 
     /**
      * This method will be called when this ViewModel is created.

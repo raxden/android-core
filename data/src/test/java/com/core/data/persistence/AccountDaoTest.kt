@@ -1,21 +1,28 @@
 package com.core.data.persistence
 
+import android.content.Context
 import androidx.room.EmptyResultSetException
 import androidx.room.Room
-import com.core.data.BaseTest
+import androidx.test.platform.app.InstrumentationRegistry
 import com.core.domain.Account
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
-class AccountDaoTest : BaseTest() {
+@RunWith(RobolectricTestRunner::class)
+class AccountDaoTest {
 
+    private lateinit var context: Context
     private lateinit var database: AppDatabase
 
     @Before
     fun initDb() {
+        context = InstrumentationRegistry.getInstrumentation().context
         // using an in-memory database because the information stored here disappears after test
-        database = Room.inMemoryDatabaseBuilder(getContext(), AppDatabase::class.java)
+        database = Room
+                .inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().context, AppDatabase::class.java)
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()
                 .build()
