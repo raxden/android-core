@@ -4,18 +4,21 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.ViewModelProvider
 import com.core.app.BuildConfig
 import com.core.app.helper.AnimationHelper
 import com.core.app.helper.DialogHelper
 import com.core.app.helper.NavigationHelper
-import com.core.app.injector.module.LifecycleActivityModule
-import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
+import com.core.app.lifecycle.activity.BroadcastActivityLifecycle
+import com.core.app.lifecycle.activity.CompositeActivityLifecycle
 import com.core.app.util.*
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoSet
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Named
 
@@ -23,16 +26,27 @@ import javax.inject.Named
  * Provides base activity dependencies. This must be included in all activity modules, which must
  * provide a concrete implementation of [Activity].
  */
-@Module(includes = [
-    LifecycleActivityModule::class,
-    ViewModelModule::class
-])
+@Module
 abstract class BaseActivityModule {
 
     @Binds
     @Named(ACTIVITY_CONTEXT)
     @PerActivity
     internal abstract fun context(activity: Activity): Context
+
+    @Binds
+    @PerActivity
+    internal abstract fun viewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory
+
+    @Binds
+    @IntoSet
+    @PerActivity
+    internal abstract fun compositeLifecycleObserver(lifecycleObserver: CompositeActivityLifecycle): LifecycleObserver
+
+    @Binds
+    @IntoSet
+    @PerActivity
+    internal abstract fun broadcastLifecycleObserver(lifecycleObserver: BroadcastActivityLifecycle): LifecycleObserver
 
     @Module
     companion object {

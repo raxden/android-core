@@ -4,6 +4,8 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import com.core.app.injector.module.*
+import com.core.data.network.NetworkModule
+import com.core.data.persistence.PersistenceModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +22,7 @@ import javax.inject.Singleton
     UseCaseModule::class,
     PreferencesModule::class,
     NetworkModule::class,
-    DatabaseModule::class
+    PersistenceModule::class
 ])
 abstract class BaseApplicationModule {
 

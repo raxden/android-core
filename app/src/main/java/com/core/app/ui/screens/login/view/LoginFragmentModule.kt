@@ -2,7 +2,6 @@ package com.core.app.ui.screens.login.view
 
 import androidx.fragment.app.Fragment
 import com.core.app.base.fragment.BaseFragmentModule
-import com.core.app.base.fragment.BaseViewModelFragmentModule
 import com.core.app.injector.scope.PerFragment
 import dagger.Binds
 import dagger.Module
@@ -10,7 +9,7 @@ import dagger.Module
 /**
  * Provides SampleMapFragment fragment dependencies.
  */
-@Module(includes = [BaseViewModelFragmentModule::class])
+@Module(includes = [BaseFragmentModule::class])
 abstract class LoginFragmentModule {
 
     /**

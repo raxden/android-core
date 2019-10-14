@@ -1,9 +1,9 @@
-package com.core.app.injector.module
+package com.core.data.network
 
 import android.content.Context
+import com.core.data.BuildConfig
+import com.core.data.R
 import com.google.gson.Gson
-import com.core.app.BuildConfig
-import com.core.app.R
 import com.core.data.network.gateway.AppGateway
 import com.core.data.network.gateway.stream.AppFileStreamGateway
 import com.core.data.network.gateway.retrofit.AppRetrofitGateway

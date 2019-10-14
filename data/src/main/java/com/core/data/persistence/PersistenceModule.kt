@@ -1,9 +1,8 @@
-package com.core.app.injector.module
+package com.core.data.persistence
 
 import android.content.Context
 import androidx.room.Room
-import com.core.app.BuildConfig
-import com.core.data.persistence.AppDatabase
+import com.core.data.BuildConfig
 import com.core.data.persistence.dao.AccountDao
 import com.core.data.persistence.dao.ProjectDao
 import dagger.Module
@@ -11,7 +10,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-object DatabaseModule {
+object PersistenceModule {
 
     @JvmStatic
     @Provides

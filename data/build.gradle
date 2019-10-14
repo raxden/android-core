@@ -13,6 +13,20 @@ android {
         testInstrumentationRunner rootProject.ext.testInstrumentationRunner
     }
 
+    flavorDimensions "tier"
+
+    productFlavors {
+        dev {
+            dimension "tier"
+        }
+        mock {
+            dimension "tier"
+        }
+        prod {
+            dimension "tier"
+        }
+    }
+
     androidExtensions {
         experimental = true
     }

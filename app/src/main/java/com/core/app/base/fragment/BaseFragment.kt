@@ -6,19 +6,14 @@ import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
-import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_COMPOSITE_DISPOSABLE
-import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_DIALOG_HELPER
-import com.core.app.base.fragment.BaseFragmentModule.Companion.FRAGMENT_PERMISSION_MANAGER
+import com.core.app.base.fragment.BaseFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
 import com.core.app.helper.AnimationHelper
 import com.core.app.helper.DialogHelper
-import com.core.app.injector.module.LifecycleFragmentModule.Companion.LIFECYCLE_FRAGMENT_OBSERVER
 import com.core.app.lifecycle.BaseFragmentLifecycle
 import com.core.app.util.ErrorManager
 import com.core.app.util.KeyboardManager
-import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -53,18 +48,11 @@ abstract class BaseFragment : DialogFragment(),
         HasSupportFragmentInjector {
 
     @Inject
-    @field:Named(FRAGMENT_DIALOG_HELPER)
     lateinit var dialogHelper: DialogHelper
     @Inject
     lateinit var animationHelper: AnimationHelper
     @Inject
-    @field:Named(FRAGMENT_COMPOSITE_DISPOSABLE)
-    lateinit var compositeDisposable: CompositeDisposable
-    @Inject
     lateinit var keyboardManager: KeyboardManager
-    @Inject
-    @field:Named(FRAGMENT_PERMISSION_MANAGER)
-    lateinit var permissionManager: PermissionManager
     @Inject
     lateinit var errorManager: ErrorManager
     @Inject
