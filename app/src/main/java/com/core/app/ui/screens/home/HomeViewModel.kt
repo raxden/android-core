@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.core.app.base.BaseViewModel
 import com.core.app.model.ProjectModel
+import com.core.app.util.OpenForTesting
 import com.core.commons.Event
 import com.core.commons.extension.notifyObservers
 import com.core.domain.Project
@@ -18,6 +19,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@OpenForTesting
 class HomeViewModel @Inject constructor(
         private val getProjectListUseCase: GetProjectListUseCase,
         private val logoutUseCase: LogoutUseCase

@@ -20,9 +20,10 @@ versions.dagger = '2.22.1'              // https://github.com/google/dagger
 versions.glide = '4.9.0'                // https://github.com/bumptech/glide
 versions.okhttp = '3.12.0'              // https://github.com/square/okhttp
 versions.retrofit = '2.5.0'             // https://github.com/square/retrofit
+versions.atsl_core = '1.2.0'
 versions.atsl_runner = '1.1.1'
 versions.atsl_rules = '1.1.1'
-versions.atsl_junit = '1.1.0'
+versions.atsl_junit = '1.1.1'
 versions.espresso = '3.1.1'
 versions.junit = '4.12'
 versions.assertj = '1.7.0'
@@ -121,9 +122,14 @@ ext {
     ]
 
     def atsl = [
+            // Core library
+            core:   [group: 'androidx.test', name: 'core-ktx', version: versions.atsl_core],
+            // AndroidJUnitRunner and JUnit Rules
             runner: [group: 'androidx.test', name: 'runner', version: versions.atsl_runner],
             rules : [group: 'androidx.test', name: 'rules', version: versions.atsl_rules],
-            junit : [group: 'androidx.test.ext', name: 'junit', version: versions.atsl_junit]
+            // Assertions
+            junit : [group: 'androidx.test.ext', name: 'junit-ktx', version: versions.atsl_junit]
+            // Espresso dependencies
     ]
 
     def espresso = [
@@ -183,6 +189,7 @@ ext {
                 transitive = true
             }],
 
+            [configuration: "androidTestImplementation", dependency: atsl.core],
             [configuration: "androidTestImplementation", dependency: atsl.runner],
             [configuration: "androidTestImplementation", dependency: atsl.rules],
             [configuration: "androidTestImplementation", dependency: atsl.junit],
@@ -191,6 +198,7 @@ ext {
             [configuration: "androidTestImplementation", dependency: espresso.intents],
             [configuration: "androidTestImplementation", dependency: mockito.core],
             [configuration: "androidTestImplementation", dependency: mockito.android],
+            [configuration: "kaptAndroidTest", dependency: dagger.compiler],
 
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],

@@ -9,10 +9,12 @@ import com.core.app.AppActivity
 import com.core.app.databinding.SplashActivityBinding
 import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
+import com.core.app.util.OpenForTesting
 import com.core.commons.extension.getExtras
 import com.core.domain.Forward
 import org.jetbrains.annotations.TestOnly
 
+@OpenForTesting
 class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
         InjectFragmentActivityLifecycle.Callback<SplashFragment> {
 

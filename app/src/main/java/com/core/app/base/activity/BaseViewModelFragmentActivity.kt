@@ -14,7 +14,7 @@ abstract class BaseViewModelFragmentActivity<VM : BaseViewModel, VDB : ViewDataB
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     protected abstract val viewModelClass: Class<VM>
-    protected val viewModel: VM by lazy {
+    val viewModel: VM by lazy {
         ViewModelProvider(this, viewModelFactory).get(viewModelClass).also { it.onAttached() }
     }
 

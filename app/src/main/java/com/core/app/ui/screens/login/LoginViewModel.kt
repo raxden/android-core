@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.core.app.R
 import com.core.app.base.BaseViewModel
+import com.core.app.util.OpenForTesting
 import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
@@ -13,6 +14,7 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@OpenForTesting
 class LoginViewModel @Inject constructor(
         private val getVersionUseCase: GetVersionUseCase,
         private val loginUseCase: LoginUseCase
