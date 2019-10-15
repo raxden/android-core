@@ -7,16 +7,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
-import com.core.app.helper.AnimationHelper
-import com.core.app.helper.DialogHelper
-import com.core.app.helper.NavigationHelper
-import com.core.app.lifecycle.BaseActivityLifecycle
 import com.core.app.util.BroadcastManager
-import com.core.app.util.LocaleManager
-import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.disposables.CompositeDisposable
+import java.util.logging.ErrorManager
 import javax.inject.Inject
 
 /**
@@ -28,10 +23,6 @@ abstract class BaseActivity : AppCompatActivity(),
 
     protected abstract val layoutId: Int
 
-    @Inject
-    lateinit var navigationHelper: NavigationHelper
-    @Inject
-    lateinit var dialogHelper: DialogHelper
     @Inject
     lateinit var animationHelper: AnimationHelper
     @Inject

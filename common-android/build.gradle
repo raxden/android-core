@@ -17,6 +17,10 @@ android {
         experimental = true
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     testOptions.unitTests.includeAndroidResources = true
 }
 

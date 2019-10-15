@@ -3,7 +3,6 @@ package com.core.data.network
 import android.content.Context
 import android.text.TextUtils
 import androidx.test.platform.app.InstrumentationRegistry
-import com.core.commons.AssetsUtils
 import com.core.data.network.entity.ErrorEntity
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.entity.UserEntity

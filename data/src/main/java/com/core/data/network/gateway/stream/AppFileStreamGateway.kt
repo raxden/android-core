@@ -1,13 +1,11 @@
 package com.core.data.network.gateway.stream
 
 import android.content.Context
-import com.core.commons.AssetsUtils
 import com.core.commons.extension.fromJson
 import com.core.data.network.gateway.AppGateway
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.entity.UserEntity
 import com.google.gson.Gson
-import io.reactivex.Maybe
 import io.reactivex.Single
 import java.util.concurrent.TimeUnit
 

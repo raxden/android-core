@@ -4,7 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.core.app.RxSchedulerRule
 import com.core.app.ui.screens.login.LoginViewModel
-import com.core.commons.MockitoUtils
 import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase

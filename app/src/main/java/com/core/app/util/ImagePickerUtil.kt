@@ -26,7 +26,6 @@ import android.os.Parcelable
 import android.preference.PreferenceManager.getDefaultSharedPreferences
 import android.provider.MediaStore
 import androidx.core.content.FileProvider
-import com.core.commons.BitmapUtils
 import com.core.commons.extension.rotate
 import timber.log.Timber
 import java.io.File

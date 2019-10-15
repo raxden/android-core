@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import com.core.app.RxSchedulerRule
 import com.core.app.model.ProjectModel
 import com.core.app.ui.screens.home.HomeViewModel
-import com.core.commons.Event
 import com.core.domain.Project
 import com.core.domain.User
 import com.core.domain.interactor.GetProjectListUseCase
@@ -21,8 +20,6 @@ import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.junit.MockitoRule
-import org.robolectric.RobolectricTestRunner
-import kotlin.test.assertTrue
 
 @RunWith(MockitoJUnitRunner::class)
 class HomeViewModelTest {
