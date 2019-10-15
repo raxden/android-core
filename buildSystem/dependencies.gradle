@@ -148,6 +148,7 @@ ext {
 
     def modules = [
             app             : ':app',
+            appBase         : ':app-base',
             appSplash       : ':app-ui-splash',
             appLogin        : ':app-ui-login',
             appHome         : ':app-ui-home',
@@ -156,8 +157,65 @@ ext {
             commons         : ':commons'
     ]
 
+    appBaseDependencies = [
+            [configuration: "implementation", dependency: project(modules.commons)],
+            [configuration: "implementation", dependency: project(modules.domain)],
+
+            [configuration: "implementation", dependency: support.material],
+            [configuration: "implementation", dependency: support.constraintLayout],
+            [configuration: "implementation", dependency: kotlin.core],
+            [configuration: "implementation", dependency: services.location],
+            [configuration: "implementation", dependency: firebase.core],
+            [configuration: "implementation", dependency: firebase.analytics],
+            [configuration: "implementation", dependency: firebase.messaging],
+            [configuration: "implementation", dependency: dagger.androidSupport],
+            [configuration: "kapt", dependency: dagger.compiler],
+            [configuration: "kapt", dependency: dagger.androidProcessor],
+            [configuration: "implementation", dependency: rx.android],
+            [configuration: "implementation", dependency: rx.kotlin],
+            [configuration: "implementation", dependency: retrofit.core],
+            [configuration: "implementation", dependency: retrofit.rx],
+            [configuration: "implementation", dependency: retrofit.converterGson],
+            [configuration: "implementation", dependency: retrofit.converterScalars],
+            [configuration: "implementation", dependency: okhttp.core],
+            [configuration: "implementation", dependency: okhttp.loggingInterceptor],
+            [configuration: "implementation", dependency: room.runtime],
+            [configuration: "kapt", dependency: room.compiler],
+            [configuration: "implementation", dependency: room.rxjava2],
+            [configuration: "implementation", dependency: glide.core],
+            [configuration: "kapt", dependency: glide.compiler],
+            [configuration: "implementation", dependency: gson.core],
+            [configuration: "implementation", dependency: threetenabp.core],
+            [configuration: "implementation", dependency: timber.core],
+            [configuration: "implementation", dependency: rxpermissions.core],
+            [configuration: "implementation", dependency: crashlytics.core, options: {
+                transitive = true
+            }],
+
+            [configuration: "androidTestImplementation", dependency: atsl.core],
+            [configuration: "androidTestImplementation", dependency: atsl.runner],
+            [configuration: "androidTestImplementation", dependency: atsl.rules],
+            [configuration: "androidTestImplementation", dependency: atsl.junit],
+            [configuration: "androidTestImplementation", dependency: espresso.core],
+            [configuration: "androidTestImplementation", dependency: espresso.contrib],
+            [configuration: "androidTestImplementation", dependency: espresso.intents],
+            [configuration: "androidTestImplementation", dependency: mockito.core],
+            [configuration: "androidTestImplementation", dependency: mockito.android],
+            [configuration: "kaptAndroidTest", dependency: dagger.compiler],
+
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "testImplementation", dependency: testLibs.assertj],
+            [configuration: "testImplementation", dependency: testLibs.arch],
+            [configuration: "testImplementation", dependency: kotlin.test],
+            [configuration: "testImplementation", dependency: mockito.core],
+            [configuration: "testImplementation", dependency: robolectric.core],
+            [configuration: "testImplementation", dependency: robolectric.multidex],
+            [configuration: "kaptTest", dependency: dagger.compiler]
+    ]
+
     appSplashDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
+            [configuration: "implementation", dependency: project(modules.appBase)],
             [configuration: "implementation", dependency: project(modules.domain)],
 
             [configuration: "implementation", dependency: support.material],
