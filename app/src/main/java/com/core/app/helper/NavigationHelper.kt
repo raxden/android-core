@@ -5,10 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
-import com.core.app.ui.screens.login.LoginActivity
-import com.core.app.ui.screens.home.HomeActivity
-import com.core.app.ui.screens.splash.SplashActivity
-import com.core.commons.AppUtils
+import com.core.app.splash.SplashActivity
 import com.core.domain.Project
 import com.core.domain.User
 

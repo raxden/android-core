@@ -14,7 +14,7 @@ import timber.log.Timber
  * Created by Angel on 18/07/2017.
  */
 
-class AppApplication : com.core.app.base.BaseApplication() {
+class AppApplication : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()

@@ -12,7 +12,6 @@ import com.core.app.helper.DialogHelper
 import com.core.app.helper.NavigationHelper
 import com.core.app.lifecycle.BaseActivityLifecycle
 import com.core.app.util.BroadcastManager
-import com.core.app.util.ErrorManager
 import com.core.app.util.LocaleManager
 import com.core.app.util.PermissionManager
 import dagger.android.DispatchingAndroidInjector

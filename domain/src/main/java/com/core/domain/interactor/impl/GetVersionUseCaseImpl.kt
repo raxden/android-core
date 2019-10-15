@@ -1,7 +1,6 @@
 package com.core.domain.interactor.impl
 
 import android.content.Context
-import com.core.commons.AppUtils
 import com.core.domain.interactor.GetVersionUseCase
 import io.reactivex.Single
 import javax.inject.Inject

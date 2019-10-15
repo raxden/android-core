@@ -10,7 +10,6 @@ import com.core.app.base.fragment.BaseFragmentModule.Companion.LIFECYCLE_FRAGMEN
 import com.core.app.helper.AnimationHelper
 import com.core.app.helper.DialogHelper
 import com.core.app.lifecycle.BaseFragmentLifecycle
-import com.core.app.util.ErrorManager
 import com.core.app.util.KeyboardManager
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector

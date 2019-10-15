@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.os.Build
 import android.preference.PreferenceManager
 import java.util.*
-import com.core.commons.AppUtils
 
 object LocaleManager {
 

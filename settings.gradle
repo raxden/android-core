@@ -1,1 +1,1 @@
-include ':app', ':commons', ':data', ':domain', ':app-ui-login', ':app-ui-splash', ':app-ui-home', ':app-base', ':app-ui-base'
+include ':app', ':commons', ':data', ':domain', ':app-ui-login', ':app-ui-splash', ':app-ui-home', ':app-base', ':app-ui-base', ':common-lifecycle', ':common-android', ':common', ':common-lifecycle-rx', ':common-dagger'

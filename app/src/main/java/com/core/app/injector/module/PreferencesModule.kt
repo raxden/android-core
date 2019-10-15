@@ -2,7 +2,6 @@ package com.core.app.injector.module
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.core.commons.AppUtils
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
