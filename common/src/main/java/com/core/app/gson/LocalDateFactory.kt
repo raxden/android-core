@@ -1,7 +1,7 @@
-package com.core.commons.gson
+package com.core.app.gson
 
-import com.core.commons.extension.toLocalDate
-import com.core.commons.extension.toMilliseconds
+import com.core.app.extension.toLocalDate
+import com.core.app.extension.toMilliseconds
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter

@@ -1,4 +1,4 @@
-package com.core.commons.glide
+package com.core.app.glide
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap

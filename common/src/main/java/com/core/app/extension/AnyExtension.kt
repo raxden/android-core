@@ -1,7 +1,7 @@
 package com.core.app.extension
 
-import com.core.commons.gson.LocalDateFactory
-import com.core.commons.gson.LocalDateTimeFactory
+import com.core.app.gson.LocalDateFactory
+import com.core.app.gson.LocalDateTimeFactory
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import org.threeten.bp.LocalDate
