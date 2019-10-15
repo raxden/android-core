@@ -4,11 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
-import com.core.app.injector.scope.PerActivity
 import com.core.app.lifecycle.BaseActivityLifecycle
 import javax.inject.Inject
 
-@PerActivity
 open class ToolbarActivityLifecycle @Inject internal constructor(
         activity: AppCompatActivity
 ) : BaseActivityLifecycle(activity) {

@@ -8,11 +8,9 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.viewpager.widget.ViewPager
-import com.core.app.injector.scope.PerActivity
 import com.core.app.lifecycle.BaseActivityLifecycle
 import javax.inject.Inject
 
-@PerActivity
 class FragmentStatePagerActivityLifecycle<TFragment : Fragment> @Inject internal constructor(
         activity: AppCompatActivity
 ) : BaseActivityLifecycle(activity) {
