@@ -1,4 +1,4 @@
-package com.core.app.base.adapter
+package com.core.app.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.core.app.BR
-import com.core.app.base.viewmodel.BaseViewModel
 
 abstract class BaseListAdapter<T : Any, VM : BaseViewModel, VDB : ViewDataBinding>(
         private val viewModel: VM,

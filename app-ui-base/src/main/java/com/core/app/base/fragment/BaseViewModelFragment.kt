@@ -5,7 +5,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import com.core.app.BR
-import com.core.app.base.viewmodel.BaseViewModel
+import com.core.app.base.BaseViewModel
 import javax.inject.Inject
 
 abstract class BaseViewModelFragment<VM : BaseViewModel, VDB : ViewDataBinding>

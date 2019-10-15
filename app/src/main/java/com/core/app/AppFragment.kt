@@ -1,10 +1,10 @@
 package com.core.app
 
 import androidx.databinding.ViewDataBinding
-import com.core.app.base.viewmodel.BaseViewModel
+import com.core.app.base.BaseViewModel
 import com.core.app.base.fragment.BaseViewModelFragment
 
-abstract class AppFragment<VM : BaseViewModel, VDB : ViewDataBinding>
+abstract class AppFragment<VM : com.core.app.base.BaseViewModel, VDB : ViewDataBinding>
     : BaseViewModelFragment<VM, VDB>() {
 
     override val layoutId: Int
