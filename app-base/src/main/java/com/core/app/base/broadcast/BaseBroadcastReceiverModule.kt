@@ -1,4 +1,4 @@
-package com.core.app.base
+package com.core.app.base.broadcast
 
 import com.core.app.injector.scope.PerBroadcastReceiver
 import dagger.Module

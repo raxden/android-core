@@ -1,4 +1,4 @@
-package com.core.app.base
+package com.core.app.base.application
 
 import android.app.Application
 import android.content.ContentResolver

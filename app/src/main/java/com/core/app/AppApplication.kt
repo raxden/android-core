@@ -3,7 +3,7 @@ package com.core.app
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.core.app.base.BaseApplication
+import com.core.app.base.application.BaseApplication
 import com.core.app.injector.component.DaggerApplicationComponent
 import com.core.app.util.CrashReportingTree
 import io.fabric.sdk.android.Fabric

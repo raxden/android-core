@@ -2,8 +2,6 @@ package com.core.app.injector.component
 
 import com.core.app.AppApplication
 import com.core.app.AppApplicationModule
-import com.core.app.base.BaseApplication
-import com.core.app.base.BaseApplicationModule
 import com.core.app.injector.module.InjectorModule
 import dagger.Component
 import dagger.android.AndroidInjectionModule

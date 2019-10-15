@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
-import com.core.app.base.BaseViewModel
+import com.core.app.base.viewmodel.BaseViewModel
 import com.core.app.base.fragment.BaseViewModelFragment
 
 abstract class AppFragmentDialog<VM : BaseViewModel, VDB : ViewDataBinding>

@@ -1,4 +1,4 @@
-package com.core.app.base
+package com.core.app.base.service
 
 import com.core.app.injector.scope.PerService
 import dagger.Module

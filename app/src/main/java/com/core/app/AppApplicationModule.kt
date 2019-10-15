@@ -1,7 +1,7 @@
 package com.core.app
 
 import android.app.Application
-import com.core.app.base.BaseApplicationModule
+import com.core.app.base.application.BaseApplicationModule
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

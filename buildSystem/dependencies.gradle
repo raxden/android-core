@@ -280,6 +280,7 @@ ext {
 
     appDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
+            [configuration: "implementation", dependency: project(modules.appBase)],
             [configuration: "implementation", dependency: project(modules.domain)],
             [configuration: "implementation", dependency: project(modules.data)],
 

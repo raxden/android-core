@@ -1,7 +1,7 @@
-package com.core.app.base
+package com.core.app.base.service
 
 import android.app.Service
-import com.core.app.base.BaseServiceModule.Companion.DISPOSABLE_SERVICE_MANAGER
+import com.core.app.base.service.BaseServiceModule.Companion.DISPOSABLE_SERVICE_MANAGER
 import dagger.android.AndroidInjection
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject

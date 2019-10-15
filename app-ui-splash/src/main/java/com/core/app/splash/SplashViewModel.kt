@@ -2,7 +2,7 @@ package com.core.app.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.core.app.base.BaseViewModel
+import com.core.app.base.viewmodel.BaseViewModel
 import com.core.app.util.OpenForTesting
 import com.core.domain.Forward
 import com.core.domain.User
