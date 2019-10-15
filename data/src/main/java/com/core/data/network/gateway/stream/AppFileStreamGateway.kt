@@ -7,8 +7,8 @@ import com.core.data.network.gateway.AppGateway
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.entity.UserEntity
 import com.google.gson.Gson
-import io.reactivex.Maybe
 import io.reactivex.Single
+import retrofit2.Response
 import java.util.concurrent.TimeUnit
 
 class AppFileStreamGateway(
@@ -23,6 +23,10 @@ class AppFileStreamGateway(
     override fun user(username: String): Single<UserEntity> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<UserEntity>(AssetsUtils.getString(context, "user.json") ?: "") }
+
+    override suspend fun userCO(username: String): Response<UserEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun projectList(username: String): Single<List<ProjectEntity>> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)

@@ -2,8 +2,8 @@ package com.core.data.network.gateway.retrofit.service
 
 import com.core.data.network.entity.ProjectEntity
 import com.core.data.network.entity.UserEntity
-import io.reactivex.Maybe
 import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.*
 
 interface AppRetrofitService {
@@ -13,6 +13,10 @@ interface AppRetrofitService {
             @Path("user") username: String
     ): Single<UserEntity>
 
+    @GET("users/{user}")
+    suspend fun retrieveUserCO(
+            @Path("user") username: String
+    ): Response<UserEntity>
 
     @GET("users/{user}/repos")
     fun retrieveProjectList(
