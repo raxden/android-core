@@ -166,7 +166,7 @@ ext {
             [configuration: "implementation", dependency: support.material],
             [configuration: "implementation", dependency: support.constraintLayout],
             [configuration: "implementation", dependency: kotlin.core],
-            [configuration: "implementation", dependency: coroutines.core],
+//            [configuration: "implementation", dependency: coroutines.core],
             [configuration: "implementation", dependency: services.location],
             [configuration: "implementation", dependency: firebase.core],
             [configuration: "implementation", dependency: firebase.analytics],
