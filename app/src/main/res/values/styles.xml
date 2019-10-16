@@ -1,12 +1,11 @@
 <resources>
 
-    <style name="AppButton.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="backgroundTint">@color/white</item>
-        <item name="android:textAppearance">@style/CodeFont.Subtitle1</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:minHeight">60dp</item>
-        <item name="strokeColor">@color/teal</item>
-        <item name="cornerRadius">24dp</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
 </resources>

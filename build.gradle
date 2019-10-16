@@ -1,20 +1,14 @@
-apply from: 'buildSystem/ci.gradle'
-
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    apply from: 'buildSystem/dependencies.gradle'
     repositories {
         google()
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
-        maven { url 'https://github.com/leonardocardoso/mvn-repo/raw/master/maven-deploy' }
-        maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$versions.android_gradle_plugin"
-        classpath "com.google.gms:google-services:$versions.google_services"
-        classpath "io.fabric.tools:gradle:$versions.fabric_tools"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-        classpath "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+        classpath "com.android.tools.build:gradle:${Versions.gradle}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        classpath "io.fabric.tools:gradle:${Versions.fabric}"
     }
 }
 
@@ -22,28 +16,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://maven.google.com" }
-        maven { url "https://jitpack.io" }
-        flatDir {
-            dirs 'libs'
-        }
-    }
-    ext {
-        minSdkVersion = 21      // https://developer.android.com/about/dashboards
-        targetSdkVersion = 28
-        compileSdkVersion = 28
 
-        androidApplicationId = 'com.core.app'
-        androidVersionCode = VERSION_CODE as int
-        androidVersionName = VERSION_NAME as String
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        testApplicationId = 'com.core.test'
-
-        // Crashlytics configuration
-        betaDistributionReleaseNotesFilePath = 'buildSystem/crashlytics/release_notes.txt'
-        betaDistributionGroupAliasesFilePath = 'buildSystem/crashlytics/group_aliases.txt'
-        betaDistributionNotifications = true
     }
 }
 

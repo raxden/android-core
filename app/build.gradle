@@ -1,176 +1,22 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'io.fabric'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-allopen'
-apply plugin: 'kotlin-android-extensions'
-
-allOpen {
-    // allows mocking for classes w/o directly opening them for release builds
-    annotation 'com.core.app.util.OpenClass'
-}
+apply from: '../android_commons.gradle'
 
 android {
-
-    dexOptions {
-        maxProcessCount 8  // Sets the maximum number of DEX processes that can be started concurrently.
-        javaMaxHeapSize "2g" // Sets the maximum memory allocation pool size for the dex operation.
-        preDexLibraries true // Enables Gradle to pre-dex library dependencies.
-    }
-
-    compileSdkVersion rootProject.ext.compileSdkVersion
-
-    compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-
-        applicationId rootProject.ext.androidApplicationId
-        versionCode rootProject.ext.androidVersionCode
-        versionName rootProject.ext.androidVersionName
-
-        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
-        testApplicationId rootProject.ext.testApplicationId
-
-        setProperty("archivesBaseName", "core")
-
-        vectorDrawables.useSupportLibrary = true
-
-        ext.betaDistributionReleaseNotesFilePath = rootProject.ext.betaDistributionReleaseNotesFilePath
-        ext.betaDistributionGroupAliasesFilePath = rootProject.ext.betaDistributionGroupAliasesFilePath
-        ext.betaDistributionNotifications = rootProject.ext.betaDistributionNotifications
-
-        multiDexEnabled true
+        applicationId ApplicationId.id
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    flavorDimensions "tier"
-
-    sourceSets {
-        main {
-            res.srcDirs =
-                    [
-                            'src/main/res/layouts/components',
-                            'src/main/res/layouts/screens/login',
-                            'src/main/res/layouts/screens/splash',
-                            'src/main/res/layouts/screens/home',
-                            'src/main/res/layouts',
-                            'src/main/res'
-                    ]
-        }
-    }
-
-    signingConfigs {
-        debug {
-            ext.enableCrashlytics = false
-            storeFile file('../buildSystem/debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-        release {
-            storeFile file('../buildSystem/release.jks')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-    }
-
-    productFlavors {
-        dev {
-            dimension "tier"
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
-            resValue "string", "app_name", "Dev core"
-            resConfigs "xxhdpi"
-        }
-        mock {
-            dimension "tier"
-            applicationIdSuffix ".mock"
-            versionNameSuffix "-mock"
-            resValue "string", "app_name", "Mock core"
-            resConfigs "xxhdpi"
-        }
-        prod {
-            dimension "tier"
-            resValue "string", "app_name", "core"
-        }
-    }
-
-    buildTypes {
-        debug {
-            crunchPngs false                    // Disable png compression
-            minifyEnabled false
-            signingConfig signingConfigs.debug
-        }
-        release {
-            minifyEnabled false                  // Change to TRUE to activate proguard
-            shrinkResources false
-            signingConfig signingConfigs.release
-
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
-                    'proguard-rules.pro',
-                    './proguard/proguard-android.pro',
-                    './proguard/proguard-androidx.pro',
-                    './proguard/proguard-crashlytics.pro',
-                    './proguard/proguard-firebase.pro',
-                    './proguard/proguard-glide.pro',
-                    './proguard/proguard-google.pro',
-                    './proguard/proguard-google-analytics.pro',
-                    './proguard/proguard-google-play-services.pro',
-                    './proguard/proguard-gson.pro',
-                    './proguard/proguard-material.pro',
-                    './proguard/proguard-square-okhttp3.pro',
-                    './proguard/proguard-square-okio.pro',
-                    './proguard/proguard-square-retrofit2.pro',
-                    './proguard/proguard-timber.pro'
-        }
-    }
-
-    testOptions.unitTests.includeAndroidResources = true
-
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
-
-    packagingOptions {
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/ASL2.0'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'LICENSE.txt'
-    }
-
     dataBinding {
-        enabled = true
+        enabled true
     }
-
-    androidExtensions {
-        experimental = true
-    }
-}
-
-repositories {
-    maven { url 'https://maven.fabric.io/public' }
-    maven { url "https://clojars.org/repo/" }
 }
 
 dependencies {
-    implementation fileTree(include: '*.jar', dir: 'libs')
-
-    rootProject.appDependencies.each {
-        add(it.configuration, it.dependency, it.options)
-    }
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
-
-//apply plugin: 'com.google.gms.google-services'
