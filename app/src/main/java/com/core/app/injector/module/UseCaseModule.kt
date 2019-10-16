@@ -27,7 +27,7 @@ abstract class UseCaseModule {
 
     @Binds
     @Singleton
-    internal abstract fun forwardUseCase(useCase: ForwardUseCaseImpl): ForwardUseCase
+    internal abstract fun forwardUseCase(useCase: GetUserUseCaseImpl): GetUserUseCase
 
     @Binds
     @Singleton

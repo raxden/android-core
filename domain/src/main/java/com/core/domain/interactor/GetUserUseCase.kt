@@ -5,7 +5,7 @@ import com.core.domain.Forward
 import com.core.domain.User
 import io.reactivex.Single
 
-interface ForwardUseCase {
+interface GetUserUseCase {
 
-    suspend fun execute(): Resource<Pair<Forward, User?>>
+    suspend fun execute(): Resource<User>
 }

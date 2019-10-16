@@ -7,7 +7,7 @@ import com.core.app.ui.screens.splash.SplashViewModel
 import com.core.commons.Resource
 import com.core.domain.Forward
 import com.core.domain.User
-import com.core.domain.interactor.ForwardUseCase
+import com.core.domain.interactor.GetUserUseCase
 import com.core.domain.interactor.GetVersionUseCase
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -33,7 +33,7 @@ class SplashViewModelTest {
     @Mock
     private lateinit var getVersionUseCase: GetVersionUseCase
     @Mock
-    private lateinit var forwardUseCase: ForwardUseCase
+    private lateinit var getUserUseCase: GetUserUseCase
     @Mock
     private lateinit var versionObserver: Observer<String>
     @Mock
@@ -56,9 +56,9 @@ class SplashViewModelTest {
     fun `check that application version is retrieved one time`() {
         coroutinesTestRule.testDispatcher.runBlockingTest {
             `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
-            `when`(forwardUseCase.execute()).thenReturn(Resource.success(forwardLogin))
+            `when`(getUserUseCase.execute()).thenReturn(Resource.success(forwardLogin))
 
-            splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+            splashViewModel = SplashViewModel(getVersionUseCase, getUserUseCase).also {
                 it.version.observeForever(versionObserver)
             }
 
@@ -70,10 +70,10 @@ class SplashViewModelTest {
     fun `check that application is ready to launch login`() {
         coroutinesTestRule.testDispatcher.runBlockingTest {
             `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
-            `when`(forwardUseCase.execute()).thenReturn(Resource.success(forwardLogin))
+            `when`(getUserUseCase.execute()).thenReturn(Resource.success(forwardLogin))
 
-            splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
-                it.applicationReady.observeForever(applicationReadyObserver)
+            splashViewModel = SplashViewModel(getVersionUseCase, getUserUseCase).also {
+                it.user.observeForever(applicationReadyObserver)
                 it.throwable.observeForever(throwableObserver)
             }
 
@@ -86,10 +86,10 @@ class SplashViewModelTest {
     fun `check that application is ready to launch home`() {
         coroutinesTestRule.testDispatcher.runBlockingTest {
             `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
-            `when`(forwardUseCase.execute()).thenReturn(Resource.success(forwardHome))
+            `when`(getUserUseCase.execute()).thenReturn(Resource.success(forwardHome))
 
-            splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
-                it.applicationReady.observeForever(applicationReadyObserver)
+            splashViewModel = SplashViewModel(getVersionUseCase, getUserUseCase).also {
+                it.user.observeForever(applicationReadyObserver)
                 it.throwable.observeForever(throwableObserver)
             }
 

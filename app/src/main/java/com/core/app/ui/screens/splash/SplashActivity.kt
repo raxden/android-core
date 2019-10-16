@@ -10,6 +10,7 @@ import com.core.app.databinding.SplashActivityBinding
 import com.core.app.lifecycle.activity.InjectFragmentActivityLifecycle
 import com.core.app.ui.screens.splash.view.SplashFragment
 import com.core.app.util.OpenForTesting
+import com.core.commons.Status
 import com.core.commons.extension.getExtras
 import com.core.domain.Forward
 import org.jetbrains.annotations.TestOnly
@@ -29,10 +30,12 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
 
     override fun onViewModelAttached(owner: LifecycleOwner, viewModel: SplashViewModel) {
         viewModel.throwable.observe(owner, Observer { errorManager.set(it) })
-        viewModel.applicationReady.observe(owner, Observer {
-            when (it.first) {
-                Forward.LOGIN -> navigationHelper.launchLogin(finishCurrentActivity = true)
-                Forward.HOME -> it.second?.let { user -> navigationHelper.launchHome(user, finishCurrentActivity = true) }
+        viewModel.user.observe(owner, Observer { resource ->
+            when (resource.status) {
+                Status.SUCCESS -> resource.data?.let { user ->
+                    navigationHelper.launchHome(user, finishCurrentActivity = true)
+                }
+                Status.ERROR -> navigationHelper.launchLogin(finishCurrentActivity = true)
             }
         })
     }
@@ -48,7 +51,9 @@ class SplashActivity : AppActivity<SplashViewModel, SplashActivityBinding>(),
 
     override fun onCreateFragment(): SplashFragment = SplashFragment.newInstance(getExtras())
 
-    override fun onFragmentLoaded(fragment: SplashFragment) { mSplashFragment = fragment }
+    override fun onFragmentLoaded(fragment: SplashFragment) {
+        mSplashFragment = fragment
+    }
 
     @TestOnly
     fun getFragment() = mSplashFragment
