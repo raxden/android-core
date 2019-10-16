@@ -1,28 +1,42 @@
 package com.core.data.repository
 
+import com.core.commons.Resource
 import com.core.data.persistence.AppDatabase
 import com.core.domain.Account
 import com.core.domain.repository.AccountRepository
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Named
 
 class AccountRepositoryImpl @Inject internal constructor(
-        private val appDatabase: AppDatabase
+        private val appDatabase: AppDatabase,
+        @Named("io") private val dispatcher: CoroutineDispatcher
 ) : AccountRepository {
 
-    override fun retrieve(): Single<Account> = appDatabase.accountDao().findAll().map { it.first() }.toSingle()
-
-    override fun retrieve(id: Long): Single<Account> = appDatabase.accountDao().find(id)
-
-    override fun save(account: Account): Single<Account> {
-        return if (account.id == 0L) {
-            appDatabase.accountDao().insert(account).flatMap {
-                appDatabase.accountDao().find(it)
-            }
-        } else appDatabase.accountDao().update(account).andThen(Single.just(account))
+    override suspend fun retrieve() = withContext(dispatcher) {
+        Resource.success(appDatabase.accountDao().findAll().first())
     }
 
-    override fun remove(account: Account): Completable = appDatabase.accountDao().delete(account)
+    override suspend fun retrieve(id: Long) = withContext(dispatcher) {
+        Resource.success(appDatabase.accountDao().find(id))
+    }
+
+    override suspend fun save(account: Account) = withContext(dispatcher) {
+        if (account.id == 0L) {
+            appDatabase.accountDao().insert(account).let { id ->
+                Resource.success(appDatabase.accountDao().find(id))
+            }
+        } else {
+            appDatabase.accountDao().update(account)
+            Resource.success(account)
+        }
+    }
+
+    override suspend fun remove(account: Account) = withContext(dispatcher) {
+        appDatabase.accountDao().delete(account)
+    }
 }

@@ -1,8 +1,8 @@
 package com.core.domain.interactor
 
-import io.reactivex.Single
+import com.core.commons.Resource
 
 interface GetVersionUseCase {
 
-    fun execute(): Single<String>
+    suspend fun execute(): Resource<String>
 }

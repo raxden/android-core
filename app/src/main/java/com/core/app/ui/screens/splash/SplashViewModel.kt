@@ -2,8 +2,10 @@ package com.core.app.ui.screens.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.core.app.base.BaseViewModel
 import com.core.app.util.OpenForTesting
+import com.core.commons.Status
 import com.core.domain.Forward
 import com.core.domain.User
 import com.core.domain.interactor.ForwardUseCase
@@ -24,10 +26,6 @@ class SplashViewModel @Inject constructor(
         private val forwardUseCase: ForwardUseCase
 ) : BaseViewModel() {
 
-    companion object {
-        const val IN_SECONDS: Long = 3
-    }
-
     private val mVersion = MutableLiveData<String>()
     val version: LiveData<String> = mVersion
 
@@ -37,29 +35,23 @@ class SplashViewModel @Inject constructor(
     init {
         retrieveVersion()
         prepareApplicationToLaunch()
-
-        GlobalScope.launch { // launch a new coroutine in background and continue
-            delay(1000L) // non-blocking delay for 1 second (default time unit is ms)
-            println("World!") // print after delay
-        }
     }
 
     private fun retrieveVersion() {
-        getVersionUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onSuccess = { mVersion.value = it })
-                .addTo(mCompositeDisposable)
+        viewModelScope.launch {
+            val resource = getVersionUseCase.execute()
+            when (resource.status) {
+                Status.SUCCESS -> mVersion.value = resource.data
+            }
+        }
     }
 
     private fun prepareApplicationToLaunch() {
-        Single.zip(
-                Single.timer(IN_SECONDS, TimeUnit.SECONDS, Schedulers.io()),
-                forwardUseCase.execute().subscribeOn(Schedulers.io()),
-                BiFunction<Long, Pair<Forward, User?>, Pair<Forward, User?>> { _, forward -> forward })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onSuccess = { mApplicationReady.value = it } )
-                .addTo(mCompositeDisposable)
+        viewModelScope.launch {
+            val resource = forwardUseCase.execute()
+            when (resource.status) {
+                Status.SUCCESS -> mApplicationReady.value = forwardUseCase.execute().data
+            }
+        }
     }
 }

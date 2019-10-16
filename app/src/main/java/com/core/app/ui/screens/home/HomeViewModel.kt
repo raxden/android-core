@@ -1,13 +1,11 @@
 package com.core.app.ui.screens.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.*
 import com.core.app.base.BaseViewModel
 import com.core.app.model.ProjectModel
 import com.core.app.util.OpenForTesting
 import com.core.commons.Event
+import com.core.commons.Status
 import com.core.commons.extension.notifyObservers
 import com.core.domain.Project
 import com.core.domain.User
@@ -17,6 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OpenForTesting
@@ -55,33 +54,21 @@ class HomeViewModel @Inject constructor(
     }
 
     fun performLogout() {
-        logoutUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onComplete = { mLogoutCompleted.value = Event(true) })
-                .addTo(mCompositeDisposable)
+        viewModelScope.launch {
+            logoutUseCase.execute()
+            mLogoutCompleted.value = Event(true)
+        }
     }
 
     private fun retrieveProjectList(username: String) {
-        getProjectListUseCase.execute(username)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { mLoaderManager.push() }
-                .subscribeBy(
-                        onError = {
-                            mThrowable.value = it
-                            mProjectList.value = emptyList()
-                            mLoaderManager.pop()
-                        },
-                        onSuccess = {
-                            mProjectList.value = it
-                            mLoaderManager.pop()
-                        },
-                        onComplete = {
-                            mProjectList.value = emptyList()
-                            mLoaderManager.pop()
-                        }
-                )
-                .addTo(mCompositeDisposable)
+        viewModelScope.launch {
+            mLoaderManager.push()
+            val resource =  getProjectListUseCase.execute(username)
+            when (resource.status) {
+                Status.ERROR -> mThrowable.value = resource.throwable
+                Status.SUCCESS -> mProjectList.value = resource.data
+            }
+            mLoaderManager.pop()
+        }
     }
 }

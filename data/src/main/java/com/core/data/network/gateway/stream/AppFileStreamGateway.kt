@@ -20,14 +20,23 @@ class AppFileStreamGateway(
         const val IN_MILLISECONDS: Long = 2000
     }
 
+    /*
     override fun user(username: String): Single<UserEntity> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<UserEntity>(AssetsUtils.getString(context, "user.json") ?: "") }
-
-    override suspend fun userCO(username: String): Response<UserEntity> {
+*/
+    override suspend fun user(username: String): UserEntity {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override suspend fun projectList(username: String): List<ProjectEntity> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun project(username: String, projectName: String): ProjectEntity {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+/*
     override fun projectList(username: String): Single<List<ProjectEntity>> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<List<ProjectEntity>>(AssetsUtils.getString(context, "repos.json") ?: "") }
@@ -35,4 +44,6 @@ class AppFileStreamGateway(
     override fun project(username: String, projectName: String): Single<ProjectEntity> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<ProjectEntity>(AssetsUtils.getString(context, "repo.json") ?: "") }
+
+     */
 }

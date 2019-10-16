@@ -7,20 +7,16 @@ import retrofit2.Response
 
 interface AppGateway {
 
-    fun user(
+    suspend fun user(
             username: String
-    ): Single<UserEntity>
+    ): UserEntity
 
-    suspend fun userCO(
+    suspend fun projectList(
             username: String
-    ): Response<UserEntity>
+    ): List<ProjectEntity>
 
-    fun projectList(
-            username: String
-    ): Single<List<ProjectEntity>>
-
-    fun project(
+    suspend fun project(
             username: String,
             projectName: String
-    ): Single<ProjectEntity>
+    ): ProjectEntity
 }

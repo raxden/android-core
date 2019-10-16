@@ -1,13 +1,11 @@
 package com.core.domain.interactor.impl
 
+import com.core.commons.Resource
 import com.core.domain.Account
 import com.core.domain.User
 import com.core.domain.interactor.LoginUseCase
 import com.core.domain.repository.AccountRepository
-import com.core.domain.repository.ProjectRepository
 import com.core.domain.repository.UserRepository
-import io.reactivex.Maybe
-import io.reactivex.Single
 import javax.inject.Inject
 
 class LoginUseCaseImpl @Inject constructor(
@@ -15,9 +13,11 @@ class LoginUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : LoginUseCase {
 
-    override fun execute(username: String): Single<User> = userRepository
-            .retrieve(username)
-            .flatMap { user ->
-                accountRepository.save(Account(username = user.username)).map { user }
+    override suspend fun execute(username: String): Resource<User> {
+        return userRepository.retrieve(username).also { resource ->
+            resource.data?.let { user ->
+                accountRepository.save(Account(username = user.username))
             }
+        }
+    }
 }

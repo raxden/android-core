@@ -1,5 +1,6 @@
 package com.core.domain.interactor.impl
 
+import com.core.commons.Resource
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectDetailUseCase
 import com.core.domain.repository.AccountRepository
@@ -13,12 +14,13 @@ class GetProjectDetailUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : GetProjectDetailUseCase {
 
-    override fun execute(projectName: String): Single<Project> = accountRepository
-            .retrieve()
-            .flatMap {
-                projectRepository.detail(it.username, projectName)
-            }
+    override suspend fun execute(projectName: String): Resource<Project> {
+        return accountRepository.retrieve().data?.let {
+            projectRepository.detail(it.username, projectName)
+        } ?: Resource.error(Throwable("Project doesn't exist"), null)
+    }
 
-    override fun execute(username: String, projectName: String): Single<Project> = projectRepository
-            .detail(username, projectName)
+    override suspend fun execute(username: String, projectName: String): Resource<Project> {
+        return projectRepository.detail(username, projectName)
+    }
 }

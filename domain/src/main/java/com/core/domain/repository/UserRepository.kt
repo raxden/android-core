@@ -8,7 +8,5 @@ import io.reactivex.Single
 
 interface UserRepository : Repository {
 
-    fun retrieve(username: String): Single<User>
-
-    suspend fun retrieveCO(username: String): Resource<User>
+    suspend fun retrieve(username: String): Resource<User>
 }

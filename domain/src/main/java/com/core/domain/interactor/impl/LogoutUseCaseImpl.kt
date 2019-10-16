@@ -9,6 +9,9 @@ class LogoutUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : LogoutUseCase {
 
-    override fun execute(): Completable = accountRepository.retrieve()
-            .flatMapCompletable { accountRepository.remove(it) }
+    override suspend fun execute() {
+        accountRepository.retrieve().data?.let {
+            accountRepository.remove(it)
+        }
+    }
 }

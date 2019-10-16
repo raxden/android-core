@@ -12,6 +12,7 @@ import com.core.app.injector.module.LifecycleActivityModule
 import com.core.app.injector.module.ViewModelModule
 import com.core.app.injector.scope.PerActivity
 import com.core.app.util.*
+import com.core.commons.AppUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import dagger.Binds
 import dagger.Module

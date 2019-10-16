@@ -1,9 +1,9 @@
 package com.core.domain.interactor
 
+import com.core.commons.Resource
 import com.core.domain.User
-import io.reactivex.Single
 
 interface LoginUseCase {
 
-    fun execute(username: String): Single<User>
+    suspend fun execute(username: String): Resource<User>
 }

@@ -1,5 +1,6 @@
 package com.core.domain.interactor.impl
 
+import com.core.commons.Resource
 import com.core.domain.Forward
 import com.core.domain.User
 import com.core.domain.interactor.ForwardUseCase
@@ -13,19 +14,9 @@ class ForwardUseCaseImpl @Inject constructor(
         private val userRepository: UserRepository
 ) : ForwardUseCase {
 
-    override fun execute(): Single<Pair<Forward, User?>> = accountRepository
-            .retrieve().map { true }
-            .onErrorResumeNext { Single.just(false) }
-            .map { hasAccount ->
-                if (hasAccount) Forward.HOME
-                else Forward.LOGIN
-            }
-            .flatMap {
-                when (it) {
-                    Forward.LOGIN -> Single.just(Pair(it, null))
-                    Forward.HOME -> accountRepository.retrieve()
-                            .flatMap { account -> userRepository.retrieve(account.username) }
-                            .map { user -> Pair(it, user) }
-                }
-            }
+    override suspend fun execute(): Resource<Pair<Forward, User?>> {
+        return accountRepository.retrieve().data?.let {account ->
+            Resource.success(Pair(Forward.HOME, userRepository.retrieve(account.username).data))
+        } ?: Resource.success(Pair(Forward.LOGIN, null))
+    }
 }

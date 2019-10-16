@@ -1,5 +1,6 @@
 package com.core.domain.interactor.impl
 
+import com.core.commons.Resource
 import com.core.domain.Project
 import com.core.domain.interactor.GetProjectListUseCase
 import com.core.domain.repository.AccountRepository
@@ -13,10 +14,13 @@ class GetProjectListUseCaseImpl @Inject constructor(
         private val accountRepository: AccountRepository
 ) : GetProjectListUseCase {
 
-    override fun execute(): Maybe<List<Project>> = accountRepository
-            .retrieve()
-            .flatMapMaybe { projectRepository.list(it.username) }
+    override suspend fun execute(): Resource<List<Project>> {
+        return accountRepository.retrieve().data?.let {
+            projectRepository.list(it.username)
+        } ?: Resource.success(emptyList())
+    }
 
-    override fun execute(username: String): Maybe<List<Project>> = projectRepository
-            .list(username)
+    override suspend fun execute(username: String): Resource<List<Project>> {
+        return projectRepository.list(username)
+    }
 }

@@ -2,16 +2,15 @@ package com.core.app.ui.screens.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.core.app.R
 import com.core.app.base.BaseViewModel
 import com.core.app.util.OpenForTesting
+import com.core.commons.Status
 import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @OpenForTesting
@@ -45,29 +44,24 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun retrieveVersion() {
-        getVersionUseCase.execute()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(onSuccess = { mVersion.value = it })
-                .addTo(mCompositeDisposable)
+        viewModelScope.launch {
+            val resource = getVersionUseCase.execute()
+            when (resource.status) {
+                Status.SUCCESS -> mVersion.value = resource.data
+            }
+        }
     }
 
     private fun performLogin(username: String) {
-        loginUseCase.execute(username)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { mLoaderManager.push() }
-                .subscribeBy(
-                        onError = {
-                            mThrowable.value = it
-                            mLoaderManager.pop()
-                        },
-                        onSuccess = {
-                            mUserLogged.value = it
-                            mLoaderManager.pop()
-                        }
-                )
-                .addTo(mCompositeDisposable)
+        viewModelScope.launch {
+            mLoaderManager.push()
+            val resource = loginUseCase.execute(username)
+            when (resource.status) {
+                Status.ERROR -> mThrowable.value = resource.throwable
+                Status.SUCCESS -> mUserLogged.value = resource.data
+            }
+            mLoaderManager.pop()
+        }
     }
 
     private fun validateUsername(): Boolean {

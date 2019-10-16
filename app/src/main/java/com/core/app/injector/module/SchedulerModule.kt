@@ -2,9 +2,8 @@ package com.core.app.injector.module
 
 import dagger.Module
 import dagger.Provides
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -18,11 +17,23 @@ object SchedulerModule {
     @Provides
     @Singleton
     @Named("io")
-    internal fun io(): Scheduler = Schedulers.io()
+    internal fun io(): CoroutineDispatcher = Dispatchers.IO
 
     @JvmStatic
     @Provides
     @Singleton
-    @Named("mainThread")
-    internal fun mainThread(): Scheduler =  AndroidSchedulers.mainThread()
+    @Named("main")
+    internal fun main(): CoroutineDispatcher = Dispatchers.Main
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    @Named("default")
+    internal fun default(): CoroutineDispatcher = Dispatchers.Default
+
+    @JvmStatic
+    @Provides
+    @Singleton
+    @Named("unconfined")
+    internal fun unconfined(): CoroutineDispatcher = Dispatchers.Unconfined
 }

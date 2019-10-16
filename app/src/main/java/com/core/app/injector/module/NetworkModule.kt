@@ -97,8 +97,8 @@ object NetworkModule {
         return Retrofit.Builder()
                 .baseUrl(context.getString(R.string.data_api_domain))
                 .client(httpClient)
-                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                //.addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
+                //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
     }

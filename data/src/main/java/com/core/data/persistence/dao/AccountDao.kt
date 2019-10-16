@@ -13,23 +13,23 @@ import io.reactivex.Single
 interface AccountDao {
 
     @Query("SELECT * FROM Account WHERE id= :id")
-    fun find(id: Long): Single<Account>
+    fun find(id: Long): Account
 
     @Query("SELECT * FROM Account")
-    fun findAll(): Maybe<List<Account>>
+    fun findAll(): List<Account>
 
     @Query("DELETE FROM Account WHERE id= :id")
-    fun delete(id: Long): Completable
+    fun delete(id: Long)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(account: Account): Single<Long>
+    fun insert(account: Account): Long
 
     @Update
-    fun update(account: Account): Completable
+    fun update(account: Account)
 
     @Delete
-    fun delete(account: Account): Completable
+    fun delete(account: Account)
 
     @Query("DELETE FROM Account")
-    fun deleteAll(): Completable
+    fun deleteAll()
 }

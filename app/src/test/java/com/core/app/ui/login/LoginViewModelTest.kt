@@ -1,14 +1,15 @@
 package com.core.app.ui.login
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.core.app.RxSchedulerRule
+import com.core.app.CoroutinesTestRule
 import com.core.app.ui.screens.login.LoginViewModel
 import com.core.commons.MockitoUtils
+import com.core.commons.Resource
 import com.core.domain.User
 import com.core.domain.interactor.GetVersionUseCase
 import com.core.domain.interactor.LoginUseCase
 import io.reactivex.Single
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -26,10 +27,7 @@ class LoginViewModelTest {
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
-    val taskExecutorRule = InstantTaskExecutorRule()
-
-    @get:Rule
-    val rxSchedulerRule = RxSchedulerRule()
+    var coroutinesTestRule = CoroutinesTestRule()
 
     @Mock
     lateinit var getVersionUseCase: GetVersionUseCase
@@ -51,13 +49,15 @@ class LoginViewModelTest {
 
     @Before
     fun setUp() {
-        `when`(getVersionUseCase.execute()).thenReturn(Single.just("version_1"))
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
 
-        loginViewModel = LoginViewModel(getVersionUseCase, loginUseCase).also {
-            it.version.observeForever(versionObserver)
-            it.userLogged.observeForever(userLoggedObserver)
-            it.usernameError.observeForever(usernameErrorObserver)
-            it.throwable.observeForever(throwableObserver)
+            loginViewModel = LoginViewModel(getVersionUseCase, loginUseCase).also {
+                it.version.observeForever(versionObserver)
+                it.userLogged.observeForever(userLoggedObserver)
+                it.usernameError.observeForever(usernameErrorObserver)
+                it.throwable.observeForever(throwableObserver)
+            }
         }
     }
 
@@ -69,35 +69,41 @@ class LoginViewModelTest {
 
     @Test
     fun `perform a success login`() {
-        `when`(loginUseCase.execute("username")).thenReturn(Single.just(user))
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            `when`(loginUseCase.execute("username")).thenReturn(Resource.success(user))
 
-        loginViewModel.username.value = "username"
-        loginViewModel.performLogin()
+            loginViewModel.username.value = "username"
+            loginViewModel.performLogin()
 
-        verify(userLoggedObserver).onChanged(user)
-        verify(usernameErrorObserver, never()).onChanged(anyInt())
-        verify(throwableObserver, never()).onChanged(throwable)
+            verify(userLoggedObserver).onChanged(user)
+            verify(usernameErrorObserver, never()).onChanged(anyInt())
+            verify(throwableObserver, never()).onChanged(throwable)
+        }
     }
 
     @Test
     fun `perform a fail login with empty username`() {
-        loginViewModel.username.value = ""
-        loginViewModel.performLogin()
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            loginViewModel.username.value = ""
+            loginViewModel.performLogin()
 
-        verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
-        verify(usernameErrorObserver).onChanged(anyInt())
-        verify(throwableObserver, never()).onChanged(throwable)
+            verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
+            verify(usernameErrorObserver).onChanged(anyInt())
+            verify(throwableObserver, never()).onChanged(throwable)
+        }
     }
 
     @Test
     fun `perform a fail login with invalid username`() {
-        `when`(loginUseCase.execute("user_not_exists")).thenReturn(Single.error(throwable))
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            `when`(loginUseCase.execute("user_not_exists")).thenReturn(Resource.error(throwable, null))
 
-        loginViewModel.username.value = "user_not_exists"
-        loginViewModel.performLogin()
+            loginViewModel.username.value = "user_not_exists"
+            loginViewModel.performLogin()
 
-        verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
-        verify(usernameErrorObserver, never()).onChanged(anyInt())
-        verify(throwableObserver).onChanged(throwable)
+            verify(userLoggedObserver, never()).onChanged(MockitoUtils.anyObject())
+            verify(usernameErrorObserver, never()).onChanged(anyInt())
+            verify(throwableObserver).onChanged(throwable)
+        }
     }
 }

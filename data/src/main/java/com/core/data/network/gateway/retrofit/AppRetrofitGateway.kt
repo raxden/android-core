@@ -11,15 +11,12 @@ class AppRetrofitGateway(
         private val service: AppRetrofitService
 ) : AppGateway {
 
-    override fun user(username: String): Single<UserEntity> = service
+    override suspend fun user(username: String): UserEntity = service
             .retrieveUser(username)
 
-    override suspend fun userCO(username: String): Response<UserEntity> = service
-            .retrieveUserCO(username)
-
-    override fun projectList(username: String): Single<List<ProjectEntity>> = service
+    override suspend fun projectList(username: String) = service
             .retrieveProjectList(username)
 
-    override fun project(username: String, projectName: String): Single<ProjectEntity> = service
+    override suspend fun project(username: String, projectName: String) = service
             .retrieveProjectDetail(username, projectName)
 }

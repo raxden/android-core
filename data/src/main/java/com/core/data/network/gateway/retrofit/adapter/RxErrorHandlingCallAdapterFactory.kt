@@ -35,13 +35,15 @@ class RxErrorHandlingCallAdapterFactory private constructor() : CallAdapter.Fact
         private fun asRetrofitException(throwable: Throwable): RetrofitException {
             // We had non-200 http error
             if (throwable is HttpException) {
-                val url  = throwable.response().raw().request().url().toString()
+                val url  = throwable.response()?.raw()?.request()?.url().toString()
                 val response = throwable.response()
-                return when {
-                    response.code() == 401 -> RetrofitException.unauthenticatedError(url, response, retrofit)
-                    response.code() in 400..499 -> RetrofitException.clientError(url, response, retrofit)
-                    response.code() in 500..599 -> RetrofitException.serverError(url, response, retrofit)
-                    else -> RetrofitException.unexpectedError(throwable)
+                response?.let {
+                    return when {
+                        it.code() == 401 -> RetrofitException.unauthenticatedError(url, it, retrofit)
+                        it.code() in 400..499 -> RetrofitException.clientError(url, it, retrofit)
+                        it.code() in 500..599 -> RetrofitException.serverError(url, it, retrofit)
+                        else -> RetrofitException.unexpectedError(throwable)
+                    }
                 }
             }
             // A network error happened

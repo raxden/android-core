@@ -1,17 +1,15 @@
 package com.core.domain.repository
 
+import com.core.commons.Resource
 import com.core.domain.Account
-import io.reactivex.Completable
-import io.reactivex.Maybe
-import io.reactivex.Single
 
 interface AccountRepository : Repository {
 
-    fun retrieve(): Single<Account>
+    suspend fun retrieve(): Resource<Account>
 
-    fun retrieve(id: Long): Single<Account>
+    suspend fun retrieve(id: Long): Resource<Account>
 
-    fun save(account: Account): Single<Account>
+    suspend fun save(account: Account): Resource<Account>
 
-    fun remove(account: Account): Completable
+    suspend fun remove(account: Account)
 }

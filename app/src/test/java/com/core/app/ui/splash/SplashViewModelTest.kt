@@ -1,14 +1,14 @@
 package com.core.app.ui.splash
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.core.app.RxSchedulerRule
+import com.core.app.CoroutinesTestRule
 import com.core.app.ui.screens.splash.SplashViewModel
+import com.core.commons.Resource
 import com.core.domain.Forward
 import com.core.domain.User
 import com.core.domain.interactor.ForwardUseCase
 import com.core.domain.interactor.GetVersionUseCase
-import io.reactivex.Single
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -26,10 +26,7 @@ class SplashViewModelTest {
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @get:Rule
-    val taskExecutorRule = InstantTaskExecutorRule()
-
-    @get:Rule
-    val rxSchedulerRule = RxSchedulerRule()
+    var coroutinesTestRule = CoroutinesTestRule()
 
     @Mock
     private lateinit var getVersionUseCase: GetVersionUseCase
@@ -50,43 +47,52 @@ class SplashViewModelTest {
 
     @Before
     fun setUp() {
-        `when`(getVersionUseCase.execute()).thenReturn(Single.just("version_1"))
+
     }
 
     @Test
     fun `check that application version is retrieved one time`() {
-        `when`(forwardUseCase.execute()).thenReturn(Single.just(forwardLogin))
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
+            `when`(forwardUseCase.execute()).thenReturn(Resource.success(forwardLogin))
 
-        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
-            it.version.observeForever(versionObserver)
+            splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+                it.version.observeForever(versionObserver)
+            }
+
+            verify(versionObserver).onChanged("version_1")
         }
-
-        verify(versionObserver).onChanged("version_1")
     }
 
     @Test
     fun `check that application is ready to launch login`() {
-        `when`(forwardUseCase.execute()).thenReturn(Single.just(forwardLogin))
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
+            `when`(forwardUseCase.execute()).thenReturn(Resource.success(forwardLogin))
 
-        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
-            it.applicationReady.observeForever(applicationReadyObserver)
-            it.throwable.observeForever(throwableObserver)
+            splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+                it.applicationReady.observeForever(applicationReadyObserver)
+                it.throwable.observeForever(throwableObserver)
+            }
+
+            verify(applicationReadyObserver).onChanged(forwardLogin)
+            verify(throwableObserver, never()).onChanged(throwable)
         }
-
-        verify(applicationReadyObserver).onChanged(forwardLogin)
-        verify(throwableObserver, never()).onChanged(throwable)
     }
 
     @Test
     fun `check that application is ready to launch home`() {
-        `when`(forwardUseCase.execute()).thenReturn(Single.just(forwardHome))
+        coroutinesTestRule.testDispatcher.runBlockingTest {
+            `when`(getVersionUseCase.execute()).thenReturn(Resource.success("version_1"))
+            `when`(forwardUseCase.execute()).thenReturn(Resource.success(forwardHome))
 
-        splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
-            it.applicationReady.observeForever(applicationReadyObserver)
-            it.throwable.observeForever(throwableObserver)
+            splashViewModel = SplashViewModel(getVersionUseCase, forwardUseCase).also {
+                it.applicationReady.observeForever(applicationReadyObserver)
+                it.throwable.observeForever(throwableObserver)
+            }
+
+            verify(applicationReadyObserver).onChanged(forwardHome)
+            verify(throwableObserver, never()).onChanged(throwable)
         }
-
-        verify(applicationReadyObserver).onChanged(forwardHome)
-        verify(throwableObserver, never()).onChanged(throwable)
     }
 }

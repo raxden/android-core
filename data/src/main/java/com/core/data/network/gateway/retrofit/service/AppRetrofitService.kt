@@ -9,23 +9,18 @@ import retrofit2.http.*
 interface AppRetrofitService {
 
     @GET("users/{user}")
-    fun retrieveUser(
+    suspend fun retrieveUser(
             @Path("user") username: String
-    ): Single<UserEntity>
-
-    @GET("users/{user}")
-    suspend fun retrieveUserCO(
-            @Path("user") username: String
-    ): Response<UserEntity>
+    ): UserEntity
 
     @GET("users/{user}/repos")
-    fun retrieveProjectList(
+    suspend fun retrieveProjectList(
         @Path("user") username: String
-    ): Single<List<ProjectEntity>>
+    ): List<ProjectEntity>
 
     @GET("repos/{user}/{reponame}")
-    fun retrieveProjectDetail(
+    suspend fun retrieveProjectDetail(
         @Path("user") username: String,
         @Path("reponame") projectName: String
-    ): Single<ProjectEntity>
+    ): ProjectEntity
 }

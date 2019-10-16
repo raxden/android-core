@@ -3,7 +3,6 @@ package com.core.domain.interactor
 import com.core.commons.MockitoUtils
 import com.core.domain.Account
 import com.core.domain.User
-import com.core.domain.interactor.impl.LoginUseCaseImpl
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.UserRepository
 import io.reactivex.Single
