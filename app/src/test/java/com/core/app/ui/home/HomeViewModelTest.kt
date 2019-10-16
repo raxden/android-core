@@ -1,5 +1,6 @@
 package com.core.app.ui.home
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.core.app.CoroutinesTestRule
 import com.core.app.model.ProjectModel
@@ -28,7 +29,8 @@ class HomeViewModelTest {
 
     @get:Rule
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
     @get:Rule
     var coroutinesTestRule = CoroutinesTestRule()
 
@@ -102,8 +104,6 @@ class HomeViewModelTest {
     @Test
     fun `perform logout operation`() {
         coroutinesTestRule.testDispatcher.runBlockingTest {
-            `when`(logoutUseCase.execute())
-
             homeViewModel.performLogout()
 
             booleanEventCaptor.run {

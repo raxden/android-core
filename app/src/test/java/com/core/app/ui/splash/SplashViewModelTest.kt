@@ -1,5 +1,6 @@
 package com.core.app.ui.splash
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.core.app.CoroutinesTestRule
 import com.core.app.ui.screens.splash.SplashViewModel
@@ -24,7 +25,8 @@ class SplashViewModelTest {
 
     @get:Rule
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
     @get:Rule
     var coroutinesTestRule = CoroutinesTestRule()
 

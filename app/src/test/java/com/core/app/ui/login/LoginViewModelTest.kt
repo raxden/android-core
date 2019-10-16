@@ -1,5 +1,6 @@
 package com.core.app.ui.login
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.core.app.CoroutinesTestRule
 import com.core.app.ui.screens.login.LoginViewModel
@@ -25,7 +26,8 @@ class LoginViewModelTest {
 
     @get:Rule
     val mockitoRule: MockitoRule = MockitoJUnit.rule()
-
+    @get:Rule
+    var instantExecutorRule = InstantTaskExecutorRule()
     @get:Rule
     var coroutinesTestRule = CoroutinesTestRule()
 

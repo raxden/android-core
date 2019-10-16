@@ -48,7 +48,6 @@ ext {
     ]
 
     def coroutines = [
-            core: [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-core', version: versions.coroutines],
             android: [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-android', version: versions.coroutines],
             test: [group: 'org.jetbrains.kotlinx', name: 'kotlinx-coroutines-test', version: versions.coroutines]
     ]
@@ -178,7 +177,6 @@ ext {
             [configuration: "implementation", dependency: support.constraintLayout],
             [configuration: "implementation", dependency: kotlin.core],
 
-            [configuration: "implementation", dependency: coroutines.core],
             [configuration: "implementation", dependency: coroutines.android],
 
             [configuration: "implementation", dependency: lifecycle.extensions],
@@ -225,6 +223,7 @@ ext {
             [configuration: "androidTestImplementation", dependency: mockito.android],
             [configuration: "kaptAndroidTest", dependency: dagger.compiler],
 
+            [configuration: "testImplementation", dependency: coroutines.android],
             [configuration: "testImplementation", dependency: coroutines.test],
             [configuration: "testImplementation", dependency: testLibs.junit],
             [configuration: "testImplementation", dependency: testLibs.assertj],
@@ -239,7 +238,6 @@ ext {
     domainDependencies = [
             [configuration: "implementation", dependency: project(modules.commons)],
 
-            [configuration: "implementation", dependency: coroutines.core],
             [configuration: "implementation", dependency: coroutines.android],
 
             [configuration: "implementation", dependency: lifecycle.extensions],
@@ -271,7 +269,6 @@ ext {
             [configuration: "implementation", dependency: project(modules.commons)],
             [configuration: "implementation", dependency: project(modules.domain)],
 
-            [configuration: "implementation", dependency: coroutines.core],
             [configuration: "implementation", dependency: coroutines.android],
             
             [configuration: "implementation", dependency: lifecycle.extensions],
