@@ -13,7 +13,6 @@ import timber.log.Timber
 /**
  * Created by Angel on 18/07/2017.
  */
-
 class AppApplication : BaseApplication() {
 
     override fun onCreate() {
