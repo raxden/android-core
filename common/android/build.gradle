@@ -1,0 +1,7 @@
+apply plugin: 'com.android.library'
+apply from: '../../android_commons.gradle'
+
+dependencies {
+    api KotlinLibraries.kotlin
+    api Libraries.timber
+}

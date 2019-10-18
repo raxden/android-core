@@ -1,4 +1,5 @@
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -9,13 +10,19 @@ android {
         versionCode Releases.versionCode
         versionName Releases.versionName
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     buildTypes {
         release {
             minifyEnabled true
         }
     }
-}
-
-dependencies {
-    implementation KotlinLibraries.kotlin
+    androidExtensions {
+        experimental = true
+    }
 }
