@@ -1,12 +1,9 @@
 package com.core.domain.repository
 
-import com.core.commons.Resource
+import com.core.common.android.Resource
 import com.core.domain.User
-import io.reactivex.Completable
-import io.reactivex.Maybe
-import io.reactivex.Single
 
-interface UserRepository : Repository {
+interface UserRepository {
 
     suspend fun retrieve(username: String): Resource<User>
 }

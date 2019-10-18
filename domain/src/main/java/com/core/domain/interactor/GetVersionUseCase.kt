@@ -1,17 +1,18 @@
-package com.core.domain.interactor.impl
+package com.core.domain.interactor
 
 import android.content.Context
-import com.core.commons.AppUtils
-import com.core.commons.Resource
-import com.core.domain.interactor.GetVersionUseCase
-import io.reactivex.Single
+import com.core.common.android.AndroidUtils
+import com.core.common.android.Resource
 import javax.inject.Inject
 
-class GetVersionUseCaseImpl @Inject constructor(
+class GetVersionUseCase @Inject constructor(
         private val context: Context
-) : GetVersionUseCase {
+//TODO NO USAR CONTEXT
+) {
 
-    override suspend fun execute(): Resource<String> {
-        return Resource.success(AppUtils.getVersionName(context) + " (" + AppUtils.getVersionCode(context) + ")")
+    suspend fun execute(): Resource<String> {
+        val versionName = AndroidUtils.getVersionName(context)
+        val versionCode = AndroidUtils.getVersionCode(context)
+        return Resource.success("$versionName ($versionCode)")
     }
 }

@@ -1,11 +1,9 @@
 package com.core.domain.repository
 
-import com.core.commons.Resource
+import com.core.common.android.Resource
 import com.core.domain.Project
-import io.reactivex.Maybe
-import io.reactivex.Single
 
-interface ProjectRepository : Repository {
+interface ProjectRepository {
 
     suspend fun list(username: String): Resource<List<Project>>
 

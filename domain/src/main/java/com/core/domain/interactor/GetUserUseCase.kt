@@ -1,20 +1,22 @@
-package com.core.domain.interactor.impl
+package com.core.domain.interactor
 
-import com.core.commons.Resource
+import com.core.common.android.Resource
 import com.core.domain.User
-import com.core.domain.interactor.GetUserUseCase
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.UserRepository
 import javax.inject.Inject
 
-class GetUserUseCaseImpl @Inject constructor(
+class GetUserUseCase @Inject constructor(
         private val accountRepository: AccountRepository,
         private val userRepository: UserRepository
-) : GetUserUseCase {
+) {
 
-    override suspend fun execute(): Resource<User> {
-        return accountRepository.retrieve().data?.let {account ->
+    suspend fun execute(): Resource<User> {
+        val account = accountRepository.retrieve().data
+        return if (account != null) {
             userRepository.retrieve(account.username)
-        } ?: Resource.error(Throwable("User not found"), null)
+        } else {
+            Resource.error(Throwable("User not found"), null)
+        }
     }
 }

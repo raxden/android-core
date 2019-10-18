@@ -1,17 +1,20 @@
-package com.core.domain.interactor.impl
+package com.core.domain.interactor
 
-import com.core.domain.interactor.LogoutUseCase
+import com.core.common.android.Resource
 import com.core.domain.repository.AccountRepository
-import io.reactivex.Completable
 import javax.inject.Inject
 
-class LogoutUseCaseImpl @Inject constructor(
+class LogoutUseCase @Inject constructor(
         private val accountRepository: AccountRepository
-) : LogoutUseCase {
+) {
 
-    override suspend fun execute() {
-        accountRepository.retrieve().data?.let {
-            accountRepository.remove(it)
+    suspend fun execute(): Resource<Boolean> {
+        val account = accountRepository.retrieve().data
+        return if (account != null) {
+            accountRepository.remove(account)
+            Resource.success(true)
+        } else {
+            Resource.error(Throwable("User not found"), null)
         }
     }
 }

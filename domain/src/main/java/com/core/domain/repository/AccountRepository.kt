@@ -1,9 +1,9 @@
 package com.core.domain.repository
 
-import com.core.commons.Resource
+import com.core.common.android.Resource
 import com.core.domain.Account
 
-interface AccountRepository : Repository {
+interface AccountRepository {
 
     suspend fun retrieve(): Resource<Account>
 
