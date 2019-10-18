@@ -48,11 +48,12 @@ object Versions {
     val archCoreTest = "2.0.0"
     val dagger = "2.22.1"                   // https://github.com/google/dagger
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
+    val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
 }
 
 object KotlinLibraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    //val kotlinCoroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    val kotlinCoroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
 }
 
 object Libraries {
@@ -74,6 +75,9 @@ object Libraries {
 
     // Timber
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    // Threetenabp
+    val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
 }
 
 object TestLibraries {

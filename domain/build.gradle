@@ -3,7 +3,5 @@ apply from: '../android_commons.gradle'
 
 dependencies {
     implementation project(Modules.commonAndroid)
-
-    kapt Libraries.daggerCompiler
-    kapt Libraries.roomCompiler
+    implementation project(Modules.commonDagger)
 }

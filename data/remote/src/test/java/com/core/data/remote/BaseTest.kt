@@ -1,9 +1,8 @@
 package com.core.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.core.data.remote.gateway.AppGateway
-import com.core.data.remote.gateway.retrofit.AppRetrofitGateway
-import com.core.data.remote.gateway.retrofit.service.AppRetrofitService
+import com.core.data.remote.retrofit.AppRetrofitGateway
+import com.core.data.remote.retrofit.service.AppRetrofitService
 import com.google.gson.GsonBuilder
 import okhttp3.mockwebserver.MockResponse
 import org.junit.Before
