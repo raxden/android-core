@@ -1,4 +1,4 @@
-package com.core.commons.extension
+package com.core.common.android.extensions
 
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
@@ -6,19 +6,26 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 
-fun LocalDate.toMilliseconds(): Long = atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+fun LocalDate.toMilliseconds(): Long
+        = atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
-fun LocalDate.toSeconds(): Long = atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() / 1000
+fun LocalDate.toSeconds(): Long
+        = atStartOfDay().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() / 1000
 
-fun LocalDateTime.toSeconds(): Long = atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() / 1000
+fun LocalDateTime.toSeconds(): Long
+        = atZone(ZoneId.systemDefault()).toInstant().toEpochMilli() / 1000
 
-fun LocalDateTime.toMilliseconds(): Long = atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+fun LocalDateTime.toMilliseconds(): Long
+        = atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
-fun Long.toLocalDate(): LocalDate = Instant.ofEpochMilli(this).atZone(ZoneId.systemDefault()).toLocalDate()
+fun Long.toLocalDate(): LocalDate
+        = Instant.ofEpochMilli(this).atZone(ZoneId.systemDefault()).toLocalDate()
 
-fun Long.toLocalDateTime(): LocalDateTime = Instant.ofEpochMilli(this).atZone(ZoneId.systemDefault()).toLocalDateTime()
+fun Long.toLocalDateTime(): LocalDateTime
+        = Instant.ofEpochMilli(this).atZone(ZoneId.systemDefault()).toLocalDateTime()
 
-fun LocalDate.isToday(): Boolean = this == LocalDate.now()
+fun LocalDate.isToday(): Boolean
+        = this == LocalDate.now()
 
 fun String.toLocalDate(vararg pattern: String): LocalDate? {
     pattern.forEach { format ->
@@ -29,7 +36,6 @@ fun String.toLocalDate(vararg pattern: String): LocalDate? {
     }
     return null
 }
-
 
 fun String.toLocalDate(vararg formatter: DateTimeFormatter): LocalDate? {
     formatter.forEach { dtf ->
@@ -50,7 +56,6 @@ fun String.toLocalDateTime(vararg pattern: String): LocalDateTime? {
     }
     return null
 }
-
 
 fun String.toLocalDateTime(vararg formatter: DateTimeFormatter): LocalDateTime? {
     formatter.forEach { dtf ->
