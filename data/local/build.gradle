@@ -6,5 +6,6 @@ dependencies {
     implementation project(Modules.domain)
 
     implementation Libraries.roomRunTime
-    implementation Libraries.roomCompiler
+    kapt Libraries.roomCompiler
+    implementation Libraries.roomKtx
 }

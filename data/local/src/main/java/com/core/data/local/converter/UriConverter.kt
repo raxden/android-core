@@ -2,8 +2,6 @@ package com.core.data.local.converter
 
 import android.net.Uri
 import androidx.room.TypeConverter
-import com.core.commons.extension.toLocalDateTime
-import com.core.commons.extension.toMilliseconds
 
 class UriConverter {
 

@@ -5,7 +5,9 @@ import com.core.domain.User
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.UserRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class GetUserUseCase @Inject constructor(
         private val accountRepository: AccountRepository,
         private val userRepository: UserRepository

@@ -8,4 +8,6 @@ dependencies {
     api TestLibraries.atslJunit
     api TestLibraries.atslRules
     api TestLibraries.atslRunner
+    api TestLibraries.mockk
+    api TestLibraries.mockkAndroid
 }

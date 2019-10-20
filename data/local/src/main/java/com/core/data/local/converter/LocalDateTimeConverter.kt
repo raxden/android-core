@@ -1,9 +1,9 @@
 package com.core.data.local.converter
 
 import androidx.room.TypeConverter
-import com.core.commons.extension.toLocalDateTime
-import com.core.commons.extension.toMilliseconds
-import java.time.LocalDateTime
+import com.core.common.android.extensions.toLocalDateTime
+import com.core.common.android.extensions.toMilliseconds
+import org.threeten.bp.LocalDateTime
 
 class LocalDateTimeConverter {
 

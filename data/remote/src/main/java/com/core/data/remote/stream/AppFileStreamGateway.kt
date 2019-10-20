@@ -1,9 +1,9 @@
 package com.core.data.remote.stream
 
+import com.core.common.android.Result
 import com.core.data.remote.entity.ProjectEntity
 import com.core.data.remote.entity.UserEntity
 import com.core.data.remote.AppGateway
-import retrofit2.Response
 
 class AppFileStreamGateway(
 //        private val context: Context,
@@ -18,19 +18,21 @@ class AppFileStreamGateway(
     override fun user(username: String): Single<UserEntity> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<UserEntity>(AssetsUtils.getString(context, "user.json") ?: "") }
-*/
-    override suspend fun user(username: String): Response<UserEntity> {
+    */
+
+    override suspend fun user(username: String): Result<UserEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun projectList(username: String): Response<List<ProjectEntity>> {
+    override suspend fun projectList(username: String): Result<List<ProjectEntity>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override suspend fun project(username: String, projectName: String): Response<ProjectEntity> {
+    override suspend fun project(username: String, projectName: String): Result<ProjectEntity> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-/*
+
+    /*
     override fun projectList(username: String): Single<List<ProjectEntity>> = Single
             .timer(IN_MILLISECONDS, TimeUnit.MILLISECONDS)
             .map { gson.fromJson<List<ProjectEntity>>(AssetsUtils.getString(context, "repos.json") ?: "") }

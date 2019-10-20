@@ -49,11 +49,18 @@ object Versions {
     val dagger = "2.22.1"                   // https://github.com/google/dagger
     val timber = "4.7.1"                    // https://github.com/JakeWharton/timber
     val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
+    val mockito = "2.27.0"
+    val mockk = "1.9.2"
 }
 
 object KotlinLibraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
     val kotlinCoroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+}
+
+object AndroidLibraries {
+    // KOTLIN
+    val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 }
 
 object Libraries {
@@ -63,8 +70,8 @@ object Libraries {
     val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
     // Room
-    val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     val roomRunTime = "androidx.room:room-runtime:${Versions.room}"
+    val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
     val roomKtx = "androidx.room:room-ktx:${Versions.room}"
 
     // Retrofit
@@ -86,6 +93,12 @@ object TestLibraries {
     val atslJunit = "androidx.test.ext:junit:${Versions.atsl}"
     val atslRunner = "androidx.test:runner:${Versions.atsl}"
     val atslRules = "androidx.test:rules:${Versions.atsl}"
+    // MOCKITO
+    val mockCore = "org.mockito:mockito-core:${Versions.mockito}"
+    val mockAndroid = "org.mockito:mockito-android:${Versions.mockito}"
+    // MOCK
+    val mockk = "io.mockk:mockk:${Versions.mockk}"
+    val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
     // COROUTINE
     val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
     // MOCK WEBSERVER

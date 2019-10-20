@@ -3,7 +3,9 @@ package com.core.domain.interactor
 import com.core.common.android.Resource
 import com.core.domain.repository.AccountRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LogoutUseCase @Inject constructor(
         private val accountRepository: AccountRepository
 ) {

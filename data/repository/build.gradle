@@ -8,5 +8,10 @@ dependencies {
     implementation project(Modules.dataLocal)
     implementation project(Modules.domain)
 
-    implementation Libraries.roomCompiler
+    implementation Libraries.roomRunTime
+    kapt Libraries.roomCompiler
+    implementation Libraries.roomKtx
+
+    // TEST
+    testImplementation project(Modules.commonTest)
 }

@@ -4,7 +4,9 @@ import android.content.Context
 import com.core.common.android.AndroidUtils
 import com.core.common.android.Resource
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class GetVersionUseCase @Inject constructor(
         private val context: Context
 //TODO NO USAR CONTEXT

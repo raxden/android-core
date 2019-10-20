@@ -1,5 +1,6 @@
 package com.core.data.remote
 
+import com.core.common.android.Result
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Test
@@ -11,11 +12,12 @@ class ProjectServiceTest: BaseTest() {
     fun `fetch project's detail`() {
         runBlocking {
             mockHttpResponse("repo.json", HttpURLConnection.HTTP_OK)
-            val response = gateway.project("", "")
-            assert(response.isSuccessful)
-            response.body()?.let { project ->
-                Assert.assertEquals("android-core", project.name)
-                Assert.assertEquals(165669612L, project.id)
+            when (val result = gateway.project("", "")) {
+                is Result.Success -> {
+                    Assert.assertEquals("android-core", result.data.name)
+                    Assert.assertEquals(165669612L, result.data.id)
+                }
+                else -> assert(false)
             }
         }
     }
@@ -24,10 +26,11 @@ class ProjectServiceTest: BaseTest() {
     fun `fetch project's list`() {
         runBlocking {
             mockHttpResponse("repos.json", HttpURLConnection.HTTP_OK)
-            val response = gateway.projectList("")
-            assert(response.isSuccessful)
-            response.body()?.let { list ->
-                assert(list.isNotEmpty())
+            when (val result = gateway.projectList("")) {
+                is Result.Success -> {
+                    assert(result.data.isNotEmpty())
+                }
+                else -> assert(false)
             }
         }
     }

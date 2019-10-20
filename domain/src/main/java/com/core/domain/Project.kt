@@ -2,6 +2,9 @@ package com.core.domain
 
 import android.net.Uri
 import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import org.threeten.bp.LocalDateTime
 

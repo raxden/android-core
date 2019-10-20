@@ -10,11 +10,11 @@ import com.core.domain.Project
 interface ProjectDao {
 
     @Query("SELECT * FROM project")
-    fun findAll(): List<Project>
+    suspend fun findAll(): List<Project>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg project: Project)
+    suspend fun insert(vararg project: Project)
 
     @Query("DELETE FROM project")
-    fun deleteAll()
+    suspend fun deleteAll()
 }
