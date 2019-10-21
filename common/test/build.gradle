@@ -10,4 +10,5 @@ dependencies {
     api TestLibraries.atslRunner
     api TestLibraries.mockk
     api TestLibraries.mockkAndroid
+    api Libraries.timber
 }

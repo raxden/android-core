@@ -18,6 +18,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
 
     suspend fun build(): NetworkBoundResource<ResultType, RequestType> {
         withContext(Dispatchers.Main) {
+            Timber.d("NetworkBoundResource starting...")
             result.value = Resource.loading(null)
         }
         CoroutineScope(coroutineContext).launch(supervisorJob) {
@@ -60,8 +61,8 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     @MainThread
     private fun setValue(newValue: Resource<ResultType>) {
         Timber.d("Resource: $newValue")
-        println("Resource: $newValue")
-        if (result.value != newValue) result.postValue(newValue)
+        //if (result.value != newValue) result.postValue(newValue)
+        result.value = newValue
     }
 
     @WorkerThread
