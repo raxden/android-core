@@ -8,4 +8,7 @@ dependencies {
     implementation Libraries.roomRunTime
     kapt Libraries.roomCompiler
     implementation Libraries.roomKtx
+
+    // TEST
+    testImplementation project(Modules.commonTest)
 }

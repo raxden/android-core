@@ -24,7 +24,7 @@ abstract class BaseTest {
 
     @Before
     fun setUp() {
-        configureMockServer()
+        initMockServer()
     }
 
     @After
@@ -44,7 +44,7 @@ abstract class BaseTest {
         return String(file.readBytes())
     }
 
-    private fun configureMockServer() {
+    private fun initMockServer() {
         server = MockWebServer()
         server.start()
 
