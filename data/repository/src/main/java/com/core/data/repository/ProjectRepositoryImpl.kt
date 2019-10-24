@@ -22,15 +22,15 @@ class ProjectRepositoryImpl @Inject internal constructor(
         username: String
     ): LiveData<Resource<List<Project>>> = liveData {
         val disposable = emitSource(
-            dao.observeProjects(username).map {
-                Resource.loading(it)
-            }
+            dao.observeProjects(username).map { Resource.loading(it) }
         )
         try {
             when (val result = gateway.projectList(username)) {
                 is Result.Success -> {
+                    // Stop the previous emission to avoid dispatching the updated user as `loading`.
                     disposable.dispose()
                     dao.insert(*mapper.transform(result.data).toTypedArray())
+                    // Re-establish the emission with success type.
                     emitSource(
                         dao.observeProjects(username).map {
                             Resource.success(it)
