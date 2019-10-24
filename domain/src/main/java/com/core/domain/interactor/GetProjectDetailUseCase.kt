@@ -14,13 +14,14 @@ class GetProjectDetailUseCase @Inject constructor(
 ) {
 
     suspend fun execute(projectName: String): Resource<Project> {
-        val account = accountRepository.retrieve().data
-        return if (account != null) {
+//        val account = accountRepository.retrieve().data
+//        return if (account != null) {
 //            projectRepository.detail(account.username, projectName)
-            Resource.success(Project())
-        } else {
-            Resource.error(Throwable("Project doesn't exist"), null)
-        }
+//            Resource.success(Project())
+//        } else {
+//            Resource.error(Throwable("Project doesn't exist"), null)
+//        }
+        return Resource.success(Project())
     }
 
     suspend fun execute(username: String, projectName: String): Resource<Project> {

@@ -14,13 +14,14 @@ class GetProjectListUseCase @Inject constructor(
 ) {
 
     suspend fun execute(): Resource<List<Project>> {
-        val account  = accountRepository.retrieve().data
-        return if (account != null) {
+//        val account  = accountRepository.retrieve().data
+//        return if (account != null) {
 //            projectRepository.list(account.username)
-            Resource.success(emptyList())
-        } else {
-            Resource.success(emptyList())
-        }
+//            Resource.success(emptyList())
+//        } else {
+//            Resource.success(emptyList())
+//        }
+        return Resource.success(emptyList())
     }
 
     suspend fun execute(username: String): Resource<List<Project>> {

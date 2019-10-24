@@ -1,6 +1,7 @@
 package com.core.data.remote
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.core.common.test.BaseTest
 import com.core.data.remote.retrofit.AppRetrofitGateway
 import com.core.data.remote.retrofit.service.AppRetrofitService
 import com.google.gson.GsonBuilder
@@ -9,26 +10,24 @@ import org.junit.Before
 
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Rule
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.Retrofit
 import java.io.File
 
-abstract class BaseTest {
-
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
+abstract class BaseRemoteTest: BaseTest() {
 
     private lateinit var server: MockWebServer
     protected lateinit var gateway: AppGateway
 
     @Before
-    fun setUp() {
+    override fun setUp() {
+        super.setUp()
         initMockServer()
     }
 
     @After
-    fun tearDown() {
+    override fun tearDown() {
+        super.tearDown()
         stopMockServer()
     }
 

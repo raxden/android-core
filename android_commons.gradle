@@ -9,6 +9,8 @@ android {
         targetSdkVersion Versions.targetSdk
         versionCode Releases.versionCode
         versionName Releases.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

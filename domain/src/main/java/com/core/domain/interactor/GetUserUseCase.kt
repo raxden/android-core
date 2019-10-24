@@ -14,11 +14,12 @@ class GetUserUseCase @Inject constructor(
 ) {
 
     suspend fun execute(): Resource<User> {
-        val account = accountRepository.retrieve().data
-        return if (account != null) {
-            userRepository.retrieve(account.username)
-        } else {
-            Resource.error(Throwable("User not found"), null)
-        }
+//        val account = accountRepository.retrieve().data
+//        return if (account != null) {
+//            userRepository.retrieve(account.username)
+//        } else {
+//            Resource.error(Throwable("User not found"), null)
+//        }
+        return Resource.success(User())
     }
 }

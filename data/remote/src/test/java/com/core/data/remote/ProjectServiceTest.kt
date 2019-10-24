@@ -6,7 +6,7 @@ import org.junit.Assert
 import org.junit.Test
 import java.net.HttpURLConnection
 
-class ProjectServiceTest: BaseTest() {
+class ProjectServiceTest: BaseRemoteTest() {
 
     @Test
     fun `fetch project's detail`() {

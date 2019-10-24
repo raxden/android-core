@@ -1,11 +1,9 @@
 package com.core.data.repository
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.core.common.android.Resource
 import com.core.common.android.Result
-import com.core.common.test.rules.CoroutinesMainDispatcherRule
-import com.core.common.test.rules.TestReportingTree
+import com.core.data.BaseRepositoryTest
 import com.core.data.local.dao.ProjectDao
 import com.core.data.remote.AppGateway
 import com.core.data.remote.entity.ProjectEntity
@@ -17,19 +15,10 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import timber.log.Timber
 
-class ProjectRepositoryTest {
+class ProjectRepositoryTest: BaseRepositoryTest() {
 
-    @get:Rule
-    var instantExecutorRule = InstantTaskExecutorRule()
-    @get:Rule
-    var coroutinesTestRule = CoroutinesMainDispatcherRule()
-
-    @MockK
-    private lateinit var gateway: AppGateway
     @MockK
     private lateinit var dao: ProjectDao
     @RelaxedMockK
@@ -50,9 +39,8 @@ class ProjectRepositoryTest {
     )
 
     @Before
-    fun setUp() {
-        Timber.plant(TestReportingTree())
-        MockKAnnotations.init(this)
+    override fun setUp() {
+        super.setUp()
 
         val userDataMapper = UserDataMapper()
         val projectDataMapper = ProjectDataMapper(userDataMapper)

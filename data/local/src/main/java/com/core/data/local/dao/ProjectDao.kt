@@ -1,5 +1,6 @@
 package com.core.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.core.domain.Project
 
@@ -14,6 +15,9 @@ interface ProjectDao {
 
     @Query("SELECT * FROM project WHERE project_username = :username")
     suspend fun findAll(username: String): List<Project>
+
+    @Query("SELECT * FROM project WHERE project_username = :username")
+    fun observeProjects(username: String): LiveData<List<Project>>
 
     @Query("SELECT * FROM project WHERE project_username = :username AND name = :projectName")
     suspend fun find(username: String, projectName: String): Project

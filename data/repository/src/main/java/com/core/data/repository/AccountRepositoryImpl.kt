@@ -1,39 +1,51 @@
 package com.core.data.repository
 
+import androidx.lifecycle.liveData
 import com.core.common.android.Resource
-import com.core.data.local.AppDatabase
+import com.core.data.local.dao.AccountDao
 import com.core.domain.Account
 import com.core.domain.repository.AccountRepository
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import javax.inject.Named
 
 class AccountRepositoryImpl @Inject internal constructor(
-    private val appDatabase: AppDatabase,
-    @Named("io") private val dispatcher: CoroutineDispatcher
+    private val accountDao: AccountDao
 ) : AccountRepository {
 
-    override suspend fun retrieve() = withContext(dispatcher) {
-        Resource.success(appDatabase.accountDao().findAll().first())
-    }
-
-    override suspend fun retrieve(id: Long) = withContext(dispatcher) {
-        Resource.success(appDatabase.accountDao().find(id))
-    }
-
-    override suspend fun save(account: Account) = withContext(dispatcher) {
-        if (account.id == 0L) {
-            appDatabase.accountDao().insert(account).let { id ->
-                Resource.success(appDatabase.accountDao().find(id))
-            }
-        } else {
-            appDatabase.accountDao().update(account)
-            Resource.success(account)
+    override suspend fun retrieve() = liveData {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(accountDao.findAll().first()))
+        } catch (e: Exception) {
+            emit(Resource.error(e))
         }
     }
 
-    override suspend fun remove(account: Account) = withContext(dispatcher) {
-        appDatabase.accountDao().delete(account)
+    override suspend fun retrieve(username: String) = liveData {
+        emit(Resource.loading(null))
+        try {
+            emit(Resource.success(accountDao.find(username)))
+        } catch (e: Exception) {
+            emit(Resource.error(e))
+        }
+    }
+
+    override suspend fun save(account: Account) = liveData {
+        emit(Resource.loading(null))
+        try {
+            accountDao.insert(account)
+            emit(Resource.success(true))
+        } catch (e: Exception) {
+            emit(Resource.error(e))
+        }
+    }
+
+    override suspend fun remove(account: Account) = liveData {
+        emit(Resource.loading(null))
+        try {
+            accountDao.delete(account)
+            emit(Resource.success(true))
+        } catch (e: Exception) {
+            emit(Resource.error(e))
+        }
     }
 }
