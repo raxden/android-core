@@ -1,6 +1,7 @@
 package com.core.app.di
 
 import com.core.app.AppApplication
+import com.core.app.di.module.FeaturesModule
 import com.core.app.di.module.LocalModule
 import com.core.app.di.module.RemoteModule
 import com.core.app.di.module.RepositoryModule
@@ -15,7 +16,8 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         LocalModule::class,
         RemoteModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        FeaturesModule::class
     ]
 )
 interface ApplicationComponent : AndroidInjector<AppApplication> {

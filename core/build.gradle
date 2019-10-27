@@ -4,4 +4,7 @@ apply from: '../android_commons.gradle'
 dependencies {
     api project(Modules.commonAndroid)
     api project(Modules.commonDagger)
+
+    api AndroidLibraries.constraintLayout
+    api AndroidLibraries.material
 }

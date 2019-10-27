@@ -54,6 +54,7 @@ object Versions {
     val mockk = "1.9.2"
     val lifecycle = "2.2.0-beta01"
     val constraintLayout = "1.1.3"
+    val material = "1.1.0-beta01"
 }
 
 object KotlinLibraries {
@@ -65,6 +66,7 @@ object AndroidLibraries {
     // KOTLIN
     val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    val material = "com.google.android.material:material:${Versions.material}"
 }
 
 object Libraries {

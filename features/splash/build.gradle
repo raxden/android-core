@@ -1,11 +1,13 @@
 apply plugin: 'com.android.library'
 apply from: '../../android_commons.gradle'
 
+android {
+    dataBinding {
+        enabled true
+    }
+}
+
 dependencies {
-    implementation project(Modules.commonAndroid)
-    implementation project(Modules.commonDagger)
     implementation project(Modules.navigation)
     implementation project(Modules.core)
-        
-    implementation AndroidLibraries.constraintLayout
 }
