@@ -6,9 +6,9 @@
 
     <data>
 
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.core.app.ui.screens.splash.SplashViewModel" />-->
+        <variable
+            name="viewModel"
+            type="com.core.features.splash.SplashViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

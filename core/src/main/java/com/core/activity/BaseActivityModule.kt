@@ -1,7 +1,10 @@
-package com.core
+package com.core.activity
 
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.core.ViewModelProviderFactory
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
@@ -11,6 +14,9 @@ import dagger.Provides
  */
 @Module
 abstract class BaseActivityModule {
+
+    @Binds
+    abstract fun viewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory
 
     @Module
     companion object {

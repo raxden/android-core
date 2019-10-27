@@ -1,4 +1,4 @@
-package com.core
+package com.core.activity
 
 import android.content.Context
 import android.os.Bundle

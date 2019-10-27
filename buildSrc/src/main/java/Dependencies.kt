@@ -38,6 +38,7 @@ object Versions {
     val compileSdk = 28
     val targetSdk = 28
     val kotlin = "1.3.50"
+    val appCompat = "1.1.0-rc01"
     val gradle = "3.5.1"
     val fabric = "1.28.1"
     val room = "2.2.0"                      // https://developer.android.com/jetpack/androidx/releases/room
@@ -65,6 +66,8 @@ object KotlinLibraries {
 object AndroidLibraries {
     // KOTLIN
     val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    // ANDROID
+    val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val material = "com.google.android.material:material:${Versions.material}"
 }
