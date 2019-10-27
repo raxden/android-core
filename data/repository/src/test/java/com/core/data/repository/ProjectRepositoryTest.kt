@@ -17,8 +17,6 @@ import org.junit.Test
 
 class ProjectRepositoryTest: BaseRepositoryTest() {
 
-    @MockK
-    private lateinit var dao: ProjectDao
     @RelaxedMockK
     private lateinit var projectListObserver: Observer<Resource<List<Project>>>
 
@@ -43,14 +41,12 @@ class ProjectRepositoryTest: BaseRepositoryTest() {
         val userDataMapper = UserDataMapper()
         val projectDataMapper = ProjectDataMapper(userDataMapper)
 
-        projectRepository = ProjectRepositoryImpl(gateway, dao, projectDataMapper)
+        projectRepository = ProjectRepositoryImpl(gateway, projectDataMapper)
     }
 
     @Test
     fun `Get projects from network`() {
         coEvery { gateway.projectList("raxden") } returns Result.Success(projectEntitySampleList)
-        coEvery { dao.findAll(any()) } returns listOf() andThen projectSampleList
-        coEvery { dao.insert(*anyVararg()) } returns Unit
 
         runBlocking {
             projectRepository.list("raxden").observeForever(projectListObserver)
@@ -58,7 +54,6 @@ class ProjectRepositoryTest: BaseRepositoryTest() {
 
         verifyOrder {
             projectListObserver.onChanged(Resource.loading(null)) // Init loading with no value
-            projectListObserver.onChanged(Resource.loading(listOf())) // Then trying to load from db (fast temp loading) before load from remote source
             projectListObserver.onChanged(Resource.success(projectSampleList)) // retrofit data loaded
         }
         confirmVerified(projectListObserver)
@@ -68,7 +63,6 @@ class ProjectRepositoryTest: BaseRepositoryTest() {
     fun `Get projects from server when no internet is available`() {
         val exception = Exception("Internet")
         coEvery { gateway.projectList("raxden") } returns Result.Error(exception)
-        coEvery { dao.findAll(any()) } returns projectSampleList
 
         runBlocking {
             projectRepository.list("raxden").observeForever(projectListObserver)
@@ -76,7 +70,6 @@ class ProjectRepositoryTest: BaseRepositoryTest() {
 
         verifyOrder {
             projectListObserver.onChanged(Resource.loading(null)) // Init loading with no value
-            projectListObserver.onChanged(Resource.loading(projectSampleList)) // Then trying to load from db (fast temp loading) before load from remote source
             projectListObserver.onChanged(Resource.error(exception, projectSampleList)) // retrofit data loaded
         }
         confirmVerified(projectListObserver)

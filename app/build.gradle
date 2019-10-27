@@ -46,8 +46,11 @@ dependencies {
     implementation project(Modules.featureHome)
     implementation project(Modules.featureDetail)
 
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
     // NETWORK
-    implementation Libraries.gson
     implementation Libraries.retrofit
     implementation Libraries.retrofitGsonConverter
     implementation Libraries.httpLoggingInterceptor

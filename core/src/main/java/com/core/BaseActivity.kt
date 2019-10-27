@@ -1,12 +1,13 @@
 package com.core
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleObserver
 import com.core.common.android.LocaleManager
+import com.core.lifecycle.activity.BaseActivityLifecycle
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
@@ -20,6 +21,8 @@ abstract class BaseActivity : AppCompatActivity(),
     protected abstract val layoutId: Int
 
     @Inject
+    lateinit var lifecycleObserverList: Set<@JvmSuppressWildcards LifecycleObserver>
+    @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
 
     protected var rootView: View? = null
@@ -28,9 +31,18 @@ abstract class BaseActivity : AppCompatActivity(),
         super.attachBaseContext(LocaleManager.attachBaseContext(newBase))
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        lifecycleObserverList.forEach { (it as? BaseActivityLifecycle)?.onSaveInstanceState(outState) }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         onCreateView()?.also { onViewCreated(it) }
+
+        lifecycleObserverList.forEach { (it as? BaseActivityLifecycle)?.onCreate(savedInstanceState) }
     }
 
     open fun onCreateView(): View? = when {

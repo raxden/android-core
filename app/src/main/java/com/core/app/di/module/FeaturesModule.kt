@@ -1,11 +1,11 @@
 package com.core.app.di.module
 
-import com.core.features.splash.SplashActivityModule
+import com.core.features.splash.SplashModule
 import dagger.Module
 
 @Module(
     includes = [
-        SplashActivityModule::class
+        SplashModule::class
     ]
 )
 abstract class FeaturesModule

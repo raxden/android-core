@@ -10,4 +10,9 @@ android {
 dependencies {
     implementation project(Modules.navigation)
     implementation project(Modules.core)
+
+    // DAGGER
+    implementation Libraries.daggerAndroid
+    kapt Libraries.daggerCompiler
+    kapt Libraries.daggerProcessor
 }
