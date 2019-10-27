@@ -31,13 +31,13 @@ class SplashActivity : BaseFragmentActivity<SplashActivityBinding>(),
     override fun onViewCreated(view: View) {
         super.onViewCreated(view)
 
-        viewModel.user.observe(this, Observer {
-            when (it.status) {
-                Status.SUCCESS -> ""
-                Status.ERROR -> ""
-                Status.LOADING -> ""
-            }
-        })
+//        viewModel.user.observe(this, Observer {
+//            when (it.status) {
+//                Status.SUCCESS -> ""
+//                Status.ERROR -> ""
+//                Status.LOADING -> ""
+//            }
+//        })
     }
 
     override fun finish() {

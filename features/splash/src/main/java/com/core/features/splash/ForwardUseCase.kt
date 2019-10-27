@@ -2,7 +2,6 @@ package com.core.features.splash
 
 import androidx.lifecycle.*
 import com.core.common.android.Resource
-import com.core.common.android.Status
 import com.core.domain.User
 import com.core.domain.repository.AccountRepository
 import com.core.domain.repository.UserRepository
@@ -13,16 +12,16 @@ class ForwardUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
 
-    fun execute(): LiveData<Resource<User>> {
-        return liveData {
-            emit(Resource.loading())
-            accountRepository.retrieve().switchMap {resource ->
-                if (resource.status == Status.SUCCESS) {
-                    emitSource(userRepository.retrieve(resource.data.username))
-                } else if (resource.status == Status.ERROR) {
-                    emit(Resource.error(resource.throwable))
-                }
-            }
+//    fun execute(): LiveData<Resource<User>> {
+//        return liveData {
+//            emit(Resource.loading())
+//            accountRepository.retrieve().switchMap {resource ->
+//                if (resource.status == Status.SUCCESS) {
+//                    emitSource(userRepository.retrieve(resource.data.username))
+//                } else if (resource.status == Status.ERROR) {
+//                    emit(Resource.error(resource.throwable))
+//                }
+//            }
 //            emitSource(
 //                accountRepository.retrieve().switchMap { resource ->
 //                    liveData<Resource<User>> {
@@ -32,7 +31,7 @@ class ForwardUseCase @Inject constructor(
 //                    }
 //                }
 //            )
-        }
+//        }
 //        return accountRepository.retrieve().switchMap { account ->
 //            liveData<Resource<User>> {
 //                account.data?.username?.let {
@@ -51,5 +50,5 @@ class ForwardUseCase @Inject constructor(
 //                userRepository.retrieve(it.data)
 //            }
 //        }
-    }
+//    }
 }

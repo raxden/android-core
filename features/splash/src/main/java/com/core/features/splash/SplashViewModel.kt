@@ -15,5 +15,5 @@ class SplashViewModel @Inject constructor(
     private val mVersion = MutableLiveData<String>()
     val version: LiveData<String> = mVersion
 
-    val user: LiveData<Resource<User>> = forwardUseCase.execute()
+//    val user: LiveData<Resource<User>> = forwardUseCase.execute()
 }
