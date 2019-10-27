@@ -1,7 +1,10 @@
 package com.core.app
 
-import android.app.Application
+import com.core.BaseApplication
 
-class AppApplication: Application() {
+class AppApplication: BaseApplication() {
 
+    override fun initDaggerApplicationComponent() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

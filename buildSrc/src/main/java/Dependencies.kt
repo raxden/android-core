@@ -5,6 +5,7 @@ object ApplicationId {
 object Modules {
     val app = ":app"
 
+    val core = ":core"
     val navigation = ":navigation"
 
     val commonAndroid = ":common:android"
@@ -52,6 +53,7 @@ object Versions {
     val mockito = "2.27.0"
     val mockk = "1.9.2"
     val lifecycle = "2.2.0-beta01"
+    val constraintLayout = "1.1.3"
 }
 
 object KotlinLibraries {
@@ -62,6 +64,7 @@ object KotlinLibraries {
 object AndroidLibraries {
     // KOTLIN
     val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
 }
 
 object Libraries {

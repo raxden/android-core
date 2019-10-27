@@ -4,12 +4,11 @@ apply from: '../../android_commons.gradle'
 dependencies {
     implementation project(Modules.commonAndroid)
     implementation project(Modules.domain)
+
     // ROOM
     implementation Libraries.roomRunTime
     kapt Libraries.roomCompiler
     implementation Libraries.roomKtx
-
-    implementation Libraries.lifecycleLiveData
     // TEST
     androidTestImplementation project(Modules.commonTest)
 }

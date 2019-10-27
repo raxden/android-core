@@ -4,7 +4,6 @@ apply from: '../../android_commons.gradle'
 dependencies {
     implementation project(Modules.commonAndroid)
     // NETWORK
-    implementation Libraries.gson
     implementation Libraries.retrofit
     implementation Libraries.retrofitGsonConverter
     implementation Libraries.httpLoggingInterceptor

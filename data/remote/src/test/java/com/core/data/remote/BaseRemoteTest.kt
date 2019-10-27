@@ -38,9 +38,10 @@ abstract class BaseRemoteTest: BaseTest() {
     )
 
     private fun getJson(path : String) : String {
-        val uri = this.javaClass.classLoader.getResource(path)
-        val file = File(uri.path)
-        return String(file.readBytes())
+        return this.javaClass.classLoader?.getResource(path)?.let {
+            val file = File(it.path)
+            return String(file.readBytes())
+        } ?: ""
     }
 
     private fun initMockServer() {

@@ -4,8 +4,6 @@ import androidx.lifecycle.Observer
 import com.core.common.android.Resource
 import com.core.common.android.Result
 import com.core.data.BaseRepositoryTest
-import com.core.data.local.dao.ProjectDao
-import com.core.data.remote.AppGateway
 import com.core.data.remote.entity.ProjectEntity
 import com.core.data.repository.mapper.ProjectDataMapper
 import com.core.data.repository.mapper.UserDataMapper
