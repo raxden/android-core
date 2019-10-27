@@ -1,7 +1,11 @@
 package com.core.app
 
-import android.app.Application
+import com.core.BaseApplication
+import com.core.app.di.DaggerApplicationComponent
 
-class AppApplication: Application() {
+class AppApplication: BaseApplication() {
 
+    override fun initDaggerApplicationComponent() {
+        DaggerApplicationComponent.factory().create(this).inject(this)
+    }
 }

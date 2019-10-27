@@ -5,6 +5,7 @@ object ApplicationId {
 object Modules {
     val app = ":app"
 
+    val core = ":core"
     val navigation = ":navigation"
 
     val commonAndroid = ":common:android"
@@ -37,6 +38,7 @@ object Versions {
     val compileSdk = 28
     val targetSdk = 28
     val kotlin = "1.3.50"
+    val appCompat = "1.1.0-rc01"
     val gradle = "3.5.1"
     val fabric = "1.28.1"
     val room = "2.2.0"                      // https://developer.android.com/jetpack/androidx/releases/room
@@ -52,6 +54,8 @@ object Versions {
     val mockito = "2.27.0"
     val mockk = "1.9.2"
     val lifecycle = "2.2.0-beta01"
+    val constraintLayout = "1.1.3"
+    val material = "1.1.0-beta01"
 }
 
 object KotlinLibraries {
@@ -62,6 +66,10 @@ object KotlinLibraries {
 object AndroidLibraries {
     // KOTLIN
     val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    // ANDROID
+    val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+    val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    val material = "com.google.android.material:material:${Versions.material}"
 }
 
 object Libraries {

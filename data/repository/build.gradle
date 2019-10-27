@@ -13,9 +13,6 @@ dependencies {
     kapt Libraries.roomCompiler
     implementation Libraries.roomKtx
 
-    // LIVEDATA
-    implementation Libraries.lifecycleLiveData
-
     // TEST
     testImplementation project(Modules.commonTest)
 }
