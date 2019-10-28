@@ -6,7 +6,7 @@ import org.junit.Assert
 import org.junit.Test
 import java.net.HttpURLConnection
 
-class UserServiceTest : BaseTest() {
+class UserServiceTest : BaseRemoteTest() {
 
     @Test
     fun `fetch user's detail`() {

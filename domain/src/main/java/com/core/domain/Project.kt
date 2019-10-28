@@ -9,13 +9,10 @@ import kotlinx.android.parcel.Parcelize
 import org.threeten.bp.LocalDateTime
 
 @Parcelize
-@Entity(tableName = "project")
 data class Project(
-    @PrimaryKey
     var id: Long? = null,
     var name: String? = null,
     var description: String? = null,
-    @Embedded(prefix = "project_")
     var user: User? = null,
     var uri: Uri? = null,
     var createdAt: LocalDateTime? = null,

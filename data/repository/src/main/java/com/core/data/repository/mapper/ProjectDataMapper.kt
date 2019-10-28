@@ -5,10 +5,11 @@ import com.core.common.android.DataMapper
 import com.core.common.android.extensions.toLocalDateTime
 import com.core.data.remote.entity.ProjectEntity
 import com.core.domain.Project
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ProjectDataMapper(
+class ProjectDataMapper @Inject constructor(
     private val userDataMapper: UserDataMapper
 ): DataMapper<ProjectEntity, Project>() {
 

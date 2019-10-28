@@ -5,6 +5,7 @@ object ApplicationId {
 object Modules {
     val app = ":app"
 
+    val core = ":core"
     val navigation = ":navigation"
 
     val commonAndroid = ":common:android"
@@ -37,13 +38,14 @@ object Versions {
     val compileSdk = 28
     val targetSdk = 28
     val kotlin = "1.3.50"
+    val appCompat = "1.1.0-rc01"
     val gradle = "3.5.1"
     val fabric = "1.28.1"
     val room = "2.2.0"                      // https://developer.android.com/jetpack/androidx/releases/room
     val gson = "2.8.6"                      // https://github.com/google/gson
     val okHttp = "4.2.1"                    // https://github.com/square/okhttp
     val retrofit = "2.6.2"                  // https://github.com/square/retrofit
-    val atsl = "1.1.1"
+    val atsl = "1.1.0"
     val coroutines = "1.3.2"
     val archCoreTest = "2.0.0"
     val dagger = "2.22.1"                   // https://github.com/google/dagger
@@ -51,6 +53,9 @@ object Versions {
     val threetenabp = "1.2.0"               // https://github.com/JakeWharton/ThreeTenABP
     val mockito = "2.27.0"
     val mockk = "1.9.2"
+    val lifecycle = "2.2.0-beta01"
+    val constraintLayout = "1.1.3"
+    val material = "1.1.0-beta01"
 }
 
 object KotlinLibraries {
@@ -61,6 +66,10 @@ object KotlinLibraries {
 object AndroidLibraries {
     // KOTLIN
     val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    // ANDROID
+    val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
+    val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+    val material = "com.google.android.material:material:${Versions.material}"
 }
 
 object Libraries {
@@ -79,6 +88,12 @@ object Libraries {
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val httpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+
+    //Lifecycle
+    val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+    val lifecycleLiveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
+    val lifecycleExtensions = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
 
     // Timber
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"

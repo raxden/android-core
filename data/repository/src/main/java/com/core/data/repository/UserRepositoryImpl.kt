@@ -1,5 +1,7 @@
 package com.core.data.repository
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.core.common.android.Resource
 import com.core.common.android.Result
 import com.core.data.remote.AppGateway
@@ -16,10 +18,17 @@ class UserRepositoryImpl @Inject internal constructor(
     private val mapper: UserDataMapper
 ) : UserRepository {
 
-    override suspend fun retrieve(username: String) : Resource<User> {
-        return when (val result = gateway.user(username)) {
-            is Result.Success -> Resource.success(mapper.transform(result.data))
-            is Result.Error -> Resource.error(result.exception)
+    override suspend fun retrieve(username: String): LiveData<Resource<User>> = liveData {
+        try {
+            emit(Resource.loading(null))
+            when (val result = gateway.user(username)) {
+                is Result.Success ->
+                    emit(Resource.success(mapper.transform(result.data)))
+                is Result.Error ->
+                    emit(Resource.error(result.exception))
+            }
+        } catch (e: Exception) {
+            emit(Resource.error(e))
         }
     }
 }

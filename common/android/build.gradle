@@ -5,6 +5,9 @@ dependencies {
     api KotlinLibraries.kotlin
     api KotlinLibraries.kotlinCoroutineCore
     api AndroidLibraries.kotlinCoroutineAndroid
+    api AndroidLibraries.appCompat
+    api Libraries.gson
     api Libraries.timber
     api Libraries.threetenabp
+    api Libraries.lifecycleLiveData
 }

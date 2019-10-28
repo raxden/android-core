@@ -9,17 +9,17 @@ import com.core.domain.Account
 @Dao
 interface AccountDao {
 
-    @Query("SELECT * FROM Account WHERE id= :id")
-    suspend fun find(id: Long): Account
+    @Query("SELECT * FROM Account WHERE username= :username")
+    suspend fun find(username: String): Account
 
     @Query("SELECT * FROM Account")
     suspend fun findAll(): List<Account>
 
-    @Query("DELETE FROM Account WHERE id= :id")
-    suspend fun delete(id: Long)
+    @Query("DELETE FROM Account WHERE username= :username")
+    suspend fun delete(username: String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(account: Account): Long
+    suspend fun insert(vararg account: Account)
 
     @Update
     suspend fun update(account: Account)
