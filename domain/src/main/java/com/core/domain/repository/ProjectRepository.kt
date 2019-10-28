@@ -1,12 +1,11 @@
 package com.core.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.core.common.android.Resource
 import com.core.domain.Project
+import io.reactivex.Single
 
 interface ProjectRepository {
 
-    suspend fun list(username: String): LiveData<Resource<List<Project>>>
+    fun list(username: String): Single<Result<List<Project>>>
 
-    suspend fun detail(username: String, projectName: String): LiveData<Resource<Project>>
+    fun detail(username: String, projectName: String): Single<Result<Project>>
 }

@@ -1,16 +1,15 @@
 package com.core.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.core.common.android.Resource
 import com.core.domain.Account
+import io.reactivex.Single
 
 interface AccountRepository {
 
-    suspend fun retrieve(): LiveData<Resource<Account>>
+    fun retrieve(): Single<Result<Account>>
 
-    suspend fun retrieve(username: String): LiveData<Resource<Account>>
+    fun retrieve(username: String): Single<Result<Account>>
 
-    suspend fun save(account: Account): LiveData<Resource<Boolean>>
+    fun save(account: Account): Single<Result<Boolean>>
 
-    suspend fun remove(account: Account): LiveData<Resource<Boolean>>
+    fun remove(account: Account): Single<Result<Boolean>>
 }

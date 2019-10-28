@@ -56,16 +56,15 @@ object Versions {
     val lifecycle = "2.2.0-beta01"
     val constraintLayout = "1.1.3"
     val material = "1.1.0-beta01"
+    val rxAndroid = "2.1.1"
+    val rxKotlin = "2.3.0"
 }
 
 object KotlinLibraries {
     val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    val kotlinCoroutineCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
 }
 
 object AndroidLibraries {
-    // KOTLIN
-    val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
@@ -88,6 +87,10 @@ object Libraries {
     val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val httpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+
+    // RX
+    val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
+    val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
 
     //Lifecycle
     val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"

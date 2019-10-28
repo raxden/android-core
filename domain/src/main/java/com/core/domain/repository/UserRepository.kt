@@ -1,11 +1,9 @@
 package com.core.domain.repository
 
-import androidx.lifecycle.LiveData
-import com.core.common.android.Resource
-import com.core.domain.Project
 import com.core.domain.User
+import io.reactivex.Single
 
 interface UserRepository {
 
-    suspend fun retrieve(username: String): LiveData<Resource<User>>
+    fun retrieve(username: String): Single<Result<User>>
 }
